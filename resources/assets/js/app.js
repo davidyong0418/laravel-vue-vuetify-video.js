@@ -24,7 +24,8 @@ Vue.component('gravatar', require('./components/GravatarComponent.vue'));
 
 window.Vuetify = require('vuetify');
 Vue.use(Vuetify)
-
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 import store from './store'
 import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
@@ -37,8 +38,18 @@ if (window.user) {
   store.commit(mutations.LOGGED, true)
 }
 
+const router = new VueRouter({
+  mode: 'history',
+  routes:[
+    {path: '/video-management', component: require('./components/admin/VideoComponent.vue')},
+  ]
+});
+
+
+
 const app = new Vue({
   el: '#app',
+  router,
   store,
   mixins: [ withSnackbar ],
   data: () => ({
@@ -51,9 +62,12 @@ const app = new Vue({
     items: [
       { icon: 'home', text: 'Home', href: '/home' },
       { icon: 'home', text: 'Landing Page', href: '/' },
+      { icon: 'home', text: 'Video course management', href: '/video-management' },
+      { icon: 'home', text: 'Step management', href: '/step-management' },
+      { icon: 'home', text: 'Question management', href: '/question-management' },
       { icon: 'settings', text: 'Settings' },
       { icon: 'chat_bubble', text: 'Contact' },
-      { heading: 'Links' },
+      // { heading: 'Links' },
       { icon: 'link', text: 'Google', href: 'http://www.google.com' }
       // { heading: 'Administració', role: 'Manager' }
     ]
