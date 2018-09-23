@@ -15412,9 +15412,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -15592,7 +15589,6 @@ var render = function() {
                           hint: "At least 6 characters",
                           error: _vm.errors["email"],
                           "error-messages": _vm.errors["email"],
-                          required: "",
                           min: "6",
                           type: "password",
                           required: ""

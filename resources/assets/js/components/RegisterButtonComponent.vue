@@ -32,11 +32,8 @@
                             hint="At least 6 characters"
                             :error="errors['email']"
                             :error-messages="errors['email']"
-                            required
                             min="6"
-                            type="password"
-                            required
-                    ></v-text-field>
+                            type="password" required=""></v-text-field>
                     <v-text-field
                             name="password"
                             label="Password confirmation"
