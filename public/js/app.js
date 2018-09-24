@@ -41627,8 +41627,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -41669,6 +41667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getvideos: function getvideos() {
+      alert('getvideo');
       var params = new URLSearchParams();
       this.loading = true;
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
@@ -41681,10 +41680,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     add_video: function add_video() {
-      var params = [];
-      params['video_url'] = this.add_vimeo_url;
-      params['video_alias'] = this.add_vimeo_alias;
-      axios.post('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+      axios.post('/api/admin/video-management/create', {
+        video_url: this.add_vimeo_url,
+        video_alias: this.add_vimeo_alias,
+        _token: 'asdffffffffffffff2342423'
+      }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
         console.log(response);
         this.videos = response.data.videos;
       }.bind(this)).catch(function (error) {
@@ -41694,12 +41694,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.add_vimeo_url = '';
       this.add_vimeo_alias = '';
     }
+
   },
   mounted: function mounted() {
     this.getvideos();
-  },
-
-  created: function created() {}
+  }
 });
 
 /***/ }),
@@ -41865,8 +41864,7 @@ var render = function() {
                     { attrs: { sm7: "", "offset-sm1": "" } },
                     [
                       _c("v-text-field", {
-                        attrs: { label: "Add Vimeo Url" },
-                        on: { input: _vm.up },
+                        attrs: { label: "Add Vimeo Url", required: "" },
                         model: {
                           value: _vm.add_vimeo_url,
                           callback: function($$v) {
@@ -41877,8 +41875,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
-                        attrs: { label: "Add Vimeo Alias" },
-                        on: { input: _vm.up },
+                        attrs: { label: "Add Vimeo Alias", required: "" },
                         model: {
                           value: _vm.add_vimeo_alias,
                           callback: function($$v) {

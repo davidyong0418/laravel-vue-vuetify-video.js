@@ -63,14 +63,12 @@
           <v-flex sm7 offset-sm1>
             <v-text-field
                             label="Add Vimeo Url"
-                            v-model="add_vimeo_url"
-                            @input="up"
-                            ></v-text-field>
+                            v-model="add_vimeo_url" 
+                            required></v-text-field>
             <v-text-field
                             label="Add Vimeo Alias"
                             v-model="add_vimeo_alias"
-                            @input="up"
-                            ></v-text-field>
+                            required ></v-text-field>
             </v-text-field>
           </v-flex>
           <v-flex sm3>
@@ -129,6 +127,7 @@
     },
     methods: {
       getvideos: function() {
+        alert('getvideo');
         var params = new URLSearchParams()
         this.loading = true
         axios.get('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
@@ -143,10 +142,11 @@
         }.bind(this))
       },
       add_video: function() {
-        var params = [];
-        params['video_url'] = this.add_vimeo_url;
-        params['video_alias'] = this.add_vimeo_alias;
-        axios.post('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        axios.post('/api/admin/video-management/create', {
+          video_url:this.add_vimeo_url,
+          video_alias: this.add_vimeo_alias,
+          _token: 'asdffffffffffffff2342423'
+        }, {headers: {'Content-Type': 'application/json', }})
         .then( function (response) {
           console.log(response)
           this.videos = response.data.videos
@@ -157,14 +157,11 @@
 
         this.add_vimeo_url = '';
         this.add_vimeo_alias = '';
-      }
+      },
+     
     },
     mounted(){
         this.getvideos();
-    },
-    created: function()
-    {
-
-    }
+    }    
   }
 </script>

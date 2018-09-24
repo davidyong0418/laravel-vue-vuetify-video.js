@@ -21,4 +21,4 @@ Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {
     Route::put('/user', 'LoggedUserController@update');
 });
 Route::get('admin/video-management', 'VideoController@index');
-Route::post('admin/video-management', 'VideoController@create');
+Route::post('admin/video-management/create', 'VideoController@create');
