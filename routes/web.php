@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/video-management', 'HomeController@index');
+Route::get('/admin/video-management', 'VideoController@index');
+Route::get('/admin/question-management', 'QuestionController@index');

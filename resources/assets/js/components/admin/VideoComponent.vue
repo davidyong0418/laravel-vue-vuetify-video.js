@@ -1,21 +1,13 @@
 <template>
   <v-layout row>
-    <v-flex  sm5 offset-sm1>
+    <v-flex  sm4 offset-sm1>
       <v-card>
         <v-toolbar color="indigo" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
-          <v-toolbar-title>Inbox</v-toolbar-title>
+          <v-toolbar-title>Video list</v-toolbar-title>
 
           <v-spacer></v-spacer>
-
-          <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn>
-
-          <v-btn icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
         </v-toolbar>
         <v-list>
         <v-radio-group v-model="selected">
@@ -42,31 +34,27 @@
         </v-list>
       </v-card>
     </v-flex>
-    <v-flex  sm5 offset-sm1>
+    <v-flex  sm4 offset-sm1>
       <v-card>
         <v-toolbar color="indigo" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
-          <v-toolbar-title>Inbox</v-toolbar-title>
+          <v-toolbar-title>Add Video</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
           <v-btn icon>
             <v-icon>search</v-icon>
           </v-btn>
-
-          <v-btn icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
         </v-toolbar>
         <v-list>
           <v-flex sm7 offset-sm1>
             <v-text-field
-                            label="Add Vimeo Url"
+                            label="Vimeo Url"
                             v-model="add_vimeo_url" 
                             required></v-text-field>
             <v-text-field
-                            label="Add Vimeo Alias"
+                            label="Vimeo Alias"
                             v-model="add_vimeo_alias"
                             required ></v-text-field>
             </v-text-field>

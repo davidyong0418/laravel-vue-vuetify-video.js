@@ -41,7 +41,8 @@ if (window.user) {
 const router = new VueRouter({
   mode: 'history',
   routes:[
-    {path: '/video-management', component: require('./components/admin/VideoComponent.vue')},
+    {path: '/admin/video-management', component: require('./components/admin/VideoComponent.vue')},
+    {path: '/admin/question-management', component: require('./components/admin/QuestionComponent.vue')}
   ]
 });
 
@@ -62,9 +63,9 @@ const app = new Vue({
     items: [
       { icon: 'home', text: 'Home', href: '/home' },
       { icon: 'home', text: 'Landing Page', href: '/' },
-      { icon: 'home', text: 'Video course management', href: '/video-management' },
-      { icon: 'home', text: 'Step management', href: '/step-management' },
-      { icon: 'home', text: 'Question management', href: '/question-management' },
+      { icon: 'home', text: 'Video course management', href: '/admin/video-management' },
+      { icon: 'home', text: 'Step management', href: '/admin/step-management' },
+      { icon: 'home', text: 'Question management', href: '/admin/question-management' },
       { icon: 'settings', text: 'Settings' },
       { icon: 'chat_bubble', text: 'Contact' },
       // { heading: 'Links' },

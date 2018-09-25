@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Video;
-class VideoController extends Controller
+use App\Model\Question;
+class QuestionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,22 +24,22 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('admin/video');
+        return view('admin/question');
     }
-    public function get_videos()
+    public function get_questions()
     {
-        $videos = Video::all();
-       return ['videos' => $videos];
+        $questions = Question::all();
+       return ['questions' => $questions];
     }
     public function create(Request $request)
     {
         $vimeo_url = $request->get('video_url', TRUE);
         $vimeo_alias = $request->get('video_alias', TRUE);
-        $video = new Video();
+        $video = new Question();
         $video->alias = $vimeo_alias;
         $video->vimeo_url = $vimeo_url;
         $video->save();
-        $videos = Video::all();
+        $videos = Question::all();
         return ['videos' => $videos];
 
     }
