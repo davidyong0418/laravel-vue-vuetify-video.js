@@ -41655,7 +41655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getvideos: function getvideos() {
-      alert('getvideo');
+      // alert('getvideo');
       var params = new URLSearchParams();
       this.loading = true;
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
@@ -42082,8 +42082,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       headers: [{
-        text: 'Dessert (100g serving)',
-        align: 'left',
+        text: 'Questions',
+        align: 'right',
         sortable: false,
         value: 'name'
       }, { text: 'Calories', value: 'calories' }, { text: 'Fat (g)', value: 'fat' }, { text: 'Carbs (g)', value: 'carbs' }, { text: 'Protein (g)', value: 'protein' }, { text: 'Actions', value: 'name', sortable: false }],
@@ -42124,6 +42124,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    save_qustions: function save_qustions() {
+      var form = document.querySelector('question-management');
+      var data = new FormData(form);
+      axios.post('/api/admin/question-management/create', data, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        console.log(response);
+        this.quesitons = response.data.questions;
+      }.bind()).catch(function (error) {
+        console.log(error.response);
+      }.bind(this));
+    },
     initialize: function initialize() {
       this.desserts = [{
         name: 'Frozen Yogurt',
@@ -42243,7 +42257,7 @@ var render = function() {
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "500px" },
+              attrs: { "max-width": "500px", id: "question-management" },
               model: {
                 value: _vm.dialog,
                 callback: function($$v) {
@@ -42281,7 +42295,6 @@ var render = function() {
                         [
                           _c(
                             "v-layout",
-                            { attrs: { wrap: "" } },
                             [
                               _c(
                                 "v-flex",
@@ -42303,16 +42316,16 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs12: "", sm10: "", md10: "" } },
+                                { attrs: { md12: "", wrap: "" } },
                                 [
                                   _c(
                                     "v-flex",
-                                    { attrs: { xs12: "", sm10: "", md10: "" } },
+                                    { attrs: { md10: "" } },
                                     [
                                       _c("v-text-field", {
                                         attrs: {
-                                          label: "answerssssssss",
-                                          name: ""
+                                          label: "answer",
+                                          name: "answer[]"
                                         },
                                         model: {
                                           value: _vm.editedItem.calories,
@@ -42332,7 +42345,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "v-flex",
-                                    { attrs: { xs12: "", sm10: "", md2: "" } },
+                                    { attrs: { md2: "" } },
                                     [
                                       _c(
                                         "v-btn",

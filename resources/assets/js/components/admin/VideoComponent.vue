@@ -115,7 +115,7 @@
     },
     methods: {
       getvideos: function() {
-        alert('getvideo');
+        // alert('getvideo');
         var params = new URLSearchParams()
         this.loading = true
         axios.get('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})

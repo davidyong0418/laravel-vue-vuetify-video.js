@@ -8,7 +8,7 @@
         vertical
       ></v-divider>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
+      <v-dialog v-model="dialog" max-width="500px"  id="question-management">
         <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
         <v-card>
           <v-card-title>
@@ -17,15 +17,15 @@
 
           <v-card-text>
             <v-container grid-list-md>
-              <v-layout wrap>
+              <v-layout>
                 <v-flex xs12 sm12 md12>
-                  <v-text-field v-model="editedItem.name" label="Question"></v-text-field>
+                  <v-text-field v-model="editedItem.name" label="Questionddddd"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm10 md10>
-                  <v-flex xs12 sm10 md10>
-                  <v-text-field v-model="editedItem.calories" label="answerssssssss" name=""></v-text-field>
+                <v-flex xs12 sm12 md12 wrap>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.calories" label="answer" name="answer[]"></v-text-field>
                   </v-flex>
-                  <v-flex xs12 sm10 md2>
+                  <v-flex xs12 sm6 md4>
                   <v-btn small color="primary" flat click="save">Add</v-btn>
                   </v-flex>
                 </v-flex>
@@ -93,12 +93,12 @@
       dialog: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
-          align: 'left',
+          text: 'Questions',
+          align: 'right',
           sortable: false,
           value: 'name'
         },
-        { text: 'Calories', value: 'calories' },
+        { text: 'Calories', value: 'calories',  },
         { text: 'Fat (g)', value: 'fat' },
         { text: 'Carbs (g)', value: 'carbs' },
         { text: 'Protein (g)', value: 'protein' },
@@ -139,6 +139,20 @@
     },
 
     methods: {
+      save_qustions: function(){
+        var form = document.querySelector('question-management');
+        var data = new FormData(form);
+        axios.post('/api/admin/question-management/create', data, {
+          headers:{
+            'Content-Type':'applicaton/json',
+          }
+        }).then(function(response){
+          console.log(response);
+          this.quesitons = response.data.questions;
+        }.bind()).catch(function (error){
+          console.log(error.response);
+        }.bind(this));
+      },
       initialize () {
         this.desserts = [
           {
