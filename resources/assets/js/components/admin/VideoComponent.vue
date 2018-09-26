@@ -115,7 +115,6 @@
     },
     methods: {
       getvideos: function() {
-        // alert('getvideo');
         var params = new URLSearchParams()
         this.loading = true
         axios.get('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
@@ -133,7 +132,7 @@
         axios.post('/api/admin/video-management/create', {
           video_url:this.add_vimeo_url,
           video_alias: this.add_vimeo_alias,
-          _token: 'asdffffffffffffff2342423'
+          _token: 'FFFFFFFFFFFFFFFFFFFFF'
         }, {headers: {'Content-Type': 'application/json', }})
         .then( function (response) {
           console.log(response)

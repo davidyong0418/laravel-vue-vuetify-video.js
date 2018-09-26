@@ -33,16 +33,38 @@ class QuestionController extends Controller
     }
     public function create(Request $request)
     {
-        $vimeo_url = $request->all();
-        var_dump($vimeo_url);
-        exit;
-        $vimeo_alias = $request->get();
-        $video = new Question();
-        $video->alias = $vimeo_alias;
-        $video->vimeo_url = $vimeo_url;
-        $video->save();
-        $videos = Question::all();
-        return ['videos' => $videos];
+        $requests = $request->get('data');
+        $new = (array)json_decode($requests);
+        $selected = $new['selected'] - 1 ;
+        $new['answers'][$selected]->valid = 1;
+        unset($new['_id']);
+        $new['correct_answer'] = $new['answers'][$selected]->answer;
+        Question::create($new);
+        $questions = Question::all();
+        return ['questions' => $questions];
+
+    }
+    public function update(Request $request)
+    {
+        $result = $request->get('data');
+        $update = (array)json_decode($result);
+        $update_id = $update['_id'];
+        $update_data = array(
+            'question' => $update['question'],
+            'count' => $update['count'],
+            'answers' => $update['answers'],
+            'selected' => $update['selected']
+        );
+        Question::where('_id', $update_id)->update($update_data);
+        $send = array(
+            'action' => 'true',
+            'result'=>'success'
+        );
+        return 'success';
+    }
+    public function delete(Request $request)
+    {
+        $requests=$request->all();
 
     }
     

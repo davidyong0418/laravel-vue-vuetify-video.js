@@ -41655,7 +41655,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getvideos: function getvideos() {
-      // alert('getvideo');
       var params = new URLSearchParams();
       this.loading = true;
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
@@ -41671,7 +41670,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/admin/video-management/create', {
         video_url: this.add_vimeo_url,
         video_alias: this.add_vimeo_alias,
-        _token: 'asdffffffffffffff2342423'
+        _token: 'FFFFFFFFFFFFFFFFFFFFF'
       }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
         console.log(response);
         this.videos = response.data.videos;
@@ -42081,19 +42080,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -42105,27 +42091,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       dialog: false,
       count: 1,
       answer: [],
-      headers: [{
-        text: 'Questions',
-        align: 'right',
-        sortable: false,
-        value: 'name'
-      }, { text: 'Calories', value: 'calories' }, { text: 'Fat (g)', value: 'fat' }, { text: 'Carbs (g)', value: 'carbs' }, { text: 'Protein (g)', value: 'protein' }, { text: 'Actions', value: 'name', sortable: false }],
+      loginLoading: false,
+      headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct', value: 'correct', align: 'center' }, { text: 'Answer Count', value: 'count', align: 'center' }, { text: 'Create Date', value: 'created_at', align: 'center' }, { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        question: '',
+        count: 0,
+        answers: [],
+        selected: 0,
+        _id: ''
       },
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        question: '',
+        count: 0,
+        selected: 0,
+        answers: [],
+        _id: ''
       }
     };
   },
@@ -42146,112 +42128,98 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    close: function close() {
-      this.count = this.count - 1;
+    new_question: function new_question() {
+      this.editedItem.question = '';
+      this.editedItem.count = 1;
+      this.editedItem.answers = [];
+      this.editedItem.selected = 1;
+      this.editedItem._id = '';
+      var answers = { 'answer': '', 'valid': 0 };
+      this.editedItem.answers.push(answers);
+    },
+    remove: function remove(order) {
+      console.log('-------------', order);
+      this.defaultItem.count = this.defaultItem.count - 1;
+      console.log('((((((((((', this.editedItem);
+
+      this.defaultItem.answers.splice(order, 1);
+      console.log(')))))))))))', this.editedItem);
+      this.defaultItem.selected = this.defaultItem.count;
     },
     add: function add() {
-      this.count = this.count + 1;
-      console.log(this.count);
+      this.editedItem.count = this.editedItem.count + 1;
+      var answers = {
+        'answer': '',
+        'valid': 0
+      };
+      this.editedItem.answers.push(answers);
     },
     save_qustions: function save_qustions() {
       // var form = document.querySelector('question-management');
-      var formData = new FormData();
-      console.log(this.selected);
-      formData.append('file', this.answer);
-      formData.append('selected', this.selected - 1);
-      formData.append('question', this.question);
-      axios.post('/api/admin/question-management/create', formData, {
-        headers: {
-          // 'Content-Type':'applicaton/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        console.log(response);
-        this.quesitons = response.data.questions;
-      }.bind()).catch(function (error) {
-        console.log(error.response);
-      }.bind(this));
+      if (this.editedIndex > -1) {
+        console.log(this.editedItem);
+        console.log('#############', this.editedItem);
+        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.defaultItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          console.log(response);
+          Object.assign(this.desserts[this.editedIndex], this.defaultItem);
+        }.bind(this)).catch(function (error) {
+          console.log(error.response);
+        }.bind(this));
+      } else {
+        console.log(this.editedItem);
+        axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          this.desserts = response.data.questions;
+        }.bind(this)).catch(function (error) {
+          console.log(error.response);
+        }.bind(this));
+      }
+      this.dialog = false;
     },
     initialize: function initialize() {
-      this.desserts = [{
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0
-      }, {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3
-      }, {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0
-      }, {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3
-      }, {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9
-      }, {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0
-      }, {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0
-      }, {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5
-      }, {
-        name: 'Donut',
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7
-      }];
+      var params = new URLSearchParams();
+      console.log(params);
+      this.loading = true;
+      axios.get('/api/admin/question-management/', { params: params, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        this.loading = false;
+        this.desserts = response.data.questions;
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
     },
     editItem: function editItem(item) {
+      this.defaultItem = this.editedIndex;
       this.editedIndex = this.desserts.indexOf(item);
+      console.log('+++++++++++++++++++', this.editedIndex);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
       var index = this.desserts.indexOf(item);
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1);
+      var delete_item = Object.assign({}, item);
+      if (confirm('Are you sure you want to delete this item?')) {
+        axios.get('/api/admin/question-management/', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+          this.loading = false;
+          this.desserts.splice(index, 1);
+          // this.desserts = response.data.questions
+        }.bind(this)).catch(function (error) {
+          this.loading = false;
+        }.bind(this));
+      }
     },
-    cancel: function cancel() {
-      var _this = this;
-
+    close: function close() {
       this.dialog = false;
-      setTimeout(function () {
-        _this.editedItem = Object.assign({}, _this.defaultItem);
-        _this.editedIndex = -1;
-      }, 300);
+      // setTimeout(() => {
+      //   this.editedItem = Object.assign({}, this.defaultItem)
+      //   this.editedIndex = -1 
+      // }, 300)
     },
     save: function save() {
       if (this.editedIndex > -1) {
@@ -42279,19 +42247,12 @@ var render = function() {
         "v-toolbar",
         { attrs: { flat: "", color: "white" } },
         [
-          _c("v-toolbar-title", [_vm._v("My CRUD")]),
-          _vm._v(" "),
-          _c("v-divider", {
-            staticClass: "mx-2",
-            attrs: { inset: "", vertical: "" }
-          }),
-          _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "500px", id: "question-management" },
+              attrs: { "max-width": "500px" },
               model: {
                 value: _vm.dialog,
                 callback: function($$v) {
@@ -42306,9 +42267,14 @@ var render = function() {
                 {
                   staticClass: "mb-2",
                   attrs: { slot: "activator", color: "primary", dark: "" },
+                  nativeOn: {
+                    click: function($event) {
+                      return _vm.new_question($event)
+                    }
+                  },
                   slot: "activator"
                 },
-                [_vm._v("New Item")]
+                [_vm._v("New Question")]
               ),
               _vm._v(" "),
               _c(
@@ -42339,11 +42305,15 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: { label: "Question" },
                                         model: {
-                                          value: _vm.question,
+                                          value: _vm.editedItem.question,
                                           callback: function($$v) {
-                                            _vm.question = $$v
+                                            _vm.$set(
+                                              _vm.editedItem,
+                                              "question",
+                                              $$v
+                                            )
                                           },
-                                          expression: "question"
+                                          expression: "editedItem.question"
                                         }
                                       })
                                     ],
@@ -42354,21 +42324,27 @@ var render = function() {
                                     "v-radio-group",
                                     {
                                       model: {
-                                        value: _vm.selected,
+                                        value: _vm.editedItem.selected,
                                         callback: function($$v) {
-                                          _vm.selected = $$v
+                                          _vm.$set(
+                                            _vm.editedItem,
+                                            "selected",
+                                            $$v
+                                          )
                                         },
-                                        expression: "selected"
+                                        expression: "editedItem.selected"
                                       }
                                     },
-                                    _vm._l(_vm.count, function(video) {
+                                    _vm._l(_vm.editedItem.count, function(
+                                      video
+                                    ) {
                                       return _c(
                                         "v-list-tile",
                                         {
                                           key: video,
                                           on: {
                                             click: function($event) {
-                                              _vm.selected = video
+                                              _vm.editedItem.selected = video
                                             }
                                           }
                                         },
@@ -42395,18 +42371,23 @@ var render = function() {
                                             "v-list-tile-content",
                                             [
                                               _c("v-text-field", {
-                                                attrs: { name: "answer[]" },
+                                                attrs: { label: "Answer" },
                                                 model: {
-                                                  value: _vm.answer[video - 1],
+                                                  value:
+                                                    _vm.editedItem.answers[
+                                                      video - 1
+                                                    ]["answer"],
                                                   callback: function($$v) {
                                                     _vm.$set(
-                                                      _vm.answer,
-                                                      video - 1,
+                                                      _vm.editedItem.answers[
+                                                        video - 1
+                                                      ],
+                                                      "answer",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "answer[video - 1]"
+                                                    "editedItem.answers[video-1]['answer']"
                                                 }
                                               })
                                             ],
@@ -42450,9 +42431,7 @@ var render = function() {
                                                         click: function(
                                                           $event
                                                         ) {
-                                                          return _vm.close(
-                                                            $event
-                                                          )
+                                                          _vm.remove(video - 1)
                                                         }
                                                       }
                                                     },
@@ -42488,7 +42467,7 @@ var render = function() {
                               attrs: { color: "blue darken-1", flat: "" },
                               nativeOn: {
                                 click: function($event) {
-                                  return _vm.cancel($event)
+                                  return _vm.close($event)
                                 }
                               }
                             },
@@ -42537,22 +42516,18 @@ var render = function() {
               key: "items",
               fn: function(props) {
                 return [
-                  _c("td", [_vm._v(_vm._s(props.item.name))]),
+                  _c("td", [_vm._v(_vm._s(props.item.question))]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
-                    _vm._v(_vm._s(props.item.calories))
+                  _c("td", { staticClass: "text-xs-center" }, [
+                    _vm._v(_vm._s(props.item.correct_answer))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
-                    _vm._v(_vm._s(props.item.fat))
+                  _c("td", { staticClass: "text-xs-center" }, [
+                    _vm._v(_vm._s(props.item.count))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
-                    _vm._v(_vm._s(props.item.carbs))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
-                    _vm._v(_vm._s(props.item.protein))
+                  _c("td", { staticClass: "text-xs-center" }, [
+                    _vm._v(_vm._s(props.item.created_at))
                   ]),
                   _vm._v(" "),
                   _c(

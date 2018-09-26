@@ -1,15 +1,9 @@
 <template>
   <div>
     <v-toolbar flat color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px"  id="question-management">
-        <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+      <v-dialog v-model="dialog" max-width="500px">
+        <v-btn slot="activator" color="primary" dark class="mb-2" @click.native="new_question">New Question</v-btn>
         <v-form>
         <v-card>
           <v-card-title>
@@ -18,20 +12,13 @@
   
           <v-card-text>
             <v-container grid-list-md>
-                <!-- <v-layout wrap>
-                <v-flex xs12 sm12>
-                  <v-text-field v-model="editedItem.name" label="Questidddonddddd"></v-text-field>
-                </v-flex>
-                </v-layout> -->
-
 
                 <v-list>
                   <v-list-tile>
-                  <v-text-field v-model="question" label="Question"></v-text-field>
+                  <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
                 </v-list-tile>
-                    <v-radio-group v-model="selected">
-                        <v-list-tile v-for="video in count" :key="video" @click="selected = video">
-                        
+                    <v-radio-group v-model="editedItem.selected">
+                        <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video">
                           <v-list-tile-action>
                             <v-radio 
                             name="video"
@@ -40,12 +27,12 @@
                             /></v-radio>
                           </v-list-tile-action>
                           <v-list-tile-content>
-                            <v-text-field v-model="answer[video - 1]" name="answer[]"></v-text-field>
+                            <v-text-field v-model="editedItem.answers[video-1]['answer']" label="Answer"></v-text-field>
                           </v-list-tile-content>
 
                           <v-list-tile-content>
                             <v-btn v-if="video == 1" small color="primary" flat-right @click.native="add">Add</v-btn>
-                            <v-btn v-if="video != 1" small color="primary" flat-right @click.native="close">Close</v-btn>
+                            <v-btn v-if="video != 1" small color="primary" flat-right @click.native="remove(video-1)">Close</v-btn>
                           </v-list-tile-content>
 
                         </v-list-tile>
@@ -57,12 +44,13 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="cancel">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
             <v-btn color="blue darken-1" flat @click.native="save_qustions">Save</v-btn>
           </v-card-actions>
         </v-card>
         </v-form>
       </v-dialog>
+      
     </v-toolbar>
     <v-data-table
       :headers="headers"
@@ -71,11 +59,10 @@
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td>{{ props.item.question }}</td>
+        <td class="text-xs-center">{{ props.item.correct_answer }}</td>
+        <td class="text-xs-center">{{ props.item.count }}</td>
+        <td class="text-xs-center">{{ props.item.created_at }}</td>
         <td class="justify-center layout px-0">
           <v-icon
             small
@@ -115,34 +102,29 @@
       dialog: false,
       count: 1,
       answer:[],
+      loginLoading: false,
       headers: [
-        {
-          text: 'Questions',
-          align: 'right',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Calories', value: 'calories',  },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Actions', value: 'name', sortable: false }
+        { text: 'Questions',align: 'center',sortable: false, value: 'question'},
+        { text: 'Correct', value: 'correct', align: 'center', },
+        { text: 'Answer Count', value: 'count',align: 'center'},
+        { text: 'Create Date', value: 'created_at',align: 'center' },
+        { text: 'Actions', value: 'name', sortable: false, align: 'center' }
       ],
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        question: '',
+        count: 0,
+        answers: [],
+        selected: 0,
+        _id: '',
       },
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        question: '',
+        count: 0,
+        selected: 0,
+        answers: [],
+        _id: '',
       }
     }),
 
@@ -161,124 +143,111 @@
       this.initialize()
     },
     methods: {
-      close: function(){
-        this.count = this.count - 1;
+      new_question: function()
+      {
+         this.editedItem.question = '';
+         this.editedItem.count = 1;
+         this.editedItem.answers = [];
+         this.editedItem.selected = 1;
+         this.editedItem._id = '';
+         var answers = {'answer': '', 'valid' : 0};
+         this.editedItem.answers.push(answers);
+      },
+      remove: function(order){
+        console.log('-------------',order);
+        this.defaultItem.count = this.defaultItem.count - 1;
+        console.log('((((((((((',this.editedItem);
+
+        this.defaultItem.answers.splice(order, 1);
+        console.log(')))))))))))',this.editedItem);
+        this.defaultItem.selected = this.defaultItem.count;
       },
       add: function(){
-        this.count = this.count + 1;
-        console.log(this.count);
+        this.editedItem.count = this.editedItem.count + 1;
+        var answers = {
+           'answer': '',
+           'valid' : 0
+        };
+         this.editedItem.answers.push(answers);
       },
       save_qustions: function(){
         // var form = document.querySelector('question-management');
-        var formData  = new FormData();
-        console.log(this.selected);
-        formData.append('file', this.answer);
-        formData.append('selected', this.selected - 1);
-        formData.append('question', this.question);
-        axios.post('/api/admin/question-management/create', formData, {
-          headers:{
-            // 'Content-Type':'applicaton/json',
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(function(response){
-          console.log(response);
-          this.quesitons = response.data.questions;
-        }.bind()).catch(function (error){
-          console.log(error.response);
-        }.bind(this));
+        if(this.editedIndex > -1)
+        {
+          console.log(this.editedItem);
+          console.log('#############', this.editedItem);
+            axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.defaultItem)}, {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            console.log(response);
+            Object.assign(this.desserts[this.editedIndex], this.defaultItem);
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+          }.bind(this));
+        }
+        else{
+          console.log(this.editedItem);
+          axios.post('/api/admin/question-management/create', {data: JSON.stringify(this.editedItem)}, {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            this.desserts = response.data.questions;
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+          }.bind(this));
+        }
+        this.dialog = false
       },
       initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7
-          }
-        ]
+        var params = new URLSearchParams();
+        console.log(params);
+        this.loading = true
+        axios.get('/api/admin/question-management/', {params, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        .then( function (response) {
+          this.loading = false
+          this.desserts = response.data.questions
+        }.bind(this))
+        .catch(function (error) {
+          this.loading = false
+        }.bind(this))
       },
 
       editItem (item) {
+        this.defaultItem = this.editedIndex;
         this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        console.log('+++++++++++++++++++',this.editedIndex);
+        this.editedItem = Object.assign({}, item);
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        const index = this.desserts.indexOf(item);
+        let delete_item = Object.assign({}, item);
+        if(confirm('Are you sure you want to delete this item?'))
+        {
+          axios.get('/api/admin/question-management/', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+          .then( function (response) {
+            this.loading = false
+            this.desserts.splice(index, 1)
+            // this.desserts = response.data.questions
+          }.bind(this))
+          .catch(function (error) {
+            this.loading = false
+          }.bind(this));
+
+        }
+        
       },
 
-      cancel () {
+      close () {
         this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1 
-        }, 300)
+        // setTimeout(() => {
+        //   this.editedItem = Object.assign({}, this.defaultItem)
+        //   this.editedIndex = -1 
+        // }, 300)
       },
 
       save () {
