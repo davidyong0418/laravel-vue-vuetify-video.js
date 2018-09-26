@@ -42074,13 +42074,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      selected: 1,
+      question: '',
       dialog: false,
+      count: 1,
+      answer: [],
       headers: [{
         text: 'Questions',
         align: 'right',
@@ -42117,19 +42141,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       val || this.close();
     }
   },
-
   created: function created() {
     this.initialize();
   },
 
-
   methods: {
+    close: function close() {
+      this.count = this.count - 1;
+    },
+    add: function add() {
+      this.count = this.count + 1;
+      console.log(this.count);
+    },
     save_qustions: function save_qustions() {
-      var form = document.querySelector('question-management');
-      var data = new FormData(form);
-      axios.post('/api/admin/question-management/create', data, {
+      // var form = document.querySelector('question-management');
+      var formData = new FormData();
+      console.log(this.selected);
+      formData.append('file', this.answer);
+      formData.append('selected', this.selected - 1);
+      formData.append('question', this.question);
+      axios.post('/api/admin/question-management/create', formData, {
         headers: {
-          'Content-Type': 'applicaton/json'
+          // 'Content-Type':'applicaton/json',
+          'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
         console.log(response);
@@ -42210,7 +42244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var index = this.desserts.indexOf(item);
       confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1);
     },
-    close: function close() {
+    cancel: function cancel() {
       var _this = this;
 
       this.dialog = false;
@@ -42278,65 +42312,38 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-card",
+                "v-form",
                 [
-                  _c("v-card-title", [
-                    _c("span", { staticClass: "headline" }, [
-                      _vm._v(_vm._s(_vm.formTitle))
-                    ])
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "v-card-text",
+                    "v-card",
                     [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v(_vm._s(_vm.formTitle))
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
-                        "v-container",
-                        { attrs: { "grid-list-md": "" } },
+                        "v-card-text",
                         [
                           _c(
-                            "v-layout",
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
                             [
                               _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm12: "", md12: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Question" },
-                                    model: {
-                                      value: _vm.editedItem.name,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.editedItem, "name", $$v)
-                                      },
-                                      expression: "editedItem.name"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { md12: "", wrap: "" } },
+                                "v-list",
                                 [
                                   _c(
-                                    "v-flex",
-                                    { attrs: { md10: "" } },
+                                    "v-list-tile",
                                     [
                                       _c("v-text-field", {
-                                        attrs: {
-                                          label: "answer",
-                                          name: "answer[]"
-                                        },
+                                        attrs: { label: "Question" },
                                         model: {
-                                          value: _vm.editedItem.calories,
+                                          value: _vm.question,
                                           callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.editedItem,
-                                              "calories",
-                                              $$v
-                                            )
+                                            _vm.question = $$v
                                           },
-                                          expression: "editedItem.calories"
+                                          expression: "question"
                                         }
                                       })
                                     ],
@@ -42344,42 +42351,122 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-flex",
-                                    { attrs: { md2: "" } },
-                                    [
-                                      _c(
-                                        "v-btn",
+                                    "v-radio-group",
+                                    {
+                                      model: {
+                                        value: _vm.selected,
+                                        callback: function($$v) {
+                                          _vm.selected = $$v
+                                        },
+                                        expression: "selected"
+                                      }
+                                    },
+                                    _vm._l(_vm.count, function(video) {
+                                      return _c(
+                                        "v-list-tile",
                                         {
-                                          attrs: {
-                                            small: "",
-                                            color: "primary",
-                                            flat: "",
-                                            click: "save"
+                                          key: video,
+                                          on: {
+                                            click: function($event) {
+                                              _vm.selected = video
+                                            }
                                           }
                                         },
-                                        [_vm._v("Add")]
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c("v-radio", {
+                                                attrs: {
+                                                  name: "video",
+                                                  value: video
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                  }
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: { name: "answer[]" },
+                                                model: {
+                                                  value: _vm.answer[video - 1],
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.answer,
+                                                      video - 1,
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "answer[video - 1]"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              video == 1
+                                                ? _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        small: "",
+                                                        color: "primary",
+                                                        "flat-right": ""
+                                                      },
+                                                      nativeOn: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.add($event)
+                                                        }
+                                                      }
+                                                    },
+                                                    [_vm._v("Add")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              video != 1
+                                                ? _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        small: "",
+                                                        color: "primary",
+                                                        "flat-right": ""
+                                                      },
+                                                      nativeOn: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.close(
+                                                            $event
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [_vm._v("Close")]
+                                                  )
+                                                : _vm._e()
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
                                       )
-                                    ],
-                                    1
+                                    })
                                   )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", md4: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Protein (g)" },
-                                    model: {
-                                      value: _vm.editedItem.protein,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.editedItem, "protein", $$v)
-                                      },
-                                      expression: "editedItem.protein"
-                                    }
-                                  })
                                 ],
                                 1
                               )
@@ -42388,40 +42475,40 @@ var render = function() {
                           )
                         ],
                         1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.close($event)
-                            }
-                          }
-                        },
-                        [_vm._v("Cancel")]
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.save($event)
-                            }
-                          }
-                        },
-                        [_vm._v("Save")]
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.cancel($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Cancel")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.save_qustions($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1

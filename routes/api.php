@@ -22,3 +22,4 @@ Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {
 });
 Route::get('admin/video-management', 'VideoController@get_videos');
 Route::post('admin/video-management/create', 'VideoController@create');
+Route::post('admin/question-management/create', 'QuestionController@create');
