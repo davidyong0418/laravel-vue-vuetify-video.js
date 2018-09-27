@@ -49,23 +49,32 @@ class QuestionController extends Controller
         $result = $request->get('data');
         $update = (array)json_decode($result);
         $update_id = $update['_id'];
+        $selected = $update['selected'];
+        if($selected > $update['count'])
+        {
+            $selected = 1;
+        }
+        $correct_answer = $update['answers'][$selected-1]->answer;
         $update_data = array(
             'question' => $update['question'],
             'count' => $update['count'],
             'answers' => $update['answers'],
-            'selected' => $update['selected']
+            'selected' => $update['selected'],
+            'correct_answer' => $correct_answer,
         );
         Question::where('_id', $update_id)->update($update_data);
         $send = array(
             'action' => 'true',
             'result'=>'success'
         );
-        return 'success';
+        return $update_data;
     }
     public function delete(Request $request)
     {
-        $requests=$request->all();
-
+        $delete_id=$request->get('data');
+        $question = Question::find($delete_id);
+        Question::where('_id', $delete_id)->delete();
+        return 'success';
     }
     
 }

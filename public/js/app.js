@@ -42081,6 +42081,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+var test = [];
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -42114,7 +42115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? 'New Question' : 'Edit Question';
     }
   },
 
@@ -42138,13 +42139,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.editedItem.answers.push(answers);
     },
     remove: function remove(order) {
-      console.log('-------------', order);
-      this.defaultItem.count = this.defaultItem.count - 1;
-      console.log('((((((((((', this.editedItem);
-
-      this.defaultItem.answers.splice(order, 1);
-      console.log(')))))))))))', this.editedItem);
-      this.defaultItem.selected = this.defaultItem.count;
+      this.editedItem.count = this.editedItem.count - 1;
+      this.editedItem.answers.splice(order, 1);
+      console.log(this.editedItem);
+      this.editedItem.selected = 1;
+      console.log(this.editedItem);
     },
     add: function add() {
       this.editedItem.count = this.editedItem.count + 1;
@@ -42157,15 +42156,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     save_qustions: function save_qustions() {
       // var form = document.querySelector('question-management');
       if (this.editedIndex > -1) {
-        console.log(this.editedItem);
-        console.log('#############', this.editedItem);
-        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.defaultItem) }, {
+        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
           headers: {
             'Content-Type': 'applicaton/json'
           }
         }).then(function (response) {
-          console.log(response);
-          Object.assign(this.desserts[this.editedIndex], this.defaultItem);
+          console.log(response.data);
+          Object.assign(this.desserts[this.editedIndex], response.data);
         }.bind(this)).catch(function (error) {
           console.log(error.response);
         }.bind(this));
@@ -42195,17 +42192,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     editItem: function editItem(item) {
-      this.defaultItem = this.editedIndex;
       this.editedIndex = this.desserts.indexOf(item);
-      console.log('+++++++++++++++++++', this.editedIndex);
-      this.editedItem = Object.assign({}, item);
+      this.defaultItem = Object.assign({}, item);
+      console.log(item);
+      this.editedItem.selected = item['selected'];
+      this.editedItem.question = item['question'];
+      this.editedItem.count = item['count'];
+      this.editedItem.correct_answer = item['correct_answer'];
+      this.editedItem._id = item['_id'];
+      this.editedItem.answers = [];
+      for (var i = 0; i < item['answers'].length; i++) {
+        this.editedItem.answers.push({ 'answer': item['answers'][i]['answer'], 'valid': item['answers'][i]['valid'] });
+      }
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
       var index = this.desserts.indexOf(item);
       var delete_item = Object.assign({}, item);
       if (confirm('Are you sure you want to delete this item?')) {
-        axios.get('/api/admin/question-management/', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
           this.loading = false;
           this.desserts.splice(index, 1);
           // this.desserts = response.data.questions
@@ -42216,18 +42221,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     close: function close() {
       this.dialog = false;
-      // setTimeout(() => {
-      //   this.editedItem = Object.assign({}, this.defaultItem)
-      //   this.editedIndex = -1 
-      // }, 300)
+      this.editedIndex = -1;
     },
     save: function save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
-      this.close();
+      // if (this.editedIndex > -1) {
+      //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      // } else {
+      //   this.desserts.push(this.editedItem)
+      // }
+      // this.close()
     }
   }
 });
@@ -42406,13 +42408,7 @@ var render = function() {
                                                         color: "primary",
                                                         "flat-right": ""
                                                       },
-                                                      nativeOn: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.add($event)
-                                                        }
-                                                      }
+                                                      on: { click: _vm.add }
                                                     },
                                                     [_vm._v("Add")]
                                                   )

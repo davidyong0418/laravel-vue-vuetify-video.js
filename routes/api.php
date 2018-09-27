@@ -26,3 +26,4 @@ Route::post('admin/video-management/create', 'VideoController@create');
 Route::get('admin/question-management', 'QuestionController@get_questions');
 Route::post('admin/question-management/create', 'QuestionController@create');
 Route::post('admin/question-management/update', 'QuestionController@update');
+Route::post('admin/question-management/delete', 'QuestionController@delete');
