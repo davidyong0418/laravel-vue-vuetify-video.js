@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/video-management', 'VideoController@index');
 Route::get('/admin/question-management', 'QuestionController@index');
+Route::get('/admin/step-management', 'StepController@index');

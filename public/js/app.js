@@ -13471,7 +13471,7 @@ if (window.user) {
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/admin/video-management', component: __webpack_require__(90) }, { path: '/admin/question-management', component: __webpack_require__(95) }]
+  routes: [{ path: '/admin/video-management', component: __webpack_require__(90) }, { path: '/admin/question-management', component: __webpack_require__(95) }, { path: '/admin/step-management', component: __webpack_require__(104) }]
 });
 
 var app = new Vue({
@@ -42599,6 +42599,773 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(105)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(107)
+/* template */
+var __vue_template__ = __webpack_require__(108)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2c54313d"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\stepComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c54313d", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c54313d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(106);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("5c52ee7a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2c54313d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stepComponent.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2c54313d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stepComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.facebook[data-v-2c54313d] {\n    width: 20px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 107 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      select_video: '',
+      init: '00:00',
+      count: 4,
+      e1: 'Florida',
+      e2: [],
+      e3: null,
+      e4: null,
+      items: [{ text: 'State 1' }, { text: 'State 2' }, { text: 'State 3' }, { text: 'State 4' }, { text: 'State 5' }, { text: 'State 6' }, { text: 'State 7' }],
+      states: ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
+
+      selected: 1,
+      question: '',
+      dialog: false
+    }, _defineProperty(_ref, 'count', 1), _defineProperty(_ref, 'answer', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'test', [{ 'point': 'Answer Count' }, { 'point': 'Answer1 Count' }, { 'point': 'Answer2 Count' }, { 'point': 'Answer3 Count' }]), _defineProperty(_ref, 'editedIndex', -1), _defineProperty(_ref, 'editedItem', {
+      question: '',
+      count: 0,
+      answers: [],
+      selected: 0,
+      _id: ''
+    }), _defineProperty(_ref, 'defaultItem', {
+      question: '',
+      count: 0,
+      selected: 0,
+      answers: [],
+      _id: ''
+    }), _ref;
+  },
+
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'New Question' : 'Edit Question';
+    }
+  },
+
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
+
+  methods: {
+    new_question: function new_question() {
+      this.editedItem.question = '';
+      this.editedItem.count = 1;
+      this.editedItem.answers = [];
+      this.editedItem.selected = 1;
+      this.editedItem._id = '';
+      var answers = { 'answer': '', 'valid': 0 };
+      this.editedItem.answers.push(answers);
+    },
+    remove: function remove(index) {
+      this.test.splice(index, 1);
+    },
+    add: function add() {
+      var new_step = { 'point': '', sort: this.test.length + 1 };
+      this.test.push(new_step);
+    },
+    save_steps: function save_steps() {
+      // var form = document.querySelector('question-management');
+      if (this.editedIndex > -1) {
+        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          console.log(response.data);
+          Object.assign(this.desserts[this.editedIndex], response.data);
+        }.bind(this)).catch(function (error) {
+          console.log(error.response);
+        }.bind(this));
+      } else {
+        console.log(this.editedItem);
+        axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          this.desserts = response.data.questions;
+        }.bind(this)).catch(function (error) {
+          console.log(error.response);
+        }.bind(this));
+      }
+      this.dialog = false;
+    },
+    initialize: function initialize() {
+      var params = new URLSearchParams();
+      console.log(params);
+      this.loading = true;
+      axios.get('/api/admin/question-management/', { params: params, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        this.loading = false;
+        this.desserts = response.data.questions;
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.defaultItem = Object.assign({}, item);
+      console.log(item);
+      this.editedItem.selected = item['selected'];
+      this.editedItem.question = item['question'];
+      this.editedItem.count = item['count'];
+      this.editedItem.correct_answer = item['correct_answer'];
+      this.editedItem._id = item['_id'];
+      this.editedItem.answers = [];
+      for (var i = 0; i < item['answers'].length; i++) {
+        this.editedItem.answers.push({ 'answer': item['answers'][i]['answer'], 'valid': item['answers'][i]['valid'] });
+      }
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.desserts.indexOf(item);
+      var delete_item = Object.assign({}, item);
+      if (confirm('Are you sure you want to delete this item?')) {
+        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+          this.loading = false;
+          this.desserts.splice(index, 1);
+          // this.desserts = response.data.questions
+        }.bind(this)).catch(function (error) {
+          this.loading = false;
+        }.bind(this));
+      }
+    },
+    close: function close() {
+      this.dialog = false;
+      this.editedIndex = -1;
+    },
+    save: function save() {
+      // if (this.editedIndex > -1) {
+      //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      // } else {
+      //   this.desserts.push(this.editedItem)
+      // }
+      // this.close()
+    }
+  }
+});
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { flat: "", color: "white" } },
+        [
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "500px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "mb-2",
+                  attrs: { slot: "activator", color: "primary", dark: "" },
+                  nativeOn: {
+                    click: function($event) {
+                      return _vm.new_question($event)
+                    }
+                  },
+                  slot: "activator"
+                },
+                [_vm._v("New Question")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v(_vm._s(_vm.formTitle))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
+                            [
+                              _c(
+                                "v-list",
+                                [
+                                  _c(
+                                    "v-list-tile",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Question" },
+                                        model: {
+                                          value: _vm.editedItem.question,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.editedItem,
+                                              "question",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "editedItem.question"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.editedItem.count, function(video) {
+                                    return _c(
+                                      "v-list-tile",
+                                      {
+                                        key: video,
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editedItem.selected = video
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("v-list-tile-action"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-tile-content",
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Answer" },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.answers[
+                                                    video - 1
+                                                  ]["answer"],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.answers[
+                                                      video - 1
+                                                    ],
+                                                    "answer",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.answers[video-1]['answer']"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-tile-content",
+                                          [
+                                            video == 1
+                                              ? _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: {
+                                                      small: "",
+                                                      color: "primary",
+                                                      "flat-right": ""
+                                                    },
+                                                    on: { click: _vm.add }
+                                                  },
+                                                  [_vm._v("Add")]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            video != 1
+                                              ? _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: {
+                                                      small: "",
+                                                      color: "primary",
+                                                      "flat-right": ""
+                                                    },
+                                                    nativeOn: {
+                                                      click: function($event) {
+                                                        _vm.remove(video - 1)
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Close")]
+                                                )
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.close($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Cancel")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.save_qustions($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs8: "" } },
+        [
+          _c("v-select", {
+            attrs: { items: _vm.states, label: "Select or add Colors" },
+            model: {
+              value: _vm.e1,
+              callback: function($$v) {
+                _vm.e1 = $$v
+              },
+              expression: "e1"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-list",
+        [
+          _vm._l(_vm.test, function(step, index) {
+            return [
+              _c(
+                "v-container",
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs10: "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  index == 0
+                                    ? _c("v-text-field", {
+                                        attrs: { label: "start time" },
+                                        model: {
+                                          value: _vm.init,
+                                          callback: function($$v) {
+                                            _vm.init = $$v
+                                          },
+                                          expression: "init"
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  index != 0
+                                    ? _c("v-text-field", {
+                                        attrs: { label: "start time" },
+                                        model: {
+                                          value: _vm.test[index - 1]["point"],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.test[index - 1],
+                                              "point",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "test[index - 1]['point']"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "End time" },
+                                    model: {
+                                      value: step.point,
+                                      callback: function($$v) {
+                                        _vm.$set(step, "point", $$v)
+                                      },
+                                      expression: "step.point"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.states,
+                                  label: "Select or add Colors",
+                                  multiple: ""
+                                },
+                                model: {
+                                  value: _vm.e2,
+                                  callback: function($$v) {
+                                    _vm.e2 = $$v
+                                  },
+                                  expression: "e2"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { "xs-2": "" } },
+                        [
+                          index == 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  on: { click: _vm.add }
+                                },
+                                [_vm._v("Add")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          index != 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      _vm.remove(index)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Close")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider")
+            ]
+          })
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
