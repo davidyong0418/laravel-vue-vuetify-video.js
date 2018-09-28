@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::post('/password/email', 'PasswordController@remember');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/video-management', 'VideoController@index');
 Route::get('/admin/question-management', 'QuestionController@index');

@@ -512,7 +512,36 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_mutation_types__ = __webpack_require__(4);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOGGED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SNACKBAR_SHOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SNACKBAR_COLOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SNACKBAR_TEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SNACKBAR_SUBTEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SNACKBAR_TIMEOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SELECTED_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USERS; });
+// AUTH
+var LOGGED = 'LOGGED';
+var USER = 'USER';
+
+// SNACKBAR
+var SET_SNACKBAR_SHOW = 'SET_SNACKBAR_SHOW';
+var SET_SNACKBAR_COLOR = 'SET_SNACKBAR_COLOR';
+var SET_SNACKBAR_TEXT = 'SET_SNACKBAR_TEXT';
+var SET_SNACKBAR_SUBTEXT = 'SET_SNACKBAR_SUBTEXT';
+var SET_SNACKBAR_TIMEOUT = 'SET_SNACKBAR_TIMEOUT';
+
+// USERS
+var SELECTED_USER = 'SELECTED_USER';
+var SET_USERS = 'SET_USERS';
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -549,35 +578,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   }
 });
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOGGED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SNACKBAR_SHOW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SNACKBAR_COLOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SNACKBAR_TEXT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SNACKBAR_SUBTEXT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SNACKBAR_TIMEOUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SELECTED_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USERS; });
-// AUTH
-var LOGGED = 'LOGGED';
-var USER = 'USER';
-
-// SNACKBAR
-var SET_SNACKBAR_SHOW = 'SET_SNACKBAR_SHOW';
-var SET_SNACKBAR_COLOR = 'SET_SNACKBAR_COLOR';
-var SET_SNACKBAR_TEXT = 'SET_SNACKBAR_TEXT';
-var SET_SNACKBAR_SUBTEXT = 'SET_SNACKBAR_SUBTEXT';
-var SET_SNACKBAR_TIMEOUT = 'SET_SNACKBAR_TIMEOUT';
-
-// USERS
-var SELECTED_USER = 'SELECTED_USER';
-var SET_USERS = 'SET_USERS';
 
 /***/ }),
 /* 5 */
@@ -13413,7 +13413,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(20);
-module.exports = __webpack_require__(105);
+module.exports = __webpack_require__(100);
 
 
 /***/ }),
@@ -13425,9 +13425,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mixins_withSnackbar__ = __webpack_require__(4);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 /**
@@ -13471,7 +13471,7 @@ if (window.user) {
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/admin/video-management', component: __webpack_require__(90) }, { path: '/admin/question-management', component: __webpack_require__(95) }, { path: '/admin/step-management', component: __webpack_require__(100) }]
+  routes: [{ path: '/admin/video-management', component: __webpack_require__(90) }, { path: '/admin/question-management', component: __webpack_require__(95) }, { path: '/admin/step-management', component: __webpack_require__(104) }]
 });
 
 var app = new Vue({
@@ -14892,7 +14892,7 @@ module.exports = function listToStyles (parentId, list) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -15352,7 +15352,7 @@ exports.push([module.i, "\n.facebook[data-v-53759da1] {\n    width: 20px;\n}\n",
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -15759,7 +15759,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -15840,6 +15840,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     rememberPassword: function rememberPassword() {
       var _this = this;
 
+      this.showMessage('Email sent to change password');
       if (this.$refs.resetPasswordForm.validate()) {
         this.loading = true;
         this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_0__store_action_types__["e" /* REMEMBER_PASSWORD */], this.email).then(function (response) {
@@ -15969,7 +15970,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Close")]
               ),
               _vm._v(" "),
               _c(
@@ -16070,7 +16071,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -16432,7 +16433,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_mutation_types__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -41142,7 +41143,7 @@ var state = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(80);
 var _actions$LOGIN$action;
@@ -41240,7 +41241,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(3);
 var _types$LOGGED$types$U;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -41305,7 +41306,7 @@ var state = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(3);
 var _types$SET_SNACKBAR_S;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -41367,7 +41368,7 @@ var state = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(88);
 var _actions$SELECTED_USE;
@@ -41426,7 +41427,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(3);
 var _types$SELECTED_USER$;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -41537,7 +41538,7 @@ exports.push([module.i, "\n.facebook[data-v-558b1f66] {\n    width: 20px;\n}\n",
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -41985,7 +41986,7 @@ exports.push([module.i, "\n.facebook[data-v-55d1fc43] {\n    width: 20px;\n}\n",
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
 //
 //
 //
@@ -42596,18 +42597,27 @@ if (false) {
 
 /***/ }),
 /* 100 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(101)
+  __webpack_require__(105)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(103)
+var __vue_script__ = __webpack_require__(107)
 /* template */
-var __vue_template__ = __webpack_require__(104)
+var __vue_template__ = __webpack_require__(108)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -42646,13 +42656,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(102);
+var content = __webpack_require__(106);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -42672,7 +42682,7 @@ if(false) {
 }
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -42686,15 +42696,28 @@ exports.push([module.i, "\n.facebook[data-v-2c54313d] {\n    width: 20px;\n}\n",
 
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(4);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42757,44 +42780,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return _ref = {
       select_video: '',
       init: '00:00',
-      count: 4,
-      e1: 'Florida',
-      e2: [],
-
+      video: { 'alias': '', '_id': '' },
       steps: [],
       videos: [],
       questions: [],
-      init_steps: [],
-      states: ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
-
-      selected: 1,
-      question: '',
-      dialog: false
-    }, _defineProperty(_ref, 'count', 1), _defineProperty(_ref, 'answer', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'test', [{ 'point': 'Answer Count' }, { 'point': 'Answer1 Count' }, { 'point': 'Answer2 Count' }, { 'point': 'Answer3 Count' }]), _defineProperty(_ref, 'desserts', []), _defineProperty(_ref, 'editedIndex', -1), _defineProperty(_ref, 'editedItem', {
-      question: '',
-      count: 0,
-      answers: [],
-      selected: 0,
-      _id: ''
-    }), _defineProperty(_ref, 'defaultItem', {
-      question: '',
-      count: 0,
-      selected: 0,
-      answers: [],
-      _id: ''
+      question: [],
+      select_questions: []
+    }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
+      video_id: '',
+      end_times: []
     }), _ref;
-  },
-
-  computed: {
-    formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'New Question' : 'Edit Question';
-    }
-  },
-
-  watch: {
-    dialog: function dialog(val) {
-      val || this.close();
-    }
   },
   created: function created() {
     this.initialize();
@@ -42802,120 +42797,90 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   methods: {
     onChange: function onChange(_id) {
-      axios.get('/api/admin/step-management/get_steps', { data: _id, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+      console.log(_id);
+      var param = { "_id": _id };
+      axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        console.log(response);
         this.loading = false;
-        this.desserts = response.data.steps;
-        this.steps = this.desserts[0].end_times;
-        console.log(this.desserts);
+        if (response.data.action == 'true') {
+          this.step_info = Object.assign({}, response.data.steps);
+          this.steps = Object.assign({}, this.step_info.end_times);
+        } else {
+          this.step_info = [];
+          this.steps = [];
+          this.step_info = {
+            video_id: '',
+            end_times: []
+          };
+          console.log('this.step_info ==============', this.step_info);
+          console.log('this.defaultItem ++++++++====', this.defaultItem);
+          console.log('this.steps ++++++++====', this.steps);
+          this.step_info.video_id = response.data.steps;
+          this.step_info.end_times = [];
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+        }
       }.bind(this)).catch(function (error) {
         this.loading = false;
       }.bind(this));
-    },
-    new_question: function new_question() {
-      this.editedItem.question = '';
-      this.editedItem.count = 1;
-      this.editedItem.answers = [];
-      this.editedItem.selected = 1;
-      this.editedItem._id = '';
-      var answers = { 'answer': '', 'valid': 0 };
-      this.editedItem.answers.push(answers);
     },
     remove: function remove(index) {
       this.steps.splice(index, 1);
     },
     add: function add() {
-      if (this.steps[this.steps.length]['point'] == '') {
-        return;
-      }
-      var new_step = { 'point': '', sort: this.steps.length + 1 };
+      // if(this.steps[this.steps.length]['point'] == '')
+      // {
+      //   return;
+      // }
+      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
       this.steps.push(new_step);
+      console.log('step_info++++++++++++++++++++', this.step_info);
     },
-    save_steps: function save_steps() {
-      // var form = document.querySelector('question-management');
-      if (this.editedIndex > -1) {
-        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
-          headers: {
-            'Content-Type': 'applicaton/json'
-          }
-        }).then(function (response) {
-          console.log(response.data);
-          Object.assign(this.desserts[this.editedIndex], response.data);
-        }.bind(this)).catch(function (error) {
-          console.log(error.response);
-        }.bind(this));
-      } else {
-        console.log(this.editedItem);
-        axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
-          headers: {
-            'Content-Type': 'applicaton/json'
-          }
-        }).then(function (response) {
-          this.desserts = response.data.questions;
-        }.bind(this)).catch(function (error) {
-          console.log(error.response);
-        }.bind(this));
-      }
-      this.dialog = false;
+    save: function save() {
+      console.log('save step_info+++++++++++', this.step_info);
+      axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.step_info) }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        console.log('save respone++++++++++', response);
+      }.bind(this)).catch(function (error) {
+        console.log(error.response);
+      }.bind(this));
     },
     initialize: function initialize() {
       this.loading = true;
-      axios.get('/api/admin/step-management/get_init_data', { _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
         this.loading = false;
         this.videos = response.data.videos;
         this.questions = response.data.questions;
-        this.init_steps = response.data.init_steps;
-        // this.desserts = response.data.steps
-        this.steps = this.init_steps[0].end_times;
-        console.log(this.questions);
+        var flag = response.data.action;
+        console.log("++++++++++++++", this.videos);
+        console.log('step_info++++++++++++++++', this.step_info);
+        if (flag == 'false') {
+          //   this.step_info = response.data.init_steps;
+
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+          console.log('new_step++++++++++++++++', this.steps);
+        } else {
+          this.step_info = response.data.init_steps;
+          this.steps = this.step_info.end_times;
+          console.log('end_times++++++++++++++++', this.steps);
+        }
+        console.log('step_info++++++++++++++++', this.step_info);
       }.bind(this)).catch(function (error) {
         this.loading = false;
+        console.log(error);
       }.bind(this));
-    },
-    editItem: function editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.defaultItem = Object.assign({}, item);
-      console.log(item);
-      this.editedItem.selected = item['selected'];
-      this.editedItem.question = item['question'];
-      this.editedItem.count = item['count'];
-      this.editedItem.correct_answer = item['correct_answer'];
-      this.editedItem._id = item['_id'];
-      this.editedItem.answers = [];
-      for (var i = 0; i < item['answers'].length; i++) {
-        this.editedItem.answers.push({ 'answer': item['answers'][i]['answer'], 'valid': item['answers'][i]['valid'] });
-      }
-      this.dialog = true;
-    },
-    deleteItem: function deleteItem(item) {
-      var index = this.desserts.indexOf(item);
-      var delete_item = Object.assign({}, item);
-      if (confirm('Are you sure you want to delete this item?')) {
-        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
-          this.loading = false;
-          this.desserts.splice(index, 1);
-          // this.desserts = response.data.questions
-        }.bind(this)).catch(function (error) {
-          this.loading = false;
-        }.bind(this));
-      }
-    },
-    close: function close() {
-      this.dialog = false;
-      this.editedIndex = -1;
-    },
-    save: function save() {
-      // if (this.editedIndex > -1) {
-      //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      // } else {
-      //   this.desserts.push(this.editedItem)
-      // }
-      // this.close()
     }
   }
 });
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -42943,14 +42908,10 @@ var render = function() {
                 attrs: {
                   items: _vm.videos,
                   "item-text": "alias",
-                  label: "Select or add Colors",
+                  label: "Select Video",
                   "item-value": "_id"
                 },
-                on: {
-                  change: function($event) {
-                    _vm.onChange("" + _vm.video._id)
-                  }
-                },
+                on: { change: _vm.onChange },
                 model: {
                   value: _vm.video,
                   callback: function($$v) {
@@ -42969,6 +42930,24 @@ var render = function() {
       _c(
         "v-list",
         [
+          _c(
+            "v-list-tile",
+            [
+              _c(
+                "v-list-tile-content",
+                [
+                  _c("v-list-tile-title", {
+                    domProps: { innerHTML: _vm._s(_vm.step_info.alias) }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-list-tile-content")
+            ],
+            1
+          ),
+          _vm._v(" "),
           _vm._l(_vm.steps, function(step, index) {
             return [
               _c(
@@ -43050,16 +43029,19 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.states,
+                                  items: _vm.questions,
+                                  "item-text": "question",
+                                  "item-value": "_id",
                                   label: "Select or add Colors",
-                                  multiple: ""
+                                  multiple: "",
+                                  chips: ""
                                 },
                                 model: {
-                                  value: _vm.e2,
+                                  value: step.question_ids,
                                   callback: function($$v) {
-                                    _vm.e2 = $$v
+                                    _vm.$set(step, "question_ids", $$v)
                                   },
-                                  expression: "e2"
+                                  expression: "step.question_ids"
                                 }
                               })
                             ],
@@ -43082,9 +43064,9 @@ var render = function() {
                                     color: "primary",
                                     "flat-right": ""
                                   },
-                                  on: {
+                                  nativeOn: {
                                     click: function($event) {
-                                      _vm.add(_vm.target)
+                                      return _vm.add($event)
                                     }
                                   }
                                 },
@@ -43122,7 +43104,32 @@ var render = function() {
               _vm._v(" "),
               _c("v-divider")
             ]
-          })
+          }),
+          _vm._v(" "),
+          _c(
+            "v-list-tile",
+            [
+              _c(
+                "v-list-tile-action",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", "flat-right": "" },
+                      nativeOn: {
+                        click: function($event) {
+                          return _vm.save($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         2
       )
@@ -43139,12 +43146,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
   }
 }
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

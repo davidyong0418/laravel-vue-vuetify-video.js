@@ -5,11 +5,19 @@
     </v-toolbar>
     <v-container>
     <v-flex xs8>
-        <v-select :items="videos" v-model="video" item-text="alias" label="Select or add Colors" v-on:change="onChange(`${video._id}`)" item-value="_id"></v-select>
+        <v-select :items="videos" v-model="video" item-text="alias" label="Select Video" @change="onChange" item-value="_id"></v-select>
     </v-flex>
     </v-container>
 
     <v-list>
+      <v-list-tile>
+        <v-list-tile-content>
+          <v-list-tile-title v-html="step_info.alias"></v-list-tile-title>
+        </v-list-tile-content>
+         <v-list-tile-content>
+          <!-- <v-list-tile-title v-html="step_info.vimeo_url[0]"></v-list-tile-title> -->
+        </v-list-tile-content>
+      </v-list-tile>
           <template v-for="(step, index) in steps">
             <v-container>
             <v-layout wrap>
@@ -24,12 +32,12 @@
                 </v-flex>
               </v-layout>
               <v-layout>
-                
-                <v-select :items="states" v-model="e2" label="Select or add Colors"  multiple></v-select>
+          
+                <v-select :items="questions" item-text="question" item-value="_id" v-model="step.question_ids" label="Select or add Colors" multiple chips ></v-select>
               </v-layout>
             </v-flex>
             <v-flex xs-2>
-              <v-btn v-if="index == 0" small color="primary" flat-right @click="add(target)">Add</v-btn>
+              <v-btn v-if="index == 0" small color="primary" flat-right @click.native="add">Add</v-btn>
               <v-btn v-if="index != 0" small color="primary" flat-right @click.native="remove(index)">Close</v-btn>
 
             </v-flex>
@@ -38,6 +46,11 @@
 
             <v-divider></v-divider>
           </template>
+          <v-list-tile>
+        <v-list-tile-action>
+          <v-btn color="primary" flat-right @click.native="save">Save</v-btn>
+        </v-list-tile-action>
+      </v-list-tile>
         </v-list>
     
   </div>
@@ -57,210 +70,117 @@
     data: () => ({
         select_video:'',
         init:'00:00',
-        count: 4,
-        e1: 'Florida',
-        e2: [],
-       
-        steps:[],
+        video:{'alias': '', '_id': ''},
+        steps:[
+        ],
         videos:[],
         questions:[],
-        init_steps:[],
-        states: [
-          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-          'Arkansas', 'California', 'Colorado', 'Connecticut',
-          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-          'Missouri', 'Montana', 'Nebraska', 'Nevada',
-          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-        ],
-
-
-
-      selected: 1,
+        question:[],
+       select_questions:[],
       question:'',
-      dialog: false,
-      count: 1,
-      answer:[],
+      step_info:[],
       loginLoading: false,
-      test: [
-        { 'point': 'Answer Count'},
-         { 'point': 'Answer1 Count'},
-          { 'point': 'Answer2 Count'},
-           { 'point': 'Answer3 Count'},
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        question: '',
-        count: 0,
-        answers: [],
-        selected: 0,
-        _id: '',
-      },
       defaultItem: {
-        question: '',
-        count: 0,
-        selected: 0,
-        answers: [],
-        _id: '',
+        video_id:'',
+        end_times:[],
       }
     }),
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Question' : 'Edit Question'
-      }
-    },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      }
-    },
     created () {
       this.initialize()
     },
     methods: {
       onChange: function(_id)
       {
-         axios.get('/api/admin/step-management/get_steps', {data:_id, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        console.log(_id);
+        var param = {"_id":_id };
+         axios.post('/api/admin/step-management/get_steps', {data:_id}, {headers: {'Content-Type': 'application/json'}})
         .then( function (response) {
+          console.log(response)
           this.loading = false
-          this.desserts = response.data.steps
-          this.steps = this.desserts[0].end_times;
-          console.log(this.desserts)
+          if(response.data.action == 'true')
+          {
+             this.step_info = Object.assign({}, response.data.steps);
+             this.steps = Object.assign({}, this.step_info.end_times);
+          }
+          else
+          {
+            this.step_info = [];
+              this.steps = [];
+            this.step_info ={
+            video_id:'',
+            end_times:[],
+          };
+            console.log('this.step_info ==============',this.step_info);
+            console.log('this.defaultItem ++++++++====',this.defaultItem)
+            console.log('this.steps ++++++++====',this.steps)
+            this.step_info.video_id = response.data.steps;
+            this.step_info.end_times = [];
+            this.steps = this.step_info.end_times;
+            var new_step = {'point':'','sort': 1,'question_ids':[]};
+            this.steps.push(new_step);
+
+          }
         }.bind(this))
         .catch(function (error) {
           this.loading = false
         }.bind(this))
-      },
-      new_question: function()
-      {
-         this.editedItem.question = '';
-         this.editedItem.count = 1;
-         this.editedItem.answers = [];
-         this.editedItem.selected = 1;
-         this.editedItem._id = '';
-         var answers = {'answer': '', 'valid' : 0};
-         this.editedItem.answers.push(answers);
       },
       remove: function(index){
         this.steps.splice(index, 1);
       },
       add: function(){
-        if(this.steps[this.steps.length]['point'] == '')
-        {
-          return;
-        }
-        var new_step = {'point':'',sort:this.steps.length + 1};
+        // if(this.steps[this.steps.length]['point'] == '')
+        // {
+        //   return;
+        // }
+        var new_step = {'point':'','sort':this.steps.length + 1, 'question_ids':[]};
         this.steps.push(new_step);
-
+        console.log('step_info++++++++++++++++++++', this.step_info);
     
       },
-      save_steps: function(){
-        // var form = document.querySelector('question-management');
-        if(this.editedIndex > -1)
-        {
-            axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.editedItem)}, {
+      save: function(){
+          console.log('save step_info+++++++++++',this.step_info);
+          axios.post('/api/admin/question-management/create', {data: JSON.stringify(this.step_info)}, {
             headers:{
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(response.data)
-            Object.assign(this.desserts[this.editedIndex], response.data);
+            console.log('save respone++++++++++', response)            
           }.bind(this)).catch(function (error){
             console.log(error.response);
           }.bind(this));
-        }
-        else{
-          console.log(this.editedItem);
-          axios.post('/api/admin/question-management/create', {data: JSON.stringify(this.editedItem)}, {
-            headers:{
-              'Content-Type':'applicaton/json',
-            }
-          }).then(function(response){
-            this.desserts = response.data.questions;
-            
-          }.bind(this)).catch(function (error){
-            console.log(error.response);
-          }.bind(this));
-        }
-        this.dialog = false
       },
       initialize () {
         this.loading = true
-        axios.get('/api/admin/step-management/get_init_data', {_token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        axios.get('/api/admin/step-management/get_init_data', {data:'ddd',_token:'kkkkkkkkkkkk'}, {headers: {'Content-Type':'applicaton/json',}})
         .then( function (response) {
           this.loading = false
           this.videos = response.data.videos;
           this.questions = response.data.questions;
-          this.init_steps = response.data.init_steps;
-          // this.desserts = response.data.steps
-          this.steps = this.init_steps[0].end_times;
-          console.log(this.questions)
+          var flag = response.data.action;
+          console.log("++++++++++++++",this.videos)
+          console.log('step_info++++++++++++++++', this.step_info)
+          if(flag == 'false')
+          {
+            //   this.step_info = response.data.init_steps;
+           
+            this.steps = this.step_info.end_times;
+            var new_step = {'point':'','sort':1, 'question_ids':[]};
+              this.steps.push(new_step);
+              console.log('new_step++++++++++++++++',this.steps)
+          }
+          else{
+            this.step_info = response.data.init_steps;
+            this.steps = this.step_info.end_times;
+            console.log('end_times++++++++++++++++',this.steps)
+          }
+          console.log('step_info++++++++++++++++',this.step_info)
         }.bind(this))
         .catch(function (error) {
           this.loading = false
+          console.log(error)
         }.bind(this))
       },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item);
-        this.defaultItem = Object.assign({}, item);
-        console.log(item);
-        this.editedItem.selected = item['selected'];
-        this.editedItem.question = item['question'];
-        this.editedItem.count = item['count'];
-        this.editedItem.correct_answer = item['correct_answer'];
-        this.editedItem._id = item['_id'];
-        this.editedItem.answers = [];
-        for (var i=0;i<item['answers'].length;i++)
-        {
-             this.editedItem.answers.push({'answer':item['answers'][i]['answer'], 'valid':item['answers'][i]['valid']})
-        }
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        const index = this.desserts.indexOf(item);
-        let delete_item = Object.assign({}, item);
-        if(confirm('Are you sure you want to delete this item?'))
-        {
-          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
-          .then( function (response) {
-            this.loading = false
-            this.desserts.splice(index, 1)
-            // this.desserts = response.data.questions
-          }.bind(this))
-          .catch(function (error) {
-            this.loading = false
-          }.bind(this));
-
-        }
-        
-      },
-
-      close () {
-        this.dialog = false
-        this.editedIndex = -1;
-      },
-
-      save () {
-        // if (this.editedIndex > -1) {
-        //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        // } else {
-        //   this.desserts.push(this.editedItem)
-        // }
-        // this.close()
-      }
     }
   }
 </script>

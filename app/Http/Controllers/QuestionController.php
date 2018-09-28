@@ -42,7 +42,6 @@ class QuestionController extends Controller
         Question::create($new);
         $questions = Question::all();
         return ['questions' => $questions];
-
     }
     public function update(Request $request)
     {

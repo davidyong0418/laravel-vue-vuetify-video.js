@@ -24,7 +24,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="showRememberPassword = false">Tancar</v-btn>
+                <v-btn color="blue darken-1" flat @click.native="showRememberPassword = false">Close</v-btn>
                 <v-btn
                         :loading="loading"
                         flat
@@ -73,6 +73,7 @@
     },
     methods: {
       rememberPassword () {
+        this.showMessage(`Email sent to change password`)
         if (this.$refs.resetPasswordForm.validate()) {
           this.loading = true
           this.$store.dispatch(actions.REMEMBER_PASSWORD, this.email).then(response => {
