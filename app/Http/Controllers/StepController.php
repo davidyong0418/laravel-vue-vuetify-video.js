@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Step;
+use App\Moedel\Question;
 class StepController extends Controller
 {
     /**
@@ -28,20 +29,39 @@ class StepController extends Controller
     }
     public function get_questions()
     {
+        $steps = Step::all();
+       return ['steps' => $steps];
+    }
+    public function get_videos(Request $request)
+    {
+        $videos = Video::all();
         $questions = Question::all();
-       return ['questions' => $questions];
+        $steps = Step::all();
+        return ['videos'=> $videos, 'questions'=>$questions, 'init_steps'=>$init_steps];
+    }
+    public function get_init_data(Request $request)
+    {
+        $video_id = $request->get('data');
+        $steps = Step::where('video_id', $video_id)->get();
+        return ['steps'=>$steps];
     }
     public function create(Request $request)
     {
-        $requests = $request->get('data');
-        $new = (array)json_decode($requests);
-        $selected = $new['selected'] - 1 ;
-        $new['answers'][$selected]->valid = 1;
-        unset($new['_id']);
-        $new['correct_answer'] = $new['answers'][$selected]->answer;
-        Question::create($new);
-        $questions = Question::all();
-        return ['questions' => $questions];
+        // $requests = $request->get('data');
+        // $new = (array)json_decode($requests);
+
+        // Step::create($new);
+            
+        $step = new Step();
+        $step->video_id = 10;
+        $step->end_times = array(
+            'step'=>'00:15',
+            'sort'=> 1
+        );
+        $step->question_ids = '1,2,3,4,5';
+        $step->save();
+        // $step = Step::all();
+        return ['step' => $step];
 
     }
     public function update(Request $request)

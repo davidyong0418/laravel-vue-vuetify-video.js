@@ -2,69 +2,22 @@
   <div>
     <v-toolbar flat color="white">
       <v-spacer></v-spacer>
-      
-      <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" color="primary" dark class="mb-2" @click.native="new_question">New Question</v-btn>
-        <v-form>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-             
-          <v-card-text>
-            <v-container grid-list-md>
-                
-                <v-list>
-                  <v-list-tile>
-                  <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
-                </v-list-tile>
-                  
-                        <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video">
-                          <v-list-tile-action>
-                              
-                          </v-list-tile-action>
-                          <v-list-tile-content>
-                            <v-text-field v-model="editedItem.answers[video-1]['answer']" label="Answer"></v-text-field>
-                          </v-list-tile-content>
-
-                          <v-list-tile-content>
-                            <v-btn v-if="video == 1" small color="primary" flat-right @click="add">Add</v-btn>
-                            <v-btn v-if="video != 1" small color="primary" flat-right @click.native="remove(video-1)">Close</v-btn>
-                          </v-list-tile-content>
-
-                        </v-list-tile>
-              
-                    </v-list>
-
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save_qustions">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-        </v-form>
-      </v-dialog>
-      
     </v-toolbar>
-
+    <v-container>
     <v-flex xs8>
-        <v-select :items="states" v-model="e1" label="Select or add Colors" ></v-select>
+        <v-select :items="videos" v-model="video" item-text="alias" label="Select or add Colors" v-on:change="onChange(`${video._id}`)" item-value="_id"></v-select>
     </v-flex>
-
+    </v-container>
 
     <v-list>
-          <template v-for="(step, index) in test">
+          <template v-for="(step, index) in steps">
             <v-container>
             <v-layout wrap>
             <v-flex xs10>
               <v-layout wrap>
                 <v-flex xs6>
                   <v-text-field v-if="index == 0" v-model="init" label="start time"></v-text-field>
-                  <v-text-field v-if="index != 0" v-model="test[index - 1]['point']" label="start time"></v-text-field>
+                  <v-text-field v-if="index != 0" v-model="steps[index - 1]['point']" label="start time"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                   <v-text-field v-model="step.point" label="End time"></v-text-field>
@@ -76,7 +29,7 @@
               </v-layout>
             </v-flex>
             <v-flex xs-2>
-              <v-btn v-if="index == 0" small color="primary" flat-right @click="add">Add</v-btn>
+              <v-btn v-if="index == 0" small color="primary" flat-right @click="add(target)">Add</v-btn>
               <v-btn v-if="index != 0" small color="primary" flat-right @click.native="remove(index)">Close</v-btn>
 
             </v-flex>
@@ -107,17 +60,11 @@
         count: 4,
         e1: 'Florida',
         e2: [],
-        e3: null,
-        e4: null,
-        items: [
-          { text: 'State 1' },
-          { text: 'State 2' },
-          { text: 'State 3' },
-          { text: 'State 4' },
-          { text: 'State 5' },
-          { text: 'State 6' },
-          { text: 'State 7' }
-        ],
+       
+        steps:[],
+        videos:[],
+        questions:[],
+        init_steps:[],
         states: [
           'Alabama', 'Alaska', 'American Samoa', 'Arizona',
           'Arkansas', 'California', 'Colorado', 'Connecticut',
@@ -149,7 +96,7 @@
           { 'point': 'Answer2 Count'},
            { 'point': 'Answer3 Count'},
       ],
-      // desserts: [],
+      desserts: [],
       editedIndex: -1,
       editedItem: {
         question: '',
@@ -182,6 +129,19 @@
       this.initialize()
     },
     methods: {
+      onChange: function(_id)
+      {
+         axios.get('/api/admin/step-management/get_steps', {data:_id, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        .then( function (response) {
+          this.loading = false
+          this.desserts = response.data.steps
+          this.steps = this.desserts[0].end_times;
+          console.log(this.desserts)
+        }.bind(this))
+        .catch(function (error) {
+          this.loading = false
+        }.bind(this))
+      },
       new_question: function()
       {
          this.editedItem.question = '';
@@ -193,11 +153,15 @@
          this.editedItem.answers.push(answers);
       },
       remove: function(index){
-        this.test.splice(index, 1);
+        this.steps.splice(index, 1);
       },
       add: function(){
-        var new_step = {'point':'',sort:this.test.length + 1};
-        this.test.push(new_step);
+        if(this.steps[this.steps.length]['point'] == '')
+        {
+          return;
+        }
+        var new_step = {'point':'',sort:this.steps.length + 1};
+        this.steps.push(new_step);
 
     
       },
@@ -224,6 +188,7 @@
             }
           }).then(function(response){
             this.desserts = response.data.questions;
+            
           }.bind(this)).catch(function (error){
             console.log(error.response);
           }.bind(this));
@@ -231,13 +196,16 @@
         this.dialog = false
       },
       initialize () {
-        var params = new URLSearchParams();
-        console.log(params);
         this.loading = true
-        axios.get('/api/admin/question-management/', {params, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        axios.get('/api/admin/step-management/get_init_data', {_token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
         .then( function (response) {
           this.loading = false
-          this.desserts = response.data.questions
+          this.videos = response.data.videos;
+          this.questions = response.data.questions;
+          this.init_steps = response.data.init_steps;
+          // this.desserts = response.data.steps
+          this.steps = this.init_steps[0].end_times;
+          console.log(this.questions)
         }.bind(this))
         .catch(function (error) {
           this.loading = false

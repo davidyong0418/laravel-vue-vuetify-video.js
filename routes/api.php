@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {
     Route::put('/user', 'LoggedUserController@update');
@@ -27,3 +27,10 @@ Route::get('admin/question-management', 'QuestionController@get_questions');
 Route::post('admin/question-management/create', 'QuestionController@create');
 Route::post('admin/question-management/update', 'QuestionController@update');
 Route::post('admin/question-management/delete', 'QuestionController@delete');
+//Step management
+Route::get('admin/step-management', 'StepController@get_questions');
+Route::post('admin/step-management/create', 'StepController@create');
+Route::post('admin/step-management/update', 'StepController@update');
+Route::post('admin/step-management/delete', 'StepController@delete');
+Route::get('admin/step-management/get_steps', 'StepController@get_steps');
+Route::get('admin/step-management/get_init_data', 'StepController@get_init_data');
