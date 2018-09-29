@@ -9,14 +9,11 @@
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
           </v-card-title>
-  
+          <v-divider></v-divider>
           <v-card-text>
             <v-container grid-list-md>
-
                 <v-list>
-                  <v-list-tile>
                   <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
-                </v-list-tile>
                     <v-radio-group v-model="editedItem.selected">
                         <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video">
                           <v-list-tile-action>
@@ -44,8 +41,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save_qustions">Save</v-btn>
+            <v-btn color="orange" dark flat @click.native="close">Cancel<v-icon dark left>remove_circle</v-icon></v-btn>
+            <v-btn color="orange"  flat @click.native="save_qustions">Save<v-icon dark right>check_circle</v-icon></v-btn>
           </v-card-actions>
         </v-card>
         </v-form>
@@ -97,6 +94,7 @@ var test = [];
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
   export default {
+    mixins: [withSnackbar],
     data: () => ({
       selected: 1,
       question:'',
@@ -119,6 +117,7 @@ var test = [];
         answers: [],
         selected: 0,
         _id: '',
+        correct_answer:''
       },
       defaultItem: {
         question: '',
@@ -126,6 +125,7 @@ var test = [];
         selected: 0,
         answers: [],
         _id: '',
+        correct_answer:''
       }
     }),
 
@@ -173,15 +173,28 @@ var test = [];
         // var form = document.querySelector('question-management');
         if(this.editedIndex > -1)
         {
+          console.log('***************',this.editedItem);
+            this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
             axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.editedItem)}, {
             headers:{
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(response.data)
-            Object.assign(this.desserts[this.editedIndex], response.data);
+            console.log(this.editedIndex);
+            Object.assign(this.desserts[this.editedIndex], this.editedItem);
+
+            // this.desserts[this.editedIndex].selected = this.editedItem.selected;
+            // this.desserts[this.editedIndex].question = this.editedItem.question;
+            // this.desserts[this.editedIndex].count = this.editedItem.count;
+            // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
+            // this.desserts[this.editedIndex].answers = [];
+            // this.desserts[this.editedIndex].answers = this.editedItem.answers;
+
+
+            this.showMessage(`Successfully Updated`);
+
           }.bind(this)).catch(function (error){
-            console.log(error.response);
+            console.log(error);
           }.bind(this));
         }
         else{
@@ -192,6 +205,7 @@ var test = [];
             }
           }).then(function(response){
             this.desserts = response.data.questions;
+            this.showMessage(`Successfully Saved`);
           }.bind(this)).catch(function (error){
             console.log(error.response);
           }.bind(this));
@@ -234,10 +248,11 @@ var test = [];
         let delete_item = Object.assign({}, item);
         if(confirm('Are you sure you want to delete this item?'))
         {
-          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/json'}})
           .then( function (response) {
             this.loading = false
-            this.desserts.splice(index, 1)
+            this.desserts.splice(index, 1);
+            this.showMessage(`Successfully Deleted`);
             // this.desserts = response.data.questions
           }.bind(this))
           .catch(function (error) {
@@ -250,7 +265,6 @@ var test = [];
 
       close () {
         this.dialog = false
-        this.editedIndex = -1;
       },
 
       save () {

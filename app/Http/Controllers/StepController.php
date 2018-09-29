@@ -151,12 +151,16 @@ class StepController extends Controller
     {
         $requests = $request->get('data');
         $new = (array)json_decode($requests);
-        if(empty($new['video_id']))
+        if(empty($new['_id']))
         {
             Step::create($new);
         }
         else{
-            Step::where('video_id',$new['video_id'])->update($new);
+            $update_step = array(
+                'video_id' => $new['video_id'],
+                'end_times' => $new['end_times']
+            );
+            Step::where('_id',$new['_id'])->update($update_step);
         }
         $step = Step::all();
         return ['step' => $step];

@@ -66,13 +66,15 @@ class QuestionController extends Controller
             'action' => 'true',
             'result'=>'success'
         );
-        return $update_data;
+        return['send' => $send];
+        // return response()->json($update_data);
     }
     public function delete(Request $request)
     {
         $delete_id=$request->get('data');
         $question = Question::find($delete_id);
-        Question::where('_id', $delete_id)->delete();
+        $question->delete();
+        // Question::where('_id', $delete_id)->delete();
         return 'success';
     }
     

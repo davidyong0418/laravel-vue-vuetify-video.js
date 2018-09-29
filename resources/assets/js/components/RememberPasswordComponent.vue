@@ -73,7 +73,6 @@
     },
     methods: {
       rememberPassword () {
-        this.showMessage(`Email sent to change password`)
         if (this.$refs.resetPasswordForm.validate()) {
           this.loading = true
           this.$store.dispatch(actions.REMEMBER_PASSWORD, this.email).then(response => {

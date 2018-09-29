@@ -13495,11 +13495,7 @@ var app = new Vue({
       logoutLoading: false,
       changingPassword: false,
       updatingUser: false,
-      items: [{ icon: 'home', text: 'Home', href: '/home' }, { icon: 'home', text: 'Landing Page', href: '/' }, { icon: 'home', text: 'Video course management', href: '/admin/video-management' }, { icon: 'home', text: 'Step management', href: '/admin/step-management' }, { icon: 'home', text: 'Question management', href: '/admin/question-management' }, { icon: 'settings', text: 'Settings' }, { icon: 'chat_bubble', text: 'Contact' },
-      // { heading: 'Links' },
-      { icon: 'link', text: 'Google', href: 'http://www.google.com'
-        // { heading: 'Administració', role: 'Manager' }
-      }]
+      items: [{ icon: 'home', text: 'Home', href: '/home' }, { icon: 'home', text: 'Landing Page', href: '/' }, { icon: 'folder_open', text: 'Video course management', href: '/admin/video-management' }, { icon: 'widgets', text: 'Question management', href: '/admin/question-management' }, { icon: 'gavel', text: 'Step management', href: '/admin/step-management' }]
     };
   },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["b" /* mapGetters */])({
@@ -15028,7 +15024,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     }
   },
+  watch: {
+    showLogin: function showLogin(val) {
+      console.log('watch login', val);
+      val || this.close();
+    }
+  },
+
   methods: {
+    close: function close() {
+      this.showLogin = false;
+    },
     login: function login() {
       var _this = this;
 
@@ -15217,21 +15223,12 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "blue darken-2", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.showLogin = false
-                    }
-                  }
-                },
-                [_vm._v("Close")]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
                   staticClass: "white--text",
-                  attrs: { color: "blue darken-2", loading: _vm.loginLoading },
+                  attrs: {
+                    color: "blue darken-2",
+                    block: "",
+                    loading: _vm.loginLoading
+                  },
                   nativeOn: {
                     click: function($event) {
                       return _vm.login($event)
@@ -15848,7 +15845,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     rememberPassword: function rememberPassword() {
       var _this = this;
 
-      this.showMessage('Email sent to change password');
       if (this.$refs.resetPasswordForm.validate()) {
         this.loading = true;
         this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_0__store_action_types__["e" /* REMEMBER_PASSWORD */], this.email).then(function (response) {
@@ -41624,6 +41620,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -41634,7 +41632,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       errors: [],
       internalAction: this.action,
       loginLoading: false,
-      selected: '',
+      selected: 0,
       videos: [],
       add_vimeo_url: '',
       add_vimeo_alias: ''
@@ -41668,7 +41666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.loading = true;
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
         this.loading = false;
-        console.log(response);
+        console.log('response+++++++++++++++', response);
         this.videos = response.data.videos;
       }.bind(this)).catch(function (error) {
         this.loading = false;
@@ -41711,21 +41709,14 @@ var render = function() {
     [
       _c(
         "v-flex",
-        { attrs: { sm4: "", "offset-sm1": "" } },
+        { attrs: { sm8: "" } },
         [
           _c(
             "v-card",
             [
               _c(
                 "v-toolbar",
-                { attrs: { color: "indigo", dark: "" } },
-                [
-                  _c("v-toolbar-side-icon"),
-                  _vm._v(" "),
-                  _c("v-toolbar-title", [_vm._v("Video list")]),
-                  _vm._v(" "),
-                  _c("v-spacer")
-                ],
+                [_c("v-toolbar-title", [_vm._v("Video list")])],
                 1
               ),
               _vm._v(" "),
@@ -41747,10 +41738,10 @@ var render = function() {
                       return _c(
                         "v-list-tile",
                         {
-                          key: video.id,
+                          key: video._id,
                           on: {
                             click: function($event) {
-                              _vm.selected = video.id
+                              _vm.selected = video._id
                             }
                           }
                         },
@@ -41759,7 +41750,7 @@ var render = function() {
                             "v-list-tile-action",
                             [
                               _c("v-radio", {
-                                attrs: { name: "video", value: video.id },
+                                attrs: { name: "video", value: video._id },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -41806,27 +41797,17 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-flex",
-        { attrs: { sm4: "", "offset-sm1": "" } },
+        { attrs: { sm4: "" } },
         [
           _c(
             "v-card",
             [
               _c(
                 "v-toolbar",
-                { attrs: { color: "indigo", dark: "" } },
                 [
-                  _c("v-toolbar-side-icon"),
-                  _vm._v(" "),
                   _c("v-toolbar-title", [_vm._v("Add Video")]),
                   _vm._v(" "),
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    { attrs: { icon: "" } },
-                    [_c("v-icon", [_vm._v("search")])],
-                    1
-                  )
+                  _c("v-spacer")
                 ],
                 1
               ),
@@ -41839,6 +41820,7 @@ var render = function() {
                     { attrs: { sm7: "", "offset-sm1": "" } },
                     [
                       _c("v-text-field", {
+                        staticClass: "mb-3",
                         attrs: { label: "Vimeo Url", required: "" },
                         model: {
                           value: _vm.add_vimeo_url,
@@ -41849,7 +41831,10 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
                       _c("v-text-field", {
+                        staticClass: "mb-3",
                         attrs: { label: "Vimeo Alias", required: "" },
                         model: {
                           value: _vm.add_vimeo_alias,
@@ -41865,11 +41850,16 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-flex",
-                    { attrs: { sm3: "" } },
+                    { attrs: { sm3: "", "offset-sm6": "" } },
                     [
-                      _c("v-btn", { on: { click: _vm.add_video } }, [
-                        _vm._v("Add")
-                      ])
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary", "flat-right": "" },
+                          on: { click: _vm.add_video }
+                        },
+                        [_vm._v("Add")]
+                      )
                     ],
                     1
                   )
@@ -42086,14 +42076,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 var test = [];
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
   data: function data() {
     return {
       selected: 1,
@@ -42110,14 +42098,16 @@ var test = [];
         count: 0,
         answers: [],
         selected: 0,
-        _id: ''
+        _id: '',
+        correct_answer: ''
       },
       defaultItem: {
         question: '',
         count: 0,
         selected: 0,
         answers: [],
-        _id: ''
+        _id: '',
+        correct_answer: ''
       }
     };
   },
@@ -42165,15 +42155,27 @@ var test = [];
     save_qustions: function save_qustions() {
       // var form = document.querySelector('question-management');
       if (this.editedIndex > -1) {
+        console.log('***************', this.editedItem);
+        this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
         axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
           headers: {
             'Content-Type': 'applicaton/json'
           }
         }).then(function (response) {
-          console.log(response.data);
-          Object.assign(this.desserts[this.editedIndex], response.data);
+          console.log(this.editedIndex);
+          Object.assign(this.desserts[this.editedIndex], this.editedItem);
+
+          // this.desserts[this.editedIndex].selected = this.editedItem.selected;
+          // this.desserts[this.editedIndex].question = this.editedItem.question;
+          // this.desserts[this.editedIndex].count = this.editedItem.count;
+          // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
+          // this.desserts[this.editedIndex].answers = [];
+          // this.desserts[this.editedIndex].answers = this.editedItem.answers;
+
+
+          this.showMessage('Successfully Updated');
         }.bind(this)).catch(function (error) {
-          console.log(error.response);
+          console.log(error);
         }.bind(this));
       } else {
         console.log(this.editedItem);
@@ -42183,6 +42185,7 @@ var test = [];
           }
         }).then(function (response) {
           this.desserts = response.data.questions;
+          this.showMessage('Successfully Saved');
         }.bind(this)).catch(function (error) {
           console.log(error.response);
         }.bind(this));
@@ -42219,9 +42222,10 @@ var test = [];
       var index = this.desserts.indexOf(item);
       var delete_item = Object.assign({}, item);
       if (confirm('Are you sure you want to delete this item?')) {
-        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
           this.loading = false;
           this.desserts.splice(index, 1);
+          this.showMessage('Successfully Deleted');
           // this.desserts = response.data.questions
         }.bind(this)).catch(function (error) {
           this.loading = false;
@@ -42230,7 +42234,6 @@ var test = [];
     },
     close: function close() {
       this.dialog = false;
-      this.editedIndex = -1;
     },
     save: function save() {
       // if (this.editedIndex > -1) {
@@ -42300,6 +42303,8 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
                       _c(
                         "v-card-text",
                         [
@@ -42310,26 +42315,20 @@ var render = function() {
                               _c(
                                 "v-list",
                                 [
-                                  _c(
-                                    "v-list-tile",
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Question" },
-                                        model: {
-                                          value: _vm.editedItem.question,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.editedItem,
-                                              "question",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "editedItem.question"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
+                                  _c("v-text-field", {
+                                    attrs: { label: "Question" },
+                                    model: {
+                                      value: _vm.editedItem.question,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItem,
+                                          "question",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItem.question"
+                                    }
+                                  }),
                                   _vm._v(" "),
                                   _c(
                                     "v-radio-group",
@@ -42469,27 +42468,39 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "blue darken-1", flat: "" },
+                              attrs: { color: "orange", dark: "", flat: "" },
                               nativeOn: {
                                 click: function($event) {
                                   return _vm.close($event)
                                 }
                               }
                             },
-                            [_vm._v("Cancel")]
+                            [
+                              _vm._v("Cancel"),
+                              _c("v-icon", { attrs: { dark: "", left: "" } }, [
+                                _vm._v("remove_circle")
+                              ])
+                            ],
+                            1
                           ),
                           _vm._v(" "),
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "blue darken-1", flat: "" },
+                              attrs: { color: "orange", flat: "" },
                               nativeOn: {
                                 click: function($event) {
                                   return _vm.save_qustions($event)
                                 }
                               }
                             },
-                            [_vm._v("Save")]
+                            [
+                              _vm._v("Save"),
+                              _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                                _vm._v("check_circle")
+                              ])
+                            ],
+                            1
                           )
                         ],
                         1
@@ -42759,20 +42770,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
   data: function data() {
     var _ref;
 
@@ -42788,7 +42791,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
       video_id: '',
       end_times: []
-    }), _ref;
+    }), _defineProperty(_ref, 'loading_state', false), _ref;
   },
   created: function created() {
     this.initialize();
@@ -42797,13 +42800,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     onChange: function onChange(_id) {
       console.log(_id);
+
       var param = { "_id": _id };
       axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
         console.log(response);
         this.loading = false;
+        this.loading_state = true;
         if (response.data.action == 'true') {
-          this.step_info = Object.assign({}, response.data.steps);
-          this.steps = Object.assign({}, this.step_info.end_times);
+          this.step_info = response.data.steps;
+          this.steps = this.step_info.end_times;
         } else {
           this.step_info = [];
           this.steps = [];
@@ -42811,14 +42816,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             video_id: '',
             end_times: []
           };
-          console.log('this.step_info ==============', this.step_info);
-          console.log('this.defaultItem ++++++++====', this.defaultItem);
-          console.log('this.steps ++++++++====', this.steps);
+
           this.step_info.video_id = response.data.steps;
           this.step_info.end_times = [];
           this.steps = this.step_info.end_times;
           var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
           this.steps.push(new_step);
+          console.log('this.step_info ==============', this.step_info);
+          console.log('this.defaultItem ++++++++====', this.defaultItem);
+          console.log('this.steps ++++++++====', this.steps);
         }
       }.bind(this)).catch(function (error) {
         this.loading = false;
@@ -42828,35 +42834,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.steps.splice(index, 1);
     },
     add: function add() {
-      // if(this.steps[this.steps.length]['point'] == '')
-      // {
-      //   return;
-      // }
+      console.log('step_info++++++++++++++++++++', this.steps);
       var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
       this.steps.push(new_step);
-      console.log('step_info++++++++++++++++++++', this.step_info);
     },
     save: function save() {
       console.log('save step_info+++++++++++', this.step_info);
-      axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.step_info) }, {
+      axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
         headers: {
           'Content-Type': 'applicaton/json'
         }
       }).then(function (response) {
-        console.log('save respone++++++++++', response);
+        this.showMessage('Successfully Saved');
       }.bind(this)).catch(function (error) {
         console.log(error.response);
+        this.showError('Error');
       }.bind(this));
     },
     initialize: function initialize() {
       this.loading = true;
+      this.loading_state = false;
       axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
         this.loading = false;
         this.videos = response.data.videos;
         this.questions = response.data.questions;
         var flag = response.data.action;
-        console.log("++++++++++++++", this.videos);
-        console.log('step_info++++++++++++++++', this.step_info);
         if (flag == 'false') {
           //   this.step_info = response.data.init_steps;
 
@@ -42890,13 +42892,6 @@ var render = function() {
     "div",
     [
       _c(
-        "v-toolbar",
-        { attrs: { flat: "", color: "white" } },
-        [_c("v-spacer")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
         "v-container",
         [
           _c(
@@ -42929,23 +42924,13 @@ var render = function() {
       _c(
         "v-list",
         [
-          _c(
-            "v-list-tile",
-            [
-              _c(
-                "v-list-tile-content",
-                [
-                  _c("v-list-tile-title", {
-                    domProps: { innerHTML: _vm._s(_vm.step_info.alias) }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-list-tile-content")
-            ],
-            1
-          ),
+          _vm.loading_state == false
+            ? _c("v-card-text", {}, [
+                _c("h2", { staticClass: "text-sm-left" }, [
+                  _vm._v("Please select video")
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm._l(_vm.steps, function(step, index) {
             return [
@@ -42970,7 +42955,10 @@ var render = function() {
                                 [
                                   index == 0
                                     ? _c("v-text-field", {
-                                        attrs: { label: "start time" },
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: ""
+                                        },
                                         model: {
                                           value: _vm.init,
                                           callback: function($$v) {
@@ -42983,7 +42971,10 @@ var render = function() {
                                   _vm._v(" "),
                                   index != 0
                                     ? _c("v-text-field", {
-                                        attrs: { label: "start time" },
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: ""
+                                        },
                                         model: {
                                           value: _vm.steps[index - 1]["point"],
                                           callback: function($$v) {
@@ -43007,7 +42998,7 @@ var render = function() {
                                 { attrs: { xs6: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "End time" },
+                                    attrs: { label: "End time", mask: "##:##" },
                                     model: {
                                       value: step.point,
                                       callback: function($$v) {
@@ -43031,7 +43022,7 @@ var render = function() {
                                   items: _vm.questions,
                                   "item-text": "question",
                                   "item-value": "_id",
-                                  label: "Select or add Colors",
+                                  label: "Select Question",
                                   multiple: "",
                                   chips: ""
                                 },
@@ -43108,24 +43099,27 @@ var render = function() {
           _c(
             "v-list-tile",
             [
-              _c(
-                "v-list-tile-action",
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "primary", "flat-right": "" },
-                      nativeOn: {
-                        click: function($event) {
-                          return _vm.save($event)
-                        }
-                      }
-                    },
-                    [_vm._v("Save")]
+              _vm.loading_state == true
+                ? _c(
+                    "v-list-tile-action",
+                    { attrs: { "flat-right": "" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.save($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              )
+                : _vm._e()
             ],
             1
           )

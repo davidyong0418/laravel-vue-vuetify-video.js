@@ -10,6 +10,6 @@ class Step extends Model
     protected $collection = 'step';
     
     protected $fillable = [
-        'count','question','answers','selected','correct_answer'
+        'video_id','end_times'
     ];
 }
