@@ -42090,14 +42090,16 @@ var test = [];
         count: 0,
         answers: [],
         selected: 0,
-        _id: ''
+        _id: '',
+        correct_answer: ''
       },
       defaultItem: {
         question: '',
         count: 0,
         selected: 0,
         answers: [],
-        _id: ''
+        _id: '',
+        correct_answer: ''
       }
     };
   },
@@ -42145,16 +42147,27 @@ var test = [];
     save_qustions: function save_qustions() {
       // var form = document.querySelector('question-management');
       if (this.editedIndex > -1) {
+        console.log('***************', this.editedItem);
+        this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
         axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
           headers: {
             'Content-Type': 'applicaton/json'
           }
         }).then(function (response) {
-          console.log(response.data);
+          console.log(this.editedIndex);
+          Object.assign(this.desserts[this.editedIndex], this.editedItem);
+
+          // this.desserts[this.editedIndex].selected = this.editedItem.selected;
+          // this.desserts[this.editedIndex].question = this.editedItem.question;
+          // this.desserts[this.editedIndex].count = this.editedItem.count;
+          // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
+          // this.desserts[this.editedIndex].answers = [];
+          // this.desserts[this.editedIndex].answers = this.editedItem.answers;
+
+
           this.showMessage('Successfully Updated');
-          Object.assign(this.desserts[this.editedIndex], response.data);
         }.bind(this)).catch(function (error) {
-          console.log(error.response);
+          console.log(error);
         }.bind(this));
       } else {
         console.log(this.editedItem);
@@ -42201,7 +42214,7 @@ var test = [];
       var index = this.desserts.indexOf(item);
       var delete_item = Object.assign({}, item);
       if (confirm('Are you sure you want to delete this item?')) {
-        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
           this.loading = false;
           this.desserts.splice(index, 1);
           this.showMessage('Successfully Deleted');
@@ -42213,7 +42226,6 @@ var test = [];
     },
     close: function close() {
       this.dialog = false;
-      this.editedIndex = -1;
     },
     save: function save() {
       // if (this.editedIndex > -1) {
@@ -42750,14 +42762,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -42795,8 +42799,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.loading = false;
         this.loading_state = true;
         if (response.data.action == 'true') {
-          this.step_info = Object.assign({}, response.data.steps);
-          this.steps = Object.assign({}, this.step_info.end_times);
+          this.step_info = response.data.steps;
+          this.steps = this.step_info.end_times;
         } else {
           this.step_info = [];
           this.steps = [];
@@ -42804,14 +42808,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             video_id: '',
             end_times: []
           };
-          console.log('this.step_info ==============', this.step_info);
-          console.log('this.defaultItem ++++++++====', this.defaultItem);
-          console.log('this.steps ++++++++====', this.steps);
+
           this.step_info.video_id = response.data.steps;
           this.step_info.end_times = [];
           this.steps = this.step_info.end_times;
           var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
           this.steps.push(new_step);
+          console.log('this.step_info ==============', this.step_info);
+          console.log('this.defaultItem ++++++++====', this.defaultItem);
+          console.log('this.steps ++++++++====', this.steps);
         }
       }.bind(this)).catch(function (error) {
         this.loading = false;
@@ -42821,9 +42826,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.steps.splice(index, 1);
     },
     add: function add() {
+      console.log('step_info++++++++++++++++++++', this.steps);
       var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
       this.steps.push(new_step);
-      console.log('step_info++++++++++++++++++++', this.step_info);
     },
     save: function save() {
       console.log('save step_info+++++++++++', this.step_info);
@@ -42846,8 +42851,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.videos = response.data.videos;
         this.questions = response.data.questions;
         var flag = response.data.action;
-        console.log("++++++++++++++", this.videos);
-        console.log('step_info++++++++++++++++', this.step_info);
         if (flag == 'false') {
           //   this.step_info = response.data.init_steps;
 
@@ -42913,36 +42916,6 @@ var render = function() {
       _c(
         "v-list",
         [
-          _vm.loading_state == true
-            ? _c(
-                "v-list-tile",
-                [
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", {
-                        domProps: { innerHTML: _vm._s(_vm.step_info.alias[0]) }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", {
-                        domProps: {
-                          innerHTML: _vm._s(_vm.step_info.vimeo_url[0])
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
           _vm.loading_state == false
             ? _c("v-card-text", {}, [
                 _c("h2", { staticClass: "text-sm-left" }, [

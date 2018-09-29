@@ -8,14 +8,6 @@
     </v-container>
 
     <v-list>
-      <v-list-tile v-if="loading_state == true">
-        <v-list-tile-content>
-          <v-list-tile-title v-html="step_info.alias[0]"></v-list-tile-title>
-        </v-list-tile-content>
-         <v-list-tile-content>
-          <v-list-tile-title v-html="step_info.vimeo_url[0]"></v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
        <v-card-text v-if="loading_state == false" class=""><h2 class="text-sm-left">Please select video</h2></v-card-text>
           <template v-for="(step, index) in steps">
             <v-container>
@@ -102,26 +94,26 @@
           this.loading_state = true
           if(response.data.action == 'true')
           {
-             this.step_info = Object.assign({}, response.data.steps);
-             this.steps = Object.assign({}, this.step_info.end_times);
+             this.step_info = response.data.steps;
+             this.steps = this.step_info.end_times;
           }
           else
           {
             this.step_info = [];
               this.steps = [];
             this.step_info ={
-            video_id:'',
-            end_times:[],
-          };
-            console.log('this.step_info ==============',this.step_info);
-            console.log('this.defaultItem ++++++++====',this.defaultItem)
-            console.log('this.steps ++++++++====',this.steps)
+                video_id:'',
+                end_times:[],
+              };
+           
             this.step_info.video_id = response.data.steps;
             this.step_info.end_times = [];
             this.steps = this.step_info.end_times;
             var new_step = {'point':'','sort': 1,'question_ids':[]};
             this.steps.push(new_step);
-
+ console.log('this.step_info ==============',this.step_info);
+            console.log('this.defaultItem ++++++++====',this.defaultItem)
+            console.log('this.steps ++++++++====',this.steps)
           }
         }.bind(this))
         .catch(function (error) {
@@ -132,9 +124,9 @@
         this.steps.splice(index, 1);
       },
       add: function(){
+        console.log('step_info++++++++++++++++++++', this.steps);
         var new_step = {'point':'','sort':this.steps.length + 1, 'question_ids':[]};
         this.steps.push(new_step);
-        console.log('step_info++++++++++++++++++++', this.step_info);
     
       },
       save: function(){
@@ -159,8 +151,6 @@
           this.videos = response.data.videos;
           this.questions = response.data.questions;
           var flag = response.data.action;
-          console.log("++++++++++++++",this.videos)
-          console.log('step_info++++++++++++++++', this.step_info)
           if(flag == 'false')
           {
             //   this.step_info = response.data.init_steps;

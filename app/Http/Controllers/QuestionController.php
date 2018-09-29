@@ -66,7 +66,8 @@ class QuestionController extends Controller
             'action' => 'true',
             'result'=>'success'
         );
-        return $update_data;
+        return['send' => $send];
+        // return response()->json($update_data);
     }
     public function delete(Request $request)
     {

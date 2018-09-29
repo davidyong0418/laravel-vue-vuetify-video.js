@@ -117,6 +117,7 @@ var test = [];
         answers: [],
         selected: 0,
         _id: '',
+        correct_answer:''
       },
       defaultItem: {
         question: '',
@@ -124,6 +125,7 @@ var test = [];
         selected: 0,
         answers: [],
         _id: '',
+        correct_answer:''
       }
     }),
 
@@ -171,16 +173,28 @@ var test = [];
         // var form = document.querySelector('question-management');
         if(this.editedIndex > -1)
         {
+          console.log('***************',this.editedItem);
+            this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
             axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.editedItem)}, {
             headers:{
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(response.data);
+            console.log(this.editedIndex);
+            Object.assign(this.desserts[this.editedIndex], this.editedItem);
+
+            // this.desserts[this.editedIndex].selected = this.editedItem.selected;
+            // this.desserts[this.editedIndex].question = this.editedItem.question;
+            // this.desserts[this.editedIndex].count = this.editedItem.count;
+            // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
+            // this.desserts[this.editedIndex].answers = [];
+            // this.desserts[this.editedIndex].answers = this.editedItem.answers;
+
+
             this.showMessage(`Successfully Updated`);
-            Object.assign(this.desserts[this.editedIndex], response.data);
+
           }.bind(this)).catch(function (error){
-            console.log(error.response);
+            console.log(error);
           }.bind(this));
         }
         else{
@@ -234,7 +248,7 @@ var test = [];
         let delete_item = Object.assign({}, item);
         if(confirm('Are you sure you want to delete this item?'))
         {
-          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/json'}})
           .then( function (response) {
             this.loading = false
             this.desserts.splice(index, 1);
@@ -251,7 +265,6 @@ var test = [];
 
       close () {
         this.dialog = false
-        this.editedIndex = -1;
       },
 
       save () {
