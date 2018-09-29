@@ -23,9 +23,10 @@ Vue.component('snackbar', require('./components/SnackBarComponent.vue'));
 Vue.component('gravatar', require('./components/GravatarComponent.vue'));
 
 window.Vuetify = require('vuetify');
-Vue.use(Vuetify)
 import VueRouter from 'vue-router';
-Vue.use(VueRouter);
+import VueVideoPlayer from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+
 import store from './store'
 import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
@@ -33,6 +34,10 @@ import * as mutations from './store/mutation-types'
 import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
 
+
+Vue.use(Vuetify)
+Vue.use(VueRouter);
+Vue.use(VueVideoPlayer);
 if (window.user) {
   store.commit(mutations.USER,  user)
   store.commit(mutations.LOGGED, true)
@@ -43,7 +48,8 @@ const router = new VueRouter({
   routes:[
     {path: '/admin/video-management', component: require('./components/admin/VideoComponent.vue')},
     {path: '/admin/question-management', component: require('./components/admin/QuestionComponent.vue')},
-    {path: '/admin/step-management', component: require('./components/admin/stepComponent.vue')}
+    {path: '/admin/step-management', component: require('./components/admin/stepComponent.vue')},
+    {path: '/user/user-course', component: require('./components/user/UserComponent.vue')},
   ]
 });
 
