@@ -106,11 +106,13 @@
     <v-content>
         @yield('content')
     </v-content>
+    
 </v-app>
+
 @stack('beforeScripts')
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-<script src="{{url('plugin/videojs-vimeo.js')}}"></script>
 @stack('afterScripts')
 </body>
 </html>
