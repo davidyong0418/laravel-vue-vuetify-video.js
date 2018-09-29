@@ -42949,7 +42949,8 @@ var render = function() {
                                     ? _c("v-text-field", {
                                         attrs: {
                                           label: "start time",
-                                          disabled: ""
+                                          disabled: "",
+                                          mask: "##:##"
                                         },
                                         model: {
                                           value: _vm.init,
@@ -42965,7 +42966,8 @@ var render = function() {
                                     ? _c("v-text-field", {
                                         attrs: {
                                           label: "start time",
-                                          disabled: ""
+                                          disabled: "",
+                                          mask: "##:##"
                                         },
                                         model: {
                                           value: _vm.steps[index - 1]["point"],

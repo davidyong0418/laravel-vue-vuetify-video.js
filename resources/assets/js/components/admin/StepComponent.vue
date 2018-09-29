@@ -15,8 +15,8 @@
             <v-flex xs10>
               <v-layout wrap>
                 <v-flex xs6>
-                  <v-text-field v-if="index == 0" v-model="init" label="start time" disabled></v-text-field>
-                  <v-text-field v-if="index != 0" v-model="steps[index - 1]['point']" label="start time" disabled></v-text-field>
+                  <v-text-field v-if="index == 0" v-model="init" label="start time" disabled mask="##:##"></v-text-field>
+                  <v-text-field v-if="index != 0" v-model="steps[index - 1]['point']" label="start time" disabled mask="##:##"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                   <v-text-field v-model="step.point" label="End time" mask="##:##"></v-text-field>
