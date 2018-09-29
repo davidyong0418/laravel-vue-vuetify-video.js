@@ -1,22 +1,22 @@
 <template>
   <v-layout row>
-    <v-flex  sm4 offset-sm1>
+    <v-flex  sm8>
       <v-card>
-        <v-toolbar color="indigo" dark>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar>
+          <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
 
           <v-toolbar-title>Video list</v-toolbar-title>
 
-          <v-spacer></v-spacer>
+          <!-- <v-spacer></v-spacer> -->
         </v-toolbar>
         <v-list>
         <v-radio-group v-model="selected">
-            <v-list-tile v-for="video in videos" :key="video.id" @click="selected = video.id">
+            <v-list-tile v-for="video in videos" :key="video._id" @click="selected = video._id">
             
               <v-list-tile-action>
                 <v-radio 
                 name="video"
-                v-bind:value="video.id"
+                v-bind:value="video._id"
                 @click.prevent=""
                 /></v-radio>
               </v-list-tile-action>
@@ -34,33 +34,35 @@
         </v-list>
       </v-card>
     </v-flex>
-    <v-flex  sm4 offset-sm1>
+    <v-flex  sm4>
       <v-card>
-        <v-toolbar color="indigo" dark>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
+        <!-- <v-toolbar color="indigo" dark> -->
+          <v-toolbar>
+          <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
 
           <v-toolbar-title>Add Video</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
-          <v-btn icon>
+          <!-- <v-btn icon>
             <v-icon>search</v-icon>
-          </v-btn>
+          </v-btn> -->
         </v-toolbar>
         <v-list>
           <v-flex sm7 offset-sm1>
             <v-text-field
                             label="Vimeo Url"
                             v-model="add_vimeo_url" 
-                            required></v-text-field>
+                            required class="mb-3"></v-text-field>
+                            <v-spacer></v-spacer>
             <v-text-field
                             label="Vimeo Alias"
                             v-model="add_vimeo_alias"
-                            required ></v-text-field>
+                            required class="mb-3"></v-text-field>
             </v-text-field>
           </v-flex>
-          <v-flex sm3>
-            <v-btn @click="add_video">Add</v-btn>
+          <v-flex sm3 offset-sm6>
+            <v-btn color="primary" flat-right @click="add_video">Add</v-btn>
             </v-text-field>
           </v-flex>
         </v-list>
@@ -85,7 +87,7 @@
         errors: [],
         internalAction: this.action,
         loginLoading: false,
-        selected:'',
+        selected:0,
         videos:[],
         add_vimeo_url:'',
         add_vimeo_alias:''
@@ -120,7 +122,7 @@
         axios.get('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
         .then( function (response) {
           this.loading = false
-          console.log(response)
+          console.log('response+++++++++++++++',response)
           this.videos = response.data.videos
         }.bind(this))
         .catch(function (error) {

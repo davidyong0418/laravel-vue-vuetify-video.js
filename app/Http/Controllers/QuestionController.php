@@ -72,7 +72,8 @@ class QuestionController extends Controller
     {
         $delete_id=$request->get('data');
         $question = Question::find($delete_id);
-        Question::where('_id', $delete_id)->delete();
+        $question->delete();
+        // Question::where('_id', $delete_id)->delete();
         return 'success';
     }
     

@@ -29,7 +29,7 @@ Route::post('admin/question-management/update', 'QuestionController@update');
 Route::post('admin/question-management/delete', 'QuestionController@delete');
 //Step management
 Route::get('admin/step-management', 'StepController@get_questions');
-Route::get('admin/step-management/create', 'StepController@create');
+Route::post('admin/step-management/create', 'StepController@create');
 Route::post('admin/step-management/update', 'StepController@update');
 Route::post('admin/step-management/delete', 'StepController@delete');
 Route::post('admin/step-management/get_steps', 'StepController@get_steps');

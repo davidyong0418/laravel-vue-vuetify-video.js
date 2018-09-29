@@ -76,7 +76,7 @@ class StepController extends Controller
         if(!empty($step))
         {
             $response = array(
-                'action'=> 'false',
+                'action'=> 'true',
                 'steps'=> $step[0]
             );
 
@@ -136,7 +136,7 @@ class StepController extends Controller
            $action = 'false';
         }
         else{
-           $action = 'true';
+           $action = 'false';
         }
         $send = array(
             'videos'=>$videos,

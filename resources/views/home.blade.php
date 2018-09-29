@@ -10,9 +10,7 @@
                     <v-fade-transition mode="out-in">
                         <router-view></router-view>
                     </v-fade-transition>
-                    <v-card-text class="px-0 mb-2 hidden-sm-and-down">
-                        Create and amazing app!
-                    </v-card-text>
+                    
                 </v-card>
             </v-flex>
         </v-layout>

@@ -63,8 +63,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-2" flat @click.native="showLogin = false">Close</v-btn>
-                <v-btn color="blue darken-2" class="white--text" @click.native="login" :loading="loginLoading">Login</v-btn>
+                <!-- <v-btn color="blue darken-2" flat @click.native="showLogin = false">Close</v-btn> -->
+                <v-btn color="blue darken-2"  block class="white--text" @click.native="login" :loading="loginLoading">Login</v-btn>
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
@@ -122,7 +122,17 @@
         }
       }
     },
+    watch: {
+      showLogin (val) {
+        console.log('watch login', val)
+        val || this.close()
+      }
+    },
+    
     methods: {
+      close () {
+        this.showLogin = false
+      },
       login () {
         if (this.$refs.loginForm.validate()) {
           this.loginLoading = true

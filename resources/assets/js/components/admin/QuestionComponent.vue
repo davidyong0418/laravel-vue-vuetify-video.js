@@ -9,14 +9,11 @@
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
           </v-card-title>
-  
+          <v-divider></v-divider>
           <v-card-text>
             <v-container grid-list-md>
-
                 <v-list>
-                  <v-list-tile>
                   <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
-                </v-list-tile>
                     <v-radio-group v-model="editedItem.selected">
                         <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video">
                           <v-list-tile-action>
@@ -44,8 +41,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save_qustions">Save</v-btn>
+            <v-btn color="orange" dark flat @click.native="close">Cancel<v-icon dark left>remove_circle</v-icon></v-btn>
+            <v-btn color="orange"  flat @click.native="save_qustions">Save<v-icon dark right>check_circle</v-icon></v-btn>
           </v-card-actions>
         </v-card>
         </v-form>
@@ -97,6 +94,7 @@ var test = [];
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
   export default {
+    mixins: [withSnackbar],
     data: () => ({
       selected: 1,
       question:'',
@@ -178,7 +176,8 @@ var test = [];
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(response.data)
+            console.log(response.data);
+            this.showMessage(`Successfully Updated`);
             Object.assign(this.desserts[this.editedIndex], response.data);
           }.bind(this)).catch(function (error){
             console.log(error.response);
@@ -192,6 +191,7 @@ var test = [];
             }
           }).then(function(response){
             this.desserts = response.data.questions;
+            this.showMessage(`Successfully Saved`);
           }.bind(this)).catch(function (error){
             console.log(error.response);
           }.bind(this));
@@ -237,7 +237,8 @@ var test = [];
           axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
           .then( function (response) {
             this.loading = false
-            this.desserts.splice(index, 1)
+            this.desserts.splice(index, 1);
+            this.showMessage(`Successfully Deleted`);
             // this.desserts = response.data.questions
           }.bind(this))
           .catch(function (error) {

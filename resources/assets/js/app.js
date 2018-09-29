@@ -64,14 +64,10 @@ const app = new Vue({
     items: [
       { icon: 'home', text: 'Home', href: '/home' },
       { icon: 'home', text: 'Landing Page', href: '/' },
-      { icon: 'home', text: 'Video course management', href: '/admin/video-management' },
-      { icon: 'home', text: 'Step management', href: '/admin/step-management' },
-      { icon: 'home', text: 'Question management', href: '/admin/question-management' },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Contact' },
-      // { heading: 'Links' },
-      { icon: 'link', text: 'Google', href: 'http://www.google.com' }
-      // { heading: 'Administració', role: 'Manager' }
+      { icon: 'folder_open', text: 'Video course management', href: '/admin/video-management' },
+      { icon: 'widgets', text: 'Question management', href: '/admin/question-management' },
+      { icon: 'gavel', text: 'Step management', href: '/admin/step-management' },
+      
     ]
   }),
   computed: {
