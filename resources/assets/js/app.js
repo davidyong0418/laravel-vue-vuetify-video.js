@@ -30,10 +30,12 @@ import * as mutations from './store/mutation-types'
 
 import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
-
+import VueVideoPlayer from 'vue-video-player';
 
 Vue.use(Vuetify)
-Vue.use(VueRouter);
+Vue.use(VueRouter)
+Vue.use(VueVideoPlayer)
+import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)
   store.commit(mutations.LOGGED, true)
