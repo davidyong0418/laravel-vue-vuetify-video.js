@@ -2,9 +2,32 @@
   <v-layout row>
     <v-flex  sm10>
       <template>
+<<<<<<< HEAD
          <video-player class="vjs-custom-skin" 
                         :options="playerOptions" 
                        ></video-player>
+=======
+        <video-player  class="video-player-box"
+                 ref="videoPlayer"
+                 :options="playerOptions"
+                 :playsinline="true"
+                 customEventName="customstatechangedeventname"
+
+                 @play="onPlayerPlay($event)"
+                 @pause="onPlayerPause($event)"
+                 @ended="onPlayerEnded($event)"
+                 @waiting="onPlayerWaiting($event)"
+                 @playing="onPlayerPlaying($event)"
+                 @loadeddata="onPlayerLoadeddata($event)"
+                 @timeupdate="onPlayerTimeupdate($event)"
+                 @canplay="onPlayerCanplay($event)"
+                 @canplaythrough="onPlayerCanplaythrough($event)"
+
+                 @statechanged="playerStateChanged($event)"
+                 @ready="playerReadied">
+        </video-player>
+        
+>>>>>>> f7bb91ac94e14187d0b75f8bd9fc13d24fdfb396
       </template>
 
     </v-flex>
@@ -24,13 +47,19 @@
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
+<<<<<<< HEAD
 import 'videojs-vimeo';
   export default {
     mixins: [withSnackbar],
+=======
+  import 'videojs-vimeo'
+  export default {
+>>>>>>> f7bb91ac94e14187d0b75f8bd9fc13d24fdfb396
     data() {
       return {
         playerOptions: {
           // videojs options
+<<<<<<< HEAD
           sources: [{
             type: "video/vimeo",
             src: "https://vimeo.com/153979733"
@@ -47,6 +76,29 @@ import 'videojs-vimeo';
     created(){
       this.player = this.$refs.videoplayer;
       console.log(this.player);
+=======
+          muted: true,
+          language: 'en',
+          playbackRates: [0.7, 1.0, 1.5, 2.0],
+          playerOptions: {
+            // videojs options
+            sources: [{
+              type: "video/vimeo",
+              src: "https://vimeo.com/291344987"
+            }],
+            techOrder: ["vimeo"]
+        },
+        }
+      }
+    },
+    mounted() {
+      console.log('this is current player instance object', this.player)
+    },
+    computed: {
+      player() {
+        return this.$refs.videoPlayer.player
+      }
+>>>>>>> f7bb91ac94e14187d0b75f8bd9fc13d24fdfb396
     },
     methods: {
       // listen event
@@ -70,6 +122,9 @@ import 'videojs-vimeo';
         // player.[methods]
       }
     }
+<<<<<<< HEAD
      
+=======
+>>>>>>> f7bb91ac94e14187d0b75f8bd9fc13d24fdfb396
   }
 </script>
