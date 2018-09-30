@@ -25,15 +25,17 @@ Vue.component('gravatar', require('./components/GravatarComponent.vue'));
 window.Vuetify = require('vuetify');
 import VueRouter from 'vue-router';
 import store from './store'
+import VueVideoPlayer from 'vue-video-player'
 import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
 
 import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
-
-
+import * as Vimeo from './components/user/UserComponent.vue';
 Vue.use(Vuetify)
 Vue.use(VueRouter);
+Vue.use(VueVideoPlayer);
+import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)
   store.commit(mutations.LOGGED, true)
