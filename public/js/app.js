@@ -69504,6 +69504,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69516,8 +69537,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loginLoading: false,
       selected: 0,
       videos: [],
+      transition: [],
+      tt: false,
+      prior_val: '',
       add_vimeo_url: '',
-      add_vimeo_alias: ''
+      add_vimeo_alias: '',
+      add_vimeo_description: ''
     };
   },
 
@@ -69529,6 +69554,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     show: {
       type: Boolean,
       default: true
+    }
+  },
+  watch: {
+    selected: function selected(val) {
+      console.log(val);
+      console.log(this.transition);
+      this.transition[this.prior_val] = false;
+      this.transition[val] = true;
+      this.prior_val = val;
     }
   },
   computed: {
@@ -69543,6 +69577,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    select_video: function select_video(selected_id) {
+      axios.post('/api/admin/video-management/select_video', { data: selected_id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        this.showMessage('Successfully Selected');
+      }.bind(this)).catch(function (error) {
+        this.showError('Not selected');
+      }.bind(this));
+    },
     getvideos: function getvideos() {
       var params = new URLSearchParams();
       this.loading = true;
@@ -69550,6 +69591,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.loading = false;
         console.log('response+++++++++++++++', response);
         this.videos = response.data.videos;
+        this.selected = response.data.select_video;
       }.bind(this)).catch(function (error) {
         this.loading = false;
         console.log(error.response);
@@ -69559,10 +69601,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/admin/video-management/create', {
         video_url: this.add_vimeo_url,
         video_alias: this.add_vimeo_alias,
+        video_description: add_vimeo_description,
         _token: 'FFFFFFFFFFFFFFFFFFFFF'
       }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
         console.log(response);
-        this.videos = response.data.videos;
+
+        if (response.data.action == true) {
+          this.showMessage('Successfully Saved');
+          this.videos = response.data.result;
+        } else {
+          this.showError(response.data.result);
+        }
       }.bind(this)).catch(function (error) {
         console.log(error.response);
       }.bind(this));
@@ -69618,47 +69667,127 @@ var render = function() {
                     },
                     _vm._l(_vm.videos, function(video) {
                       return _c(
-                        "v-list-tile",
-                        {
-                          key: video._id,
-                          on: {
-                            click: function($event) {
-                              _vm.selected = video._id
-                            }
-                          }
-                        },
+                        "div",
                         [
                           _c(
-                            "v-list-tile-action",
-                            [
-                              _c("v-radio", {
-                                attrs: { name: "video", value: video._id },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                  }
+                            "v-list-tile",
+                            {
+                              key: video._id,
+                              on: {
+                                click: function($event) {
+                                  _vm.selected = video._id
                                 }
-                              })
+                              }
+                            },
+                            [
+                              _c(
+                                "v-list-tile-action",
+                                [
+                                  _c("v-radio", {
+                                    attrs: { name: "video", value: video._id },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                      }
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-content",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v(_vm._s(video.alias))
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-content",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v(_vm._s(video.vimeo_url))
+                                  ])
+                                ],
+                                1
+                              )
                             ],
                             1
                           ),
                           _vm._v(" "),
                           _c(
-                            "v-list-tile-content",
+                            "v-slide-y-transition",
                             [
-                              _c("v-list-tile-title", [
-                                _vm._v(_vm._s(video.alias))
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-tile-content",
-                            [
-                              _c("v-list-tile-title", [
-                                _vm._v(_vm._s(video.vimeo_url))
-                              ])
+                              _c(
+                                "v-layout",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.transition[video._id],
+                                      expression: "transition[video._id]"
+                                    }
+                                  ],
+                                  attrs: { row: "", wrap: "", "ml-5": "" }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { sm3: "" } },
+                                    [
+                                      _c("v-img", {
+                                        attrs: { src: video.thumbnail }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { sm2: "" } }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "mr-5": "", sm3: "" } },
+                                    [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(video.description) +
+                                          "\n                  "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { sm10: "" }
+                                    },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            color: "success",
+                                            small: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.select_video(video._id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Select")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
@@ -69724,6 +69853,18 @@ var render = function() {
                             _vm.add_vimeo_alias = $$v
                           },
                           expression: "add_vimeo_alias"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        staticClass: "mb-3",
+                        attrs: { label: "Vimeo Description", required: "" },
+                        model: {
+                          value: _vm.add_vimeo_description,
+                          callback: function($$v) {
+                            _vm.add_vimeo_description = $$v
+                          },
+                          expression: "add_vimeo_description"
                         }
                       })
                     ],
@@ -71144,6 +71285,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       current_step_quiz: [],
       current_step_answer: [],
       quiz: false,
+      accept_btn: false,
+      next_btn: false,
+      replay_btn: false,
       playerOptions: {
         // videojs options
         sources: [{
@@ -71170,6 +71314,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    replay_video: function replay_video() {
+      this.player.load();
+    },
+    next_video_step: function next_video_step() {
+      // this.start_offset = ;
+      // this.end_offset = ;
+      this.set_offset();
+    },
     accept: function accept() {
       console.log(this.current_step_answer);
       var send_data = {};
@@ -71181,7 +71333,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         headers: {
           'Content-Type': 'applicaton/json'
         }
-      }).then(function (response) {}.bind(this)).catch(function (error) {
+      }).then(function (response) {
+        if (this.response.check == true) {
+          this.next_btn = true;
+          this.quiz = false;
+        } else {
+          this.accept_btn = false;
+          this.replay_btn = true;
+          this.quiz = false;
+        }
+      }.bind(this)).catch(function (error) {
         console.log(error.response);
         this.showError('Error');
       }.bind(this));
@@ -71218,7 +71379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.showError('Error');
       }.bind(this));
     },
-    set_event: function set_event() {
+    set_offset: function set_offset() {
       console.log('+++++++++++', this.player);
       // this.player.currentTime(10);
       this.player.offset({
@@ -71258,7 +71419,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onPlayerTimeupdate: function onPlayerTimeupdate(player) {
       console.log('this player time update', player);
     },
-    onPlayerEnded: function onPlayerEnded(player) {}
+    onPlayerEnded: function onPlayerEnded(player) {
+      this.accept_btn = true;
+      this.quiz = true;
+    }
   }
 });
 
@@ -72196,14 +72360,38 @@ var render = function() {
               _c(
                 "v-card-actions",
                 [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { "flat-right": "", color: "orange" },
-                      on: { click: _vm.accept }
-                    },
-                    [_vm._v("OK")]
-                  )
+                  _vm.accept_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.accept }
+                        },
+                        [_vm._v("OK")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.next_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.next_video_step }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.replay_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.replay_video }
+                        },
+                        [_vm._v("Replay")]
+                      )
+                    : _vm._e()
                 ],
                 1
               )

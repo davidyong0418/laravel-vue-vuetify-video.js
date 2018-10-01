@@ -90,8 +90,8 @@
         this.player.load();
       },
       next_video_step(){
-        this.start_offset = ;
-        this.end_offset = ;
+        // this.start_offset = ;
+        // this.end_offset = ;
         this.set_offset();
       },
       accept(){
