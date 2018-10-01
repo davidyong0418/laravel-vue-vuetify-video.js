@@ -34,3 +34,9 @@ Route::post('admin/step-management/update', 'StepController@update');
 Route::post('admin/step-management/delete', 'StepController@delete');
 Route::post('admin/step-management/get_steps', 'StepController@get_steps');
 Route::get('admin/step-management/get_init_data', 'StepController@get_init_data');
+
+//User management
+// Route::get('user/user-quiz/get_quiz_info', 'UserController@get_quiz_info');
+Route::get('user/user-quiz', 'UserController@index');
+Route::post('user/user-quiz/get_questions_answers', 'UserController@get_questions_answers');
+Route::post('user/user-quiz/accept', 'UserController@accept');

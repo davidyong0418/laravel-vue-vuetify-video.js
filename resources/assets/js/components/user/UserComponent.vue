@@ -1,8 +1,8 @@
 <template>
-  <v-layout row>
-    <v-flex  sm10>
-      <template>
 
+  <v-layout>
+    <v-flex xs12 sm6 offset-sm3 offset-sm2>
+      <v-card sm6>
         <video-player  class="video-player-box"
                  ref="videoPlayer"
                  :options="playerOptions"
@@ -13,33 +13,62 @@
                  @ended="onPlayerEnded($event)"
                  @ready="playerReadied">
         </video-player>
-      </template>
+        <v-card-text>
+            <span class="grey--text text-md-center">Number 10</span><br>
+            <h3 class="headline mb-0 text-md-center">Kangaroo Valley Safari</h3>
+            <p class="text-md-center">Whitehaven Beach</p>
+            <p class="text-md-center">Whitsunday Island, Whitsunday Islands</p>
+        </v-card-text>
+       
+          <v-list v-if="quiz==false">
+            <template v-for="(question_item, index) in current_step_quiz">
+                  <h3 class="text-left">{{question_item.question}}</h3>
+                    <v-radio-group v-model="current_step_answer[index]" class="ml-3">
+                        <v-radio v-for="(answer_item, answer_index) in question_item.answers" :key="answer_index" :label="answer_item.answer" :value="answer_index"></v-radio>
+                    </v-radio-group>
+          </template>
+        </v-list>
 
+        <v-card-actions>
+          <v-btn flat-right v-if="accept_btn == true" color="orange" @click="accept">OK</v-btn>
+          <v-btn flat-right v-if="next_btn == true" color="orange" @click="next_video_step">Next</v-btn>
+          <v-btn flat-right v-if="replay_btn == true" color="orange" @click="replay_video">Replay</v-btn>
+        </v-card-actions>
+      </v-card>
     </v-flex>
-    <v-flex  sm10 offset-sm1>
-      <v-btn color="primary" flat-right @click="set_event">Add</v-btn>    
-      <v-btn color="primary" flat-right @click="reload">load</v-btn>    
-      </v-flex>
   </v-layout>
 </template>
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
   import 'videojs-vimeo'
-  import 'videojs-offset'
   import './videojs-offset.js'
   export default {
     mixins: [withSnackbar],
     data() {
       return {
-          playerOptions: {
-            // videojs options
-            sources: [{
-            type: "video/vimeo",
-            src: "https://vimeo.com/153979733"
-           }],
-            techOrder: ["vimeo"]
+        video_url:'',
+        video_data:{},
+        step_data:{},
+        radioGroup:'',
+        start_offset:0,
+        end_offset:0,
+        current_step:{},
+        step_oder:0,
+        current_step_quiz:[],
+        current_step_answer:[],
+        quiz:false,
+        accept_btn:false,
+        next_btn:false,
+        replay_btn:false,
+        playerOptions: {
+          // videojs options
+          sources: [{
+          type: "video/vimeo",
+          src: 'https://vimeo.com/291838509'
+          }],
+          techOrder: ["vimeo"],
 
         },
         change_value:20,
@@ -53,14 +82,88 @@
         return this.$refs.videoPlayer.player
       }
     },
+    created () {
+      this.get_quiz_info();
+    },
     methods: {
-      set_event()
+      replay_video(){
+        this.player.load();
+      },
+      next_video_step(){
+        this.start_offset = ;
+        this.end_offset = ;
+        this.set_offset();
+      },
+      accept(){
+        console.log(this.current_step_answer)
+        var send_data = {};
+        send_data['selected_ids'] = this.current_step_answer;
+        send_data['current_quiz'] = this.current_step_quiz;
+        axios.post('/api/user/user-quiz/accept', 
+        {
+          data: JSON.stringify(send_data)
+        },
+        {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            if(this.response.check == true)
+            {
+              this.next_btn = true;
+              this.quiz = false;
+            }
+            else{
+              this.accept_btn = false;
+              this.replay_btn = true;
+              this.quiz = false;
+            }
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+            this.showError('Error')
+          }.bind(this));
+      },
+      get_quiz_info(){
+        axios.get('/api/user/user-quiz', {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            this.video_data = response.data.video_data;
+            this.step_data = response.data.step_data;
+            this.video_url = this.video_data.vimeo_url;
+            console.log('this.video_data++++++++++++===',this.video_data);
+            this.set_current_step();
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+            this.showError('Error')
+          }.bind(this));
+      },
+      set_current_step(){
+        this.current_step = this.step_data.end_times[this.step_oder];
+        this.questions = this.current_step.question_ids;
+        axios.post('/api/user/user-quiz/get_questions_answers',{
+          data:JSON.stringify(this.current_step.question_ids)
+        },
+        {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            this.current_step_quiz = response.data.questions
+
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+            this.showError('Error')
+          }.bind(this));
+      },
+      set_offset()
       {
         console.log('+++++++++++',this.player)
         // this.player.currentTime(10);
         this.player.offset({
-            start: this.change_value,
-            end: 50,
+            start: this.start_offset,
+            end: this.end_offset,
             restart_beginning: false //Should the video go to the beginning when it ends
           });
       },
@@ -95,7 +198,8 @@
       },
       onPlayerEnded(player)
       {
-
+        this.accept_btn = true;
+        this.quiz = true;
       }
     },
   }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Video;
+use App\Model\Step;
+use App\Model\Question;
+use App\Model\Userhistory;
 class UserController extends Controller
 {
     /**
@@ -23,7 +26,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user/user');
+        $video_data = Video::where('select', 1)->get()->toArray();
+        $step_data = Step::where('video_id', $video_data[0]['_id'])->get()->toArray();
+        $response = array(
+            'video_data' => $video_data[0],
+            'step_data' => $step_data[0]
+        );
+        return response()->json($response);
     }
     public function get_videos()
     {
@@ -42,5 +51,30 @@ class UserController extends Controller
         return ['videos' => $videos];
 
     }
+    public function get_questions_answers(Request $request)
+    {
+        $question_ids = json_decode($request->get('data', TRUE));
+        $questions = Question::whereIn('_id', $question_ids)->get();
+        return ['questions' => $questions];
+    }
+    public function accept(Request $request)
+    {
+        $response_data = json_decode($request->get('data'));
+        $selected_ids = $response_data->selected_ids;
+        $current_quiz = $response_data->current_quiz;
+        $flag = true;
+        foreach ($current_quiz as $key => $item)
+        {
+            $current_quiz[$key]['user_select'] = $item;
+            if($current_quiz[$key]['selected'] == $item)
+            {
+                $flag = false;
+            }
+        }
+        Userhistory::create($new);
+
+        return ['check'=>$flag];
+    }
+
     
 }
