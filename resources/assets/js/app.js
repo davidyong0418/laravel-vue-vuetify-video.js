@@ -31,18 +31,9 @@ import * as mutations from './store/mutation-types'
 
 import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
-<<<<<<< HEAD
-import * as Vimeo from './components/user/UserComponent.vue';
 Vue.use(Vuetify)
 Vue.use(VueRouter);
 Vue.use(VueVideoPlayer);
-=======
-import VueVideoPlayer from 'vue-video-player';
-
-Vue.use(Vuetify)
-Vue.use(VueRouter)
-Vue.use(VueVideoPlayer)
->>>>>>> f7bb91ac94e14187d0b75f8bd9fc13d24fdfb396
 import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)

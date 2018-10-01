@@ -26,4 +26,12 @@
   border-top-color: #0D47A1;
   border-left-color: #0D47A1;
 }
-
+.vp-controls.tiny{
+  display: none !important;
+}
+.v-toolbar.blue{
+  display: none !important;
+}
+.vp-progress{
+  display: none !important;
+}
