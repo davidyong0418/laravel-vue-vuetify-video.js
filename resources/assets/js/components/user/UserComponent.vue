@@ -48,6 +48,7 @@
         playerOptions: {
           // videojs options
           muted: true,
+          width:1000,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],
           playerOptions: {
@@ -72,7 +73,7 @@
     methods: {
       // listen event
       onPlayerPlay(player) {
-        // console.log('player play!', player)
+        console.log('player play!', player)
       },
       onPlayerPause(player) {
         // console.log('player pause!', player)

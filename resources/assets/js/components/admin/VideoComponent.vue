@@ -10,7 +10,7 @@
           <!-- <v-spacer></v-spacer> -->
         </v-toolbar>
         <v-list>
-        <v-radio-group v-model="selected">
+        <v-radio-group v-model="selected" class="mb-6">
             <v-list-tile v-for="video in videos" :key="video._id" @click="selected = video._id">
             
               <v-list-tile-action>
@@ -31,6 +31,7 @@
 
             </v-list-tile>
 			    </v-radio-group>
+          <v-btn color="primary" flat-right @click="accept">Accept</v-btn>
         </v-list>
       </v-card>
     </v-flex>
@@ -147,6 +148,23 @@
         this.add_vimeo_url = '';
         this.add_vimeo_alias = '';
       },
+      save_video:function() {
+         axios.post('/api/admin/video-management/create', {
+          video_url:this.add_vimeo_url,
+          video_alias: this.add_vimeo_alias,
+          _token: 'FFFFFFFFFFFFFFFFFFFFF'
+        }, {headers: {'Content-Type': 'application/json', }})
+        .then( function (response) {
+          console.log(response)
+          this.videos = response.data.videos
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error.response)
+        }.bind(this));
+
+        this.add_vimeo_url = '';
+        this.add_vimeo_alias = '';
+      }
      
     },
     mounted(){
