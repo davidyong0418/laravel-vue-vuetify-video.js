@@ -147,8 +147,6 @@
           var flag = response.data.action;
           if(flag == 'false')
           {
-            //   this.step_info = response.data.init_steps;
-           
             this.steps = this.step_info.end_times;
             var new_step = {'point':'','sort':1, 'question_ids':[]};
               this.steps.push(new_step);

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Step;
 use App\Model\Question;
+use App\Http\Controllers\Controller;
 class StepController extends Controller
 {
     /**
@@ -151,6 +152,16 @@ class StepController extends Controller
     {
         $requests = $request->get('data');
         $new = (array)json_decode($requests);
+        foreach ($new['end_times'] as $key =>$item)
+        {
+            if($key == 0)
+            {
+             $item->s_point = '00:00';
+            }
+            else{
+                $item->s_point = $new['end_times'][$key - 1]->point;
+            }
+        }
         if(empty($new['_id']))
         {
             Step::create($new);

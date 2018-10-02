@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Model\Video;
 class UserController extends Controller
 {
     /**
@@ -23,7 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user/user');
+        $video_data = Video::where('select', 1)->get()->toArray();
+        return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url']]);
     }
     
 }

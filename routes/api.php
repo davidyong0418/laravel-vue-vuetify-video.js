@@ -20,9 +20,9 @@ use Illuminate\Http\Request;
 Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {
     Route::put('/user', 'LoggedUserController@update');
 });
-Route::get('admin/video-management', 'VideoController@get_videos');
-Route::post('admin/video-management/create', 'VideoController@create');
-Route::post('admin/video-management/select_video', 'VideoController@select_video');
+Route::get('admin/video-management', 'Admin\VideoController@get_videos');
+Route::post('admin/video-management/create', 'Admin\VideoController@create');
+Route::post('admin/video-management/select_video', 'Admin\VideoController@select_video');
 
 // Question management
 Route::get('admin/question-management/read', 'Admin\QuestionController@get_questions');

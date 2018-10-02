@@ -42408,9 +42408,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         this.video_data = response.data.video_data;
         this.step_data = response.data.step_data;
-        this.video_url = this.video_data.vimeo_url;
+        console.log('this.step_data++++++++++++===', this.step_data);
+
+        // this.video_url = this.video_data.vimeo_url;
         this.player_loading = true;
-        console.log('this.video_data++++++++++++===', this.video_data);
         this.set_current_step();
       }.bind(this)).catch(function (error) {
         console.log(error.response);
@@ -42420,6 +42421,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     set_current_step: function set_current_step() {
       this.current_step = this.step_data.end_times[this.step_oder];
       this.questions = this.current_step.question_ids;
+      console.log('this.current_step++++++++++++++++++', this.current_step);
+      var start = this.current_step.s_point;
+      var end = this.current_step.point;
+      console.log(start);
+      console.log(end);
+      this.start_offset = parseInt(start.substring(0, 2)) * 60 + parseInt(start.substring(3, 5));
+      this.end_offset = parseInt(end.substring(0, 2)) * 60 + parseInt(end.substring(3, 5));
+      conole.log(this.start_offset);
+      consoel.log('this.end_offset ====================', this.end_offset);
+      this.set_offset();
       axios.post('/api/user/user-quiz/get_questions_answers', {
         data: JSON.stringify(this.current_step.question_ids)
       }, {
@@ -72095,8 +72106,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.questions = response.data.questions;
         var flag = response.data.action;
         if (flag == 'false') {
-          //   this.step_info = response.data.init_steps;
-
           this.steps = this.step_info.end_times;
           var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
           this.steps.push(new_step);

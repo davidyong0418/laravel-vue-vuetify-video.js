@@ -62,6 +62,7 @@ class QuizController extends Controller
     }
     public function accept(Request $request)
     {
+        var_dump(Auth::user()->_id);exit;
         $response_data = (array)json_decode($request->get('data'));
         $selected_ids = $response_data['selected_ids'];
         $current_quiz = $response_data['current_quiz'];
