@@ -23,12 +23,14 @@
                 </v-flex>
               </v-layout>
               <v-layout>
+          
                 <v-select :items="questions" item-text="question" item-value="_id" v-model="step.question_ids" label="Select Question" multiple chips ></v-select>
               </v-layout>
             </v-flex>
             <v-flex xs-2>
               <v-btn v-if="index == 0" small color="primary" flat-right @click.native="add">Add</v-btn>
               <v-btn v-if="index != 0" small color="primary" flat-right @click.native="remove(index)">Close</v-btn>
+
             </v-flex>
             </v-layout>
           </v-container>
@@ -76,10 +78,12 @@
     methods: {
       onChange: function(_id)
       {
+        console.log(_id);
         
         var param = {"_id":_id };
          axios.post('/api/admin/step-management/get_steps', {data:_id}, {headers: {'Content-Type': 'application/json'}})
         .then( function (response) {
+          console.log(response)
           this.loading = false
           this.loading_state = true
           if(response.data.action == 'true')
@@ -101,6 +105,9 @@
             this.steps = this.step_info.end_times;
             var new_step = {'point':'','sort': 1,'question_ids':[]};
             this.steps.push(new_step);
+ console.log('this.step_info ==============',this.step_info);
+            console.log('this.defaultItem ++++++++====',this.defaultItem)
+            console.log('this.steps ++++++++====',this.steps)
           }
         }.bind(this))
         .catch(function (error) {

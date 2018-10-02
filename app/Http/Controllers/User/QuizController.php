@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Model\Video;
@@ -9,6 +9,7 @@ use App\Model\Question;
 use App\Model\Userhistory;
 use JavaScript;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 class QuizController extends Controller
 {
     /**

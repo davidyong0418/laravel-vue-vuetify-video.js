@@ -72,26 +72,12 @@
         player_loading:false,
         playerOptions: {
           // videojs options
-<<<<<<< HEAD
-          muted: true,
-          width:1000,
-          language: 'en',
-          playbackRates: [0.7, 1.0, 1.5, 2.0],
-          playerOptions: {
-            // videojs options
-            sources: [{
-              type: "video/vimeo",
-              src: "https://vimeo.com/291344987"
-            }],
-            techOrder: ["vimeo"]
-=======
           sources: [{
           type: "video/vimeo",
           src: this.vimeourl
           }],
           techOrder: ["vimeo"],
 
->>>>>>> 5a6eddbd86ec6fcbc25d91008a626a5de49b46f6
         },
         change_value:20,
       }

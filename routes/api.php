@@ -39,6 +39,6 @@ Route::get('admin/step-management/get_init_data', 'Admin\StepController@get_init
 
 //User management
 // Route::get('user/user-quiz/get_quiz_info', 'UserController@get_quiz_info');
-Route::get('user/user-quiz', 'QuizController@get_quiz_info');
-Route::post('user/user-quiz/get_questions_answers', 'QuizController@get_questions_answers');
-Route::post('user/user-quiz/accept', 'QuizController@accept');
+Route::get('user/user-quiz', 'User\QuizController@get_quiz_info');
+Route::post('user/user-quiz/get_questions_answers', 'User\QuizController@get_questions_answers');
+Route::post('user/user-quiz/accept', 'User\QuizController@accept');
