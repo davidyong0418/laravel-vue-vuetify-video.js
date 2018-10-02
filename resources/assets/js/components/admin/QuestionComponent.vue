@@ -216,7 +216,7 @@ var test = [];
         var params = new URLSearchParams();
         console.log(params);
         this.loading = true
-        axios.get('/api/admin/question-management/', {params, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        axios.get('/api/admin/question-management/read', {params, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
         .then( function (response) {
           this.loading = false
           this.desserts = response.data.questions

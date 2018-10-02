@@ -16,9 +16,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+// admin
 Route::post('/password/email', 'PasswordController@remember');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/video-management', 'VideoController@index');
-Route::get('/admin/question-management', 'QuestionController@index');
-Route::get('/admin/step-management', 'StepController@index');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', 'AdminController@index')->name('home');
+    Route::get('/admin/video-management', 'AdminController@video');
+    Route::get('/admin/question-management', 'AdminController@question');
+    Route::get('/admin/step-management', 'AdminController@step');
+});
+
+// user
+Route::get('/user', 'UserController@index')->name('user');
 Route::get('/user/user-course','UserController@view');

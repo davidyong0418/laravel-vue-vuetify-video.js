@@ -32,16 +32,10 @@ class PasswordController extends Controller
     public function remember(Request $request)
     {
         $email = $request->get('email');
-       
         $name = 'Krunal';
-   Mail::to($email)->send(new SendMailable($name));
-    //   Mail::send(['text'=>'mail'], $data, function($message) use($data, $email) {
-    //      $message->to($email, 'Tutorials Point')->subject
-    //         ('Laravel Basic Testing Mail');
-    //      $message->from('xyz@gmail.com','Virat Gandhi');
-    //   });
-      echo "Basic Email Sent. Check your inbox.";
-      return 'success';
+        Mail::to($email)->send(new SendMailable($name));
+        echo "Basic Email Sent. Check your inbox.";
+        return 'success';
     }
    
 }
