@@ -18,7 +18,7 @@ class User extends MonogoAuth
     protected $connection = 'mongodb';
     protected $collection = 'User';
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_admin'
     ];
 
     /**
@@ -26,7 +26,14 @@ class User extends MonogoAuth
      *
      * @var array
      */
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function isAdmin()
+    {
+        return $this->is_admin; // this looks for an admin column in your users table
+    }
 }

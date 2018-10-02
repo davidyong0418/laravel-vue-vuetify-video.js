@@ -21,20 +21,19 @@ Vue.component('remember-password', require('./components/RememberPasswordCompone
 Vue.component('reset-password', require('./components/ResetPasswordComponent.vue'));
 Vue.component('snackbar', require('./components/SnackBarComponent.vue'));
 Vue.component('gravatar', require('./components/GravatarComponent.vue'));
-
+Vue.component('user-course', require('./components/user/UserComponent.vue'));
 window.Vuetify = require('vuetify');
 import VueRouter from 'vue-router';
 import store from './store'
+import VueVideoPlayer from 'vue-video-player'
 import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
 
 import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
-import VueVideoPlayer from 'vue-video-player';
-
 Vue.use(Vuetify)
-Vue.use(VueRouter)
-Vue.use(VueVideoPlayer)
+Vue.use(VueRouter);
+Vue.use(VueVideoPlayer);
 import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)
@@ -47,7 +46,7 @@ const router = new VueRouter({
     {path: '/admin/video-management', component: require('./components/admin/VideoComponent.vue')},
     {path: '/admin/question-management', component: require('./components/admin/QuestionComponent.vue')},
     {path: '/admin/step-management', component: require('./components/admin/stepComponent.vue')},
-    {path: '/user/user-course', component: require('./components/user/UserComponent.vue')},
+    // {path: '/user/user-course', component: require('./components/user/UserComponent.vue')},
   ]
 });
 

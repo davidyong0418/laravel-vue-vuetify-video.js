@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex  sm8>
+    <v-flex sm8>
       <v-card>
         <v-toolbar>
           <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
@@ -10,8 +10,14 @@
           <!-- <v-spacer></v-spacer> -->
         </v-toolbar>
         <v-list>
+<<<<<<< HEAD
         <v-radio-group v-model="selected" class="mb-6">
             <v-list-tile v-for="video in videos" :key="video._id" @click="selected = video._id">
+=======
+        <v-radio-group v-model="selected">
+          <div v-for="video in videos">
+            <v-list-tile :key="video._id" @click="selected = video._id">
+>>>>>>> 5a6eddbd86ec6fcbc25d91008a626a5de49b46f6
             
               <v-list-tile-action>
                 <v-radio 
@@ -28,8 +34,22 @@
               <v-list-tile-content>
                 <v-list-tile-title>{{video.vimeo_url}}</v-list-tile-title>
               </v-list-tile-content>
-
             </v-list-tile>
+            <v-slide-y-transition>
+                <v-layout v-show="transition[video._id]" row wrap ml-5>
+                  <v-flex sm3>
+                    <v-img :src="video.thumbnail"></v-img>
+                  </v-flex>
+                  <v-flex sm2></v-flex>
+                  <v-flex mr-5 sm3>
+                    {{video.description}}
+                  </v-flex>
+                  <v-flex sm10 class="text-xs-right">
+                    <v-btn color="success" small @click="select_video(video._id)">Select</v-btn>
+                  </v-flex>
+                </v-layout>
+              </v-slide-y-transition>
+          </div>
 			    </v-radio-group>
           <v-btn color="primary" flat-right @click="accept">Accept</v-btn>
         </v-list>
@@ -45,9 +65,6 @@
 
           <v-spacer></v-spacer>
 
-          <!-- <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn> -->
         </v-toolbar>
         <v-list>
           <v-flex sm7 offset-sm1>
@@ -59,6 +76,12 @@
             <v-text-field
                             label="Vimeo Alias"
                             v-model="add_vimeo_alias"
+                            required class="mb-3"></v-text-field>
+            </v-text-field>
+
+            <v-text-field
+                            label="Vimeo Description"
+                            v-model="add_vimeo_description"
                             required class="mb-3"></v-text-field>
             </v-text-field>
           </v-flex>
@@ -90,8 +113,12 @@
         loginLoading: false,
         selected:0,
         videos:[],
+        transition: [],
+        tt:false,
+        prior_val:'',
         add_vimeo_url:'',
-        add_vimeo_alias:''
+        add_vimeo_alias:'',
+        add_vimeo_description:'',
       }
     },
     props: {
@@ -102,6 +129,15 @@
       show: {
         type: Boolean,
         default: true
+      }
+    },
+    watch: {
+      selected(val){
+        console.log(val);
+        console.log(this.transition)
+        this.transition[this.prior_val] = false;
+        this.transition[val] = true;
+        this.prior_val = val;
       }
     },
     computed: {
@@ -117,6 +153,15 @@
       }
     },
     methods: {
+      select_video: function(selected_id){
+        axios.post('/api/admin/video-management/select_video', {data:selected_id}, {headers: {'Content-Type': 'application/json'}})
+        .then( function (response) {
+          this.showMessage(`Successfully Selected`);
+        }.bind(this))
+        .catch(function (error) {
+          this.showError('Not selected');
+        }.bind(this))
+      },
       getvideos: function() {
         var params = new URLSearchParams()
         this.loading = true
@@ -125,6 +170,7 @@
           this.loading = false
           console.log('response+++++++++++++++',response)
           this.videos = response.data.videos
+          this.selected = response.data.select_video
         }.bind(this))
         .catch(function (error) {
           this.loading = false
@@ -135,11 +181,21 @@
         axios.post('/api/admin/video-management/create', {
           video_url:this.add_vimeo_url,
           video_alias: this.add_vimeo_alias,
+          video_description: add_vimeo_description,
           _token: 'FFFFFFFFFFFFFFFFFFFFF'
         }, {headers: {'Content-Type': 'application/json', }})
         .then( function (response) {
           console.log(response)
-          this.videos = response.data.videos
+         
+          if(response.data.action == true)
+          {
+            this.showMessage(`Successfully Saved`);
+             this.videos = response.data.result;
+          }
+          else
+          {
+            this.showError(response.data.result);
+          }
         }.bind(this))
         .catch(function (error) {
           console.log(error.response)

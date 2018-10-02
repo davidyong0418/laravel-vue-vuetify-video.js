@@ -22,15 +22,23 @@ Route::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {
 });
 Route::get('admin/video-management', 'VideoController@get_videos');
 Route::post('admin/video-management/create', 'VideoController@create');
+Route::post('admin/video-management/select_video', 'VideoController@select_video');
+
 // Question management
-Route::get('admin/question-management', 'QuestionController@get_questions');
-Route::post('admin/question-management/create', 'QuestionController@create');
-Route::post('admin/question-management/update', 'QuestionController@update');
-Route::post('admin/question-management/delete', 'QuestionController@delete');
+Route::get('admin/question-management/read', 'Admin\QuestionController@get_questions');
+Route::post('admin/question-management/create', 'Admin\QuestionController@create');
+Route::post('admin/question-management/update', 'Admin\QuestionController@update');
+Route::post('admin/question-management/delete', 'Admin\QuestionController@delete');
 //Step management
-Route::get('admin/step-management', 'StepController@get_questions');
-Route::post('admin/step-management/create', 'StepController@create');
-Route::post('admin/step-management/update', 'StepController@update');
-Route::post('admin/step-management/delete', 'StepController@delete');
-Route::post('admin/step-management/get_steps', 'StepController@get_steps');
-Route::get('admin/step-management/get_init_data', 'StepController@get_init_data');
+Route::get('admin/step-management', 'Admin\StepController@get_questions');
+Route::post('admin/step-management/create', 'Admin\StepController@create');
+Route::post('admin/step-management/update', 'Admin\StepController@update');
+Route::post('admin/step-management/delete', 'Admin\StepController@delete');
+Route::post('admin/step-management/get_steps', 'Admin\StepController@get_steps');
+Route::get('admin/step-management/get_init_data', 'Admin\StepController@get_init_data');
+
+//User management
+// Route::get('user/user-quiz/get_quiz_info', 'UserController@get_quiz_info');
+Route::get('user/user-quiz', 'QuizController@get_quiz_info');
+Route::post('user/user-quiz/get_questions_answers', 'QuizController@get_questions_answers');
+Route::post('user/user-quiz/accept', 'QuizController@accept');
