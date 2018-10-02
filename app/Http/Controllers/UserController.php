@@ -7,6 +7,8 @@ use App\Model\Video;
 use App\Model\Step;
 use App\Model\Question;
 use App\Model\Userhistory;
+use JavaScript;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
@@ -59,21 +61,36 @@ class UserController extends Controller
     }
     public function accept(Request $request)
     {
-        $response_data = json_decode($request->get('data'));
-        $selected_ids = $response_data->selected_ids;
-        $current_quiz = $response_data->current_quiz;
+        print_r($request->user()->id);
+        exit;
+        $response_data = (array)json_decode($request->get('data'));
+        $selected_ids = $response_data['selected_ids'];
+        $current_quiz = $response_data['current_quiz'];
         $flag = true;
         foreach ($current_quiz as $key => $item)
         {
-            $current_quiz[$key]['user_select'] = $item;
-            if($current_quiz[$key]['selected'] == $item)
+            $current_quiz[$key]->user_select= $selected_ids[$key];
+            unset($current_quiz[$key]->_id);
+            unset($current_quiz[$key]->updated_at);
+            unset($current_quiz[$key]->created_at);
+            if($current_quiz[$key]->selected == $selected_ids[$key] + 1 )
             {
                 $flag = false;
             }
         }
-        Userhistory::create($new);
-
+        
+        $userhistory = new Userhistory();
+        $userhistory->user_id = 
+        Userhistory::create($current_quiz);
         return ['check'=>$flag];
+    }
+    public function view()
+    {
+        $video_data = Video::where('select', 1)->get()->toArray();
+        // Javascript::put([
+        //     'vimeo_url' => $video_data[0]['vimeo_url']
+        // ]);
+        return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url']]);
     }
 
     

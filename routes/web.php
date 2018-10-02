@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/video-management', 'VideoController@index');
 Route::get('/admin/question-management', 'QuestionController@index');
 Route::get('/admin/step-management', 'StepController@index');
-Route::get('/user/user-course', function(){return view('user/user');});
+Route::get('/user/user-course','UserController@view');

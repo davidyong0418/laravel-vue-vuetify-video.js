@@ -3,7 +3,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
-        <video-player  class="video-player-box"
+        <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
                  :options="playerOptions"
                  :playsinline="true"
@@ -44,11 +44,18 @@
   import withSnackbar from '../mixins/withSnackbar'
   import 'videojs-vimeo'
   import './videojs-offset.js'
+  // console.log('vimeo_url', vimeo_url);
   export default {
     mixins: [withSnackbar],
+     props:{
+            vimeourl: {
+              type: String,
+              default: null
+            },
+        },
     data() {
       return {
-        video_url:'',
+        video_url:this.vimeourl,
         video_data:{},
         step_data:{},
         radioGroup:'',
@@ -59,14 +66,15 @@
         current_step_quiz:[],
         current_step_answer:[],
         quiz:false,
-        accept_btn:false,
+        accept_btn:true,
         next_btn:false,
         replay_btn:false,
+        player_loading:false,
         playerOptions: {
           // videojs options
           sources: [{
           type: "video/vimeo",
-          src: 'https://vimeo.com/291838509'
+          src: this.vimeourl
           }],
           techOrder: ["vimeo"],
 
@@ -74,8 +82,9 @@
         change_value:20,
       }
     },
+   
     mounted() {
-      console.log('this is current player instance object', this.player)
+      console.log('this is current player instance object', this.vimeourl)
     },
     computed: {
       player() {
@@ -108,6 +117,7 @@
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
+            console.log(response)
             if(this.response.check == true)
             {
               this.next_btn = true;
@@ -132,6 +142,7 @@
             this.video_data = response.data.video_data;
             this.step_data = response.data.step_data;
             this.video_url = this.video_data.vimeo_url;
+            this.player_loading = true;
             console.log('this.video_data++++++++++++===',this.video_data);
             this.set_current_step();
           }.bind(this)).catch(function (error){

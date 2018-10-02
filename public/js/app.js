@@ -1880,11 +1880,11 @@ var index_esm = {
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var window = _interopDefault(__webpack_require__(13));
-var document = _interopDefault(__webpack_require__(93));
-var tsml = _interopDefault(__webpack_require__(95));
-var safeParseTuple = _interopDefault(__webpack_require__(96));
-var xhr = _interopDefault(__webpack_require__(97));
-var vtt = _interopDefault(__webpack_require__(104));
+var document = _interopDefault(__webpack_require__(79));
+var tsml = _interopDefault(__webpack_require__(81));
+var safeParseTuple = _interopDefault(__webpack_require__(82));
+var xhr = _interopDefault(__webpack_require__(83));
+var vtt = _interopDefault(__webpack_require__(90));
 
 var version = "6.12.1";
 
@@ -38399,15 +38399,15 @@ module.exports = __webpack_require__(134);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_video_player__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_mixins_withSnackbar__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_video_js_dist_video_js_css__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_video_js_dist_video_js_css__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_video_js_dist_video_js_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_video_js_dist_video_js_css__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -38433,8 +38433,8 @@ Vue.component('remember-password', __webpack_require__(55));
 Vue.component('reset-password', __webpack_require__(58));
 Vue.component('snackbar', __webpack_require__(61));
 Vue.component('gravatar', __webpack_require__(64));
-
-window.Vuetify = __webpack_require__(76);
+Vue.component('user-course', __webpack_require__(76));
+window.Vuetify = __webpack_require__(96);
 
 
 
@@ -38454,7 +38454,7 @@ if (window.user) {
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/admin/video-management', component: __webpack_require__(114) }, { path: '/admin/question-management', component: __webpack_require__(119) }, { path: '/admin/step-management', component: __webpack_require__(124) }, { path: '/user/user-course', component: __webpack_require__(129) }]
+  routes: [{ path: '/admin/video-management', component: __webpack_require__(119) }, { path: '/admin/question-management', component: __webpack_require__(124) }, { path: '/admin/step-management', component: __webpack_require__(129) }]
 });
 
 var app = new Vue({
@@ -42211,6 +42211,3644 @@ if (false) {
 
 /***/ }),
 /* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = __webpack_require__(95)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\user\\UserComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-459403d0", Component.options)
+  } else {
+    hotAPI.reload("data-v-459403d0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_videojs_vimeo__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_videojs_vimeo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_videojs_vimeo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videojs_offset_js__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videojs_offset_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__videojs_offset_js__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+// console.log('vimeo_url', vimeo_url);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
+  props: {
+    vimeourl: {
+      type: String,
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      video_url: this.vimeourl,
+      video_data: {},
+      step_data: {},
+      radioGroup: '',
+      start_offset: 0,
+      end_offset: 0,
+      current_step: {},
+      step_oder: 0,
+      current_step_quiz: [],
+      current_step_answer: [],
+      quiz: false,
+      accept_btn: true,
+      next_btn: false,
+      replay_btn: false,
+      player_loading: false,
+      playerOptions: {
+        // videojs options
+        sources: [{
+          type: "video/vimeo",
+          src: this.vimeourl
+        }],
+        techOrder: ["vimeo"]
+
+      },
+      change_value: 20
+    };
+  },
+  mounted: function mounted() {
+    console.log('this is current player instance object', this.vimeourl);
+  },
+
+  computed: {
+    player: function player() {
+      return this.$refs.videoPlayer.player;
+    }
+  },
+  created: function created() {
+    this.get_quiz_info();
+  },
+
+  methods: {
+    replay_video: function replay_video() {
+      this.player.load();
+    },
+    next_video_step: function next_video_step() {
+      // this.start_offset = ;
+      // this.end_offset = ;
+      this.set_offset();
+    },
+    accept: function accept() {
+      console.log(this.current_step_answer);
+      var send_data = {};
+      send_data['selected_ids'] = this.current_step_answer;
+      send_data['current_quiz'] = this.current_step_quiz;
+      axios.post('/api/user/user-quiz/accept', {
+        data: JSON.stringify(send_data)
+      }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        console.log(response);
+        if (this.response.check == true) {
+          this.next_btn = true;
+          this.quiz = false;
+        } else {
+          this.accept_btn = false;
+          this.replay_btn = true;
+          this.quiz = false;
+        }
+      }.bind(this)).catch(function (error) {
+        console.log(error.response);
+        this.showError('Error');
+      }.bind(this));
+    },
+    get_quiz_info: function get_quiz_info() {
+      axios.get('/api/user/user-quiz', {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        this.video_data = response.data.video_data;
+        this.step_data = response.data.step_data;
+        this.video_url = this.video_data.vimeo_url;
+        this.player_loading = true;
+        console.log('this.video_data++++++++++++===', this.video_data);
+        this.set_current_step();
+      }.bind(this)).catch(function (error) {
+        console.log(error.response);
+        this.showError('Error');
+      }.bind(this));
+    },
+    set_current_step: function set_current_step() {
+      this.current_step = this.step_data.end_times[this.step_oder];
+      this.questions = this.current_step.question_ids;
+      axios.post('/api/user/user-quiz/get_questions_answers', {
+        data: JSON.stringify(this.current_step.question_ids)
+      }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        this.current_step_quiz = response.data.questions;
+      }.bind(this)).catch(function (error) {
+        console.log(error.response);
+        this.showError('Error');
+      }.bind(this));
+    },
+    set_offset: function set_offset() {
+      console.log('+++++++++++', this.player);
+      // this.player.currentTime(10);
+      this.player.offset({
+        start: this.start_offset,
+        end: this.end_offset,
+        restart_beginning: false //Should the video go to the beginning when it ends
+      });
+    },
+    reload: function reload() {
+      this.change_value = 10;
+      // console.log(this.change_value);
+      // this.player.trigger('loadstart');
+
+      // this.player.load();
+    },
+
+    // listen event
+    onPlayerPlay: function onPlayerPlay(player) {
+      console.log('player play!', player);
+    },
+    onPlayerPause: function onPlayerPause(player) {
+      // console.log('player pause!', player)
+    },
+
+    // ...player event
+    // or listen state event
+    playerStateChanged: function playerStateChanged(playerCurrentState) {
+      // console.log('player current update state', playerCurrentState)
+    },
+
+    // player is ready
+    playerReadied: function playerReadied(player) {
+      console.log('the player is readied', player);
+      // you can use it to do something...
+      // player.[methods]
+    },
+    onPlayerTimeupdate: function onPlayerTimeupdate(player) {
+      console.log('this player time update', player);
+    },
+    onPlayerEnded: function onPlayerEnded(player) {
+      this.accept_btn = true;
+      this.quiz = true;
+    }
+  }
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* The MIT License (MIT)
+Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE. */
+(function (root, factory) {
+  if(true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(videojs){
+      return (root.Vimeo = factory(videojs));
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if(typeof module === 'object' && module.exports) {
+    module.exports = (root.Vimeo = factory(require('video.js')));
+  } else {
+    root.Vimeo = factory(root.videojs);
+  }
+}(this, function(videojs) {
+  'use strict';
+
+  var VimeoState = {
+    UNSTARTED: -1,
+    ENDED: 0,
+    PLAYING: 1,
+    PAUSED: 2,
+    BUFFERING: 3
+  };
+
+  var Tech = videojs.getComponent('Tech');
+
+  var Vimeo = videojs.extend(Tech, {
+    constructor: function(options, ready) {
+      Tech.call(this, options, ready);
+      if(options.poster != "") {this.setPoster(options.poster);}
+      this.setSrc(this.options_.source.src, true);
+
+      // Set the vjs-vimeo class to the player
+      // Parent is not set yet so we have to wait a tick
+      setTimeout(function() {
+        this.el_.parentNode.className += ' vjs-vimeo';
+      }.bind(this));
+
+    },
+
+    dispose: function() {
+      this.el_.parentNode.className = this.el_.parentNode.className.replace(' vjs-vimeo', '');
+    },
+
+    createEl: function() {
+      this.vimeo = {};
+      this.vimeoInfo = {};
+      this.baseUrl = 'https://player.vimeo.com/video/';
+      this.baseApiUrl = 'http://www.vimeo.com/api/v2/video/';
+      this.videoId = Vimeo.parseUrl(this.options_.source.src).videoId;
+
+      this.iframe = document.createElement('iframe');
+      this.iframe.setAttribute('id', this.options_.techId);
+      this.iframe.setAttribute('title', 'Vimeo Video Player');
+      this.iframe.setAttribute('class', 'vimeoplayer');
+      this.iframe.setAttribute('src', this.baseUrl + this.videoId + '?api=1&player_id=' + this.options_.techId);
+      this.iframe.setAttribute('frameborder', '0');
+      this.iframe.setAttribute('scrolling', 'no');
+      this.iframe.setAttribute('marginWidth', '0');
+      this.iframe.setAttribute('marginHeight', '0');
+      this.iframe.setAttribute('webkitAllowFullScreen', '0');
+      this.iframe.setAttribute('mozallowfullscreen', '0');
+      this.iframe.setAttribute('allowFullScreen', '0');
+
+      var divWrapper = document.createElement('div');
+      divWrapper.setAttribute('style', 'margin:0 auto;padding-bottom:56.25%;width:100%;height:0;position:relative;overflow:hidden;');
+      divWrapper.setAttribute('class', 'vimeoFrame');
+      divWrapper.appendChild(this.iframe);
+
+      if (!_isOnMobile && !this.options_.ytControls) {
+        var divBlocker = document.createElement('div');
+        divBlocker.setAttribute('class', 'vjs-iframe-blocker');
+        divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
+
+        // In case the blocker is still there and we want to pause
+        divBlocker.onclick = function() {
+          this.onPause();
+        }.bind(this);
+
+        divWrapper.appendChild(divBlocker);
+      }
+
+      if (Vimeo.isApiReady) {
+        this.initPlayer();
+      } else {
+        Vimeo.apiReadyQueue.push(this);
+      }
+
+      if(this.options_.poster == "") {
+        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
+          return function(data) {
+            // Set the low resolution first
+            _this.setPoster(data[0].thumbnail_large);
+          };
+        })(this));
+      }
+
+      return divWrapper;
+    },
+
+    initPlayer: function() {
+      var self = this;
+      var vimeoVideoID = Vimeo.parseUrl(this.options_.source.src).videoId;
+      //load vimeo
+      if (this.vimeo && this.vimeo.api) {
+        this.vimeo.api('unload');
+        delete this.vimeo;
+      }
+
+      self.vimeo = $f(self.iframe);
+
+      self.vimeoInfo = {
+        state: VimeoState.UNSTARTED,
+        volume: 1,
+        muted: false,
+        muteVolume: 1,
+        time: 0,
+        duration: 0,
+        buffered: 0,
+        url: self.baseUrl + self.videoId,
+        error: null
+      };
+
+      this.vimeo.addEvent('ready', function(id){
+        self.onReady();
+
+        self.vimeo.addEvent('loadProgress', function(data, id){ self.onLoadProgress(data); });
+        self.vimeo.addEvent('playProgress', function(data, id){ self.onPlayProgress(data); });
+        self.vimeo.addEvent('play', function(id){ self.onPlay(); });
+        self.vimeo.addEvent('pause', function(id){ self.onPause(); });
+        self.vimeo.addEvent('finish', function(id){ self.onFinish(); });
+        self.vimeo.addEvent('seek', function(data, id){ self.onSeek(data); });
+
+      });
+
+    },
+
+    onReady: function(){
+      this.isReady_ = true;
+      this.triggerReady();
+      this.trigger('loadedmetadata');
+      if (this.startMuted) {
+        this.setMuted(true);
+        this.startMuted = false;
+      }
+    },
+
+    onLoadProgress: function(data) {
+      var durationUpdate = !this.vimeoInfo.duration;
+      this.vimeoInfo.duration = data.duration;
+      this.vimeoInfo.buffered = data.percent;
+      this.trigger('progress');
+      if (durationUpdate) this.trigger('durationchange');
+    },
+    onPlayProgress: function(data) {
+      this.vimeoInfo.time = data.seconds;
+      this.trigger('timeupdate');
+    },
+    onPlay: function() {
+      this.vimeoInfo.state = VimeoState.PLAYING;
+      this.trigger('play');
+    },
+    onPause: function() {
+      this.vimeoInfo.state = VimeoState.PAUSED;
+      this.trigger('pause');
+    },
+    onFinish: function() {
+      this.vimeoInfo.state = VimeoState.ENDED;
+      this.trigger('ended');
+    },
+    onSeek: function(data) {
+      this.trigger('seeking');
+      this.vimeoInfo.time = data.seconds;
+      this.trigger('timeupdate');
+      this.trigger('seeked');
+    },
+    onError: function(error){
+      this.error = error;
+      this.trigger('error');
+    },
+
+    error: function() {
+      switch (this.errorNumber) {
+        case 2:
+          return { code: 'Unable to find the video' };
+
+        case 5:
+          return { code: 'Error while trying to play the video' };
+
+        case 100:
+          return { code: 'Unable to find the video' };
+
+        case 101:
+        case 150:
+          return { code: 'Playback on other Websites has been disabled by the video owner.' };
+      }
+
+      return { code: 'Vimeo unknown error (' + this.errorNumber + ')' };
+    },
+
+    src: function() {
+      return this.source;
+    },
+
+    poster: function() {
+      return this.poster_;
+    },
+
+    setPoster: function(poster) {
+      this.poster_ = poster;
+    },
+
+    setSrc: function(source) {
+      if (!source || !source.src) {
+        return;
+      }
+
+      this.source = source;
+      this.url = Vimeo.parseUrl(source.src);
+
+      if (!this.options_.poster) {
+        if (this.url.videoId) {
+          $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
+            return function(data) {
+              // Set the low resolution first
+              _this.poster_ = data[0].thumbnail_small;
+            };
+          })(this));
+
+          // Check if their is a high res
+          this.checkHighResPoster();
+        }
+      }
+
+      if (this.options_.autoplay && !_isOnMobile) {
+        if (this.isReady_) {
+          this.play();
+        } else {
+          this.playOnReady = true;
+        }
+      }
+    },
+
+    supportsFullScreen: function() {
+      return true;
+    },
+
+    //TRIGGER
+    load : function(){},
+    play : function(){ this.vimeo.api('play'); },
+    pause : function(){ this.vimeo.api('pause'); },
+    paused : function(){
+      return this.vimeoInfo.state !== VimeoState.PLAYING &&
+             this.vimeoInfo.state !== VimeoState.BUFFERING;
+    },
+
+    currentTime : function(){ return this.vimeoInfo.time || 0; },
+
+    setCurrentTime :function(seconds){
+      this.vimeo.api('seekTo', seconds);
+      this.player_.trigger('timeupdate');
+    },
+
+    duration :function(){ return this.vimeoInfo.duration || 0; },
+    buffered :function(){ return videojs.createTimeRange(0, (this.vimeoInfo.buffered*this.vimeoInfo.duration) || 0); },
+
+    volume :function() { return (this.vimeoInfo.muted)? this.vimeoInfo.muteVolume : this.vimeoInfo.volume; },
+    setVolume :function(percentAsDecimal){
+      this.vimeo.api('setvolume', percentAsDecimal);
+      this.vimeoInfo.volume = percentAsDecimal;
+      this.player_.trigger('volumechange');
+    },
+    currentSrc :function() {
+      return this.el_.src;
+    },
+    muted :function() { return this.vimeoInfo.muted || false; },
+    setMuted :function(muted) {
+      if (muted) {
+        this.vimeoInfo.muteVolume = this.vimeoInfo.volume;
+        this.setVolume(0);
+      } else {
+        this.setVolume(this.vimeoInfo.muteVolume);
+      }
+
+      this.vimeoInfo.muted = muted;
+      this.player_.trigger('volumechange');
+    },
+
+    // Tries to get the highest resolution thumbnail available for the video
+    checkHighResPoster: function(){
+      var uri = '';
+
+      try {
+
+        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_uri){
+          return function(data) {
+            // Set the low resolution first
+            _uri = data[0].thumbnail_large;
+          };
+        })(uri));
+
+        var image = new Image();
+        image.onload = function(){
+          // Onload thumbnail
+          if('naturalHeight' in this){
+            if(this.naturalHeight <= 90 || this.naturalWidth <= 120) {
+              this.onerror();
+              return;
+            }
+          } else if(this.height <= 90 || this.width <= 120) {
+            this.onerror();
+            return;
+          }
+
+          this.poster_ = uri;
+          this.trigger('posterchange');
+        }.bind(this);
+        image.onerror = function(){};
+        image.src = uri;
+      }
+      catch(e){}
+    }
+  });
+
+  Vimeo.isSupported = function() {
+    return true;
+  };
+
+  Vimeo.canPlaySource = function(e) {
+    return (e.type === 'video/vimeo');
+  };
+
+  var _isOnMobile = /(iPad|iPhone|iPod|Android)/g.test(navigator.userAgent);
+
+  Vimeo.parseUrl = function(url) {
+    var result = {
+      videoId: null
+    };
+
+    var regex = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
+    var match = url.match(regex);
+
+    if (match) {
+      result.videoId = match[5];
+    }
+
+    return result;
+  };
+
+  function injectCss() {
+    var css = // iframe blocker to catch mouse events
+              '.vjs-vimeo .vjs-iframe-blocker { display: none; }' +
+              '.vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
+              '.vjs-vimeo .vjs-poster { background-size: cover; }' +
+              '.vjs-vimeo { height:100%; }' +
+              '.vimeoplayer { width:100%; height:180%; position:absolute; left:0; top:-40%; }';
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (style.styleSheet){
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+  }
+
+  Vimeo.apiReadyQueue = [];
+
+  var vimeoIframeAPIReady = function() {
+    Vimeo.isApiReady = true;
+    injectCss();
+
+    for (var i = 0; i < Vimeo.apiReadyQueue.length; ++i) {
+      Vimeo.apiReadyQueue[i].initPlayer();
+    }
+  };
+
+  vimeoIframeAPIReady();
+
+  videojs.registerTech('Vimeo', Vimeo);
+
+
+
+  // Froogaloop API -------------------------------------------------------------
+
+  // From https://github.com/vimeo/player-api/blob/master/javascript/froogaloop.js
+  // Init style shamelessly stolen from jQuery http://jquery.com
+  var Froogaloop = (function(){
+      // Define a local copy of Froogaloop
+      function Froogaloop(iframe) {
+          // The Froogaloop object is actually just the init constructor
+          return new Froogaloop.fn.init(iframe);
+      }
+
+      var eventCallbacks = {},
+          hasWindowEvent = false,
+          isReady = false,
+          slice = Array.prototype.slice,
+          playerOrigin = '*';
+
+      Froogaloop.fn = Froogaloop.prototype = {
+          element: null,
+
+          init: function(iframe) {
+              if (typeof iframe === "string") {
+                  iframe = document.getElementById(iframe);
+              }
+
+              this.element = iframe;
+
+              return this;
+          },
+
+          /*
+           * Calls a function to act upon the player.
+           *
+           * @param {string} method The name of the Javascript API method to call. Eg: 'play'.
+           * @param {Array|Function} valueOrCallback params Array of parameters to pass when calling an API method
+           *                                or callback function when the method returns a value.
+           */
+          api: function(method, valueOrCallback) {
+              if (!this.element || !method) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null,
+                  params = !isFunction(valueOrCallback) ? valueOrCallback : null,
+                  callback = isFunction(valueOrCallback) ? valueOrCallback : null;
+
+              // Store the callback for get functions
+              if (callback) {
+                  storeCallback(method, callback, target_id);
+              }
+
+              postMessage(method, params, element);
+              return self;
+          },
+
+          /*
+           * Registers an event listener and a callback function that gets called when the event fires.
+           *
+           * @param eventName (String): Name of the event to listen for.
+           * @param callback (Function): Function that should be called when the event fires.
+           */
+          addEvent: function(eventName, callback) {
+              if (!this.element) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null;
+
+
+              storeCallback(eventName, callback, target_id);
+
+              // The ready event is not registered via postMessage. It fires regardless.
+              if (eventName != 'ready') {
+                  postMessage('addEventListener', eventName, element);
+              }
+              else if (eventName == 'ready' && isReady) {
+                  callback.call(null, target_id);
+              }
+
+              return self;
+          },
+
+          /*
+           * Unregisters an event listener that gets called when the event fires.
+           *
+           * @param eventName (String): Name of the event to stop listening for.
+           */
+          removeEvent: function(eventName) {
+              if (!this.element) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null,
+                  removed = removeCallback(eventName, target_id);
+
+              // The ready event is not registered
+              if (eventName != 'ready' && removed) {
+                  postMessage('removeEventListener', eventName, element);
+              }
+          }
+      };
+
+      /**
+       * Handles posting a message to the parent window.
+       *
+       * @param method (String): name of the method to call inside the player. For api calls
+       * this is the name of the api method (api_play or api_pause) while for events this method
+       * is api_addEventListener.
+       * @param params (Object or Array): List of parameters to submit to the method. Can be either
+       * a single param or an array list of parameters.
+       * @param target (HTMLElement): Target iframe to post the message to.
+       */
+      function postMessage(method, params, target) {
+          if (!target.contentWindow.postMessage) {
+              return false;
+          }
+
+          var data = JSON.stringify({
+              method: method,
+              value: params
+          });
+
+          target.contentWindow.postMessage(data, playerOrigin);
+      }
+
+      /**
+       * Event that fires whenever the window receives a message from its parent
+       * via window.postMessage.
+       */
+      function onMessageReceived(event) {
+          var data, method;
+
+          try {
+              data = JSON.parse(event.data);
+              method = data.event || data.method;
+          }
+          catch(e)  {
+              //fail silently... like a ninja!
+          }
+
+          if (method == 'ready' && !isReady) {
+              isReady = true;
+          }
+
+          // Handles messages from the vimeo player only
+          if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
+              return false;
+          }
+
+          if (playerOrigin === '*') {
+              playerOrigin = event.origin;
+          }
+
+          var value = data.value,
+              eventData = data.data,
+              target_id = target_id === '' ? null : data.player_id,
+
+              callback = getCallback(method, target_id),
+              params = [];
+
+          if (!callback) {
+              return false;
+          }
+
+          if (value !== undefined) {
+              params.push(value);
+          }
+
+          if (eventData) {
+              params.push(eventData);
+          }
+
+          if (target_id) {
+              params.push(target_id);
+          }
+
+          return params.length > 0 ? callback.apply(null, params) : callback.call();
+      }
+
+
+      /**
+       * Stores submitted callbacks for each iframe being tracked and each
+       * event for that iframe.
+       *
+       * @param eventName (String): Name of the event. Eg. api_onPlay
+       * @param callback (Function): Function that should get executed when the
+       * event is fired.
+       * @param target_id (String) [Optional]: If handling more than one iframe then
+       * it stores the different callbacks for different iframes based on the iframe's
+       * id.
+       */
+      function storeCallback(eventName, callback, target_id) {
+          if (target_id) {
+              if (!eventCallbacks[target_id]) {
+                  eventCallbacks[target_id] = {};
+              }
+              eventCallbacks[target_id][eventName] = callback;
+          }
+          else {
+              eventCallbacks[eventName] = callback;
+          }
+      }
+
+      /**
+       * Retrieves stored callbacks.
+       */
+      function getCallback(eventName, target_id) {
+          if (target_id && eventCallbacks[target_id]) {
+              return eventCallbacks[target_id][eventName];
+          }
+          else if (eventCallbacks[eventName]) {
+              return eventCallbacks[eventName];
+          }
+      }
+
+      function removeCallback(eventName, target_id) {
+          if (target_id && eventCallbacks[target_id]) {
+              if (!eventCallbacks[target_id][eventName]) {
+                  return false;
+              }
+              eventCallbacks[target_id][eventName] = null;
+          }
+          else {
+              if (!eventCallbacks[eventName]) {
+                  return false;
+              }
+              eventCallbacks[eventName] = null;
+          }
+
+          return true;
+      }
+
+      function isFunction(obj) {
+          return !!(obj && obj.constructor && obj.call && obj.apply);
+      }
+
+      function isArray(obj) {
+          return toString.call(obj) === '[object Array]';
+      }
+
+      // Give the init function the Froogaloop prototype for later instantiation
+      Froogaloop.fn.init.prototype = Froogaloop.fn;
+
+      // Listens for the message event.
+      // W3C
+      if (window.addEventListener) {
+          window.addEventListener('message', onMessageReceived, false);
+      }
+      // IE
+      else {
+          window.attachEvent('onmessage', onMessageReceived);
+      }
+
+      // Expose froogaloop to the global object
+      return (window.Froogaloop = window.$f = Froogaloop);
+
+  })();
+}));
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
+    typeof window !== 'undefined' ? window : {}
+var minDoc = __webpack_require__(80);
+
+var doccy;
+
+if (typeof document !== 'undefined') {
+    doccy = document;
+} else {
+    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
+
+    if (!doccy) {
+        doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
+    }
+}
+
+module.exports = doccy;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports) {
+
+function clean (s) {
+  return s.replace(/\n\r?\s*/g, '')
+}
+
+
+module.exports = function tsml (sa) {
+  var s = ''
+    , i = 0
+
+  for (; i < arguments.length; i++)
+    s += clean(sa[i]) + (arguments[i + 1] || '')
+
+  return s
+}
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports) {
+
+module.exports = SafeParseTuple
+
+function SafeParseTuple(obj, reviver) {
+    var json
+    var error = null
+
+    try {
+        json = JSON.parse(obj, reviver)
+    } catch (err) {
+        error = err
+    }
+
+    return [error, json]
+}
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var window = __webpack_require__(13)
+var isFunction = __webpack_require__(84)
+var parseHeaders = __webpack_require__(85)
+var xtend = __webpack_require__(89)
+
+module.exports = createXHR
+createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+        options = initParams(uri, options, callback)
+        options.method = method.toUpperCase()
+        return _createXHR(options)
+    }
+})
+
+function forEachArray(array, iterator) {
+    for (var i = 0; i < array.length; i++) {
+        iterator(array[i])
+    }
+}
+
+function isEmpty(obj){
+    for(var i in obj){
+        if(obj.hasOwnProperty(i)) return false
+    }
+    return true
+}
+
+function initParams(uri, options, callback) {
+    var params = uri
+
+    if (isFunction(options)) {
+        callback = options
+        if (typeof uri === "string") {
+            params = {uri:uri}
+        }
+    } else {
+        params = xtend(options, {uri: uri})
+    }
+
+    params.callback = callback
+    return params
+}
+
+function createXHR(uri, options, callback) {
+    options = initParams(uri, options, callback)
+    return _createXHR(options)
+}
+
+function _createXHR(options) {
+    if(typeof options.callback === "undefined"){
+        throw new Error("callback argument missing")
+    }
+
+    var called = false
+    var callback = function cbOnce(err, response, body){
+        if(!called){
+            called = true
+            options.callback(err, response, body)
+        }
+    }
+
+    function readystatechange() {
+        if (xhr.readyState === 4) {
+            setTimeout(loadFunc, 0)
+        }
+    }
+
+    function getBody() {
+        // Chrome with requestType=blob throws errors arround when even testing access to responseText
+        var body = undefined
+
+        if (xhr.response) {
+            body = xhr.response
+        } else {
+            body = xhr.responseText || getXml(xhr)
+        }
+
+        if (isJson) {
+            try {
+                body = JSON.parse(body)
+            } catch (e) {}
+        }
+
+        return body
+    }
+
+    function errorFunc(evt) {
+        clearTimeout(timeoutTimer)
+        if(!(evt instanceof Error)){
+            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
+        }
+        evt.statusCode = 0
+        return callback(evt, failureResponse)
+    }
+
+    // will load the data & process the response in a special response object
+    function loadFunc() {
+        if (aborted) return
+        var status
+        clearTimeout(timeoutTimer)
+        if(options.useXDR && xhr.status===undefined) {
+            //IE8 CORS GET successful response doesn't have a status field, but body is fine
+            status = 200
+        } else {
+            status = (xhr.status === 1223 ? 204 : xhr.status)
+        }
+        var response = failureResponse
+        var err = null
+
+        if (status !== 0){
+            response = {
+                body: getBody(),
+                statusCode: status,
+                method: method,
+                headers: {},
+                url: uri,
+                rawRequest: xhr
+            }
+            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
+                response.headers = parseHeaders(xhr.getAllResponseHeaders())
+            }
+        } else {
+            err = new Error("Internal XMLHttpRequest Error")
+        }
+        return callback(err, response, response.body)
+    }
+
+    var xhr = options.xhr || null
+
+    if (!xhr) {
+        if (options.cors || options.useXDR) {
+            xhr = new createXHR.XDomainRequest()
+        }else{
+            xhr = new createXHR.XMLHttpRequest()
+        }
+    }
+
+    var key
+    var aborted
+    var uri = xhr.url = options.uri || options.url
+    var method = xhr.method = options.method || "GET"
+    var body = options.body || options.data
+    var headers = xhr.headers = options.headers || {}
+    var sync = !!options.sync
+    var isJson = false
+    var timeoutTimer
+    var failureResponse = {
+        body: undefined,
+        headers: {},
+        statusCode: 0,
+        method: method,
+        url: uri,
+        rawRequest: xhr
+    }
+
+    if ("json" in options && options.json !== false) {
+        isJson = true
+        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
+        if (method !== "GET" && method !== "HEAD") {
+            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
+            body = JSON.stringify(options.json === true ? body : options.json)
+        }
+    }
+
+    xhr.onreadystatechange = readystatechange
+    xhr.onload = loadFunc
+    xhr.onerror = errorFunc
+    // IE9 must have onprogress be set to a unique function.
+    xhr.onprogress = function () {
+        // IE must die
+    }
+    xhr.onabort = function(){
+        aborted = true;
+    }
+    xhr.ontimeout = errorFunc
+    xhr.open(method, uri, !sync, options.username, options.password)
+    //has to be after open
+    if(!sync) {
+        xhr.withCredentials = !!options.withCredentials
+    }
+    // Cannot set timeout with sync request
+    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
+    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
+    if (!sync && options.timeout > 0 ) {
+        timeoutTimer = setTimeout(function(){
+            if (aborted) return
+            aborted = true//IE9 may still call readystatechange
+            xhr.abort("timeout")
+            var e = new Error("XMLHttpRequest timeout")
+            e.code = "ETIMEDOUT"
+            errorFunc(e)
+        }, options.timeout )
+    }
+
+    if (xhr.setRequestHeader) {
+        for(key in headers){
+            if(headers.hasOwnProperty(key)){
+                xhr.setRequestHeader(key, headers[key])
+            }
+        }
+    } else if (options.headers && !isEmpty(options.headers)) {
+        throw new Error("Headers cannot be set on an XDomainRequest object")
+    }
+
+    if ("responseType" in options) {
+        xhr.responseType = options.responseType
+    }
+
+    if ("beforeSend" in options &&
+        typeof options.beforeSend === "function"
+    ) {
+        options.beforeSend(xhr)
+    }
+
+    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
+    // XMLHttpRequest spec says to pass null as body to indicate no body
+    // See https://github.com/naugtur/xhr/issues/100.
+    xhr.send(body || null)
+
+    return xhr
+
+
+}
+
+function getXml(xhr) {
+    if (xhr.responseType === "document") {
+        return xhr.responseXML
+    }
+    var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+        return xhr.responseXML
+    }
+
+    return null
+}
+
+function noop() {}
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports) {
+
+module.exports = isFunction
+
+var toString = Object.prototype.toString
+
+function isFunction (fn) {
+  var string = toString.call(fn)
+  return string === '[object Function]' ||
+    (typeof fn === 'function' && string !== '[object RegExp]') ||
+    (typeof window !== 'undefined' &&
+     // IE8 and below
+     (fn === window.setTimeout ||
+      fn === window.alert ||
+      fn === window.confirm ||
+      fn === window.prompt))
+};
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var trim = __webpack_require__(86)
+  , forEach = __webpack_require__(87)
+  , isArray = function(arg) {
+      return Object.prototype.toString.call(arg) === '[object Array]';
+    }
+
+module.exports = function (headers) {
+  if (!headers)
+    return {}
+
+  var result = {}
+
+  forEach(
+      trim(headers).split('\n')
+    , function (row) {
+        var index = row.indexOf(':')
+          , key = trim(row.slice(0, index)).toLowerCase()
+          , value = trim(row.slice(index + 1))
+
+        if (typeof(result[key]) === 'undefined') {
+          result[key] = value
+        } else if (isArray(result[key])) {
+          result[key].push(value)
+        } else {
+          result[key] = [ result[key], value ]
+        }
+      }
+  )
+
+  return result
+}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports) {
+
+
+exports = module.exports = trim;
+
+function trim(str){
+  return str.replace(/^\s*|\s*$/g, '');
+}
+
+exports.left = function(str){
+  return str.replace(/^\s*/, '');
+};
+
+exports.right = function(str){
+  return str.replace(/\s*$/, '');
+};
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isCallable = __webpack_require__(88);
+
+var toStr = Object.prototype.toString;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+var forEachArray = function forEachArray(array, iterator, receiver) {
+    for (var i = 0, len = array.length; i < len; i++) {
+        if (hasOwnProperty.call(array, i)) {
+            if (receiver == null) {
+                iterator(array[i], i, array);
+            } else {
+                iterator.call(receiver, array[i], i, array);
+            }
+        }
+    }
+};
+
+var forEachString = function forEachString(string, iterator, receiver) {
+    for (var i = 0, len = string.length; i < len; i++) {
+        // no such thing as a sparse string.
+        if (receiver == null) {
+            iterator(string.charAt(i), i, string);
+        } else {
+            iterator.call(receiver, string.charAt(i), i, string);
+        }
+    }
+};
+
+var forEachObject = function forEachObject(object, iterator, receiver) {
+    for (var k in object) {
+        if (hasOwnProperty.call(object, k)) {
+            if (receiver == null) {
+                iterator(object[k], k, object);
+            } else {
+                iterator.call(receiver, object[k], k, object);
+            }
+        }
+    }
+};
+
+var forEach = function forEach(list, iterator, thisArg) {
+    if (!isCallable(iterator)) {
+        throw new TypeError('iterator must be a function');
+    }
+
+    var receiver;
+    if (arguments.length >= 3) {
+        receiver = thisArg;
+    }
+
+    if (toStr.call(list) === '[object Array]') {
+        forEachArray(list, iterator, receiver);
+    } else if (typeof list === 'string') {
+        forEachString(list, iterator, receiver);
+    } else {
+        forEachObject(list, iterator, receiver);
+    }
+};
+
+module.exports = forEach;
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fnToStr = Function.prototype.toString;
+
+var constructorRegex = /^\s*class /;
+var isES6ClassFn = function isES6ClassFn(value) {
+	try {
+		var fnStr = fnToStr.call(value);
+		var singleStripped = fnStr.replace(/\/\/.*\n/g, '');
+		var multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, '');
+		var spaceStripped = multiStripped.replace(/\n/mg, ' ').replace(/ {2}/g, ' ');
+		return constructorRegex.test(spaceStripped);
+	} catch (e) {
+		return false; // not a function
+	}
+};
+
+var tryFunctionObject = function tryFunctionObject(value) {
+	try {
+		if (isES6ClassFn(value)) { return false; }
+		fnToStr.call(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+};
+var toStr = Object.prototype.toString;
+var fnClass = '[object Function]';
+var genClass = '[object GeneratorFunction]';
+var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+
+module.exports = function isCallable(value) {
+	if (!value) { return false; }
+	if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+	if (hasToStringTag) { return tryFunctionObject(value); }
+	if (isES6ClassFn(value)) { return false; }
+	var strClass = toStr.call(value);
+	return strClass === fnClass || strClass === genClass;
+};
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports) {
+
+module.exports = extend
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (hasOwnProperty.call(source, key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright 2013 vtt.js Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Default exports for Node. Export the extended versions of VTTCue and
+// VTTRegion in Node since we likely want the capability to convert back and
+// forth between JSON. If we don't then it's not that big of a deal since we're
+// off browser.
+
+var window = __webpack_require__(13);
+
+var vttjs = module.exports = {
+  WebVTT: __webpack_require__(91),
+  VTTCue: __webpack_require__(92),
+  VTTRegion: __webpack_require__(93)
+};
+
+window.vttjs = vttjs;
+window.WebVTT = vttjs.WebVTT;
+
+var cueShim = vttjs.VTTCue;
+var regionShim = vttjs.VTTRegion;
+var nativeVTTCue = window.VTTCue;
+var nativeVTTRegion = window.VTTRegion;
+
+vttjs.shim = function() {
+  window.VTTCue = cueShim;
+  window.VTTRegion = regionShim;
+};
+
+vttjs.restore = function() {
+  window.VTTCue = nativeVTTCue;
+  window.VTTRegion = nativeVTTRegion;
+};
+
+if (!window.VTTCue) {
+  vttjs.shim();
+}
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright 2013 vtt.js Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
+var _objCreate = Object.create || (function() {
+  function F() {}
+  return function(o) {
+    if (arguments.length !== 1) {
+      throw new Error('Object.create shim only accepts one parameter.');
+    }
+    F.prototype = o;
+    return new F();
+  };
+})();
+
+// Creates a new ParserError object from an errorData object. The errorData
+// object should have default code and message properties. The default message
+// property can be overriden by passing in a message parameter.
+// See ParsingError.Errors below for acceptable errors.
+function ParsingError(errorData, message) {
+  this.name = "ParsingError";
+  this.code = errorData.code;
+  this.message = message || errorData.message;
+}
+ParsingError.prototype = _objCreate(Error.prototype);
+ParsingError.prototype.constructor = ParsingError;
+
+// ParsingError metadata for acceptable ParsingErrors.
+ParsingError.Errors = {
+  BadSignature: {
+    code: 0,
+    message: "Malformed WebVTT signature."
+  },
+  BadTimeStamp: {
+    code: 1,
+    message: "Malformed time stamp."
+  }
+};
+
+// Try to parse input as a time stamp.
+function parseTimeStamp(input) {
+
+  function computeSeconds(h, m, s, f) {
+    return (h | 0) * 3600 + (m | 0) * 60 + (s | 0) + (f | 0) / 1000;
+  }
+
+  var m = input.match(/^(\d+):(\d{2})(:\d{2})?\.(\d{3})/);
+  if (!m) {
+    return null;
+  }
+
+  if (m[3]) {
+    // Timestamp takes the form of [hours]:[minutes]:[seconds].[milliseconds]
+    return computeSeconds(m[1], m[2], m[3].replace(":", ""), m[4]);
+  } else if (m[1] > 59) {
+    // Timestamp takes the form of [hours]:[minutes].[milliseconds]
+    // First position is hours as it's over 59.
+    return computeSeconds(m[1], m[2], 0,  m[4]);
+  } else {
+    // Timestamp takes the form of [minutes]:[seconds].[milliseconds]
+    return computeSeconds(0, m[1], m[2], m[4]);
+  }
+}
+
+// A settings object holds key/value pairs and will ignore anything but the first
+// assignment to a specific key.
+function Settings() {
+  this.values = _objCreate(null);
+}
+
+Settings.prototype = {
+  // Only accept the first assignment to any key.
+  set: function(k, v) {
+    if (!this.get(k) && v !== "") {
+      this.values[k] = v;
+    }
+  },
+  // Return the value for a key, or a default value.
+  // If 'defaultKey' is passed then 'dflt' is assumed to be an object with
+  // a number of possible default values as properties where 'defaultKey' is
+  // the key of the property that will be chosen; otherwise it's assumed to be
+  // a single value.
+  get: function(k, dflt, defaultKey) {
+    if (defaultKey) {
+      return this.has(k) ? this.values[k] : dflt[defaultKey];
+    }
+    return this.has(k) ? this.values[k] : dflt;
+  },
+  // Check whether we have a value for a key.
+  has: function(k) {
+    return k in this.values;
+  },
+  // Accept a setting if its one of the given alternatives.
+  alt: function(k, v, a) {
+    for (var n = 0; n < a.length; ++n) {
+      if (v === a[n]) {
+        this.set(k, v);
+        break;
+      }
+    }
+  },
+  // Accept a setting if its a valid (signed) integer.
+  integer: function(k, v) {
+    if (/^-?\d+$/.test(v)) { // integer
+      this.set(k, parseInt(v, 10));
+    }
+  },
+  // Accept a setting if its a valid percentage.
+  percent: function(k, v) {
+    var m;
+    if ((m = v.match(/^([\d]{1,3})(\.[\d]*)?%$/))) {
+      v = parseFloat(v);
+      if (v >= 0 && v <= 100) {
+        this.set(k, v);
+        return true;
+      }
+    }
+    return false;
+  }
+};
+
+// Helper function to parse input into groups separated by 'groupDelim', and
+// interprete each group as a key/value pair separated by 'keyValueDelim'.
+function parseOptions(input, callback, keyValueDelim, groupDelim) {
+  var groups = groupDelim ? input.split(groupDelim) : [input];
+  for (var i in groups) {
+    if (typeof groups[i] !== "string") {
+      continue;
+    }
+    var kv = groups[i].split(keyValueDelim);
+    if (kv.length !== 2) {
+      continue;
+    }
+    var k = kv[0];
+    var v = kv[1];
+    callback(k, v);
+  }
+}
+
+function parseCue(input, cue, regionList) {
+  // Remember the original input if we need to throw an error.
+  var oInput = input;
+  // 4.1 WebVTT timestamp
+  function consumeTimeStamp() {
+    var ts = parseTimeStamp(input);
+    if (ts === null) {
+      throw new ParsingError(ParsingError.Errors.BadTimeStamp,
+                            "Malformed timestamp: " + oInput);
+    }
+    // Remove time stamp from input.
+    input = input.replace(/^[^\sa-zA-Z-]+/, "");
+    return ts;
+  }
+
+  // 4.4.2 WebVTT cue settings
+  function consumeCueSettings(input, cue) {
+    var settings = new Settings();
+
+    parseOptions(input, function (k, v) {
+      switch (k) {
+      case "region":
+        // Find the last region we parsed with the same region id.
+        for (var i = regionList.length - 1; i >= 0; i--) {
+          if (regionList[i].id === v) {
+            settings.set(k, regionList[i].region);
+            break;
+          }
+        }
+        break;
+      case "vertical":
+        settings.alt(k, v, ["rl", "lr"]);
+        break;
+      case "line":
+        var vals = v.split(","),
+            vals0 = vals[0];
+        settings.integer(k, vals0);
+        settings.percent(k, vals0) ? settings.set("snapToLines", false) : null;
+        settings.alt(k, vals0, ["auto"]);
+        if (vals.length === 2) {
+          settings.alt("lineAlign", vals[1], ["start", "middle", "end"]);
+        }
+        break;
+      case "position":
+        vals = v.split(",");
+        settings.percent(k, vals[0]);
+        if (vals.length === 2) {
+          settings.alt("positionAlign", vals[1], ["start", "middle", "end"]);
+        }
+        break;
+      case "size":
+        settings.percent(k, v);
+        break;
+      case "align":
+        settings.alt(k, v, ["start", "middle", "end", "left", "right"]);
+        break;
+      }
+    }, /:/, /\s/);
+
+    // Apply default values for any missing fields.
+    cue.region = settings.get("region", null);
+    cue.vertical = settings.get("vertical", "");
+    cue.line = settings.get("line", "auto");
+    cue.lineAlign = settings.get("lineAlign", "start");
+    cue.snapToLines = settings.get("snapToLines", true);
+    cue.size = settings.get("size", 100);
+    cue.align = settings.get("align", "middle");
+    cue.position = settings.get("position", {
+      start: 0,
+      left: 0,
+      middle: 50,
+      end: 100,
+      right: 100
+    }, cue.align);
+    cue.positionAlign = settings.get("positionAlign", {
+      start: "start",
+      left: "start",
+      middle: "middle",
+      end: "end",
+      right: "end"
+    }, cue.align);
+  }
+
+  function skipWhitespace() {
+    input = input.replace(/^\s+/, "");
+  }
+
+  // 4.1 WebVTT cue timings.
+  skipWhitespace();
+  cue.startTime = consumeTimeStamp();   // (1) collect cue start time
+  skipWhitespace();
+  if (input.substr(0, 3) !== "-->") {     // (3) next characters must match "-->"
+    throw new ParsingError(ParsingError.Errors.BadTimeStamp,
+                           "Malformed time stamp (time stamps must be separated by '-->'): " +
+                           oInput);
+  }
+  input = input.substr(3);
+  skipWhitespace();
+  cue.endTime = consumeTimeStamp();     // (5) collect cue end time
+
+  // 4.1 WebVTT cue settings list.
+  skipWhitespace();
+  consumeCueSettings(input, cue);
+}
+
+var ESCAPE = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&lrm;": "\u200e",
+  "&rlm;": "\u200f",
+  "&nbsp;": "\u00a0"
+};
+
+var TAG_NAME = {
+  c: "span",
+  i: "i",
+  b: "b",
+  u: "u",
+  ruby: "ruby",
+  rt: "rt",
+  v: "span",
+  lang: "span"
+};
+
+var TAG_ANNOTATION = {
+  v: "title",
+  lang: "lang"
+};
+
+var NEEDS_PARENT = {
+  rt: "ruby"
+};
+
+// Parse content into a document fragment.
+function parseContent(window, input) {
+  function nextToken() {
+    // Check for end-of-string.
+    if (!input) {
+      return null;
+    }
+
+    // Consume 'n' characters from the input.
+    function consume(result) {
+      input = input.substr(result.length);
+      return result;
+    }
+
+    var m = input.match(/^([^<]*)(<[^>]*>?)?/);
+    // If there is some text before the next tag, return it, otherwise return
+    // the tag.
+    return consume(m[1] ? m[1] : m[2]);
+  }
+
+  // Unescape a string 's'.
+  function unescape1(e) {
+    return ESCAPE[e];
+  }
+  function unescape(s) {
+    while ((m = s.match(/&(amp|lt|gt|lrm|rlm|nbsp);/))) {
+      s = s.replace(m[0], unescape1);
+    }
+    return s;
+  }
+
+  function shouldAdd(current, element) {
+    return !NEEDS_PARENT[element.localName] ||
+           NEEDS_PARENT[element.localName] === current.localName;
+  }
+
+  // Create an element for this tag.
+  function createElement(type, annotation) {
+    var tagName = TAG_NAME[type];
+    if (!tagName) {
+      return null;
+    }
+    var element = window.document.createElement(tagName);
+    element.localName = tagName;
+    var name = TAG_ANNOTATION[type];
+    if (name && annotation) {
+      element[name] = annotation.trim();
+    }
+    return element;
+  }
+
+  var rootDiv = window.document.createElement("div"),
+      current = rootDiv,
+      t,
+      tagStack = [];
+
+  while ((t = nextToken()) !== null) {
+    if (t[0] === '<') {
+      if (t[1] === "/") {
+        // If the closing tag matches, move back up to the parent node.
+        if (tagStack.length &&
+            tagStack[tagStack.length - 1] === t.substr(2).replace(">", "")) {
+          tagStack.pop();
+          current = current.parentNode;
+        }
+        // Otherwise just ignore the end tag.
+        continue;
+      }
+      var ts = parseTimeStamp(t.substr(1, t.length - 2));
+      var node;
+      if (ts) {
+        // Timestamps are lead nodes as well.
+        node = window.document.createProcessingInstruction("timestamp", ts);
+        current.appendChild(node);
+        continue;
+      }
+      var m = t.match(/^<([^.\s/0-9>]+)(\.[^\s\\>]+)?([^>\\]+)?(\\?)>?$/);
+      // If we can't parse the tag, skip to the next tag.
+      if (!m) {
+        continue;
+      }
+      // Try to construct an element, and ignore the tag if we couldn't.
+      node = createElement(m[1], m[3]);
+      if (!node) {
+        continue;
+      }
+      // Determine if the tag should be added based on the context of where it
+      // is placed in the cuetext.
+      if (!shouldAdd(current, node)) {
+        continue;
+      }
+      // Set the class list (as a list of classes, separated by space).
+      if (m[2]) {
+        node.className = m[2].substr(1).replace('.', ' ');
+      }
+      // Append the node to the current node, and enter the scope of the new
+      // node.
+      tagStack.push(m[1]);
+      current.appendChild(node);
+      current = node;
+      continue;
+    }
+
+    // Text nodes are leaf nodes.
+    current.appendChild(window.document.createTextNode(unescape(t)));
+  }
+
+  return rootDiv;
+}
+
+// This is a list of all the Unicode characters that have a strong
+// right-to-left category. What this means is that these characters are
+// written right-to-left for sure. It was generated by pulling all the strong
+// right-to-left characters out of the Unicode data table. That table can
+// found at: http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
+var strongRTLRanges = [[0x5be, 0x5be], [0x5c0, 0x5c0], [0x5c3, 0x5c3], [0x5c6, 0x5c6],
+ [0x5d0, 0x5ea], [0x5f0, 0x5f4], [0x608, 0x608], [0x60b, 0x60b], [0x60d, 0x60d],
+ [0x61b, 0x61b], [0x61e, 0x64a], [0x66d, 0x66f], [0x671, 0x6d5], [0x6e5, 0x6e6],
+ [0x6ee, 0x6ef], [0x6fa, 0x70d], [0x70f, 0x710], [0x712, 0x72f], [0x74d, 0x7a5],
+ [0x7b1, 0x7b1], [0x7c0, 0x7ea], [0x7f4, 0x7f5], [0x7fa, 0x7fa], [0x800, 0x815],
+ [0x81a, 0x81a], [0x824, 0x824], [0x828, 0x828], [0x830, 0x83e], [0x840, 0x858],
+ [0x85e, 0x85e], [0x8a0, 0x8a0], [0x8a2, 0x8ac], [0x200f, 0x200f],
+ [0xfb1d, 0xfb1d], [0xfb1f, 0xfb28], [0xfb2a, 0xfb36], [0xfb38, 0xfb3c],
+ [0xfb3e, 0xfb3e], [0xfb40, 0xfb41], [0xfb43, 0xfb44], [0xfb46, 0xfbc1],
+ [0xfbd3, 0xfd3d], [0xfd50, 0xfd8f], [0xfd92, 0xfdc7], [0xfdf0, 0xfdfc],
+ [0xfe70, 0xfe74], [0xfe76, 0xfefc], [0x10800, 0x10805], [0x10808, 0x10808],
+ [0x1080a, 0x10835], [0x10837, 0x10838], [0x1083c, 0x1083c], [0x1083f, 0x10855],
+ [0x10857, 0x1085f], [0x10900, 0x1091b], [0x10920, 0x10939], [0x1093f, 0x1093f],
+ [0x10980, 0x109b7], [0x109be, 0x109bf], [0x10a00, 0x10a00], [0x10a10, 0x10a13],
+ [0x10a15, 0x10a17], [0x10a19, 0x10a33], [0x10a40, 0x10a47], [0x10a50, 0x10a58],
+ [0x10a60, 0x10a7f], [0x10b00, 0x10b35], [0x10b40, 0x10b55], [0x10b58, 0x10b72],
+ [0x10b78, 0x10b7f], [0x10c00, 0x10c48], [0x1ee00, 0x1ee03], [0x1ee05, 0x1ee1f],
+ [0x1ee21, 0x1ee22], [0x1ee24, 0x1ee24], [0x1ee27, 0x1ee27], [0x1ee29, 0x1ee32],
+ [0x1ee34, 0x1ee37], [0x1ee39, 0x1ee39], [0x1ee3b, 0x1ee3b], [0x1ee42, 0x1ee42],
+ [0x1ee47, 0x1ee47], [0x1ee49, 0x1ee49], [0x1ee4b, 0x1ee4b], [0x1ee4d, 0x1ee4f],
+ [0x1ee51, 0x1ee52], [0x1ee54, 0x1ee54], [0x1ee57, 0x1ee57], [0x1ee59, 0x1ee59],
+ [0x1ee5b, 0x1ee5b], [0x1ee5d, 0x1ee5d], [0x1ee5f, 0x1ee5f], [0x1ee61, 0x1ee62],
+ [0x1ee64, 0x1ee64], [0x1ee67, 0x1ee6a], [0x1ee6c, 0x1ee72], [0x1ee74, 0x1ee77],
+ [0x1ee79, 0x1ee7c], [0x1ee7e, 0x1ee7e], [0x1ee80, 0x1ee89], [0x1ee8b, 0x1ee9b],
+ [0x1eea1, 0x1eea3], [0x1eea5, 0x1eea9], [0x1eeab, 0x1eebb], [0x10fffd, 0x10fffd]];
+
+function isStrongRTLChar(charCode) {
+  for (var i = 0; i < strongRTLRanges.length; i++) {
+    var currentRange = strongRTLRanges[i];
+    if (charCode >= currentRange[0] && charCode <= currentRange[1]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function determineBidi(cueDiv) {
+  var nodeStack = [],
+      text = "",
+      charCode;
+
+  if (!cueDiv || !cueDiv.childNodes) {
+    return "ltr";
+  }
+
+  function pushNodes(nodeStack, node) {
+    for (var i = node.childNodes.length - 1; i >= 0; i--) {
+      nodeStack.push(node.childNodes[i]);
+    }
+  }
+
+  function nextTextNode(nodeStack) {
+    if (!nodeStack || !nodeStack.length) {
+      return null;
+    }
+
+    var node = nodeStack.pop(),
+        text = node.textContent || node.innerText;
+    if (text) {
+      // TODO: This should match all unicode type B characters (paragraph
+      // separator characters). See issue #115.
+      var m = text.match(/^.*(\n|\r)/);
+      if (m) {
+        nodeStack.length = 0;
+        return m[0];
+      }
+      return text;
+    }
+    if (node.tagName === "ruby") {
+      return nextTextNode(nodeStack);
+    }
+    if (node.childNodes) {
+      pushNodes(nodeStack, node);
+      return nextTextNode(nodeStack);
+    }
+  }
+
+  pushNodes(nodeStack, cueDiv);
+  while ((text = nextTextNode(nodeStack))) {
+    for (var i = 0; i < text.length; i++) {
+      charCode = text.charCodeAt(i);
+      if (isStrongRTLChar(charCode)) {
+        return "rtl";
+      }
+    }
+  }
+  return "ltr";
+}
+
+function computeLinePos(cue) {
+  if (typeof cue.line === "number" &&
+      (cue.snapToLines || (cue.line >= 0 && cue.line <= 100))) {
+    return cue.line;
+  }
+  if (!cue.track || !cue.track.textTrackList ||
+      !cue.track.textTrackList.mediaElement) {
+    return -1;
+  }
+  var track = cue.track,
+      trackList = track.textTrackList,
+      count = 0;
+  for (var i = 0; i < trackList.length && trackList[i] !== track; i++) {
+    if (trackList[i].mode === "showing") {
+      count++;
+    }
+  }
+  return ++count * -1;
+}
+
+function StyleBox() {
+}
+
+// Apply styles to a div. If there is no div passed then it defaults to the
+// div on 'this'.
+StyleBox.prototype.applyStyles = function(styles, div) {
+  div = div || this.div;
+  for (var prop in styles) {
+    if (styles.hasOwnProperty(prop)) {
+      div.style[prop] = styles[prop];
+    }
+  }
+};
+
+StyleBox.prototype.formatStyle = function(val, unit) {
+  return val === 0 ? 0 : val + unit;
+};
+
+// Constructs the computed display state of the cue (a div). Places the div
+// into the overlay which should be a block level element (usually a div).
+function CueStyleBox(window, cue, styleOptions) {
+  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
+  var color = "rgba(255, 255, 255, 1)";
+  var backgroundColor = "rgba(0, 0, 0, 0.8)";
+
+  if (isIE8) {
+    color = "rgb(255, 255, 255)";
+    backgroundColor = "rgb(0, 0, 0)";
+  }
+
+  StyleBox.call(this);
+  this.cue = cue;
+
+  // Parse our cue's text into a DOM tree rooted at 'cueDiv'. This div will
+  // have inline positioning and will function as the cue background box.
+  this.cueDiv = parseContent(window, cue.text);
+  var styles = {
+    color: color,
+    backgroundColor: backgroundColor,
+    position: "relative",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: "inline"
+  };
+
+  if (!isIE8) {
+    styles.writingMode = cue.vertical === "" ? "horizontal-tb"
+                                             : cue.vertical === "lr" ? "vertical-lr"
+                                                                     : "vertical-rl";
+    styles.unicodeBidi = "plaintext";
+  }
+  this.applyStyles(styles, this.cueDiv);
+
+  // Create an absolutely positioned div that will be used to position the cue
+  // div. Note, all WebVTT cue-setting alignments are equivalent to the CSS
+  // mirrors of them except "middle" which is "center" in CSS.
+  this.div = window.document.createElement("div");
+  styles = {
+    textAlign: cue.align === "middle" ? "center" : cue.align,
+    font: styleOptions.font,
+    whiteSpace: "pre-line",
+    position: "absolute"
+  };
+
+  if (!isIE8) {
+    styles.direction = determineBidi(this.cueDiv);
+    styles.writingMode = cue.vertical === "" ? "horizontal-tb"
+                                             : cue.vertical === "lr" ? "vertical-lr"
+                                                                     : "vertical-rl".
+    stylesunicodeBidi =  "plaintext";
+  }
+
+  this.applyStyles(styles);
+
+  this.div.appendChild(this.cueDiv);
+
+  // Calculate the distance from the reference edge of the viewport to the text
+  // position of the cue box. The reference edge will be resolved later when
+  // the box orientation styles are applied.
+  var textPos = 0;
+  switch (cue.positionAlign) {
+  case "start":
+    textPos = cue.position;
+    break;
+  case "middle":
+    textPos = cue.position - (cue.size / 2);
+    break;
+  case "end":
+    textPos = cue.position - cue.size;
+    break;
+  }
+
+  // Horizontal box orientation; textPos is the distance from the left edge of the
+  // area to the left edge of the box and cue.size is the distance extending to
+  // the right from there.
+  if (cue.vertical === "") {
+    this.applyStyles({
+      left:  this.formatStyle(textPos, "%"),
+      width: this.formatStyle(cue.size, "%")
+    });
+  // Vertical box orientation; textPos is the distance from the top edge of the
+  // area to the top edge of the box and cue.size is the height extending
+  // downwards from there.
+  } else {
+    this.applyStyles({
+      top: this.formatStyle(textPos, "%"),
+      height: this.formatStyle(cue.size, "%")
+    });
+  }
+
+  this.move = function(box) {
+    this.applyStyles({
+      top: this.formatStyle(box.top, "px"),
+      bottom: this.formatStyle(box.bottom, "px"),
+      left: this.formatStyle(box.left, "px"),
+      right: this.formatStyle(box.right, "px"),
+      height: this.formatStyle(box.height, "px"),
+      width: this.formatStyle(box.width, "px")
+    });
+  };
+}
+CueStyleBox.prototype = _objCreate(StyleBox.prototype);
+CueStyleBox.prototype.constructor = CueStyleBox;
+
+// Represents the co-ordinates of an Element in a way that we can easily
+// compute things with such as if it overlaps or intersects with another Element.
+// Can initialize it with either a StyleBox or another BoxPosition.
+function BoxPosition(obj) {
+  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
+
+  // Either a BoxPosition was passed in and we need to copy it, or a StyleBox
+  // was passed in and we need to copy the results of 'getBoundingClientRect'
+  // as the object returned is readonly. All co-ordinate values are in reference
+  // to the viewport origin (top left).
+  var lh, height, width, top;
+  if (obj.div) {
+    height = obj.div.offsetHeight;
+    width = obj.div.offsetWidth;
+    top = obj.div.offsetTop;
+
+    var rects = (rects = obj.div.childNodes) && (rects = rects[0]) &&
+                rects.getClientRects && rects.getClientRects();
+    obj = obj.div.getBoundingClientRect();
+    // In certain cases the outter div will be slightly larger then the sum of
+    // the inner div's lines. This could be due to bold text, etc, on some platforms.
+    // In this case we should get the average line height and use that. This will
+    // result in the desired behaviour.
+    lh = rects ? Math.max((rects[0] && rects[0].height) || 0, obj.height / rects.length)
+               : 0;
+
+  }
+  this.left = obj.left;
+  this.right = obj.right;
+  this.top = obj.top || top;
+  this.height = obj.height || height;
+  this.bottom = obj.bottom || (top + (obj.height || height));
+  this.width = obj.width || width;
+  this.lineHeight = lh !== undefined ? lh : obj.lineHeight;
+
+  if (isIE8 && !this.lineHeight) {
+    this.lineHeight = 13;
+  }
+}
+
+// Move the box along a particular axis. Optionally pass in an amount to move
+// the box. If no amount is passed then the default is the line height of the
+// box.
+BoxPosition.prototype.move = function(axis, toMove) {
+  toMove = toMove !== undefined ? toMove : this.lineHeight;
+  switch (axis) {
+  case "+x":
+    this.left += toMove;
+    this.right += toMove;
+    break;
+  case "-x":
+    this.left -= toMove;
+    this.right -= toMove;
+    break;
+  case "+y":
+    this.top += toMove;
+    this.bottom += toMove;
+    break;
+  case "-y":
+    this.top -= toMove;
+    this.bottom -= toMove;
+    break;
+  }
+};
+
+// Check if this box overlaps another box, b2.
+BoxPosition.prototype.overlaps = function(b2) {
+  return this.left < b2.right &&
+         this.right > b2.left &&
+         this.top < b2.bottom &&
+         this.bottom > b2.top;
+};
+
+// Check if this box overlaps any other boxes in boxes.
+BoxPosition.prototype.overlapsAny = function(boxes) {
+  for (var i = 0; i < boxes.length; i++) {
+    if (this.overlaps(boxes[i])) {
+      return true;
+    }
+  }
+  return false;
+};
+
+// Check if this box is within another box.
+BoxPosition.prototype.within = function(container) {
+  return this.top >= container.top &&
+         this.bottom <= container.bottom &&
+         this.left >= container.left &&
+         this.right <= container.right;
+};
+
+// Check if this box is entirely within the container or it is overlapping
+// on the edge opposite of the axis direction passed. For example, if "+x" is
+// passed and the box is overlapping on the left edge of the container, then
+// return true.
+BoxPosition.prototype.overlapsOppositeAxis = function(container, axis) {
+  switch (axis) {
+  case "+x":
+    return this.left < container.left;
+  case "-x":
+    return this.right > container.right;
+  case "+y":
+    return this.top < container.top;
+  case "-y":
+    return this.bottom > container.bottom;
+  }
+};
+
+// Find the percentage of the area that this box is overlapping with another
+// box.
+BoxPosition.prototype.intersectPercentage = function(b2) {
+  var x = Math.max(0, Math.min(this.right, b2.right) - Math.max(this.left, b2.left)),
+      y = Math.max(0, Math.min(this.bottom, b2.bottom) - Math.max(this.top, b2.top)),
+      intersectArea = x * y;
+  return intersectArea / (this.height * this.width);
+};
+
+// Convert the positions from this box to CSS compatible positions using
+// the reference container's positions. This has to be done because this
+// box's positions are in reference to the viewport origin, whereas, CSS
+// values are in referecne to their respective edges.
+BoxPosition.prototype.toCSSCompatValues = function(reference) {
+  return {
+    top: this.top - reference.top,
+    bottom: reference.bottom - this.bottom,
+    left: this.left - reference.left,
+    right: reference.right - this.right,
+    height: this.height,
+    width: this.width
+  };
+};
+
+// Get an object that represents the box's position without anything extra.
+// Can pass a StyleBox, HTMLElement, or another BoxPositon.
+BoxPosition.getSimpleBoxPosition = function(obj) {
+  var height = obj.div ? obj.div.offsetHeight : obj.tagName ? obj.offsetHeight : 0;
+  var width = obj.div ? obj.div.offsetWidth : obj.tagName ? obj.offsetWidth : 0;
+  var top = obj.div ? obj.div.offsetTop : obj.tagName ? obj.offsetTop : 0;
+
+  obj = obj.div ? obj.div.getBoundingClientRect() :
+                obj.tagName ? obj.getBoundingClientRect() : obj;
+  var ret = {
+    left: obj.left,
+    right: obj.right,
+    top: obj.top || top,
+    height: obj.height || height,
+    bottom: obj.bottom || (top + (obj.height || height)),
+    width: obj.width || width
+  };
+  return ret;
+};
+
+// Move a StyleBox to its specified, or next best, position. The containerBox
+// is the box that contains the StyleBox, such as a div. boxPositions are
+// a list of other boxes that the styleBox can't overlap with.
+function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
+
+  // Find the best position for a cue box, b, on the video. The axis parameter
+  // is a list of axis, the order of which, it will move the box along. For example:
+  // Passing ["+x", "-x"] will move the box first along the x axis in the positive
+  // direction. If it doesn't find a good position for it there it will then move
+  // it along the x axis in the negative direction.
+  function findBestPosition(b, axis) {
+    var bestPosition,
+        specifiedPosition = new BoxPosition(b),
+        percentage = 1; // Highest possible so the first thing we get is better.
+
+    for (var i = 0; i < axis.length; i++) {
+      while (b.overlapsOppositeAxis(containerBox, axis[i]) ||
+             (b.within(containerBox) && b.overlapsAny(boxPositions))) {
+        b.move(axis[i]);
+      }
+      // We found a spot where we aren't overlapping anything. This is our
+      // best position.
+      if (b.within(containerBox)) {
+        return b;
+      }
+      var p = b.intersectPercentage(containerBox);
+      // If we're outside the container box less then we were on our last try
+      // then remember this position as the best position.
+      if (percentage > p) {
+        bestPosition = new BoxPosition(b);
+        percentage = p;
+      }
+      // Reset the box position to the specified position.
+      b = new BoxPosition(specifiedPosition);
+    }
+    return bestPosition || specifiedPosition;
+  }
+
+  var boxPosition = new BoxPosition(styleBox),
+      cue = styleBox.cue,
+      linePos = computeLinePos(cue),
+      axis = [];
+
+  // If we have a line number to align the cue to.
+  if (cue.snapToLines) {
+    var size;
+    switch (cue.vertical) {
+    case "":
+      axis = [ "+y", "-y" ];
+      size = "height";
+      break;
+    case "rl":
+      axis = [ "+x", "-x" ];
+      size = "width";
+      break;
+    case "lr":
+      axis = [ "-x", "+x" ];
+      size = "width";
+      break;
+    }
+
+    var step = boxPosition.lineHeight,
+        position = step * Math.round(linePos),
+        maxPosition = containerBox[size] + step,
+        initialAxis = axis[0];
+
+    // If the specified intial position is greater then the max position then
+    // clamp the box to the amount of steps it would take for the box to
+    // reach the max position.
+    if (Math.abs(position) > maxPosition) {
+      position = position < 0 ? -1 : 1;
+      position *= Math.ceil(maxPosition / step) * step;
+    }
+
+    // If computed line position returns negative then line numbers are
+    // relative to the bottom of the video instead of the top. Therefore, we
+    // need to increase our initial position by the length or width of the
+    // video, depending on the writing direction, and reverse our axis directions.
+    if (linePos < 0) {
+      position += cue.vertical === "" ? containerBox.height : containerBox.width;
+      axis = axis.reverse();
+    }
+
+    // Move the box to the specified position. This may not be its best
+    // position.
+    boxPosition.move(initialAxis, position);
+
+  } else {
+    // If we have a percentage line value for the cue.
+    var calculatedPercentage = (boxPosition.lineHeight / containerBox.height) * 100;
+
+    switch (cue.lineAlign) {
+    case "middle":
+      linePos -= (calculatedPercentage / 2);
+      break;
+    case "end":
+      linePos -= calculatedPercentage;
+      break;
+    }
+
+    // Apply initial line position to the cue box.
+    switch (cue.vertical) {
+    case "":
+      styleBox.applyStyles({
+        top: styleBox.formatStyle(linePos, "%")
+      });
+      break;
+    case "rl":
+      styleBox.applyStyles({
+        left: styleBox.formatStyle(linePos, "%")
+      });
+      break;
+    case "lr":
+      styleBox.applyStyles({
+        right: styleBox.formatStyle(linePos, "%")
+      });
+      break;
+    }
+
+    axis = [ "+y", "-x", "+x", "-y" ];
+
+    // Get the box position again after we've applied the specified positioning
+    // to it.
+    boxPosition = new BoxPosition(styleBox);
+  }
+
+  var bestPosition = findBestPosition(boxPosition, axis);
+  styleBox.move(bestPosition.toCSSCompatValues(containerBox));
+}
+
+function WebVTT() {
+  // Nothing
+}
+
+// Helper to allow strings to be decoded instead of the default binary utf8 data.
+WebVTT.StringDecoder = function() {
+  return {
+    decode: function(data) {
+      if (!data) {
+        return "";
+      }
+      if (typeof data !== "string") {
+        throw new Error("Error - expected string data.");
+      }
+      return decodeURIComponent(encodeURIComponent(data));
+    }
+  };
+};
+
+WebVTT.convertCueToDOMTree = function(window, cuetext) {
+  if (!window || !cuetext) {
+    return null;
+  }
+  return parseContent(window, cuetext);
+};
+
+var FONT_SIZE_PERCENT = 0.05;
+var FONT_STYLE = "sans-serif";
+var CUE_BACKGROUND_PADDING = "1.5%";
+
+// Runs the processing model over the cues and regions passed to it.
+// @param overlay A block level element (usually a div) that the computed cues
+//                and regions will be placed into.
+WebVTT.processCues = function(window, cues, overlay) {
+  if (!window || !cues || !overlay) {
+    return null;
+  }
+
+  // Remove all previous children.
+  while (overlay.firstChild) {
+    overlay.removeChild(overlay.firstChild);
+  }
+
+  var paddedOverlay = window.document.createElement("div");
+  paddedOverlay.style.position = "absolute";
+  paddedOverlay.style.left = "0";
+  paddedOverlay.style.right = "0";
+  paddedOverlay.style.top = "0";
+  paddedOverlay.style.bottom = "0";
+  paddedOverlay.style.margin = CUE_BACKGROUND_PADDING;
+  overlay.appendChild(paddedOverlay);
+
+  // Determine if we need to compute the display states of the cues. This could
+  // be the case if a cue's state has been changed since the last computation or
+  // if it has not been computed yet.
+  function shouldCompute(cues) {
+    for (var i = 0; i < cues.length; i++) {
+      if (cues[i].hasBeenReset || !cues[i].displayState) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // We don't need to recompute the cues' display states. Just reuse them.
+  if (!shouldCompute(cues)) {
+    for (var i = 0; i < cues.length; i++) {
+      paddedOverlay.appendChild(cues[i].displayState);
+    }
+    return;
+  }
+
+  var boxPositions = [],
+      containerBox = BoxPosition.getSimpleBoxPosition(paddedOverlay),
+      fontSize = Math.round(containerBox.height * FONT_SIZE_PERCENT * 100) / 100;
+  var styleOptions = {
+    font: fontSize + "px " + FONT_STYLE
+  };
+
+  (function() {
+    var styleBox, cue;
+
+    for (var i = 0; i < cues.length; i++) {
+      cue = cues[i];
+
+      // Compute the intial position and styles of the cue div.
+      styleBox = new CueStyleBox(window, cue, styleOptions);
+      paddedOverlay.appendChild(styleBox.div);
+
+      // Move the cue div to it's correct line position.
+      moveBoxToLinePosition(window, styleBox, containerBox, boxPositions);
+
+      // Remember the computed div so that we don't have to recompute it later
+      // if we don't have too.
+      cue.displayState = styleBox.div;
+
+      boxPositions.push(BoxPosition.getSimpleBoxPosition(styleBox));
+    }
+  })();
+};
+
+WebVTT.Parser = function(window, vttjs, decoder) {
+  if (!decoder) {
+    decoder = vttjs;
+    vttjs = {};
+  }
+  if (!vttjs) {
+    vttjs = {};
+  }
+
+  this.window = window;
+  this.vttjs = vttjs;
+  this.state = "INITIAL";
+  this.buffer = "";
+  this.decoder = decoder || new TextDecoder("utf8");
+  this.regionList = [];
+};
+
+WebVTT.Parser.prototype = {
+  // If the error is a ParsingError then report it to the consumer if
+  // possible. If it's not a ParsingError then throw it like normal.
+  reportOrThrowError: function(e) {
+    if (e instanceof ParsingError) {
+      this.onparsingerror && this.onparsingerror(e);
+    } else {
+      throw e;
+    }
+  },
+  parse: function (data) {
+    var self = this;
+
+    // If there is no data then we won't decode it, but will just try to parse
+    // whatever is in buffer already. This may occur in circumstances, for
+    // example when flush() is called.
+    if (data) {
+      // Try to decode the data that we received.
+      self.buffer += self.decoder.decode(data, {stream: true});
+    }
+
+    function collectNextLine() {
+      var buffer = self.buffer;
+      var pos = 0;
+      while (pos < buffer.length && buffer[pos] !== '\r' && buffer[pos] !== '\n') {
+        ++pos;
+      }
+      var line = buffer.substr(0, pos);
+      // Advance the buffer early in case we fail below.
+      if (buffer[pos] === '\r') {
+        ++pos;
+      }
+      if (buffer[pos] === '\n') {
+        ++pos;
+      }
+      self.buffer = buffer.substr(pos);
+      return line;
+    }
+
+    // 3.4 WebVTT region and WebVTT region settings syntax
+    function parseRegion(input) {
+      var settings = new Settings();
+
+      parseOptions(input, function (k, v) {
+        switch (k) {
+        case "id":
+          settings.set(k, v);
+          break;
+        case "width":
+          settings.percent(k, v);
+          break;
+        case "lines":
+          settings.integer(k, v);
+          break;
+        case "regionanchor":
+        case "viewportanchor":
+          var xy = v.split(',');
+          if (xy.length !== 2) {
+            break;
+          }
+          // We have to make sure both x and y parse, so use a temporary
+          // settings object here.
+          var anchor = new Settings();
+          anchor.percent("x", xy[0]);
+          anchor.percent("y", xy[1]);
+          if (!anchor.has("x") || !anchor.has("y")) {
+            break;
+          }
+          settings.set(k + "X", anchor.get("x"));
+          settings.set(k + "Y", anchor.get("y"));
+          break;
+        case "scroll":
+          settings.alt(k, v, ["up"]);
+          break;
+        }
+      }, /=/, /\s/);
+
+      // Create the region, using default values for any values that were not
+      // specified.
+      if (settings.has("id")) {
+        var region = new (self.vttjs.VTTRegion || self.window.VTTRegion)();
+        region.width = settings.get("width", 100);
+        region.lines = settings.get("lines", 3);
+        region.regionAnchorX = settings.get("regionanchorX", 0);
+        region.regionAnchorY = settings.get("regionanchorY", 100);
+        region.viewportAnchorX = settings.get("viewportanchorX", 0);
+        region.viewportAnchorY = settings.get("viewportanchorY", 100);
+        region.scroll = settings.get("scroll", "");
+        // Register the region.
+        self.onregion && self.onregion(region);
+        // Remember the VTTRegion for later in case we parse any VTTCues that
+        // reference it.
+        self.regionList.push({
+          id: settings.get("id"),
+          region: region
+        });
+      }
+    }
+
+    // draft-pantos-http-live-streaming-20
+    // https://tools.ietf.org/html/draft-pantos-http-live-streaming-20#section-3.5
+    // 3.5 WebVTT
+    function parseTimestampMap(input) {
+      var settings = new Settings();
+
+      parseOptions(input, function(k, v) {
+        switch(k) {
+        case "MPEGT":
+          settings.integer(k + 'S', v);
+          break;
+        case "LOCA":
+          settings.set(k + 'L', parseTimeStamp(v));
+          break;
+        }
+      }, /[^\d]:/, /,/);
+
+      self.ontimestampmap && self.ontimestampmap({
+        "MPEGTS": settings.get("MPEGTS"),
+        "LOCAL": settings.get("LOCAL")
+      });
+    }
+
+    // 3.2 WebVTT metadata header syntax
+    function parseHeader(input) {
+      if (input.match(/X-TIMESTAMP-MAP/)) {
+        // This line contains HLS X-TIMESTAMP-MAP metadata
+        parseOptions(input, function(k, v) {
+          switch(k) {
+          case "X-TIMESTAMP-MAP":
+            parseTimestampMap(v);
+            break;
+          }
+        }, /=/);
+      } else {
+        parseOptions(input, function (k, v) {
+          switch (k) {
+          case "Region":
+            // 3.3 WebVTT region metadata header syntax
+            parseRegion(v);
+            break;
+          }
+        }, /:/);
+      }
+
+    }
+
+    // 5.1 WebVTT file parsing.
+    try {
+      var line;
+      if (self.state === "INITIAL") {
+        // We can't start parsing until we have the first line.
+        if (!/\r\n|\n/.test(self.buffer)) {
+          return this;
+        }
+
+        line = collectNextLine();
+
+        var m = line.match(/^WEBVTT([ \t].*)?$/);
+        if (!m || !m[0]) {
+          throw new ParsingError(ParsingError.Errors.BadSignature);
+        }
+
+        self.state = "HEADER";
+      }
+
+      var alreadyCollectedLine = false;
+      while (self.buffer) {
+        // We can't parse a line until we have the full line.
+        if (!/\r\n|\n/.test(self.buffer)) {
+          return this;
+        }
+
+        if (!alreadyCollectedLine) {
+          line = collectNextLine();
+        } else {
+          alreadyCollectedLine = false;
+        }
+
+        switch (self.state) {
+        case "HEADER":
+          // 13-18 - Allow a header (metadata) under the WEBVTT line.
+          if (/:/.test(line)) {
+            parseHeader(line);
+          } else if (!line) {
+            // An empty line terminates the header and starts the body (cues).
+            self.state = "ID";
+          }
+          continue;
+        case "NOTE":
+          // Ignore NOTE blocks.
+          if (!line) {
+            self.state = "ID";
+          }
+          continue;
+        case "ID":
+          // Check for the start of NOTE blocks.
+          if (/^NOTE($|[ \t])/.test(line)) {
+            self.state = "NOTE";
+            break;
+          }
+          // 19-29 - Allow any number of line terminators, then initialize new cue values.
+          if (!line) {
+            continue;
+          }
+          self.cue = new (self.vttjs.VTTCue || self.window.VTTCue)(0, 0, "");
+          self.state = "CUE";
+          // 30-39 - Check if self line contains an optional identifier or timing data.
+          if (line.indexOf("-->") === -1) {
+            self.cue.id = line;
+            continue;
+          }
+          // Process line as start of a cue.
+          /*falls through*/
+        case "CUE":
+          // 40 - Collect cue timings and settings.
+          try {
+            parseCue(line, self.cue, self.regionList);
+          } catch (e) {
+            self.reportOrThrowError(e);
+            // In case of an error ignore rest of the cue.
+            self.cue = null;
+            self.state = "BADCUE";
+            continue;
+          }
+          self.state = "CUETEXT";
+          continue;
+        case "CUETEXT":
+          var hasSubstring = line.indexOf("-->") !== -1;
+          // 34 - If we have an empty line then report the cue.
+          // 35 - If we have the special substring '-->' then report the cue,
+          // but do not collect the line as we need to process the current
+          // one as a new cue.
+          if (!line || hasSubstring && (alreadyCollectedLine = true)) {
+            // We are done parsing self cue.
+            self.oncue && self.oncue(self.cue);
+            self.cue = null;
+            self.state = "ID";
+            continue;
+          }
+          if (self.cue.text) {
+            self.cue.text += "\n";
+          }
+          self.cue.text += line;
+          continue;
+        case "BADCUE": // BADCUE
+          // 54-62 - Collect and discard the remaining cue.
+          if (!line) {
+            self.state = "ID";
+          }
+          continue;
+        }
+      }
+    } catch (e) {
+      self.reportOrThrowError(e);
+
+      // If we are currently parsing a cue, report what we have.
+      if (self.state === "CUETEXT" && self.cue && self.oncue) {
+        self.oncue(self.cue);
+      }
+      self.cue = null;
+      // Enter BADWEBVTT state if header was not parsed correctly otherwise
+      // another exception occurred so enter BADCUE state.
+      self.state = self.state === "INITIAL" ? "BADWEBVTT" : "BADCUE";
+    }
+    return this;
+  },
+  flush: function () {
+    var self = this;
+    try {
+      // Finish decoding the stream.
+      self.buffer += self.decoder.decode();
+      // Synthesize the end of the current cue or region.
+      if (self.cue || self.state === "HEADER") {
+        self.buffer += "\n\n";
+        self.parse();
+      }
+      // If we've flushed, parsed, and we're still on the INITIAL state then
+      // that means we don't have enough of the stream to parse the first
+      // line.
+      if (self.state === "INITIAL") {
+        throw new ParsingError(ParsingError.Errors.BadSignature);
+      }
+    } catch(e) {
+      self.reportOrThrowError(e);
+    }
+    self.onflush && self.onflush();
+    return this;
+  }
+};
+
+module.exports = WebVTT;
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright 2013 vtt.js Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var autoKeyword = "auto";
+var directionSetting = {
+  "": true,
+  "lr": true,
+  "rl": true
+};
+var alignSetting = {
+  "start": true,
+  "middle": true,
+  "end": true,
+  "left": true,
+  "right": true
+};
+
+function findDirectionSetting(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+  var dir = directionSetting[value.toLowerCase()];
+  return dir ? value.toLowerCase() : false;
+}
+
+function findAlignSetting(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+  var align = alignSetting[value.toLowerCase()];
+  return align ? value.toLowerCase() : false;
+}
+
+function extend(obj) {
+  var i = 1;
+  for (; i < arguments.length; i++) {
+    var cobj = arguments[i];
+    for (var p in cobj) {
+      obj[p] = cobj[p];
+    }
+  }
+
+  return obj;
+}
+
+function VTTCue(startTime, endTime, text) {
+  var cue = this;
+  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
+  var baseObj = {};
+
+  if (isIE8) {
+    cue = document.createElement('custom');
+  } else {
+    baseObj.enumerable = true;
+  }
+
+  /**
+   * Shim implementation specific properties. These properties are not in
+   * the spec.
+   */
+
+  // Lets us know when the VTTCue's data has changed in such a way that we need
+  // to recompute its display state. This lets us compute its display state
+  // lazily.
+  cue.hasBeenReset = false;
+
+  /**
+   * VTTCue and TextTrackCue properties
+   * http://dev.w3.org/html5/webvtt/#vttcue-interface
+   */
+
+  var _id = "";
+  var _pauseOnExit = false;
+  var _startTime = startTime;
+  var _endTime = endTime;
+  var _text = text;
+  var _region = null;
+  var _vertical = "";
+  var _snapToLines = true;
+  var _line = "auto";
+  var _lineAlign = "start";
+  var _position = 50;
+  var _positionAlign = "middle";
+  var _size = 50;
+  var _align = "middle";
+
+  Object.defineProperty(cue,
+    "id", extend({}, baseObj, {
+      get: function() {
+        return _id;
+      },
+      set: function(value) {
+        _id = "" + value;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "pauseOnExit", extend({}, baseObj, {
+      get: function() {
+        return _pauseOnExit;
+      },
+      set: function(value) {
+        _pauseOnExit = !!value;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "startTime", extend({}, baseObj, {
+      get: function() {
+        return _startTime;
+      },
+      set: function(value) {
+        if (typeof value !== "number") {
+          throw new TypeError("Start time must be set to a number.");
+        }
+        _startTime = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "endTime", extend({}, baseObj, {
+      get: function() {
+        return _endTime;
+      },
+      set: function(value) {
+        if (typeof value !== "number") {
+          throw new TypeError("End time must be set to a number.");
+        }
+        _endTime = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "text", extend({}, baseObj, {
+      get: function() {
+        return _text;
+      },
+      set: function(value) {
+        _text = "" + value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "region", extend({}, baseObj, {
+      get: function() {
+        return _region;
+      },
+      set: function(value) {
+        _region = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "vertical", extend({}, baseObj, {
+      get: function() {
+        return _vertical;
+      },
+      set: function(value) {
+        var setting = findDirectionSetting(value);
+        // Have to check for false because the setting an be an empty string.
+        if (setting === false) {
+          throw new SyntaxError("An invalid or illegal string was specified.");
+        }
+        _vertical = setting;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "snapToLines", extend({}, baseObj, {
+      get: function() {
+        return _snapToLines;
+      },
+      set: function(value) {
+        _snapToLines = !!value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "line", extend({}, baseObj, {
+      get: function() {
+        return _line;
+      },
+      set: function(value) {
+        if (typeof value !== "number" && value !== autoKeyword) {
+          throw new SyntaxError("An invalid number or illegal string was specified.");
+        }
+        _line = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "lineAlign", extend({}, baseObj, {
+      get: function() {
+        return _lineAlign;
+      },
+      set: function(value) {
+        var setting = findAlignSetting(value);
+        if (!setting) {
+          throw new SyntaxError("An invalid or illegal string was specified.");
+        }
+        _lineAlign = setting;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "position", extend({}, baseObj, {
+      get: function() {
+        return _position;
+      },
+      set: function(value) {
+        if (value < 0 || value > 100) {
+          throw new Error("Position must be between 0 and 100.");
+        }
+        _position = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "positionAlign", extend({}, baseObj, {
+      get: function() {
+        return _positionAlign;
+      },
+      set: function(value) {
+        var setting = findAlignSetting(value);
+        if (!setting) {
+          throw new SyntaxError("An invalid or illegal string was specified.");
+        }
+        _positionAlign = setting;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "size", extend({}, baseObj, {
+      get: function() {
+        return _size;
+      },
+      set: function(value) {
+        if (value < 0 || value > 100) {
+          throw new Error("Size must be between 0 and 100.");
+        }
+        _size = value;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  Object.defineProperty(cue,
+    "align", extend({}, baseObj, {
+      get: function() {
+        return _align;
+      },
+      set: function(value) {
+        var setting = findAlignSetting(value);
+        if (!setting) {
+          throw new SyntaxError("An invalid or illegal string was specified.");
+        }
+        _align = setting;
+        this.hasBeenReset = true;
+      }
+    }));
+
+  /**
+   * Other <track> spec defined properties
+   */
+
+  // http://www.whatwg.org/specs/web-apps/current-work/multipage/the-video-element.html#text-track-cue-display-state
+  cue.displayState = undefined;
+
+  if (isIE8) {
+    return cue;
+  }
+}
+
+/**
+ * VTTCue methods
+ */
+
+VTTCue.prototype.getCueAsHTML = function() {
+  // Assume WebVTT.convertCueToDOMTree is on the global.
+  return WebVTT.convertCueToDOMTree(window, this.text);
+};
+
+module.exports = VTTCue;
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright 2013 vtt.js Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var scrollSetting = {
+  "": true,
+  "up": true
+};
+
+function findScrollSetting(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+  var scroll = scrollSetting[value.toLowerCase()];
+  return scroll ? value.toLowerCase() : false;
+}
+
+function isValidPercentValue(value) {
+  return typeof value === "number" && (value >= 0 && value <= 100);
+}
+
+// VTTRegion shim http://dev.w3.org/html5/webvtt/#vttregion-interface
+function VTTRegion() {
+  var _width = 100;
+  var _lines = 3;
+  var _regionAnchorX = 0;
+  var _regionAnchorY = 100;
+  var _viewportAnchorX = 0;
+  var _viewportAnchorY = 100;
+  var _scroll = "";
+
+  Object.defineProperties(this, {
+    "width": {
+      enumerable: true,
+      get: function() {
+        return _width;
+      },
+      set: function(value) {
+        if (!isValidPercentValue(value)) {
+          throw new Error("Width must be between 0 and 100.");
+        }
+        _width = value;
+      }
+    },
+    "lines": {
+      enumerable: true,
+      get: function() {
+        return _lines;
+      },
+      set: function(value) {
+        if (typeof value !== "number") {
+          throw new TypeError("Lines must be set to a number.");
+        }
+        _lines = value;
+      }
+    },
+    "regionAnchorY": {
+      enumerable: true,
+      get: function() {
+        return _regionAnchorY;
+      },
+      set: function(value) {
+        if (!isValidPercentValue(value)) {
+          throw new Error("RegionAnchorX must be between 0 and 100.");
+        }
+        _regionAnchorY = value;
+      }
+    },
+    "regionAnchorX": {
+      enumerable: true,
+      get: function() {
+        return _regionAnchorX;
+      },
+      set: function(value) {
+        if(!isValidPercentValue(value)) {
+          throw new Error("RegionAnchorY must be between 0 and 100.");
+        }
+        _regionAnchorX = value;
+      }
+    },
+    "viewportAnchorY": {
+      enumerable: true,
+      get: function() {
+        return _viewportAnchorY;
+      },
+      set: function(value) {
+        if (!isValidPercentValue(value)) {
+          throw new Error("ViewportAnchorY must be between 0 and 100.");
+        }
+        _viewportAnchorY = value;
+      }
+    },
+    "viewportAnchorX": {
+      enumerable: true,
+      get: function() {
+        return _viewportAnchorX;
+      },
+      set: function(value) {
+        if (!isValidPercentValue(value)) {
+          throw new Error("ViewportAnchorX must be between 0 and 100.");
+        }
+        _viewportAnchorX = value;
+      }
+    },
+    "scroll": {
+      enumerable: true,
+      get: function() {
+        return _scroll;
+      },
+      set: function(value) {
+        var setting = findScrollSetting(value);
+        // Have to check for false as an empty string is a legal value.
+        if (setting === false) {
+          throw new SyntaxError("An invalid or illegal string was specified.");
+        }
+        _scroll = setting;
+      }
+    }
+  });
+}
+
+module.exports = VTTRegion;
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * videojs-offset
+ * @version 2.0.0-beta.2
+ * @copyright 2017 Carles Galan Cladera <cgcladera@gmail.com>
+ * @license MIT
+ */
+(function (global, factory) {
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory(__webpack_require__(9)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.videojsOffset = factory(global.videojs);
+})(this, function (videojs) {
+  'use strict';
+
+  videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
+
+  // Default options for the plugin.
+  var defaults = {};
+
+  // Cross-compatibility for Video.js 5 and 6.
+  var registerPlugin = videojs.registerPlugin || videojs.plugin;
+  // const dom = videojs.dom || videojs;
+
+  /**
+   * Checks whether the clip should be ended.
+   *
+   * @function onPlayerTimeUpdate
+   *
+   */
+  var onPlayerTimeUpdate = function onPlayerTimeUpdate() {
+    var curr = this.currentTime();
+
+    if (curr < 0) {
+      this.currentTime(0);
+      this.play();
+    }
+    if (this._offsetEnd > 0 && curr > this._offsetEnd - this._offsetStart) {
+      this.off('timeupdate', onPlayerTimeUpdate);
+      this.pause();
+      this.trigger('ended');
+
+      if (!this._restartBeginning) {
+        this.currentTime(this._offsetEnd - this._offsetStart);
+      } else {
+        this.trigger('loadstart');
+        this.currentTime(0);
+      }
+    }
+  };
+  /**
+   * Function to invoke when the player is ready.
+   *
+   * This is a great place for your plugin to initialize itself. When this
+   * function is called, the player will have its DOM and child components
+   * in place.
+   *
+   * @function onPlayerReady
+   * @param    {Player} player
+   *           A Video.js player.
+   * @param    {Object} [options={}]
+   *           An object of options left to the plugin author to define.
+   */
+  var onPlayerReady = function onPlayerReady(player, options) {
+    player.one('play', function () {
+      // player.on('timeupdate', onPlayerTimeUpdate);
+    });
+  };
+
+  /**
+   * A video.js plugin.
+   *
+   * In the plugin function, the value of `this` is a video.js `Player`
+   * instance. You cannot rely on the player being in a "ready" state here,
+   * depending on how the plugin is invoked. This may or may not be important
+   * to you; if not, remove the wait for "ready"!
+   *
+   * @function offset
+   * @param    {Object} [options={}]
+   *           An object of options left to the plugin author to define.
+   */
+  var offset = function offset(options) {
+    var _this = this;
+
+    options = options || {};
+    var Player = this.constructor;
+
+    this._offsetStart = options.start || 0;
+    this._offsetEnd = options.end || 0;
+    this._restartBeginning = options.restart_beginning || false;
+
+    if (!Player.__super__ || !Player.__super__.__offsetInit) {
+      Player.__super__ = {
+        __offsetInit: true,
+        duration: Player.prototype.duration,
+        currentTime: Player.prototype.currentTime,
+        bufferedPercent: Player.prototype.bufferedPercent,
+        remainingTime: Player.prototype.remainingTime
+      };
+
+      Player.prototype.duration = function () {
+        if (this._offsetEnd > 0) {
+          return this._offsetEnd - this._offsetStart;
+        }
+        return Player.__super__.duration.apply(this, arguments) - this._offsetStart;
+      };
+
+      Player.prototype.currentTime = function (seconds) {
+        if (seconds !== undefined) {
+          return Player.__super__.currentTime.call(this, seconds + this._offsetStart) - this._offsetStart;
+        }
+        return Player.__super__.currentTime.apply(this, arguments) - this._offsetStart;
+      };
+
+      Player.prototype.remainingTime = function () {
+        var curr = this.currentTime();
+
+        if (curr < this._offsetStart) {
+          curr = 0;
+        }
+        return this.duration() - curr;
+      };
+
+      Player.prototype.startOffset = function () {
+        return this._offsetStart;
+      };
+
+      Player.prototype.endOffset = function () {
+        if (this._offsetEnd > 0) {
+          return this._offsetEnd;
+        }
+        return this.duration();
+      };
+    }
+
+    this.ready(function () {
+      onPlayerReady(_this, videojs.mergeOptions(defaults, options));
+    });
+  };
+
+  // Register the plugin with video.js.
+  registerPlugin('offset', offset);
+  // Include the version number.
+  offset.VERSION = '__VERSION__';
+
+  return offset;
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    [
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", "offset-sm3": "", "offset-sm2": "" } },
+        [
+          _c(
+            "v-card",
+            { attrs: { sm6: "" } },
+            [
+              _vm.player_loading == true
+                ? _c("video-player", {
+                    ref: "videoPlayer",
+                    staticClass: "video-player-box",
+                    attrs: {
+                      options: _vm.playerOptions,
+                      playsinline: true,
+                      customEventName: "customstatechangedeventname"
+                    },
+                    on: {
+                      play: function($event) {
+                        _vm.onPlayerPlay($event)
+                      },
+                      pause: function($event) {
+                        _vm.onPlayerPause($event)
+                      },
+                      ended: function($event) {
+                        _vm.onPlayerEnded($event)
+                      },
+                      ready: _vm.playerReadied
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _c("span", { staticClass: "grey--text text-md-center" }, [
+                  _vm._v("Number 10")
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
+                  _vm._v("Kangaroo Valley Safari")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-md-center" }, [
+                  _vm._v("Whitehaven Beach")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-md-center" }, [
+                  _vm._v("Whitsunday Island, Whitsunday Islands")
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.quiz == false
+                ? _c(
+                    "v-list",
+                    [
+                      _vm._l(_vm.current_step_quiz, function(
+                        question_item,
+                        index
+                      ) {
+                        return [
+                          _c("h3", { staticClass: "text-left" }, [
+                            _vm._v(_vm._s(question_item.question))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-radio-group",
+                            {
+                              staticClass: "ml-3",
+                              model: {
+                                value: _vm.current_step_answer[index],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.current_step_answer, index, $$v)
+                                },
+                                expression: "current_step_answer[index]"
+                              }
+                            },
+                            _vm._l(question_item.answers, function(
+                              answer_item,
+                              answer_index
+                            ) {
+                              return _c("v-radio", {
+                                key: answer_index,
+                                attrs: {
+                                  label: answer_item.answer,
+                                  value: answer_index
+                                }
+                              })
+                            })
+                          )
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _vm.accept_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.accept }
+                        },
+                        [_vm._v("OK")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.next_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.next_video_step }
+                        },
+                        [_vm._v("Next")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.replay_btn == true
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { "flat-right": "", color: "orange" },
+                          on: { click: _vm.replay_video }
+                        },
+                        [_vm._v("Replay")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-459403d0", module.exports)
+  }
+}
+
+/***/ }),
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -63413,7 +67051,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 77 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66043,16 +69681,16 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 78 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(107);
 
 
 
@@ -66073,13 +69711,13 @@ var debug = "development" !== 'production';
 }));
 
 /***/ }),
-/* 79 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(103);
 
 
 
@@ -66098,7 +69736,7 @@ var state = {
 });
 
 /***/ }),
-/* 80 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66118,13 +69756,13 @@ var state = {
 });
 
 /***/ }),
-/* 81 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(102);
 var _actions$LOGIN$action;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -66179,7 +69817,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$LOGIN$action);
 
 /***/ }),
-/* 82 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66216,7 +69854,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 83 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66234,12 +69872,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$LOGGED$types$U);
 
 /***/ }),
-/* 84 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(106);
 
 
 
@@ -66258,7 +69896,7 @@ var state = {
 });
 
 /***/ }),
-/* 85 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66281,7 +69919,7 @@ var state = {
 });
 
 /***/ }),
-/* 86 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66305,13 +69943,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SET_SNACKBAR_S);
 
 /***/ }),
-/* 87 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(111);
 
 
 
@@ -66329,7 +69967,7 @@ var state = {
 });
 
 /***/ }),
-/* 88 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66343,13 +69981,13 @@ var state = {
 });
 
 /***/ }),
-/* 89 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(110);
 var _actions$SELECTED_USE;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -66381,7 +70019,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$SELECTED_USE);
 
 /***/ }),
-/* 90 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66402,7 +70040,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 91 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66420,2395 +70058,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SELECTED_USER$);
 
 /***/ }),
-/* 92 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t(__webpack_require__(9)):"function"==typeof define&&define.amd?define(["videojs"],t):"object"==typeof exports?exports.VueVideoPlayer=t(require("video.js")):e.VueVideoPlayer=t(e.videojs)}(this,function(e){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),s=window.videojs||o.default;"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e,t){if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var n=Object(e),i=1;i<arguments.length;i++){var r=arguments[i];if(null!=r)for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(n[o]=r[o])}return n},writable:!0,configurable:!0});var a=["loadeddata","canplay","canplaythrough","play","pause","waiting","playing","ended","error"];t.default={name:"video-player",props:{start:{type:Number,default:0},crossOrigin:{type:String,default:""},playsinline:{type:Boolean,default:!1},customEventName:{type:String,default:"statechanged"},options:{type:Object,required:!0},events:{type:Array,default:function(){return[]}},globalOptions:{type:Object,default:function(){return{controls:!0,controlBar:{remainingTimeDisplay:!1,playToggle:{},progressControl:{},fullscreenToggle:{},volumeMenuButton:{inline:!1,vertical:!0}},techOrder:["html5"],plugins:{}}}},globalEvents:{type:Array,default:function(){return[]}}},data:function(){return{player:null,reseted:!0}},mounted:function(){this.player||this.initialize()},beforeDestroy:function(){this.player&&this.dispose()},methods:{initialize:function(){var e=this,t=Object.assign({},this.globalOptions,this.options);this.playsinline&&(this.$refs.video.setAttribute("playsinline",this.playsinline),this.$refs.video.setAttribute("webkit-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-video-player-type","h5"),this.$refs.video.setAttribute("x5-video-player-fullscreen",!1)),""!==this.crossOrigin&&(this.$refs.video.crossOrigin=this.crossOrigin,this.$refs.video.setAttribute("crossOrigin",this.crossOrigin));var n=function(t,n){t&&e.$emit(t,e.player),n&&e.$emit(e.customEventName,i({},t,n))};t.plugins&&delete t.plugins.__ob__;var r=this;this.player=s(this.$refs.video,t,function(){for(var e=this,t=a.concat(r.events).concat(r.globalEvents),i={},o=0;o<t.length;o++)"string"==typeof t[o]&&void 0===i[t[o]]&&function(t){i[t]=null,e.on(t,function(){n(t,!0)})}(t[o]);this.on("timeupdate",function(){n("timeupdate",this.currentTime())}),r.$emit("ready",this)})},dispose:function(e){var t=this;this.player&&this.player.dispose&&("Flash"!==this.player.techName_&&this.player.pause&&this.player.pause(),this.player.dispose(),this.player=null,this.$nextTick(function(){t.reseted=!1,t.$nextTick(function(){t.reseted=!0,t.$nextTick(function(){e&&e()})})}))}},watch:{options:{deep:!0,handler:function(e,t){var n=this;this.dispose(function(){e&&e.sources&&e.sources.length&&n.initialize()})}}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(1),r=n.n(i);for(var o in i)["default","default"].indexOf(o)<0&&function(e){n.d(t,e,function(){return i[e]})}(o);var s=n(5),a=n(4),l=a(r.a,s.a,!1,null,null,null);t.default=l.exports},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.install=t.videoPlayer=t.videojs=void 0;var r=n(0),o=i(r),s=n(2),a=i(s),l=window.videojs||o.default,u=function(e,t){t&&(t.options&&(a.default.props.globalOptions.default=function(){return t.options}),t.events&&(a.default.props.globalEvents.default=function(){return t.events})),e.component(a.default.name,a.default)},d={videojs:l,videoPlayer:a.default,install:u};t.default=d,t.videojs=l,t.videoPlayer=a.default,t.install=u},function(e,t){e.exports=function(e,t,n,i,r,o){var s,a=e=e||{},l=typeof e.default;"object"!==l&&"function"!==l||(s=e,a=e.default);var u="function"==typeof a?a.options:a;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns,u._compiled=!0),n&&(u.functional=!0),r&&(u._scopeId=r);var d;if(o?(d=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},u._ssrRegister=d):i&&(d=i),d){var c=u.functional,f=c?u.render:u.beforeCreate;c?(u._injectStyles=d,u.render=function(e,t){return d.call(t),f(e,t)}):u.beforeCreate=f?[].concat(f,d):[d]}return{esModule:s,exports:a,options:u}}},function(e,t,n){"use strict";var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.reseted?n("div",{staticClass:"video-player"},[n("video",{ref:"video",staticClass:"video-js"})]):e._e()},r=[],o={render:i,staticRenderFns:r};t.a=o}])});
 
 /***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
-    typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(94);
-
-var doccy;
-
-if (typeof document !== 'undefined') {
-    doccy = document;
-} else {
-    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
-
-    if (!doccy) {
-        doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
-    }
-}
-
-module.exports = doccy;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports) {
-
-function clean (s) {
-  return s.replace(/\n\r?\s*/g, '')
-}
-
-
-module.exports = function tsml (sa) {
-  var s = ''
-    , i = 0
-
-  for (; i < arguments.length; i++)
-    s += clean(sa[i]) + (arguments[i + 1] || '')
-
-  return s
-}
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports) {
-
-module.exports = SafeParseTuple
-
-function SafeParseTuple(obj, reviver) {
-    var json
-    var error = null
-
-    try {
-        json = JSON.parse(obj, reviver)
-    } catch (err) {
-        error = err
-    }
-
-    return [error, json]
-}
-
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var window = __webpack_require__(13)
-var isFunction = __webpack_require__(98)
-var parseHeaders = __webpack_require__(99)
-var xtend = __webpack_require__(103)
-
-module.exports = createXHR
-createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
-createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
-
-forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
-    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
-        options = initParams(uri, options, callback)
-        options.method = method.toUpperCase()
-        return _createXHR(options)
-    }
-})
-
-function forEachArray(array, iterator) {
-    for (var i = 0; i < array.length; i++) {
-        iterator(array[i])
-    }
-}
-
-function isEmpty(obj){
-    for(var i in obj){
-        if(obj.hasOwnProperty(i)) return false
-    }
-    return true
-}
-
-function initParams(uri, options, callback) {
-    var params = uri
-
-    if (isFunction(options)) {
-        callback = options
-        if (typeof uri === "string") {
-            params = {uri:uri}
-        }
-    } else {
-        params = xtend(options, {uri: uri})
-    }
-
-    params.callback = callback
-    return params
-}
-
-function createXHR(uri, options, callback) {
-    options = initParams(uri, options, callback)
-    return _createXHR(options)
-}
-
-function _createXHR(options) {
-    if(typeof options.callback === "undefined"){
-        throw new Error("callback argument missing")
-    }
-
-    var called = false
-    var callback = function cbOnce(err, response, body){
-        if(!called){
-            called = true
-            options.callback(err, response, body)
-        }
-    }
-
-    function readystatechange() {
-        if (xhr.readyState === 4) {
-            setTimeout(loadFunc, 0)
-        }
-    }
-
-    function getBody() {
-        // Chrome with requestType=blob throws errors arround when even testing access to responseText
-        var body = undefined
-
-        if (xhr.response) {
-            body = xhr.response
-        } else {
-            body = xhr.responseText || getXml(xhr)
-        }
-
-        if (isJson) {
-            try {
-                body = JSON.parse(body)
-            } catch (e) {}
-        }
-
-        return body
-    }
-
-    function errorFunc(evt) {
-        clearTimeout(timeoutTimer)
-        if(!(evt instanceof Error)){
-            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
-        }
-        evt.statusCode = 0
-        return callback(evt, failureResponse)
-    }
-
-    // will load the data & process the response in a special response object
-    function loadFunc() {
-        if (aborted) return
-        var status
-        clearTimeout(timeoutTimer)
-        if(options.useXDR && xhr.status===undefined) {
-            //IE8 CORS GET successful response doesn't have a status field, but body is fine
-            status = 200
-        } else {
-            status = (xhr.status === 1223 ? 204 : xhr.status)
-        }
-        var response = failureResponse
-        var err = null
-
-        if (status !== 0){
-            response = {
-                body: getBody(),
-                statusCode: status,
-                method: method,
-                headers: {},
-                url: uri,
-                rawRequest: xhr
-            }
-            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
-                response.headers = parseHeaders(xhr.getAllResponseHeaders())
-            }
-        } else {
-            err = new Error("Internal XMLHttpRequest Error")
-        }
-        return callback(err, response, response.body)
-    }
-
-    var xhr = options.xhr || null
-
-    if (!xhr) {
-        if (options.cors || options.useXDR) {
-            xhr = new createXHR.XDomainRequest()
-        }else{
-            xhr = new createXHR.XMLHttpRequest()
-        }
-    }
-
-    var key
-    var aborted
-    var uri = xhr.url = options.uri || options.url
-    var method = xhr.method = options.method || "GET"
-    var body = options.body || options.data
-    var headers = xhr.headers = options.headers || {}
-    var sync = !!options.sync
-    var isJson = false
-    var timeoutTimer
-    var failureResponse = {
-        body: undefined,
-        headers: {},
-        statusCode: 0,
-        method: method,
-        url: uri,
-        rawRequest: xhr
-    }
-
-    if ("json" in options && options.json !== false) {
-        isJson = true
-        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
-        if (method !== "GET" && method !== "HEAD") {
-            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
-            body = JSON.stringify(options.json === true ? body : options.json)
-        }
-    }
-
-    xhr.onreadystatechange = readystatechange
-    xhr.onload = loadFunc
-    xhr.onerror = errorFunc
-    // IE9 must have onprogress be set to a unique function.
-    xhr.onprogress = function () {
-        // IE must die
-    }
-    xhr.onabort = function(){
-        aborted = true;
-    }
-    xhr.ontimeout = errorFunc
-    xhr.open(method, uri, !sync, options.username, options.password)
-    //has to be after open
-    if(!sync) {
-        xhr.withCredentials = !!options.withCredentials
-    }
-    // Cannot set timeout with sync request
-    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
-    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
-    if (!sync && options.timeout > 0 ) {
-        timeoutTimer = setTimeout(function(){
-            if (aborted) return
-            aborted = true//IE9 may still call readystatechange
-            xhr.abort("timeout")
-            var e = new Error("XMLHttpRequest timeout")
-            e.code = "ETIMEDOUT"
-            errorFunc(e)
-        }, options.timeout )
-    }
-
-    if (xhr.setRequestHeader) {
-        for(key in headers){
-            if(headers.hasOwnProperty(key)){
-                xhr.setRequestHeader(key, headers[key])
-            }
-        }
-    } else if (options.headers && !isEmpty(options.headers)) {
-        throw new Error("Headers cannot be set on an XDomainRequest object")
-    }
-
-    if ("responseType" in options) {
-        xhr.responseType = options.responseType
-    }
-
-    if ("beforeSend" in options &&
-        typeof options.beforeSend === "function"
-    ) {
-        options.beforeSend(xhr)
-    }
-
-    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
-    // XMLHttpRequest spec says to pass null as body to indicate no body
-    // See https://github.com/naugtur/xhr/issues/100.
-    xhr.send(body || null)
-
-    return xhr
-
-
-}
-
-function getXml(xhr) {
-    if (xhr.responseType === "document") {
-        return xhr.responseXML
-    }
-    var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
-    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
-        return xhr.responseXML
-    }
-
-    return null
-}
-
-function noop() {}
-
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports) {
-
-module.exports = isFunction
-
-var toString = Object.prototype.toString
-
-function isFunction (fn) {
-  var string = toString.call(fn)
-  return string === '[object Function]' ||
-    (typeof fn === 'function' && string !== '[object RegExp]') ||
-    (typeof window !== 'undefined' &&
-     // IE8 and below
-     (fn === window.setTimeout ||
-      fn === window.alert ||
-      fn === window.confirm ||
-      fn === window.prompt))
-};
-
-
-/***/ }),
-/* 99 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var trim = __webpack_require__(100)
-  , forEach = __webpack_require__(101)
-  , isArray = function(arg) {
-      return Object.prototype.toString.call(arg) === '[object Array]';
-    }
-
-module.exports = function (headers) {
-  if (!headers)
-    return {}
-
-  var result = {}
-
-  forEach(
-      trim(headers).split('\n')
-    , function (row) {
-        var index = row.indexOf(':')
-          , key = trim(row.slice(0, index)).toLowerCase()
-          , value = trim(row.slice(index + 1))
-
-        if (typeof(result[key]) === 'undefined') {
-          result[key] = value
-        } else if (isArray(result[key])) {
-          result[key].push(value)
-        } else {
-          result[key] = [ result[key], value ]
-        }
-      }
-  )
-
-  return result
-}
-
-/***/ }),
-/* 100 */
-/***/ (function(module, exports) {
-
-
-exports = module.exports = trim;
-
-function trim(str){
-  return str.replace(/^\s*|\s*$/g, '');
-}
-
-exports.left = function(str){
-  return str.replace(/^\s*/, '');
-};
-
-exports.right = function(str){
-  return str.replace(/\s*$/, '');
-};
-
-
-/***/ }),
-/* 101 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isCallable = __webpack_require__(102);
-
-var toStr = Object.prototype.toString;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-var forEachArray = function forEachArray(array, iterator, receiver) {
-    for (var i = 0, len = array.length; i < len; i++) {
-        if (hasOwnProperty.call(array, i)) {
-            if (receiver == null) {
-                iterator(array[i], i, array);
-            } else {
-                iterator.call(receiver, array[i], i, array);
-            }
-        }
-    }
-};
-
-var forEachString = function forEachString(string, iterator, receiver) {
-    for (var i = 0, len = string.length; i < len; i++) {
-        // no such thing as a sparse string.
-        if (receiver == null) {
-            iterator(string.charAt(i), i, string);
-        } else {
-            iterator.call(receiver, string.charAt(i), i, string);
-        }
-    }
-};
-
-var forEachObject = function forEachObject(object, iterator, receiver) {
-    for (var k in object) {
-        if (hasOwnProperty.call(object, k)) {
-            if (receiver == null) {
-                iterator(object[k], k, object);
-            } else {
-                iterator.call(receiver, object[k], k, object);
-            }
-        }
-    }
-};
-
-var forEach = function forEach(list, iterator, thisArg) {
-    if (!isCallable(iterator)) {
-        throw new TypeError('iterator must be a function');
-    }
-
-    var receiver;
-    if (arguments.length >= 3) {
-        receiver = thisArg;
-    }
-
-    if (toStr.call(list) === '[object Array]') {
-        forEachArray(list, iterator, receiver);
-    } else if (typeof list === 'string') {
-        forEachString(list, iterator, receiver);
-    } else {
-        forEachObject(list, iterator, receiver);
-    }
-};
-
-module.exports = forEach;
-
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var fnToStr = Function.prototype.toString;
-
-var constructorRegex = /^\s*class /;
-var isES6ClassFn = function isES6ClassFn(value) {
-	try {
-		var fnStr = fnToStr.call(value);
-		var singleStripped = fnStr.replace(/\/\/.*\n/g, '');
-		var multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, '');
-		var spaceStripped = multiStripped.replace(/\n/mg, ' ').replace(/ {2}/g, ' ');
-		return constructorRegex.test(spaceStripped);
-	} catch (e) {
-		return false; // not a function
-	}
-};
-
-var tryFunctionObject = function tryFunctionObject(value) {
-	try {
-		if (isES6ClassFn(value)) { return false; }
-		fnToStr.call(value);
-		return true;
-	} catch (e) {
-		return false;
-	}
-};
-var toStr = Object.prototype.toString;
-var fnClass = '[object Function]';
-var genClass = '[object GeneratorFunction]';
-var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
-
-module.exports = function isCallable(value) {
-	if (!value) { return false; }
-	if (typeof value !== 'function' && typeof value !== 'object') { return false; }
-	if (hasToStringTag) { return tryFunctionObject(value); }
-	if (isES6ClassFn(value)) { return false; }
-	var strClass = toStr.call(value);
-	return strClass === fnClass || strClass === genClass;
-};
-
-
-/***/ }),
-/* 103 */
-/***/ (function(module, exports) {
-
-module.exports = extend
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright 2013 vtt.js Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// Default exports for Node. Export the extended versions of VTTCue and
-// VTTRegion in Node since we likely want the capability to convert back and
-// forth between JSON. If we don't then it's not that big of a deal since we're
-// off browser.
-
-var window = __webpack_require__(13);
-
-var vttjs = module.exports = {
-  WebVTT: __webpack_require__(105),
-  VTTCue: __webpack_require__(106),
-  VTTRegion: __webpack_require__(107)
-};
-
-window.vttjs = vttjs;
-window.WebVTT = vttjs.WebVTT;
-
-var cueShim = vttjs.VTTCue;
-var regionShim = vttjs.VTTRegion;
-var nativeVTTCue = window.VTTCue;
-var nativeVTTRegion = window.VTTRegion;
-
-vttjs.shim = function() {
-  window.VTTCue = cueShim;
-  window.VTTRegion = regionShim;
-};
-
-vttjs.restore = function() {
-  window.VTTCue = nativeVTTCue;
-  window.VTTRegion = nativeVTTRegion;
-};
-
-if (!window.VTTCue) {
-  vttjs.shim();
-}
-
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports) {
-
-/**
- * Copyright 2013 vtt.js Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-/* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
-var _objCreate = Object.create || (function() {
-  function F() {}
-  return function(o) {
-    if (arguments.length !== 1) {
-      throw new Error('Object.create shim only accepts one parameter.');
-    }
-    F.prototype = o;
-    return new F();
-  };
-})();
-
-// Creates a new ParserError object from an errorData object. The errorData
-// object should have default code and message properties. The default message
-// property can be overriden by passing in a message parameter.
-// See ParsingError.Errors below for acceptable errors.
-function ParsingError(errorData, message) {
-  this.name = "ParsingError";
-  this.code = errorData.code;
-  this.message = message || errorData.message;
-}
-ParsingError.prototype = _objCreate(Error.prototype);
-ParsingError.prototype.constructor = ParsingError;
-
-// ParsingError metadata for acceptable ParsingErrors.
-ParsingError.Errors = {
-  BadSignature: {
-    code: 0,
-    message: "Malformed WebVTT signature."
-  },
-  BadTimeStamp: {
-    code: 1,
-    message: "Malformed time stamp."
-  }
-};
-
-// Try to parse input as a time stamp.
-function parseTimeStamp(input) {
-
-  function computeSeconds(h, m, s, f) {
-    return (h | 0) * 3600 + (m | 0) * 60 + (s | 0) + (f | 0) / 1000;
-  }
-
-  var m = input.match(/^(\d+):(\d{2})(:\d{2})?\.(\d{3})/);
-  if (!m) {
-    return null;
-  }
-
-  if (m[3]) {
-    // Timestamp takes the form of [hours]:[minutes]:[seconds].[milliseconds]
-    return computeSeconds(m[1], m[2], m[3].replace(":", ""), m[4]);
-  } else if (m[1] > 59) {
-    // Timestamp takes the form of [hours]:[minutes].[milliseconds]
-    // First position is hours as it's over 59.
-    return computeSeconds(m[1], m[2], 0,  m[4]);
-  } else {
-    // Timestamp takes the form of [minutes]:[seconds].[milliseconds]
-    return computeSeconds(0, m[1], m[2], m[4]);
-  }
-}
-
-// A settings object holds key/value pairs and will ignore anything but the first
-// assignment to a specific key.
-function Settings() {
-  this.values = _objCreate(null);
-}
-
-Settings.prototype = {
-  // Only accept the first assignment to any key.
-  set: function(k, v) {
-    if (!this.get(k) && v !== "") {
-      this.values[k] = v;
-    }
-  },
-  // Return the value for a key, or a default value.
-  // If 'defaultKey' is passed then 'dflt' is assumed to be an object with
-  // a number of possible default values as properties where 'defaultKey' is
-  // the key of the property that will be chosen; otherwise it's assumed to be
-  // a single value.
-  get: function(k, dflt, defaultKey) {
-    if (defaultKey) {
-      return this.has(k) ? this.values[k] : dflt[defaultKey];
-    }
-    return this.has(k) ? this.values[k] : dflt;
-  },
-  // Check whether we have a value for a key.
-  has: function(k) {
-    return k in this.values;
-  },
-  // Accept a setting if its one of the given alternatives.
-  alt: function(k, v, a) {
-    for (var n = 0; n < a.length; ++n) {
-      if (v === a[n]) {
-        this.set(k, v);
-        break;
-      }
-    }
-  },
-  // Accept a setting if its a valid (signed) integer.
-  integer: function(k, v) {
-    if (/^-?\d+$/.test(v)) { // integer
-      this.set(k, parseInt(v, 10));
-    }
-  },
-  // Accept a setting if its a valid percentage.
-  percent: function(k, v) {
-    var m;
-    if ((m = v.match(/^([\d]{1,3})(\.[\d]*)?%$/))) {
-      v = parseFloat(v);
-      if (v >= 0 && v <= 100) {
-        this.set(k, v);
-        return true;
-      }
-    }
-    return false;
-  }
-};
-
-// Helper function to parse input into groups separated by 'groupDelim', and
-// interprete each group as a key/value pair separated by 'keyValueDelim'.
-function parseOptions(input, callback, keyValueDelim, groupDelim) {
-  var groups = groupDelim ? input.split(groupDelim) : [input];
-  for (var i in groups) {
-    if (typeof groups[i] !== "string") {
-      continue;
-    }
-    var kv = groups[i].split(keyValueDelim);
-    if (kv.length !== 2) {
-      continue;
-    }
-    var k = kv[0];
-    var v = kv[1];
-    callback(k, v);
-  }
-}
-
-function parseCue(input, cue, regionList) {
-  // Remember the original input if we need to throw an error.
-  var oInput = input;
-  // 4.1 WebVTT timestamp
-  function consumeTimeStamp() {
-    var ts = parseTimeStamp(input);
-    if (ts === null) {
-      throw new ParsingError(ParsingError.Errors.BadTimeStamp,
-                            "Malformed timestamp: " + oInput);
-    }
-    // Remove time stamp from input.
-    input = input.replace(/^[^\sa-zA-Z-]+/, "");
-    return ts;
-  }
-
-  // 4.4.2 WebVTT cue settings
-  function consumeCueSettings(input, cue) {
-    var settings = new Settings();
-
-    parseOptions(input, function (k, v) {
-      switch (k) {
-      case "region":
-        // Find the last region we parsed with the same region id.
-        for (var i = regionList.length - 1; i >= 0; i--) {
-          if (regionList[i].id === v) {
-            settings.set(k, regionList[i].region);
-            break;
-          }
-        }
-        break;
-      case "vertical":
-        settings.alt(k, v, ["rl", "lr"]);
-        break;
-      case "line":
-        var vals = v.split(","),
-            vals0 = vals[0];
-        settings.integer(k, vals0);
-        settings.percent(k, vals0) ? settings.set("snapToLines", false) : null;
-        settings.alt(k, vals0, ["auto"]);
-        if (vals.length === 2) {
-          settings.alt("lineAlign", vals[1], ["start", "middle", "end"]);
-        }
-        break;
-      case "position":
-        vals = v.split(",");
-        settings.percent(k, vals[0]);
-        if (vals.length === 2) {
-          settings.alt("positionAlign", vals[1], ["start", "middle", "end"]);
-        }
-        break;
-      case "size":
-        settings.percent(k, v);
-        break;
-      case "align":
-        settings.alt(k, v, ["start", "middle", "end", "left", "right"]);
-        break;
-      }
-    }, /:/, /\s/);
-
-    // Apply default values for any missing fields.
-    cue.region = settings.get("region", null);
-    cue.vertical = settings.get("vertical", "");
-    cue.line = settings.get("line", "auto");
-    cue.lineAlign = settings.get("lineAlign", "start");
-    cue.snapToLines = settings.get("snapToLines", true);
-    cue.size = settings.get("size", 100);
-    cue.align = settings.get("align", "middle");
-    cue.position = settings.get("position", {
-      start: 0,
-      left: 0,
-      middle: 50,
-      end: 100,
-      right: 100
-    }, cue.align);
-    cue.positionAlign = settings.get("positionAlign", {
-      start: "start",
-      left: "start",
-      middle: "middle",
-      end: "end",
-      right: "end"
-    }, cue.align);
-  }
-
-  function skipWhitespace() {
-    input = input.replace(/^\s+/, "");
-  }
-
-  // 4.1 WebVTT cue timings.
-  skipWhitespace();
-  cue.startTime = consumeTimeStamp();   // (1) collect cue start time
-  skipWhitespace();
-  if (input.substr(0, 3) !== "-->") {     // (3) next characters must match "-->"
-    throw new ParsingError(ParsingError.Errors.BadTimeStamp,
-                           "Malformed time stamp (time stamps must be separated by '-->'): " +
-                           oInput);
-  }
-  input = input.substr(3);
-  skipWhitespace();
-  cue.endTime = consumeTimeStamp();     // (5) collect cue end time
-
-  // 4.1 WebVTT cue settings list.
-  skipWhitespace();
-  consumeCueSettings(input, cue);
-}
-
-var ESCAPE = {
-  "&amp;": "&",
-  "&lt;": "<",
-  "&gt;": ">",
-  "&lrm;": "\u200e",
-  "&rlm;": "\u200f",
-  "&nbsp;": "\u00a0"
-};
-
-var TAG_NAME = {
-  c: "span",
-  i: "i",
-  b: "b",
-  u: "u",
-  ruby: "ruby",
-  rt: "rt",
-  v: "span",
-  lang: "span"
-};
-
-var TAG_ANNOTATION = {
-  v: "title",
-  lang: "lang"
-};
-
-var NEEDS_PARENT = {
-  rt: "ruby"
-};
-
-// Parse content into a document fragment.
-function parseContent(window, input) {
-  function nextToken() {
-    // Check for end-of-string.
-    if (!input) {
-      return null;
-    }
-
-    // Consume 'n' characters from the input.
-    function consume(result) {
-      input = input.substr(result.length);
-      return result;
-    }
-
-    var m = input.match(/^([^<]*)(<[^>]*>?)?/);
-    // If there is some text before the next tag, return it, otherwise return
-    // the tag.
-    return consume(m[1] ? m[1] : m[2]);
-  }
-
-  // Unescape a string 's'.
-  function unescape1(e) {
-    return ESCAPE[e];
-  }
-  function unescape(s) {
-    while ((m = s.match(/&(amp|lt|gt|lrm|rlm|nbsp);/))) {
-      s = s.replace(m[0], unescape1);
-    }
-    return s;
-  }
-
-  function shouldAdd(current, element) {
-    return !NEEDS_PARENT[element.localName] ||
-           NEEDS_PARENT[element.localName] === current.localName;
-  }
-
-  // Create an element for this tag.
-  function createElement(type, annotation) {
-    var tagName = TAG_NAME[type];
-    if (!tagName) {
-      return null;
-    }
-    var element = window.document.createElement(tagName);
-    element.localName = tagName;
-    var name = TAG_ANNOTATION[type];
-    if (name && annotation) {
-      element[name] = annotation.trim();
-    }
-    return element;
-  }
-
-  var rootDiv = window.document.createElement("div"),
-      current = rootDiv,
-      t,
-      tagStack = [];
-
-  while ((t = nextToken()) !== null) {
-    if (t[0] === '<') {
-      if (t[1] === "/") {
-        // If the closing tag matches, move back up to the parent node.
-        if (tagStack.length &&
-            tagStack[tagStack.length - 1] === t.substr(2).replace(">", "")) {
-          tagStack.pop();
-          current = current.parentNode;
-        }
-        // Otherwise just ignore the end tag.
-        continue;
-      }
-      var ts = parseTimeStamp(t.substr(1, t.length - 2));
-      var node;
-      if (ts) {
-        // Timestamps are lead nodes as well.
-        node = window.document.createProcessingInstruction("timestamp", ts);
-        current.appendChild(node);
-        continue;
-      }
-      var m = t.match(/^<([^.\s/0-9>]+)(\.[^\s\\>]+)?([^>\\]+)?(\\?)>?$/);
-      // If we can't parse the tag, skip to the next tag.
-      if (!m) {
-        continue;
-      }
-      // Try to construct an element, and ignore the tag if we couldn't.
-      node = createElement(m[1], m[3]);
-      if (!node) {
-        continue;
-      }
-      // Determine if the tag should be added based on the context of where it
-      // is placed in the cuetext.
-      if (!shouldAdd(current, node)) {
-        continue;
-      }
-      // Set the class list (as a list of classes, separated by space).
-      if (m[2]) {
-        node.className = m[2].substr(1).replace('.', ' ');
-      }
-      // Append the node to the current node, and enter the scope of the new
-      // node.
-      tagStack.push(m[1]);
-      current.appendChild(node);
-      current = node;
-      continue;
-    }
-
-    // Text nodes are leaf nodes.
-    current.appendChild(window.document.createTextNode(unescape(t)));
-  }
-
-  return rootDiv;
-}
-
-// This is a list of all the Unicode characters that have a strong
-// right-to-left category. What this means is that these characters are
-// written right-to-left for sure. It was generated by pulling all the strong
-// right-to-left characters out of the Unicode data table. That table can
-// found at: http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
-var strongRTLRanges = [[0x5be, 0x5be], [0x5c0, 0x5c0], [0x5c3, 0x5c3], [0x5c6, 0x5c6],
- [0x5d0, 0x5ea], [0x5f0, 0x5f4], [0x608, 0x608], [0x60b, 0x60b], [0x60d, 0x60d],
- [0x61b, 0x61b], [0x61e, 0x64a], [0x66d, 0x66f], [0x671, 0x6d5], [0x6e5, 0x6e6],
- [0x6ee, 0x6ef], [0x6fa, 0x70d], [0x70f, 0x710], [0x712, 0x72f], [0x74d, 0x7a5],
- [0x7b1, 0x7b1], [0x7c0, 0x7ea], [0x7f4, 0x7f5], [0x7fa, 0x7fa], [0x800, 0x815],
- [0x81a, 0x81a], [0x824, 0x824], [0x828, 0x828], [0x830, 0x83e], [0x840, 0x858],
- [0x85e, 0x85e], [0x8a0, 0x8a0], [0x8a2, 0x8ac], [0x200f, 0x200f],
- [0xfb1d, 0xfb1d], [0xfb1f, 0xfb28], [0xfb2a, 0xfb36], [0xfb38, 0xfb3c],
- [0xfb3e, 0xfb3e], [0xfb40, 0xfb41], [0xfb43, 0xfb44], [0xfb46, 0xfbc1],
- [0xfbd3, 0xfd3d], [0xfd50, 0xfd8f], [0xfd92, 0xfdc7], [0xfdf0, 0xfdfc],
- [0xfe70, 0xfe74], [0xfe76, 0xfefc], [0x10800, 0x10805], [0x10808, 0x10808],
- [0x1080a, 0x10835], [0x10837, 0x10838], [0x1083c, 0x1083c], [0x1083f, 0x10855],
- [0x10857, 0x1085f], [0x10900, 0x1091b], [0x10920, 0x10939], [0x1093f, 0x1093f],
- [0x10980, 0x109b7], [0x109be, 0x109bf], [0x10a00, 0x10a00], [0x10a10, 0x10a13],
- [0x10a15, 0x10a17], [0x10a19, 0x10a33], [0x10a40, 0x10a47], [0x10a50, 0x10a58],
- [0x10a60, 0x10a7f], [0x10b00, 0x10b35], [0x10b40, 0x10b55], [0x10b58, 0x10b72],
- [0x10b78, 0x10b7f], [0x10c00, 0x10c48], [0x1ee00, 0x1ee03], [0x1ee05, 0x1ee1f],
- [0x1ee21, 0x1ee22], [0x1ee24, 0x1ee24], [0x1ee27, 0x1ee27], [0x1ee29, 0x1ee32],
- [0x1ee34, 0x1ee37], [0x1ee39, 0x1ee39], [0x1ee3b, 0x1ee3b], [0x1ee42, 0x1ee42],
- [0x1ee47, 0x1ee47], [0x1ee49, 0x1ee49], [0x1ee4b, 0x1ee4b], [0x1ee4d, 0x1ee4f],
- [0x1ee51, 0x1ee52], [0x1ee54, 0x1ee54], [0x1ee57, 0x1ee57], [0x1ee59, 0x1ee59],
- [0x1ee5b, 0x1ee5b], [0x1ee5d, 0x1ee5d], [0x1ee5f, 0x1ee5f], [0x1ee61, 0x1ee62],
- [0x1ee64, 0x1ee64], [0x1ee67, 0x1ee6a], [0x1ee6c, 0x1ee72], [0x1ee74, 0x1ee77],
- [0x1ee79, 0x1ee7c], [0x1ee7e, 0x1ee7e], [0x1ee80, 0x1ee89], [0x1ee8b, 0x1ee9b],
- [0x1eea1, 0x1eea3], [0x1eea5, 0x1eea9], [0x1eeab, 0x1eebb], [0x10fffd, 0x10fffd]];
-
-function isStrongRTLChar(charCode) {
-  for (var i = 0; i < strongRTLRanges.length; i++) {
-    var currentRange = strongRTLRanges[i];
-    if (charCode >= currentRange[0] && charCode <= currentRange[1]) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function determineBidi(cueDiv) {
-  var nodeStack = [],
-      text = "",
-      charCode;
-
-  if (!cueDiv || !cueDiv.childNodes) {
-    return "ltr";
-  }
-
-  function pushNodes(nodeStack, node) {
-    for (var i = node.childNodes.length - 1; i >= 0; i--) {
-      nodeStack.push(node.childNodes[i]);
-    }
-  }
-
-  function nextTextNode(nodeStack) {
-    if (!nodeStack || !nodeStack.length) {
-      return null;
-    }
-
-    var node = nodeStack.pop(),
-        text = node.textContent || node.innerText;
-    if (text) {
-      // TODO: This should match all unicode type B characters (paragraph
-      // separator characters). See issue #115.
-      var m = text.match(/^.*(\n|\r)/);
-      if (m) {
-        nodeStack.length = 0;
-        return m[0];
-      }
-      return text;
-    }
-    if (node.tagName === "ruby") {
-      return nextTextNode(nodeStack);
-    }
-    if (node.childNodes) {
-      pushNodes(nodeStack, node);
-      return nextTextNode(nodeStack);
-    }
-  }
-
-  pushNodes(nodeStack, cueDiv);
-  while ((text = nextTextNode(nodeStack))) {
-    for (var i = 0; i < text.length; i++) {
-      charCode = text.charCodeAt(i);
-      if (isStrongRTLChar(charCode)) {
-        return "rtl";
-      }
-    }
-  }
-  return "ltr";
-}
-
-function computeLinePos(cue) {
-  if (typeof cue.line === "number" &&
-      (cue.snapToLines || (cue.line >= 0 && cue.line <= 100))) {
-    return cue.line;
-  }
-  if (!cue.track || !cue.track.textTrackList ||
-      !cue.track.textTrackList.mediaElement) {
-    return -1;
-  }
-  var track = cue.track,
-      trackList = track.textTrackList,
-      count = 0;
-  for (var i = 0; i < trackList.length && trackList[i] !== track; i++) {
-    if (trackList[i].mode === "showing") {
-      count++;
-    }
-  }
-  return ++count * -1;
-}
-
-function StyleBox() {
-}
-
-// Apply styles to a div. If there is no div passed then it defaults to the
-// div on 'this'.
-StyleBox.prototype.applyStyles = function(styles, div) {
-  div = div || this.div;
-  for (var prop in styles) {
-    if (styles.hasOwnProperty(prop)) {
-      div.style[prop] = styles[prop];
-    }
-  }
-};
-
-StyleBox.prototype.formatStyle = function(val, unit) {
-  return val === 0 ? 0 : val + unit;
-};
-
-// Constructs the computed display state of the cue (a div). Places the div
-// into the overlay which should be a block level element (usually a div).
-function CueStyleBox(window, cue, styleOptions) {
-  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
-  var color = "rgba(255, 255, 255, 1)";
-  var backgroundColor = "rgba(0, 0, 0, 0.8)";
-
-  if (isIE8) {
-    color = "rgb(255, 255, 255)";
-    backgroundColor = "rgb(0, 0, 0)";
-  }
-
-  StyleBox.call(this);
-  this.cue = cue;
-
-  // Parse our cue's text into a DOM tree rooted at 'cueDiv'. This div will
-  // have inline positioning and will function as the cue background box.
-  this.cueDiv = parseContent(window, cue.text);
-  var styles = {
-    color: color,
-    backgroundColor: backgroundColor,
-    position: "relative",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: "inline"
-  };
-
-  if (!isIE8) {
-    styles.writingMode = cue.vertical === "" ? "horizontal-tb"
-                                             : cue.vertical === "lr" ? "vertical-lr"
-                                                                     : "vertical-rl";
-    styles.unicodeBidi = "plaintext";
-  }
-  this.applyStyles(styles, this.cueDiv);
-
-  // Create an absolutely positioned div that will be used to position the cue
-  // div. Note, all WebVTT cue-setting alignments are equivalent to the CSS
-  // mirrors of them except "middle" which is "center" in CSS.
-  this.div = window.document.createElement("div");
-  styles = {
-    textAlign: cue.align === "middle" ? "center" : cue.align,
-    font: styleOptions.font,
-    whiteSpace: "pre-line",
-    position: "absolute"
-  };
-
-  if (!isIE8) {
-    styles.direction = determineBidi(this.cueDiv);
-    styles.writingMode = cue.vertical === "" ? "horizontal-tb"
-                                             : cue.vertical === "lr" ? "vertical-lr"
-                                                                     : "vertical-rl".
-    stylesunicodeBidi =  "plaintext";
-  }
-
-  this.applyStyles(styles);
-
-  this.div.appendChild(this.cueDiv);
-
-  // Calculate the distance from the reference edge of the viewport to the text
-  // position of the cue box. The reference edge will be resolved later when
-  // the box orientation styles are applied.
-  var textPos = 0;
-  switch (cue.positionAlign) {
-  case "start":
-    textPos = cue.position;
-    break;
-  case "middle":
-    textPos = cue.position - (cue.size / 2);
-    break;
-  case "end":
-    textPos = cue.position - cue.size;
-    break;
-  }
-
-  // Horizontal box orientation; textPos is the distance from the left edge of the
-  // area to the left edge of the box and cue.size is the distance extending to
-  // the right from there.
-  if (cue.vertical === "") {
-    this.applyStyles({
-      left:  this.formatStyle(textPos, "%"),
-      width: this.formatStyle(cue.size, "%")
-    });
-  // Vertical box orientation; textPos is the distance from the top edge of the
-  // area to the top edge of the box and cue.size is the height extending
-  // downwards from there.
-  } else {
-    this.applyStyles({
-      top: this.formatStyle(textPos, "%"),
-      height: this.formatStyle(cue.size, "%")
-    });
-  }
-
-  this.move = function(box) {
-    this.applyStyles({
-      top: this.formatStyle(box.top, "px"),
-      bottom: this.formatStyle(box.bottom, "px"),
-      left: this.formatStyle(box.left, "px"),
-      right: this.formatStyle(box.right, "px"),
-      height: this.formatStyle(box.height, "px"),
-      width: this.formatStyle(box.width, "px")
-    });
-  };
-}
-CueStyleBox.prototype = _objCreate(StyleBox.prototype);
-CueStyleBox.prototype.constructor = CueStyleBox;
-
-// Represents the co-ordinates of an Element in a way that we can easily
-// compute things with such as if it overlaps or intersects with another Element.
-// Can initialize it with either a StyleBox or another BoxPosition.
-function BoxPosition(obj) {
-  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
-
-  // Either a BoxPosition was passed in and we need to copy it, or a StyleBox
-  // was passed in and we need to copy the results of 'getBoundingClientRect'
-  // as the object returned is readonly. All co-ordinate values are in reference
-  // to the viewport origin (top left).
-  var lh, height, width, top;
-  if (obj.div) {
-    height = obj.div.offsetHeight;
-    width = obj.div.offsetWidth;
-    top = obj.div.offsetTop;
-
-    var rects = (rects = obj.div.childNodes) && (rects = rects[0]) &&
-                rects.getClientRects && rects.getClientRects();
-    obj = obj.div.getBoundingClientRect();
-    // In certain cases the outter div will be slightly larger then the sum of
-    // the inner div's lines. This could be due to bold text, etc, on some platforms.
-    // In this case we should get the average line height and use that. This will
-    // result in the desired behaviour.
-    lh = rects ? Math.max((rects[0] && rects[0].height) || 0, obj.height / rects.length)
-               : 0;
-
-  }
-  this.left = obj.left;
-  this.right = obj.right;
-  this.top = obj.top || top;
-  this.height = obj.height || height;
-  this.bottom = obj.bottom || (top + (obj.height || height));
-  this.width = obj.width || width;
-  this.lineHeight = lh !== undefined ? lh : obj.lineHeight;
-
-  if (isIE8 && !this.lineHeight) {
-    this.lineHeight = 13;
-  }
-}
-
-// Move the box along a particular axis. Optionally pass in an amount to move
-// the box. If no amount is passed then the default is the line height of the
-// box.
-BoxPosition.prototype.move = function(axis, toMove) {
-  toMove = toMove !== undefined ? toMove : this.lineHeight;
-  switch (axis) {
-  case "+x":
-    this.left += toMove;
-    this.right += toMove;
-    break;
-  case "-x":
-    this.left -= toMove;
-    this.right -= toMove;
-    break;
-  case "+y":
-    this.top += toMove;
-    this.bottom += toMove;
-    break;
-  case "-y":
-    this.top -= toMove;
-    this.bottom -= toMove;
-    break;
-  }
-};
-
-// Check if this box overlaps another box, b2.
-BoxPosition.prototype.overlaps = function(b2) {
-  return this.left < b2.right &&
-         this.right > b2.left &&
-         this.top < b2.bottom &&
-         this.bottom > b2.top;
-};
-
-// Check if this box overlaps any other boxes in boxes.
-BoxPosition.prototype.overlapsAny = function(boxes) {
-  for (var i = 0; i < boxes.length; i++) {
-    if (this.overlaps(boxes[i])) {
-      return true;
-    }
-  }
-  return false;
-};
-
-// Check if this box is within another box.
-BoxPosition.prototype.within = function(container) {
-  return this.top >= container.top &&
-         this.bottom <= container.bottom &&
-         this.left >= container.left &&
-         this.right <= container.right;
-};
-
-// Check if this box is entirely within the container or it is overlapping
-// on the edge opposite of the axis direction passed. For example, if "+x" is
-// passed and the box is overlapping on the left edge of the container, then
-// return true.
-BoxPosition.prototype.overlapsOppositeAxis = function(container, axis) {
-  switch (axis) {
-  case "+x":
-    return this.left < container.left;
-  case "-x":
-    return this.right > container.right;
-  case "+y":
-    return this.top < container.top;
-  case "-y":
-    return this.bottom > container.bottom;
-  }
-};
-
-// Find the percentage of the area that this box is overlapping with another
-// box.
-BoxPosition.prototype.intersectPercentage = function(b2) {
-  var x = Math.max(0, Math.min(this.right, b2.right) - Math.max(this.left, b2.left)),
-      y = Math.max(0, Math.min(this.bottom, b2.bottom) - Math.max(this.top, b2.top)),
-      intersectArea = x * y;
-  return intersectArea / (this.height * this.width);
-};
-
-// Convert the positions from this box to CSS compatible positions using
-// the reference container's positions. This has to be done because this
-// box's positions are in reference to the viewport origin, whereas, CSS
-// values are in referecne to their respective edges.
-BoxPosition.prototype.toCSSCompatValues = function(reference) {
-  return {
-    top: this.top - reference.top,
-    bottom: reference.bottom - this.bottom,
-    left: this.left - reference.left,
-    right: reference.right - this.right,
-    height: this.height,
-    width: this.width
-  };
-};
-
-// Get an object that represents the box's position without anything extra.
-// Can pass a StyleBox, HTMLElement, or another BoxPositon.
-BoxPosition.getSimpleBoxPosition = function(obj) {
-  var height = obj.div ? obj.div.offsetHeight : obj.tagName ? obj.offsetHeight : 0;
-  var width = obj.div ? obj.div.offsetWidth : obj.tagName ? obj.offsetWidth : 0;
-  var top = obj.div ? obj.div.offsetTop : obj.tagName ? obj.offsetTop : 0;
-
-  obj = obj.div ? obj.div.getBoundingClientRect() :
-                obj.tagName ? obj.getBoundingClientRect() : obj;
-  var ret = {
-    left: obj.left,
-    right: obj.right,
-    top: obj.top || top,
-    height: obj.height || height,
-    bottom: obj.bottom || (top + (obj.height || height)),
-    width: obj.width || width
-  };
-  return ret;
-};
-
-// Move a StyleBox to its specified, or next best, position. The containerBox
-// is the box that contains the StyleBox, such as a div. boxPositions are
-// a list of other boxes that the styleBox can't overlap with.
-function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
-
-  // Find the best position for a cue box, b, on the video. The axis parameter
-  // is a list of axis, the order of which, it will move the box along. For example:
-  // Passing ["+x", "-x"] will move the box first along the x axis in the positive
-  // direction. If it doesn't find a good position for it there it will then move
-  // it along the x axis in the negative direction.
-  function findBestPosition(b, axis) {
-    var bestPosition,
-        specifiedPosition = new BoxPosition(b),
-        percentage = 1; // Highest possible so the first thing we get is better.
-
-    for (var i = 0; i < axis.length; i++) {
-      while (b.overlapsOppositeAxis(containerBox, axis[i]) ||
-             (b.within(containerBox) && b.overlapsAny(boxPositions))) {
-        b.move(axis[i]);
-      }
-      // We found a spot where we aren't overlapping anything. This is our
-      // best position.
-      if (b.within(containerBox)) {
-        return b;
-      }
-      var p = b.intersectPercentage(containerBox);
-      // If we're outside the container box less then we were on our last try
-      // then remember this position as the best position.
-      if (percentage > p) {
-        bestPosition = new BoxPosition(b);
-        percentage = p;
-      }
-      // Reset the box position to the specified position.
-      b = new BoxPosition(specifiedPosition);
-    }
-    return bestPosition || specifiedPosition;
-  }
-
-  var boxPosition = new BoxPosition(styleBox),
-      cue = styleBox.cue,
-      linePos = computeLinePos(cue),
-      axis = [];
-
-  // If we have a line number to align the cue to.
-  if (cue.snapToLines) {
-    var size;
-    switch (cue.vertical) {
-    case "":
-      axis = [ "+y", "-y" ];
-      size = "height";
-      break;
-    case "rl":
-      axis = [ "+x", "-x" ];
-      size = "width";
-      break;
-    case "lr":
-      axis = [ "-x", "+x" ];
-      size = "width";
-      break;
-    }
-
-    var step = boxPosition.lineHeight,
-        position = step * Math.round(linePos),
-        maxPosition = containerBox[size] + step,
-        initialAxis = axis[0];
-
-    // If the specified intial position is greater then the max position then
-    // clamp the box to the amount of steps it would take for the box to
-    // reach the max position.
-    if (Math.abs(position) > maxPosition) {
-      position = position < 0 ? -1 : 1;
-      position *= Math.ceil(maxPosition / step) * step;
-    }
-
-    // If computed line position returns negative then line numbers are
-    // relative to the bottom of the video instead of the top. Therefore, we
-    // need to increase our initial position by the length or width of the
-    // video, depending on the writing direction, and reverse our axis directions.
-    if (linePos < 0) {
-      position += cue.vertical === "" ? containerBox.height : containerBox.width;
-      axis = axis.reverse();
-    }
-
-    // Move the box to the specified position. This may not be its best
-    // position.
-    boxPosition.move(initialAxis, position);
-
-  } else {
-    // If we have a percentage line value for the cue.
-    var calculatedPercentage = (boxPosition.lineHeight / containerBox.height) * 100;
-
-    switch (cue.lineAlign) {
-    case "middle":
-      linePos -= (calculatedPercentage / 2);
-      break;
-    case "end":
-      linePos -= calculatedPercentage;
-      break;
-    }
-
-    // Apply initial line position to the cue box.
-    switch (cue.vertical) {
-    case "":
-      styleBox.applyStyles({
-        top: styleBox.formatStyle(linePos, "%")
-      });
-      break;
-    case "rl":
-      styleBox.applyStyles({
-        left: styleBox.formatStyle(linePos, "%")
-      });
-      break;
-    case "lr":
-      styleBox.applyStyles({
-        right: styleBox.formatStyle(linePos, "%")
-      });
-      break;
-    }
-
-    axis = [ "+y", "-x", "+x", "-y" ];
-
-    // Get the box position again after we've applied the specified positioning
-    // to it.
-    boxPosition = new BoxPosition(styleBox);
-  }
-
-  var bestPosition = findBestPosition(boxPosition, axis);
-  styleBox.move(bestPosition.toCSSCompatValues(containerBox));
-}
-
-function WebVTT() {
-  // Nothing
-}
-
-// Helper to allow strings to be decoded instead of the default binary utf8 data.
-WebVTT.StringDecoder = function() {
-  return {
-    decode: function(data) {
-      if (!data) {
-        return "";
-      }
-      if (typeof data !== "string") {
-        throw new Error("Error - expected string data.");
-      }
-      return decodeURIComponent(encodeURIComponent(data));
-    }
-  };
-};
-
-WebVTT.convertCueToDOMTree = function(window, cuetext) {
-  if (!window || !cuetext) {
-    return null;
-  }
-  return parseContent(window, cuetext);
-};
-
-var FONT_SIZE_PERCENT = 0.05;
-var FONT_STYLE = "sans-serif";
-var CUE_BACKGROUND_PADDING = "1.5%";
-
-// Runs the processing model over the cues and regions passed to it.
-// @param overlay A block level element (usually a div) that the computed cues
-//                and regions will be placed into.
-WebVTT.processCues = function(window, cues, overlay) {
-  if (!window || !cues || !overlay) {
-    return null;
-  }
-
-  // Remove all previous children.
-  while (overlay.firstChild) {
-    overlay.removeChild(overlay.firstChild);
-  }
-
-  var paddedOverlay = window.document.createElement("div");
-  paddedOverlay.style.position = "absolute";
-  paddedOverlay.style.left = "0";
-  paddedOverlay.style.right = "0";
-  paddedOverlay.style.top = "0";
-  paddedOverlay.style.bottom = "0";
-  paddedOverlay.style.margin = CUE_BACKGROUND_PADDING;
-  overlay.appendChild(paddedOverlay);
-
-  // Determine if we need to compute the display states of the cues. This could
-  // be the case if a cue's state has been changed since the last computation or
-  // if it has not been computed yet.
-  function shouldCompute(cues) {
-    for (var i = 0; i < cues.length; i++) {
-      if (cues[i].hasBeenReset || !cues[i].displayState) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // We don't need to recompute the cues' display states. Just reuse them.
-  if (!shouldCompute(cues)) {
-    for (var i = 0; i < cues.length; i++) {
-      paddedOverlay.appendChild(cues[i].displayState);
-    }
-    return;
-  }
-
-  var boxPositions = [],
-      containerBox = BoxPosition.getSimpleBoxPosition(paddedOverlay),
-      fontSize = Math.round(containerBox.height * FONT_SIZE_PERCENT * 100) / 100;
-  var styleOptions = {
-    font: fontSize + "px " + FONT_STYLE
-  };
-
-  (function() {
-    var styleBox, cue;
-
-    for (var i = 0; i < cues.length; i++) {
-      cue = cues[i];
-
-      // Compute the intial position and styles of the cue div.
-      styleBox = new CueStyleBox(window, cue, styleOptions);
-      paddedOverlay.appendChild(styleBox.div);
-
-      // Move the cue div to it's correct line position.
-      moveBoxToLinePosition(window, styleBox, containerBox, boxPositions);
-
-      // Remember the computed div so that we don't have to recompute it later
-      // if we don't have too.
-      cue.displayState = styleBox.div;
-
-      boxPositions.push(BoxPosition.getSimpleBoxPosition(styleBox));
-    }
-  })();
-};
-
-WebVTT.Parser = function(window, vttjs, decoder) {
-  if (!decoder) {
-    decoder = vttjs;
-    vttjs = {};
-  }
-  if (!vttjs) {
-    vttjs = {};
-  }
-
-  this.window = window;
-  this.vttjs = vttjs;
-  this.state = "INITIAL";
-  this.buffer = "";
-  this.decoder = decoder || new TextDecoder("utf8");
-  this.regionList = [];
-};
-
-WebVTT.Parser.prototype = {
-  // If the error is a ParsingError then report it to the consumer if
-  // possible. If it's not a ParsingError then throw it like normal.
-  reportOrThrowError: function(e) {
-    if (e instanceof ParsingError) {
-      this.onparsingerror && this.onparsingerror(e);
-    } else {
-      throw e;
-    }
-  },
-  parse: function (data) {
-    var self = this;
-
-    // If there is no data then we won't decode it, but will just try to parse
-    // whatever is in buffer already. This may occur in circumstances, for
-    // example when flush() is called.
-    if (data) {
-      // Try to decode the data that we received.
-      self.buffer += self.decoder.decode(data, {stream: true});
-    }
-
-    function collectNextLine() {
-      var buffer = self.buffer;
-      var pos = 0;
-      while (pos < buffer.length && buffer[pos] !== '\r' && buffer[pos] !== '\n') {
-        ++pos;
-      }
-      var line = buffer.substr(0, pos);
-      // Advance the buffer early in case we fail below.
-      if (buffer[pos] === '\r') {
-        ++pos;
-      }
-      if (buffer[pos] === '\n') {
-        ++pos;
-      }
-      self.buffer = buffer.substr(pos);
-      return line;
-    }
-
-    // 3.4 WebVTT region and WebVTT region settings syntax
-    function parseRegion(input) {
-      var settings = new Settings();
-
-      parseOptions(input, function (k, v) {
-        switch (k) {
-        case "id":
-          settings.set(k, v);
-          break;
-        case "width":
-          settings.percent(k, v);
-          break;
-        case "lines":
-          settings.integer(k, v);
-          break;
-        case "regionanchor":
-        case "viewportanchor":
-          var xy = v.split(',');
-          if (xy.length !== 2) {
-            break;
-          }
-          // We have to make sure both x and y parse, so use a temporary
-          // settings object here.
-          var anchor = new Settings();
-          anchor.percent("x", xy[0]);
-          anchor.percent("y", xy[1]);
-          if (!anchor.has("x") || !anchor.has("y")) {
-            break;
-          }
-          settings.set(k + "X", anchor.get("x"));
-          settings.set(k + "Y", anchor.get("y"));
-          break;
-        case "scroll":
-          settings.alt(k, v, ["up"]);
-          break;
-        }
-      }, /=/, /\s/);
-
-      // Create the region, using default values for any values that were not
-      // specified.
-      if (settings.has("id")) {
-        var region = new (self.vttjs.VTTRegion || self.window.VTTRegion)();
-        region.width = settings.get("width", 100);
-        region.lines = settings.get("lines", 3);
-        region.regionAnchorX = settings.get("regionanchorX", 0);
-        region.regionAnchorY = settings.get("regionanchorY", 100);
-        region.viewportAnchorX = settings.get("viewportanchorX", 0);
-        region.viewportAnchorY = settings.get("viewportanchorY", 100);
-        region.scroll = settings.get("scroll", "");
-        // Register the region.
-        self.onregion && self.onregion(region);
-        // Remember the VTTRegion for later in case we parse any VTTCues that
-        // reference it.
-        self.regionList.push({
-          id: settings.get("id"),
-          region: region
-        });
-      }
-    }
-
-    // draft-pantos-http-live-streaming-20
-    // https://tools.ietf.org/html/draft-pantos-http-live-streaming-20#section-3.5
-    // 3.5 WebVTT
-    function parseTimestampMap(input) {
-      var settings = new Settings();
-
-      parseOptions(input, function(k, v) {
-        switch(k) {
-        case "MPEGT":
-          settings.integer(k + 'S', v);
-          break;
-        case "LOCA":
-          settings.set(k + 'L', parseTimeStamp(v));
-          break;
-        }
-      }, /[^\d]:/, /,/);
-
-      self.ontimestampmap && self.ontimestampmap({
-        "MPEGTS": settings.get("MPEGTS"),
-        "LOCAL": settings.get("LOCAL")
-      });
-    }
-
-    // 3.2 WebVTT metadata header syntax
-    function parseHeader(input) {
-      if (input.match(/X-TIMESTAMP-MAP/)) {
-        // This line contains HLS X-TIMESTAMP-MAP metadata
-        parseOptions(input, function(k, v) {
-          switch(k) {
-          case "X-TIMESTAMP-MAP":
-            parseTimestampMap(v);
-            break;
-          }
-        }, /=/);
-      } else {
-        parseOptions(input, function (k, v) {
-          switch (k) {
-          case "Region":
-            // 3.3 WebVTT region metadata header syntax
-            parseRegion(v);
-            break;
-          }
-        }, /:/);
-      }
-
-    }
-
-    // 5.1 WebVTT file parsing.
-    try {
-      var line;
-      if (self.state === "INITIAL") {
-        // We can't start parsing until we have the first line.
-        if (!/\r\n|\n/.test(self.buffer)) {
-          return this;
-        }
-
-        line = collectNextLine();
-
-        var m = line.match(/^WEBVTT([ \t].*)?$/);
-        if (!m || !m[0]) {
-          throw new ParsingError(ParsingError.Errors.BadSignature);
-        }
-
-        self.state = "HEADER";
-      }
-
-      var alreadyCollectedLine = false;
-      while (self.buffer) {
-        // We can't parse a line until we have the full line.
-        if (!/\r\n|\n/.test(self.buffer)) {
-          return this;
-        }
-
-        if (!alreadyCollectedLine) {
-          line = collectNextLine();
-        } else {
-          alreadyCollectedLine = false;
-        }
-
-        switch (self.state) {
-        case "HEADER":
-          // 13-18 - Allow a header (metadata) under the WEBVTT line.
-          if (/:/.test(line)) {
-            parseHeader(line);
-          } else if (!line) {
-            // An empty line terminates the header and starts the body (cues).
-            self.state = "ID";
-          }
-          continue;
-        case "NOTE":
-          // Ignore NOTE blocks.
-          if (!line) {
-            self.state = "ID";
-          }
-          continue;
-        case "ID":
-          // Check for the start of NOTE blocks.
-          if (/^NOTE($|[ \t])/.test(line)) {
-            self.state = "NOTE";
-            break;
-          }
-          // 19-29 - Allow any number of line terminators, then initialize new cue values.
-          if (!line) {
-            continue;
-          }
-          self.cue = new (self.vttjs.VTTCue || self.window.VTTCue)(0, 0, "");
-          self.state = "CUE";
-          // 30-39 - Check if self line contains an optional identifier or timing data.
-          if (line.indexOf("-->") === -1) {
-            self.cue.id = line;
-            continue;
-          }
-          // Process line as start of a cue.
-          /*falls through*/
-        case "CUE":
-          // 40 - Collect cue timings and settings.
-          try {
-            parseCue(line, self.cue, self.regionList);
-          } catch (e) {
-            self.reportOrThrowError(e);
-            // In case of an error ignore rest of the cue.
-            self.cue = null;
-            self.state = "BADCUE";
-            continue;
-          }
-          self.state = "CUETEXT";
-          continue;
-        case "CUETEXT":
-          var hasSubstring = line.indexOf("-->") !== -1;
-          // 34 - If we have an empty line then report the cue.
-          // 35 - If we have the special substring '-->' then report the cue,
-          // but do not collect the line as we need to process the current
-          // one as a new cue.
-          if (!line || hasSubstring && (alreadyCollectedLine = true)) {
-            // We are done parsing self cue.
-            self.oncue && self.oncue(self.cue);
-            self.cue = null;
-            self.state = "ID";
-            continue;
-          }
-          if (self.cue.text) {
-            self.cue.text += "\n";
-          }
-          self.cue.text += line;
-          continue;
-        case "BADCUE": // BADCUE
-          // 54-62 - Collect and discard the remaining cue.
-          if (!line) {
-            self.state = "ID";
-          }
-          continue;
-        }
-      }
-    } catch (e) {
-      self.reportOrThrowError(e);
-
-      // If we are currently parsing a cue, report what we have.
-      if (self.state === "CUETEXT" && self.cue && self.oncue) {
-        self.oncue(self.cue);
-      }
-      self.cue = null;
-      // Enter BADWEBVTT state if header was not parsed correctly otherwise
-      // another exception occurred so enter BADCUE state.
-      self.state = self.state === "INITIAL" ? "BADWEBVTT" : "BADCUE";
-    }
-    return this;
-  },
-  flush: function () {
-    var self = this;
-    try {
-      // Finish decoding the stream.
-      self.buffer += self.decoder.decode();
-      // Synthesize the end of the current cue or region.
-      if (self.cue || self.state === "HEADER") {
-        self.buffer += "\n\n";
-        self.parse();
-      }
-      // If we've flushed, parsed, and we're still on the INITIAL state then
-      // that means we don't have enough of the stream to parse the first
-      // line.
-      if (self.state === "INITIAL") {
-        throw new ParsingError(ParsingError.Errors.BadSignature);
-      }
-    } catch(e) {
-      self.reportOrThrowError(e);
-    }
-    self.onflush && self.onflush();
-    return this;
-  }
-};
-
-module.exports = WebVTT;
-
-
-/***/ }),
-/* 106 */
-/***/ (function(module, exports) {
-
-/**
- * Copyright 2013 vtt.js Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-var autoKeyword = "auto";
-var directionSetting = {
-  "": true,
-  "lr": true,
-  "rl": true
-};
-var alignSetting = {
-  "start": true,
-  "middle": true,
-  "end": true,
-  "left": true,
-  "right": true
-};
-
-function findDirectionSetting(value) {
-  if (typeof value !== "string") {
-    return false;
-  }
-  var dir = directionSetting[value.toLowerCase()];
-  return dir ? value.toLowerCase() : false;
-}
-
-function findAlignSetting(value) {
-  if (typeof value !== "string") {
-    return false;
-  }
-  var align = alignSetting[value.toLowerCase()];
-  return align ? value.toLowerCase() : false;
-}
-
-function extend(obj) {
-  var i = 1;
-  for (; i < arguments.length; i++) {
-    var cobj = arguments[i];
-    for (var p in cobj) {
-      obj[p] = cobj[p];
-    }
-  }
-
-  return obj;
-}
-
-function VTTCue(startTime, endTime, text) {
-  var cue = this;
-  var isIE8 = (/MSIE\s8\.0/).test(navigator.userAgent);
-  var baseObj = {};
-
-  if (isIE8) {
-    cue = document.createElement('custom');
-  } else {
-    baseObj.enumerable = true;
-  }
-
-  /**
-   * Shim implementation specific properties. These properties are not in
-   * the spec.
-   */
-
-  // Lets us know when the VTTCue's data has changed in such a way that we need
-  // to recompute its display state. This lets us compute its display state
-  // lazily.
-  cue.hasBeenReset = false;
-
-  /**
-   * VTTCue and TextTrackCue properties
-   * http://dev.w3.org/html5/webvtt/#vttcue-interface
-   */
-
-  var _id = "";
-  var _pauseOnExit = false;
-  var _startTime = startTime;
-  var _endTime = endTime;
-  var _text = text;
-  var _region = null;
-  var _vertical = "";
-  var _snapToLines = true;
-  var _line = "auto";
-  var _lineAlign = "start";
-  var _position = 50;
-  var _positionAlign = "middle";
-  var _size = 50;
-  var _align = "middle";
-
-  Object.defineProperty(cue,
-    "id", extend({}, baseObj, {
-      get: function() {
-        return _id;
-      },
-      set: function(value) {
-        _id = "" + value;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "pauseOnExit", extend({}, baseObj, {
-      get: function() {
-        return _pauseOnExit;
-      },
-      set: function(value) {
-        _pauseOnExit = !!value;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "startTime", extend({}, baseObj, {
-      get: function() {
-        return _startTime;
-      },
-      set: function(value) {
-        if (typeof value !== "number") {
-          throw new TypeError("Start time must be set to a number.");
-        }
-        _startTime = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "endTime", extend({}, baseObj, {
-      get: function() {
-        return _endTime;
-      },
-      set: function(value) {
-        if (typeof value !== "number") {
-          throw new TypeError("End time must be set to a number.");
-        }
-        _endTime = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "text", extend({}, baseObj, {
-      get: function() {
-        return _text;
-      },
-      set: function(value) {
-        _text = "" + value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "region", extend({}, baseObj, {
-      get: function() {
-        return _region;
-      },
-      set: function(value) {
-        _region = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "vertical", extend({}, baseObj, {
-      get: function() {
-        return _vertical;
-      },
-      set: function(value) {
-        var setting = findDirectionSetting(value);
-        // Have to check for false because the setting an be an empty string.
-        if (setting === false) {
-          throw new SyntaxError("An invalid or illegal string was specified.");
-        }
-        _vertical = setting;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "snapToLines", extend({}, baseObj, {
-      get: function() {
-        return _snapToLines;
-      },
-      set: function(value) {
-        _snapToLines = !!value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "line", extend({}, baseObj, {
-      get: function() {
-        return _line;
-      },
-      set: function(value) {
-        if (typeof value !== "number" && value !== autoKeyword) {
-          throw new SyntaxError("An invalid number or illegal string was specified.");
-        }
-        _line = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "lineAlign", extend({}, baseObj, {
-      get: function() {
-        return _lineAlign;
-      },
-      set: function(value) {
-        var setting = findAlignSetting(value);
-        if (!setting) {
-          throw new SyntaxError("An invalid or illegal string was specified.");
-        }
-        _lineAlign = setting;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "position", extend({}, baseObj, {
-      get: function() {
-        return _position;
-      },
-      set: function(value) {
-        if (value < 0 || value > 100) {
-          throw new Error("Position must be between 0 and 100.");
-        }
-        _position = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "positionAlign", extend({}, baseObj, {
-      get: function() {
-        return _positionAlign;
-      },
-      set: function(value) {
-        var setting = findAlignSetting(value);
-        if (!setting) {
-          throw new SyntaxError("An invalid or illegal string was specified.");
-        }
-        _positionAlign = setting;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "size", extend({}, baseObj, {
-      get: function() {
-        return _size;
-      },
-      set: function(value) {
-        if (value < 0 || value > 100) {
-          throw new Error("Size must be between 0 and 100.");
-        }
-        _size = value;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  Object.defineProperty(cue,
-    "align", extend({}, baseObj, {
-      get: function() {
-        return _align;
-      },
-      set: function(value) {
-        var setting = findAlignSetting(value);
-        if (!setting) {
-          throw new SyntaxError("An invalid or illegal string was specified.");
-        }
-        _align = setting;
-        this.hasBeenReset = true;
-      }
-    }));
-
-  /**
-   * Other <track> spec defined properties
-   */
-
-  // http://www.whatwg.org/specs/web-apps/current-work/multipage/the-video-element.html#text-track-cue-display-state
-  cue.displayState = undefined;
-
-  if (isIE8) {
-    return cue;
-  }
-}
-
-/**
- * VTTCue methods
- */
-
-VTTCue.prototype.getCueAsHTML = function() {
-  // Assume WebVTT.convertCueToDOMTree is on the global.
-  return WebVTT.convertCueToDOMTree(window, this.text);
-};
-
-module.exports = VTTCue;
-
-
-/***/ }),
-/* 107 */
-/***/ (function(module, exports) {
-
-/**
- * Copyright 2013 vtt.js Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-var scrollSetting = {
-  "": true,
-  "up": true
-};
-
-function findScrollSetting(value) {
-  if (typeof value !== "string") {
-    return false;
-  }
-  var scroll = scrollSetting[value.toLowerCase()];
-  return scroll ? value.toLowerCase() : false;
-}
-
-function isValidPercentValue(value) {
-  return typeof value === "number" && (value >= 0 && value <= 100);
-}
-
-// VTTRegion shim http://dev.w3.org/html5/webvtt/#vttregion-interface
-function VTTRegion() {
-  var _width = 100;
-  var _lines = 3;
-  var _regionAnchorX = 0;
-  var _regionAnchorY = 100;
-  var _viewportAnchorX = 0;
-  var _viewportAnchorY = 100;
-  var _scroll = "";
-
-  Object.defineProperties(this, {
-    "width": {
-      enumerable: true,
-      get: function() {
-        return _width;
-      },
-      set: function(value) {
-        if (!isValidPercentValue(value)) {
-          throw new Error("Width must be between 0 and 100.");
-        }
-        _width = value;
-      }
-    },
-    "lines": {
-      enumerable: true,
-      get: function() {
-        return _lines;
-      },
-      set: function(value) {
-        if (typeof value !== "number") {
-          throw new TypeError("Lines must be set to a number.");
-        }
-        _lines = value;
-      }
-    },
-    "regionAnchorY": {
-      enumerable: true,
-      get: function() {
-        return _regionAnchorY;
-      },
-      set: function(value) {
-        if (!isValidPercentValue(value)) {
-          throw new Error("RegionAnchorX must be between 0 and 100.");
-        }
-        _regionAnchorY = value;
-      }
-    },
-    "regionAnchorX": {
-      enumerable: true,
-      get: function() {
-        return _regionAnchorX;
-      },
-      set: function(value) {
-        if(!isValidPercentValue(value)) {
-          throw new Error("RegionAnchorY must be between 0 and 100.");
-        }
-        _regionAnchorX = value;
-      }
-    },
-    "viewportAnchorY": {
-      enumerable: true,
-      get: function() {
-        return _viewportAnchorY;
-      },
-      set: function(value) {
-        if (!isValidPercentValue(value)) {
-          throw new Error("ViewportAnchorY must be between 0 and 100.");
-        }
-        _viewportAnchorY = value;
-      }
-    },
-    "viewportAnchorX": {
-      enumerable: true,
-      get: function() {
-        return _viewportAnchorX;
-      },
-      set: function(value) {
-        if (!isValidPercentValue(value)) {
-          throw new Error("ViewportAnchorX must be between 0 and 100.");
-        }
-        _viewportAnchorX = value;
-      }
-    },
-    "scroll": {
-      enumerable: true,
-      get: function() {
-        return _scroll;
-      },
-      set: function(value) {
-        var setting = findScrollSetting(value);
-        // Have to check for false as an empty string is a legal value.
-        if (setting === false) {
-          throw new SyntaxError("An invalid or illegal string was specified.");
-        }
-        _scroll = setting;
-      }
-    }
-  });
-}
-
-module.exports = VTTRegion;
-
-
-/***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(109);
+var content = __webpack_require__(114);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -68816,7 +70078,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(112)(content, options);
+var update = __webpack_require__(117)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -68833,22 +70095,22 @@ if(false) {
 }
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(110);
+var escape = __webpack_require__(115);
 exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before, .video-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before {\n  text-align: center; }\n\n@font-face {\n  font-family: VideoJS;\n  src: url(" + escape(__webpack_require__(111)) + "?#iefix) format(\"eot\"); }\n\n@font-face {\n  font-family: VideoJS;\n  src: url(data:application/font-woff;charset=utf-8;base64,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) format(\"woff\"), url(data:application/x-font-ttf;charset=utf-8;base64,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AG8AbgB0AGUAbABsAG8AIABwAHIAbwBqAGUAYwB0AC4AaAB0AHQAcAA6AC8ALwBmAG8AbgB0AGUAbABsAG8ALgBjAG8AbQAAAAIAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQECAQMBBAEFAQYBBwEIAQkBCgELAQwBDQEOAQ8BEAERARIBEwEUARUBFgEXARgBGQEaARsBHAEdAR4BHwEgASEBIgAEcGxheQtwbGF5LWNpcmNsZQVwYXVzZQt2b2x1bWUtbXV0ZQp2b2x1bWUtbG93CnZvbHVtZS1taWQLdm9sdW1lLWhpZ2gQZnVsbHNjcmVlbi1lbnRlcg9mdWxsc2NyZWVuLWV4aXQGc3F1YXJlB3NwaW5uZXIJc3VidGl0bGVzCGNhcHRpb25zCGNoYXB0ZXJzBXNoYXJlA2NvZwZjaXJjbGUOY2lyY2xlLW91dGxpbmUTY2lyY2xlLWlubmVyLWNpcmNsZQJoZAZjYW5jZWwGcmVwbGF5CGZhY2Vib29rBWdwbHVzCGxpbmtlZGluB3R3aXR0ZXIGdHVtYmxyCXBpbnRlcmVzdBFhdWRpby1kZXNjcmlwdGlvbgVhdWRpbwluZXh0LWl0ZW0NcHJldmlvdXMtaXRlbQAAAAA=) format(\"truetype\");\n  font-weight: normal;\n  font-style: normal; }\n\n.vjs-icon-play, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-play:before, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before {\n    content: \"\\F101\"; }\n\n.vjs-icon-play-circle {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-play-circle:before {\n    content: \"\\F102\"; }\n\n.vjs-icon-pause, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-pause:before, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {\n    content: \"\\F103\"; }\n\n.vjs-icon-volume-mute, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-mute:before, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {\n    content: \"\\F104\"; }\n\n.vjs-icon-volume-low, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-low:before, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder:before {\n    content: \"\\F105\"; }\n\n.vjs-icon-volume-mid, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-mid:before, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder:before {\n    content: \"\\F106\"; }\n\n.vjs-icon-volume-high, .video-js .vjs-mute-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-high:before, .video-js .vjs-mute-control .vjs-icon-placeholder:before {\n    content: \"\\F107\"; }\n\n.vjs-icon-fullscreen-enter, .video-js .vjs-fullscreen-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-fullscreen-enter:before, .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {\n    content: \"\\F108\"; }\n\n.vjs-icon-fullscreen-exit, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-fullscreen-exit:before, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before {\n    content: \"\\F109\"; }\n\n.vjs-icon-square {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-square:before {\n    content: \"\\F10A\"; }\n\n.vjs-icon-spinner {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-spinner:before {\n    content: \"\\F10B\"; }\n\n.vjs-icon-subtitles, .video-js .vjs-subtitles-button .vjs-icon-placeholder, .video-js .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-subtitles:before, .video-js .vjs-subtitles-button .vjs-icon-placeholder:before, .video-js .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder:before {\n    content: \"\\F10C\"; }\n\n.vjs-icon-captions, .video-js .vjs-captions-button .vjs-icon-placeholder, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-captions:before, .video-js .vjs-captions-button .vjs-icon-placeholder:before, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder:before {\n    content: \"\\F10D\"; }\n\n.vjs-icon-chapters, .video-js .vjs-chapters-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-chapters:before, .video-js .vjs-chapters-button .vjs-icon-placeholder:before {\n    content: \"\\F10E\"; }\n\n.vjs-icon-share {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-share:before {\n    content: \"\\F10F\"; }\n\n.vjs-icon-cog {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-cog:before {\n    content: \"\\F110\"; }\n\n.vjs-icon-circle, .video-js .vjs-play-progress, .video-js .vjs-volume-level {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle:before, .video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before {\n    content: \"\\F111\"; }\n\n.vjs-icon-circle-outline {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle-outline:before {\n    content: \"\\F112\"; }\n\n.vjs-icon-circle-inner-circle {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle-inner-circle:before {\n    content: \"\\F113\"; }\n\n.vjs-icon-hd {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-hd:before {\n    content: \"\\F114\"; }\n\n.vjs-icon-cancel, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-cancel:before, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder:before {\n    content: \"\\F115\"; }\n\n.vjs-icon-replay, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-replay:before, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder:before {\n    content: \"\\F116\"; }\n\n.vjs-icon-facebook {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-facebook:before {\n    content: \"\\F117\"; }\n\n.vjs-icon-gplus {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-gplus:before {\n    content: \"\\F118\"; }\n\n.vjs-icon-linkedin {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-linkedin:before {\n    content: \"\\F119\"; }\n\n.vjs-icon-twitter {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-twitter:before {\n    content: \"\\F11A\"; }\n\n.vjs-icon-tumblr {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-tumblr:before {\n    content: \"\\F11B\"; }\n\n.vjs-icon-pinterest {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-pinterest:before {\n    content: \"\\F11C\"; }\n\n.vjs-icon-audio-description, .video-js .vjs-descriptions-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-audio-description:before, .video-js .vjs-descriptions-button .vjs-icon-placeholder:before {\n    content: \"\\F11D\"; }\n\n.vjs-icon-audio, .video-js .vjs-audio-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-audio:before, .video-js .vjs-audio-button .vjs-icon-placeholder:before {\n    content: \"\\F11E\"; }\n\n.vjs-icon-next-item {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-next-item:before {\n    content: \"\\F11F\"; }\n\n.vjs-icon-previous-item {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-previous-item:before {\n    content: \"\\F120\"; }\n\n.video-js {\n  display: block;\n  vertical-align: top;\n  box-sizing: border-box;\n  color: #fff;\n  background-color: #000;\n  position: relative;\n  padding: 0;\n  font-size: 10px;\n  line-height: 1;\n  font-weight: normal;\n  font-style: normal;\n  font-family: Arial, Helvetica, sans-serif;\n  word-break: initial; }\n  .video-js:-moz-full-screen {\n    position: absolute; }\n  .video-js:-webkit-full-screen {\n    width: 100% !important;\n    height: 100% !important; }\n\n.video-js[tabindex=\"-1\"] {\n  outline: none; }\n\n.video-js *,\n.video-js *:before,\n.video-js *:after {\n  box-sizing: inherit; }\n\n.video-js ul {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n  list-style-position: outside;\n  margin-left: 0;\n  margin-right: 0;\n  margin-top: 0;\n  margin-bottom: 0; }\n\n.video-js.vjs-fluid,\n.video-js.vjs-16-9,\n.video-js.vjs-4-3 {\n  width: 100%;\n  max-width: 100%;\n  height: 0; }\n\n.video-js.vjs-16-9 {\n  padding-top: 56.25%; }\n\n.video-js.vjs-4-3 {\n  padding-top: 75%; }\n\n.video-js.vjs-fill {\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-tech {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\nbody.vjs-full-window {\n  padding: 0;\n  margin: 0;\n  height: 100%;\n  overflow-y: auto; }\n\n.vjs-full-window .video-js.vjs-fullscreen {\n  position: fixed;\n  overflow: hidden;\n  z-index: 1000;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0; }\n\n.video-js.vjs-fullscreen {\n  width: 100% !important;\n  height: 100% !important;\n  padding-top: 0 !important; }\n\n.video-js.vjs-fullscreen.vjs-user-inactive {\n  cursor: none; }\n\n.vjs-hidden {\n  display: none !important; }\n\n.vjs-disabled {\n  opacity: 0.5;\n  cursor: default; }\n\n.video-js .vjs-offscreen {\n  height: 1px;\n  left: -9999px;\n  position: absolute;\n  top: 0;\n  width: 1px; }\n\n.vjs-lock-showing {\n  display: block !important;\n  opacity: 1;\n  visibility: visible; }\n\n.vjs-no-js {\n  padding: 20px;\n  color: #fff;\n  background-color: #000;\n  font-size: 18px;\n  font-family: Arial, Helvetica, sans-serif;\n  text-align: center;\n  width: 300px;\n  height: 150px;\n  margin: 0px auto; }\n\n.vjs-no-js a,\n.vjs-no-js a:visited {\n  color: #66A8CC; }\n\n.video-js .vjs-big-play-button {\n  font-size: 3em;\n  line-height: 1.5em;\n  height: 1.5em;\n  width: 3em;\n  display: block;\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  padding: 0;\n  cursor: pointer;\n  opacity: 1;\n  border: 0.06666em solid #fff;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7);\n  -webkit-border-radius: 0.3em;\n  -moz-border-radius: 0.3em;\n  border-radius: 0.3em;\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s; }\n\n.vjs-big-play-centered .vjs-big-play-button {\n  top: 50%;\n  left: 50%;\n  margin-top: -0.75em;\n  margin-left: -1.5em; }\n\n.video-js:hover .vjs-big-play-button,\n.video-js .vjs-big-play-button:focus {\n  border-color: #fff;\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5);\n  -webkit-transition: all 0s;\n  -moz-transition: all 0s;\n  -ms-transition: all 0s;\n  -o-transition: all 0s;\n  transition: all 0s; }\n\n.vjs-controls-disabled .vjs-big-play-button,\n.vjs-has-started .vjs-big-play-button,\n.vjs-using-native-controls .vjs-big-play-button,\n.vjs-error .vjs-big-play-button {\n  display: none; }\n\n.vjs-has-started.vjs-paused.vjs-show-big-play-button-on-pause .vjs-big-play-button {\n  display: block; }\n\n.video-js button {\n  background: none;\n  border: none;\n  color: inherit;\n  display: inline-block;\n  overflow: visible;\n  font-size: inherit;\n  line-height: inherit;\n  text-transform: none;\n  text-decoration: none;\n  transition: none;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none; }\n\n.vjs-control .vjs-button {\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-control.vjs-close-button {\n  cursor: pointer;\n  height: 3em;\n  position: absolute;\n  right: 0;\n  top: 0.5em;\n  z-index: 2; }\n\n.video-js .vjs-modal-dialog {\n  background: rgba(0, 0, 0, 0.8);\n  background: -webkit-linear-gradient(-90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));\n  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));\n  overflow: auto;\n  box-sizing: content-box; }\n\n.video-js .vjs-modal-dialog > * {\n  box-sizing: border-box; }\n\n.vjs-modal-dialog .vjs-modal-dialog-content {\n  font-size: 1.2em;\n  line-height: 1.5;\n  padding: 20px 24px;\n  z-index: 1; }\n\n.vjs-menu-button {\n  cursor: pointer; }\n\n.vjs-menu-button.vjs-disabled {\n  cursor: default; }\n\n.vjs-workinghover .vjs-menu-button.vjs-disabled:hover .vjs-menu {\n  display: none; }\n\n.vjs-menu .vjs-menu-content {\n  display: block;\n  padding: 0;\n  margin: 0;\n  font-family: Arial, Helvetica, sans-serif;\n  overflow: auto;\n  box-sizing: content-box; }\n\n.vjs-menu .vjs-menu-content > * {\n  box-sizing: border-box; }\n\n.vjs-scrubbing .vjs-menu-button:hover .vjs-menu {\n  display: none; }\n\n.vjs-menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0.2em 0;\n  line-height: 1.4em;\n  font-size: 1.2em;\n  text-align: center;\n  text-transform: lowercase; }\n\n.vjs-menu li.vjs-menu-item:focus,\n.vjs-menu li.vjs-menu-item:hover {\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5); }\n\n.vjs-menu li.vjs-selected,\n.vjs-menu li.vjs-selected:focus,\n.vjs-menu li.vjs-selected:hover {\n  background-color: #fff;\n  color: #2B333F; }\n\n.vjs-menu li.vjs-menu-title {\n  text-align: center;\n  text-transform: uppercase;\n  font-size: 1em;\n  line-height: 2em;\n  padding: 0;\n  margin: 0 0 0.3em 0;\n  font-weight: bold;\n  cursor: default; }\n\n.vjs-menu-button-popup .vjs-menu {\n  display: none;\n  position: absolute;\n  bottom: 0;\n  width: 10em;\n  left: -3em;\n  height: 0em;\n  margin-bottom: 1.5em;\n  border-top-color: rgba(43, 51, 63, 0.7); }\n\n.vjs-menu-button-popup .vjs-menu .vjs-menu-content {\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7);\n  position: absolute;\n  width: 100%;\n  bottom: 1.5em;\n  max-height: 15em; }\n\n.vjs-workinghover .vjs-menu-button-popup:hover .vjs-menu,\n.vjs-menu-button-popup .vjs-menu.vjs-lock-showing {\n  display: block; }\n\n.video-js .vjs-menu-button-inline {\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s;\n  overflow: hidden; }\n\n.video-js .vjs-menu-button-inline:before {\n  width: 2.222222222em; }\n\n.video-js .vjs-menu-button-inline:hover,\n.video-js .vjs-menu-button-inline:focus,\n.video-js .vjs-menu-button-inline.vjs-slider-active,\n.video-js.vjs-no-flex .vjs-menu-button-inline {\n  width: 12em; }\n\n.vjs-menu-button-inline .vjs-menu {\n  opacity: 0;\n  height: 100%;\n  width: auto;\n  position: absolute;\n  left: 4em;\n  top: 0;\n  padding: 0;\n  margin: 0;\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s; }\n\n.vjs-menu-button-inline:hover .vjs-menu,\n.vjs-menu-button-inline:focus .vjs-menu,\n.vjs-menu-button-inline.vjs-slider-active .vjs-menu {\n  display: block;\n  opacity: 1; }\n\n.vjs-no-flex .vjs-menu-button-inline .vjs-menu {\n  display: block;\n  opacity: 1;\n  position: relative;\n  width: auto; }\n\n.vjs-no-flex .vjs-menu-button-inline:hover .vjs-menu,\n.vjs-no-flex .vjs-menu-button-inline:focus .vjs-menu,\n.vjs-no-flex .vjs-menu-button-inline.vjs-slider-active .vjs-menu {\n  width: auto; }\n\n.vjs-menu-button-inline .vjs-menu-content {\n  width: auto;\n  height: 100%;\n  margin: 0;\n  overflow: hidden; }\n\n.video-js .vjs-control-bar {\n  display: none;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 3.0em;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7); }\n\n.vjs-has-started .vjs-control-bar {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  visibility: visible;\n  opacity: 1;\n  -webkit-transition: visibility 0.1s, opacity 0.1s;\n  -moz-transition: visibility 0.1s, opacity 0.1s;\n  -ms-transition: visibility 0.1s, opacity 0.1s;\n  -o-transition: visibility 0.1s, opacity 0.1s;\n  transition: visibility 0.1s, opacity 0.1s; }\n\n.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n  visibility: visible;\n  opacity: 0;\n  -webkit-transition: visibility 1s, opacity 1s;\n  -moz-transition: visibility 1s, opacity 1s;\n  -ms-transition: visibility 1s, opacity 1s;\n  -o-transition: visibility 1s, opacity 1s;\n  transition: visibility 1s, opacity 1s; }\n\n.vjs-controls-disabled .vjs-control-bar,\n.vjs-using-native-controls .vjs-control-bar,\n.vjs-error .vjs-control-bar {\n  display: none !important; }\n\n.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n  opacity: 1;\n  visibility: visible; }\n\n.vjs-has-started.vjs-no-flex .vjs-control-bar {\n  display: table; }\n\n.video-js .vjs-control {\n  position: relative;\n  text-align: center;\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  width: 4em;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-button > .vjs-icon-placeholder:before {\n  font-size: 1.8em;\n  line-height: 1.67; }\n\n.video-js .vjs-control:focus:before,\n.video-js .vjs-control:hover:before,\n.video-js .vjs-control:focus {\n  text-shadow: 0em 0em 1em white; }\n\n.video-js .vjs-control-text {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px; }\n\n.vjs-no-flex .vjs-control {\n  display: table-cell;\n  vertical-align: middle; }\n\n.video-js .vjs-custom-control-spacer {\n  display: none; }\n\n.video-js .vjs-progress-control {\n  cursor: pointer;\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  align-items: center;\n  min-width: 4em;\n  touch-action: none; }\n\n.video-js .vjs-progress-control.disabled {\n  cursor: default; }\n\n.vjs-live .vjs-progress-control {\n  display: none; }\n\n.vjs-no-flex .vjs-progress-control {\n  width: auto; }\n\n.video-js .vjs-progress-holder {\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  -webkit-transition: all 0.2s;\n  -moz-transition: all 0.2s;\n  -ms-transition: all 0.2s;\n  -o-transition: all 0.2s;\n  transition: all 0.2s;\n  height: 0.3em; }\n\n.video-js .vjs-progress-control .vjs-progress-holder {\n  margin: 0 10px; }\n\n.video-js .vjs-progress-control:hover .vjs-progress-holder {\n  font-size: 1.666666666666666666em; }\n\n.video-js .vjs-progress-control:hover .vjs-progress-holder.disabled {\n  font-size: 1em; }\n\n.video-js .vjs-progress-holder .vjs-play-progress,\n.video-js .vjs-progress-holder .vjs-load-progress,\n.video-js .vjs-progress-holder .vjs-load-progress div {\n  position: absolute;\n  display: block;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  width: 0;\n  left: 0;\n  top: 0; }\n\n.video-js .vjs-play-progress {\n  background-color: #fff; }\n  .video-js .vjs-play-progress:before {\n    font-size: 0.9em;\n    position: absolute;\n    right: -0.5em;\n    top: -0.333333333333333em;\n    z-index: 1; }\n\n.video-js .vjs-load-progress {\n  background: #bfc7d3;\n  background: rgba(115, 133, 159, 0.5); }\n\n.video-js .vjs-load-progress div {\n  background: white;\n  background: rgba(115, 133, 159, 0.75); }\n\n.video-js .vjs-time-tooltip {\n  background-color: #fff;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-border-radius: 0.3em;\n  -moz-border-radius: 0.3em;\n  border-radius: 0.3em;\n  color: #000;\n  float: right;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 1em;\n  padding: 6px 8px 8px 8px;\n  pointer-events: none;\n  position: absolute;\n  top: -3.4em;\n  visibility: hidden;\n  z-index: 1; }\n\n.video-js .vjs-progress-holder:focus .vjs-time-tooltip {\n  display: none; }\n\n.video-js .vjs-progress-control:hover .vjs-time-tooltip,\n.video-js .vjs-progress-control:hover .vjs-progress-holder:focus .vjs-time-tooltip {\n  display: block;\n  font-size: 0.6em;\n  visibility: visible; }\n\n.video-js .vjs-progress-control.disabled:hover .vjs-time-tooltip {\n  font-size: 1em; }\n\n.video-js .vjs-progress-control .vjs-mouse-display {\n  display: none;\n  position: absolute;\n  width: 1px;\n  height: 100%;\n  background-color: #000;\n  z-index: 1; }\n\n.vjs-no-flex .vjs-progress-control .vjs-mouse-display {\n  z-index: 0; }\n\n.video-js .vjs-progress-control:hover .vjs-mouse-display {\n  display: block; }\n\n.video-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display {\n  visibility: hidden;\n  opacity: 0;\n  -webkit-transition: visibility 1s, opacity 1s;\n  -moz-transition: visibility 1s, opacity 1s;\n  -ms-transition: visibility 1s, opacity 1s;\n  -o-transition: visibility 1s, opacity 1s;\n  transition: visibility 1s, opacity 1s; }\n\n.video-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display {\n  display: none; }\n\n.vjs-mouse-display .vjs-time-tooltip {\n  color: #fff;\n  background-color: #000;\n  background-color: rgba(0, 0, 0, 0.8); }\n\n.video-js .vjs-slider {\n  position: relative;\n  cursor: pointer;\n  padding: 0;\n  margin: 0 0.45em 0 0.45em;\n  /* iOS Safari */\n  -webkit-touch-callout: none;\n  /* Safari */\n  -webkit-user-select: none;\n  /* Konqueror HTML */\n  -khtml-user-select: none;\n  /* Firefox */\n  -moz-user-select: none;\n  /* Internet Explorer/Edge */\n  -ms-user-select: none;\n  /* Non-prefixed version, currently supported by Chrome and Opera */\n  user-select: none;\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5); }\n\n.video-js .vjs-slider.disabled {\n  cursor: default; }\n\n.video-js .vjs-slider:focus {\n  text-shadow: 0em 0em 1em white;\n  -webkit-box-shadow: 0 0 1em #fff;\n  -moz-box-shadow: 0 0 1em #fff;\n  box-shadow: 0 0 1em #fff; }\n\n.video-js .vjs-mute-control {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none;\n  padding-left: 2em;\n  padding-right: 2em;\n  padding-bottom: 3em; }\n\n.video-js .vjs-volume-control {\n  cursor: pointer;\n  margin-right: 1em;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex; }\n\n.video-js .vjs-volume-control.vjs-volume-horizontal {\n  width: 5em; }\n\n.video-js .vjs-volume-panel .vjs-volume-control {\n  visibility: visible;\n  opacity: 0;\n  width: 1px;\n  height: 1px;\n  margin-left: -1px; }\n\n.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\"; }\n  .vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n  .vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical .vjs-volume-level {\n    -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\"; }\n\n.video-js .vjs-volume-panel {\n  -webkit-transition: width 1s;\n  -moz-transition: width 1s;\n  -ms-transition: width 1s;\n  -o-transition: width 1s;\n  transition: width 1s; }\n  .video-js .vjs-volume-panel:hover .vjs-volume-control,\n  .video-js .vjs-volume-panel:active .vjs-volume-control,\n  .video-js .vjs-volume-panel:focus .vjs-volume-control,\n  .video-js .vjs-volume-panel .vjs-volume-control:hover,\n  .video-js .vjs-volume-panel .vjs-volume-control:active,\n  .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control,\n  .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active {\n    visibility: visible;\n    opacity: 1;\n    position: relative;\n    -webkit-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -moz-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -ms-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -o-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s; }\n    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-horizontal {\n      width: 5em;\n      height: 3em; }\n    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical {\n      -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)\"; }\n      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-level {\n        -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)\"; }\n  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {\n    width: 9em;\n    -webkit-transition: width 0.1s;\n    -moz-transition: width 0.1s;\n    -ms-transition: width 0.1s;\n    -o-transition: width 0.1s;\n    transition: width 0.1s; }\n  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {\n    width: 4em; }\n\n.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  height: 8em;\n  width: 3em;\n  left: -3.5em;\n  -webkit-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -moz-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -ms-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s; }\n\n.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {\n  -webkit-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -moz-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -ms-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s; }\n\n.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {\n  width: 5em;\n  height: 3em;\n  visibility: visible;\n  opacity: 1;\n  position: relative;\n  -webkit-transition: none;\n  -moz-transition: none;\n  -ms-transition: none;\n  -o-transition: none;\n  transition: none; }\n\n.video-js.vjs-no-flex .vjs-volume-control.vjs-volume-vertical,\n.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  position: absolute;\n  bottom: 3em;\n  left: 0.5em; }\n\n.video-js .vjs-volume-panel {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex; }\n\n.video-js .vjs-volume-bar {\n  margin: 1.35em 0.45em; }\n\n.vjs-volume-bar.vjs-slider-horizontal {\n  width: 5em;\n  height: 0.3em; }\n\n.vjs-volume-bar.vjs-slider-vertical {\n  width: 0.3em;\n  height: 5em;\n  margin: 1.35em auto; }\n\n.video-js .vjs-volume-level {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #fff; }\n  .video-js .vjs-volume-level:before {\n    position: absolute;\n    font-size: 0.9em; }\n\n.vjs-slider-vertical .vjs-volume-level {\n  width: 0.3em; }\n  .vjs-slider-vertical .vjs-volume-level:before {\n    top: -0.5em;\n    left: -0.3em; }\n\n.vjs-slider-horizontal .vjs-volume-level {\n  height: 0.3em; }\n  .vjs-slider-horizontal .vjs-volume-level:before {\n    top: -0.3em;\n    right: -0.5em; }\n\n.video-js .vjs-volume-panel.vjs-volume-panel-vertical {\n  width: 4em; }\n\n.vjs-volume-bar.vjs-slider-vertical .vjs-volume-level {\n  height: 100%; }\n\n.vjs-volume-bar.vjs-slider-horizontal .vjs-volume-level {\n  width: 100%; }\n\n.video-js .vjs-volume-vertical {\n  width: 3em;\n  height: 8em;\n  bottom: 8em;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7); }\n\n.video-js .vjs-volume-horizontal .vjs-menu {\n  left: -2em; }\n\n.vjs-poster {\n  display: inline-block;\n  vertical-align: middle;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n  background-size: contain;\n  background-color: #000000;\n  cursor: pointer;\n  margin: 0;\n  padding: 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%; }\n\n.vjs-poster img {\n  display: block;\n  vertical-align: middle;\n  margin: 0 auto;\n  max-height: 100%;\n  padding: 0;\n  width: 100%; }\n\n.vjs-has-started .vjs-poster {\n  display: none; }\n\n.vjs-audio.vjs-has-started .vjs-poster {\n  display: block; }\n\n.vjs-using-native-controls .vjs-poster {\n  display: none; }\n\n.video-js .vjs-live-control {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: flex-start;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: flex-start;\n  align-items: flex-start;\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  font-size: 1em;\n  line-height: 3em; }\n\n.vjs-no-flex .vjs-live-control {\n  display: table-cell;\n  width: auto;\n  text-align: left; }\n\n.video-js .vjs-time-control {\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none;\n  font-size: 1em;\n  line-height: 3em;\n  min-width: 2em;\n  width: auto;\n  padding-left: 1em;\n  padding-right: 1em; }\n\n.vjs-live .vjs-time-control {\n  display: none; }\n\n.video-js .vjs-current-time,\n.vjs-no-flex .vjs-current-time {\n  display: none; }\n\n.vjs-no-flex .vjs-remaining-time.vjs-time-control.vjs-control {\n  width: 0px !important;\n  white-space: nowrap; }\n\n.video-js .vjs-duration,\n.vjs-no-flex .vjs-duration {\n  display: none; }\n\n.vjs-time-divider {\n  display: none;\n  line-height: 3em; }\n\n.vjs-live .vjs-time-divider {\n  display: none; }\n\n.video-js .vjs-play-control .vjs-icon-placeholder {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-text-track-display {\n  position: absolute;\n  bottom: 3em;\n  left: 0;\n  right: 0;\n  top: 0;\n  pointer-events: none; }\n\n.video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {\n  bottom: 1em; }\n\n.video-js .vjs-text-track {\n  font-size: 1.4em;\n  text-align: center;\n  margin-bottom: 0.1em;\n  background-color: #000;\n  background-color: rgba(0, 0, 0, 0.5); }\n\n.vjs-subtitles {\n  color: #fff; }\n\n.vjs-captions {\n  color: #fc6; }\n\n.vjs-tt-cue {\n  display: block; }\n\nvideo::-webkit-media-text-track-display {\n  -moz-transform: translateY(-3em);\n  -ms-transform: translateY(-3em);\n  -o-transform: translateY(-3em);\n  -webkit-transform: translateY(-3em);\n  transform: translateY(-3em); }\n\n.video-js.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {\n  -moz-transform: translateY(-1.5em);\n  -ms-transform: translateY(-1.5em);\n  -o-transform: translateY(-1.5em);\n  -webkit-transform: translateY(-1.5em);\n  transform: translateY(-1.5em); }\n\n.video-js .vjs-fullscreen-control {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-playback-rate > .vjs-menu-button,\n.vjs-playback-rate .vjs-playback-rate-value {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.vjs-playback-rate .vjs-playback-rate-value {\n  pointer-events: none;\n  font-size: 1.5em;\n  line-height: 2;\n  text-align: center; }\n\n.vjs-playback-rate .vjs-menu {\n  width: 4em;\n  left: 0em; }\n\n.vjs-error .vjs-error-display .vjs-modal-dialog-content {\n  font-size: 1.4em;\n  text-align: center; }\n\n.vjs-error .vjs-error-display:before {\n  color: #fff;\n  content: 'X';\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 4em;\n  left: 0;\n  line-height: 1;\n  margin-top: -0.5em;\n  position: absolute;\n  text-shadow: 0.05em 0.05em 0.1em #000;\n  text-align: center;\n  top: 50%;\n  vertical-align: middle;\n  width: 100%; }\n\n.vjs-loading-spinner {\n  display: none;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin: -25px 0 0 -25px;\n  opacity: 0.85;\n  text-align: left;\n  border: 6px solid rgba(43, 51, 63, 0.7);\n  box-sizing: border-box;\n  background-clip: padding-box;\n  width: 50px;\n  height: 50px;\n  border-radius: 25px;\n  visibility: hidden; }\n\n.vjs-seeking .vjs-loading-spinner,\n.vjs-waiting .vjs-loading-spinner {\n  display: block;\n  animation: 0s linear 0.3s forwards vjs-spinner-show; }\n\n.vjs-loading-spinner:before,\n.vjs-loading-spinner:after {\n  content: \"\";\n  position: absolute;\n  margin: -6px;\n  box-sizing: inherit;\n  width: inherit;\n  height: inherit;\n  border-radius: inherit;\n  opacity: 1;\n  border: inherit;\n  border-color: transparent;\n  border-top-color: white; }\n\n.vjs-seeking .vjs-loading-spinner:before,\n.vjs-seeking .vjs-loading-spinner:after,\n.vjs-waiting .vjs-loading-spinner:before,\n.vjs-waiting .vjs-loading-spinner:after {\n  -webkit-animation: vjs-spinner-spin 1.1s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, vjs-spinner-fade 1.1s linear infinite;\n  animation: vjs-spinner-spin 1.1s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, vjs-spinner-fade 1.1s linear infinite; }\n\n.vjs-seeking .vjs-loading-spinner:before,\n.vjs-waiting .vjs-loading-spinner:before {\n  border-top-color: white; }\n\n.vjs-seeking .vjs-loading-spinner:after,\n.vjs-waiting .vjs-loading-spinner:after {\n  border-top-color: white;\n  -webkit-animation-delay: 0.44s;\n  animation-delay: 0.44s; }\n\n@keyframes vjs-spinner-show {\n  to {\n    visibility: visible; } }\n\n@-webkit-keyframes vjs-spinner-show {\n  to {\n    visibility: visible; } }\n\n@keyframes vjs-spinner-spin {\n  100% {\n    transform: rotate(360deg); } }\n\n@-webkit-keyframes vjs-spinner-spin {\n  100% {\n    -webkit-transform: rotate(360deg); } }\n\n@keyframes vjs-spinner-fade {\n  0% {\n    border-top-color: #73859f; }\n  20% {\n    border-top-color: #73859f; }\n  35% {\n    border-top-color: white; }\n  60% {\n    border-top-color: #73859f; }\n  100% {\n    border-top-color: #73859f; } }\n\n@-webkit-keyframes vjs-spinner-fade {\n  0% {\n    border-top-color: #73859f; }\n  20% {\n    border-top-color: #73859f; }\n  35% {\n    border-top-color: white; }\n  60% {\n    border-top-color: #73859f; }\n  100% {\n    border-top-color: #73859f; } }\n\n.vjs-chapters-button .vjs-menu ul {\n  width: 24em; }\n\n.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {\n  vertical-align: middle;\n  display: inline-block;\n  margin-bottom: -0.1em; }\n\n.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {\n  font-family: VideoJS;\n  content: \"\\F10D\";\n  font-size: 1.5em;\n  line-height: inherit; }\n\n.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder {\n  vertical-align: middle;\n  display: inline-block;\n  margin-bottom: -0.1em; }\n\n.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {\n  font-family: VideoJS;\n  content: \" \\F11D\";\n  font-size: 1.5em;\n  line-height: inherit; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-custom-control-spacer {\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen).vjs-no-flex .vjs-custom-control-spacer {\n  width: auto; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-playback-rate, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-progress-control,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-audio-button {\n  display: none; }\n\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-playback-rate,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-audio-button {\n  display: none; }\n\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-playback-rate,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-subtitles-button .vjs-audio-button {\n  display: none; }\n\n.vjs-modal-dialog.vjs-text-track-settings {\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.75);\n  color: #fff;\n  height: 70%; }\n\n.vjs-text-track-settings .vjs-modal-dialog-content {\n  display: table; }\n\n.vjs-text-track-settings .vjs-track-settings-colors,\n.vjs-text-track-settings .vjs-track-settings-font,\n.vjs-text-track-settings .vjs-track-settings-controls {\n  display: table-cell; }\n\n.vjs-text-track-settings .vjs-track-settings-controls {\n  text-align: right;\n  vertical-align: bottom; }\n\n@supports (display: grid) {\n  .vjs-text-track-settings .vjs-modal-dialog-content {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    grid-template-rows: 1fr auto; }\n  .vjs-text-track-settings .vjs-track-settings-colors {\n    display: block;\n    grid-column: 1;\n    grid-row: 1; }\n  .vjs-text-track-settings .vjs-track-settings-font {\n    grid-column: 2;\n    grid-row: 1; }\n  .vjs-text-track-settings .vjs-track-settings-controls {\n    grid-column: 2;\n    grid-row: 2; } }\n\n.vjs-track-setting > select {\n  margin-right: 5px; }\n\n.vjs-text-track-settings fieldset {\n  margin: 5px;\n  padding: 3px;\n  border: none; }\n\n.vjs-text-track-settings fieldset span {\n  display: inline-block; }\n\n.vjs-text-track-settings legend {\n  color: #fff;\n  margin: 0 0 5px 0; }\n\n.vjs-text-track-settings .vjs-label {\n  position: absolute;\n  clip: rect(1px 1px 1px 1px);\n  clip: rect(1px, 1px, 1px, 1px);\n  display: block;\n  margin: 0 0 5px 0;\n  padding: 0;\n  border: 0;\n  height: 1px;\n  width: 1px;\n  overflow: hidden; }\n\n.vjs-track-settings-controls button:focus,\n.vjs-track-settings-controls button:active {\n  outline-style: solid;\n  outline-width: medium;\n  background-image: linear-gradient(0deg, #fff 88%, #73859f 100%); }\n\n.vjs-track-settings-controls button:hover {\n  color: rgba(43, 51, 63, 0.75); }\n\n.vjs-track-settings-controls button {\n  background-color: #fff;\n  background-image: linear-gradient(-180deg, #fff 88%, #73859f 100%);\n  color: #2B333F;\n  cursor: pointer;\n  border-radius: 2px; }\n\n.vjs-track-settings-controls .vjs-default-button {\n  margin-right: 1em; }\n\n@media print {\n  .video-js > *:not(.vjs-tech):not(.vjs-poster) {\n    visibility: hidden; } }\n\n.vjs-resize-manager {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n  visibility: hidden; }\n\n@media \\0screen {\n  .vjs-user-inactive.vjs-playing .vjs-control-bar :before {\n    content: \"\";\n  }\n}\n\n@media \\0screen {\n  .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n    visibility: hidden;\n  }\n}\n", ""]);
+exports.push([module.i, ".video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before, .video-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before {\n  text-align: center; }\n\n@font-face {\n  font-family: VideoJS;\n  src: url(" + escape(__webpack_require__(116)) + "?#iefix) format(\"eot\"); }\n\n@font-face {\n  font-family: VideoJS;\n  src: url(data:application/font-woff;charset=utf-8;base64,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) format(\"woff\"), url(data:application/x-font-ttf;charset=utf-8;base64,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AG8AbgB0AGUAbABsAG8AIABwAHIAbwBqAGUAYwB0AC4AaAB0AHQAcAA6AC8ALwBmAG8AbgB0AGUAbABsAG8ALgBjAG8AbQAAAAIAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQECAQMBBAEFAQYBBwEIAQkBCgELAQwBDQEOAQ8BEAERARIBEwEUARUBFgEXARgBGQEaARsBHAEdAR4BHwEgASEBIgAEcGxheQtwbGF5LWNpcmNsZQVwYXVzZQt2b2x1bWUtbXV0ZQp2b2x1bWUtbG93CnZvbHVtZS1taWQLdm9sdW1lLWhpZ2gQZnVsbHNjcmVlbi1lbnRlcg9mdWxsc2NyZWVuLWV4aXQGc3F1YXJlB3NwaW5uZXIJc3VidGl0bGVzCGNhcHRpb25zCGNoYXB0ZXJzBXNoYXJlA2NvZwZjaXJjbGUOY2lyY2xlLW91dGxpbmUTY2lyY2xlLWlubmVyLWNpcmNsZQJoZAZjYW5jZWwGcmVwbGF5CGZhY2Vib29rBWdwbHVzCGxpbmtlZGluB3R3aXR0ZXIGdHVtYmxyCXBpbnRlcmVzdBFhdWRpby1kZXNjcmlwdGlvbgVhdWRpbwluZXh0LWl0ZW0NcHJldmlvdXMtaXRlbQAAAAA=) format(\"truetype\");\n  font-weight: normal;\n  font-style: normal; }\n\n.vjs-icon-play, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-play:before, .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before {\n    content: \"\\F101\"; }\n\n.vjs-icon-play-circle {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-play-circle:before {\n    content: \"\\F102\"; }\n\n.vjs-icon-pause, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-pause:before, .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {\n    content: \"\\F103\"; }\n\n.vjs-icon-volume-mute, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-mute:before, .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {\n    content: \"\\F104\"; }\n\n.vjs-icon-volume-low, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-low:before, .video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder:before {\n    content: \"\\F105\"; }\n\n.vjs-icon-volume-mid, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-mid:before, .video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder:before {\n    content: \"\\F106\"; }\n\n.vjs-icon-volume-high, .video-js .vjs-mute-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-volume-high:before, .video-js .vjs-mute-control .vjs-icon-placeholder:before {\n    content: \"\\F107\"; }\n\n.vjs-icon-fullscreen-enter, .video-js .vjs-fullscreen-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-fullscreen-enter:before, .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {\n    content: \"\\F108\"; }\n\n.vjs-icon-fullscreen-exit, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-fullscreen-exit:before, .video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before {\n    content: \"\\F109\"; }\n\n.vjs-icon-square {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-square:before {\n    content: \"\\F10A\"; }\n\n.vjs-icon-spinner {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-spinner:before {\n    content: \"\\F10B\"; }\n\n.vjs-icon-subtitles, .video-js .vjs-subtitles-button .vjs-icon-placeholder, .video-js .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-subtitles:before, .video-js .vjs-subtitles-button .vjs-icon-placeholder:before, .video-js .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-GB) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-IE) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-AU) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js.video-js:lang(en-NZ) .vjs-subs-caps-button .vjs-icon-placeholder:before {\n    content: \"\\F10C\"; }\n\n.vjs-icon-captions, .video-js .vjs-captions-button .vjs-icon-placeholder, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder,\n.video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-captions:before, .video-js .vjs-captions-button .vjs-icon-placeholder:before, .video-js:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder:before,\n  .video-js:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder:before {\n    content: \"\\F10D\"; }\n\n.vjs-icon-chapters, .video-js .vjs-chapters-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-chapters:before, .video-js .vjs-chapters-button .vjs-icon-placeholder:before {\n    content: \"\\F10E\"; }\n\n.vjs-icon-share {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-share:before {\n    content: \"\\F10F\"; }\n\n.vjs-icon-cog {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-cog:before {\n    content: \"\\F110\"; }\n\n.vjs-icon-circle, .video-js .vjs-play-progress, .video-js .vjs-volume-level {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle:before, .video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before {\n    content: \"\\F111\"; }\n\n.vjs-icon-circle-outline {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle-outline:before {\n    content: \"\\F112\"; }\n\n.vjs-icon-circle-inner-circle {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-circle-inner-circle:before {\n    content: \"\\F113\"; }\n\n.vjs-icon-hd {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-hd:before {\n    content: \"\\F114\"; }\n\n.vjs-icon-cancel, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-cancel:before, .video-js .vjs-control.vjs-close-button .vjs-icon-placeholder:before {\n    content: \"\\F115\"; }\n\n.vjs-icon-replay, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-replay:before, .video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder:before {\n    content: \"\\F116\"; }\n\n.vjs-icon-facebook {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-facebook:before {\n    content: \"\\F117\"; }\n\n.vjs-icon-gplus {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-gplus:before {\n    content: \"\\F118\"; }\n\n.vjs-icon-linkedin {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-linkedin:before {\n    content: \"\\F119\"; }\n\n.vjs-icon-twitter {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-twitter:before {\n    content: \"\\F11A\"; }\n\n.vjs-icon-tumblr {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-tumblr:before {\n    content: \"\\F11B\"; }\n\n.vjs-icon-pinterest {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-pinterest:before {\n    content: \"\\F11C\"; }\n\n.vjs-icon-audio-description, .video-js .vjs-descriptions-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-audio-description:before, .video-js .vjs-descriptions-button .vjs-icon-placeholder:before {\n    content: \"\\F11D\"; }\n\n.vjs-icon-audio, .video-js .vjs-audio-button .vjs-icon-placeholder {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-audio:before, .video-js .vjs-audio-button .vjs-icon-placeholder:before {\n    content: \"\\F11E\"; }\n\n.vjs-icon-next-item {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-next-item:before {\n    content: \"\\F11F\"; }\n\n.vjs-icon-previous-item {\n  font-family: VideoJS;\n  font-weight: normal;\n  font-style: normal; }\n  .vjs-icon-previous-item:before {\n    content: \"\\F120\"; }\n\n.video-js {\n  display: block;\n  vertical-align: top;\n  box-sizing: border-box;\n  color: #fff;\n  background-color: #000;\n  position: relative;\n  padding: 0;\n  font-size: 10px;\n  line-height: 1;\n  font-weight: normal;\n  font-style: normal;\n  font-family: Arial, Helvetica, sans-serif;\n  word-break: initial; }\n  .video-js:-moz-full-screen {\n    position: absolute; }\n  .video-js:-webkit-full-screen {\n    width: 100% !important;\n    height: 100% !important; }\n\n.video-js[tabindex=\"-1\"] {\n  outline: none; }\n\n.video-js *,\n.video-js *:before,\n.video-js *:after {\n  box-sizing: inherit; }\n\n.video-js ul {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n  list-style-position: outside;\n  margin-left: 0;\n  margin-right: 0;\n  margin-top: 0;\n  margin-bottom: 0; }\n\n.video-js.vjs-fluid,\n.video-js.vjs-16-9,\n.video-js.vjs-4-3 {\n  width: 100%;\n  max-width: 100%;\n  height: 0; }\n\n.video-js.vjs-16-9 {\n  padding-top: 56.25%; }\n\n.video-js.vjs-4-3 {\n  padding-top: 75%; }\n\n.video-js.vjs-fill {\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-tech {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\nbody.vjs-full-window {\n  padding: 0;\n  margin: 0;\n  height: 100%;\n  overflow-y: auto; }\n\n.vjs-full-window .video-js.vjs-fullscreen {\n  position: fixed;\n  overflow: hidden;\n  z-index: 1000;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0; }\n\n.video-js.vjs-fullscreen {\n  width: 100% !important;\n  height: 100% !important;\n  padding-top: 0 !important; }\n\n.video-js.vjs-fullscreen.vjs-user-inactive {\n  cursor: none; }\n\n.vjs-hidden {\n  display: none !important; }\n\n.vjs-disabled {\n  opacity: 0.5;\n  cursor: default; }\n\n.video-js .vjs-offscreen {\n  height: 1px;\n  left: -9999px;\n  position: absolute;\n  top: 0;\n  width: 1px; }\n\n.vjs-lock-showing {\n  display: block !important;\n  opacity: 1;\n  visibility: visible; }\n\n.vjs-no-js {\n  padding: 20px;\n  color: #fff;\n  background-color: #000;\n  font-size: 18px;\n  font-family: Arial, Helvetica, sans-serif;\n  text-align: center;\n  width: 300px;\n  height: 150px;\n  margin: 0px auto; }\n\n.vjs-no-js a,\n.vjs-no-js a:visited {\n  color: #66A8CC; }\n\n.video-js .vjs-big-play-button {\n  font-size: 3em;\n  line-height: 1.5em;\n  height: 1.5em;\n  width: 3em;\n  display: block;\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  padding: 0;\n  cursor: pointer;\n  opacity: 1;\n  border: 0.06666em solid #fff;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7);\n  -webkit-border-radius: 0.3em;\n  -moz-border-radius: 0.3em;\n  border-radius: 0.3em;\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s; }\n\n.vjs-big-play-centered .vjs-big-play-button {\n  top: 50%;\n  left: 50%;\n  margin-top: -0.75em;\n  margin-left: -1.5em; }\n\n.video-js:hover .vjs-big-play-button,\n.video-js .vjs-big-play-button:focus {\n  border-color: #fff;\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5);\n  -webkit-transition: all 0s;\n  -moz-transition: all 0s;\n  -ms-transition: all 0s;\n  -o-transition: all 0s;\n  transition: all 0s; }\n\n.vjs-controls-disabled .vjs-big-play-button,\n.vjs-has-started .vjs-big-play-button,\n.vjs-using-native-controls .vjs-big-play-button,\n.vjs-error .vjs-big-play-button {\n  display: none; }\n\n.vjs-has-started.vjs-paused.vjs-show-big-play-button-on-pause .vjs-big-play-button {\n  display: block; }\n\n.video-js button {\n  background: none;\n  border: none;\n  color: inherit;\n  display: inline-block;\n  overflow: visible;\n  font-size: inherit;\n  line-height: inherit;\n  text-transform: none;\n  text-decoration: none;\n  transition: none;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none; }\n\n.vjs-control .vjs-button {\n  width: 100%;\n  height: 100%; }\n\n.video-js .vjs-control.vjs-close-button {\n  cursor: pointer;\n  height: 3em;\n  position: absolute;\n  right: 0;\n  top: 0.5em;\n  z-index: 2; }\n\n.video-js .vjs-modal-dialog {\n  background: rgba(0, 0, 0, 0.8);\n  background: -webkit-linear-gradient(-90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));\n  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));\n  overflow: auto;\n  box-sizing: content-box; }\n\n.video-js .vjs-modal-dialog > * {\n  box-sizing: border-box; }\n\n.vjs-modal-dialog .vjs-modal-dialog-content {\n  font-size: 1.2em;\n  line-height: 1.5;\n  padding: 20px 24px;\n  z-index: 1; }\n\n.vjs-menu-button {\n  cursor: pointer; }\n\n.vjs-menu-button.vjs-disabled {\n  cursor: default; }\n\n.vjs-workinghover .vjs-menu-button.vjs-disabled:hover .vjs-menu {\n  display: none; }\n\n.vjs-menu .vjs-menu-content {\n  display: block;\n  padding: 0;\n  margin: 0;\n  font-family: Arial, Helvetica, sans-serif;\n  overflow: auto;\n  box-sizing: content-box; }\n\n.vjs-menu .vjs-menu-content > * {\n  box-sizing: border-box; }\n\n.vjs-scrubbing .vjs-menu-button:hover .vjs-menu {\n  display: none; }\n\n.vjs-menu li {\n  list-style: none;\n  margin: 0;\n  padding: 0.2em 0;\n  line-height: 1.4em;\n  font-size: 1.2em;\n  text-align: center;\n  text-transform: lowercase; }\n\n.vjs-menu li.vjs-menu-item:focus,\n.vjs-menu li.vjs-menu-item:hover {\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5); }\n\n.vjs-menu li.vjs-selected,\n.vjs-menu li.vjs-selected:focus,\n.vjs-menu li.vjs-selected:hover {\n  background-color: #fff;\n  color: #2B333F; }\n\n.vjs-menu li.vjs-menu-title {\n  text-align: center;\n  text-transform: uppercase;\n  font-size: 1em;\n  line-height: 2em;\n  padding: 0;\n  margin: 0 0 0.3em 0;\n  font-weight: bold;\n  cursor: default; }\n\n.vjs-menu-button-popup .vjs-menu {\n  display: none;\n  position: absolute;\n  bottom: 0;\n  width: 10em;\n  left: -3em;\n  height: 0em;\n  margin-bottom: 1.5em;\n  border-top-color: rgba(43, 51, 63, 0.7); }\n\n.vjs-menu-button-popup .vjs-menu .vjs-menu-content {\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7);\n  position: absolute;\n  width: 100%;\n  bottom: 1.5em;\n  max-height: 15em; }\n\n.vjs-workinghover .vjs-menu-button-popup:hover .vjs-menu,\n.vjs-menu-button-popup .vjs-menu.vjs-lock-showing {\n  display: block; }\n\n.video-js .vjs-menu-button-inline {\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s;\n  overflow: hidden; }\n\n.video-js .vjs-menu-button-inline:before {\n  width: 2.222222222em; }\n\n.video-js .vjs-menu-button-inline:hover,\n.video-js .vjs-menu-button-inline:focus,\n.video-js .vjs-menu-button-inline.vjs-slider-active,\n.video-js.vjs-no-flex .vjs-menu-button-inline {\n  width: 12em; }\n\n.vjs-menu-button-inline .vjs-menu {\n  opacity: 0;\n  height: 100%;\n  width: auto;\n  position: absolute;\n  left: 4em;\n  top: 0;\n  padding: 0;\n  margin: 0;\n  -webkit-transition: all 0.4s;\n  -moz-transition: all 0.4s;\n  -ms-transition: all 0.4s;\n  -o-transition: all 0.4s;\n  transition: all 0.4s; }\n\n.vjs-menu-button-inline:hover .vjs-menu,\n.vjs-menu-button-inline:focus .vjs-menu,\n.vjs-menu-button-inline.vjs-slider-active .vjs-menu {\n  display: block;\n  opacity: 1; }\n\n.vjs-no-flex .vjs-menu-button-inline .vjs-menu {\n  display: block;\n  opacity: 1;\n  position: relative;\n  width: auto; }\n\n.vjs-no-flex .vjs-menu-button-inline:hover .vjs-menu,\n.vjs-no-flex .vjs-menu-button-inline:focus .vjs-menu,\n.vjs-no-flex .vjs-menu-button-inline.vjs-slider-active .vjs-menu {\n  width: auto; }\n\n.vjs-menu-button-inline .vjs-menu-content {\n  width: auto;\n  height: 100%;\n  margin: 0;\n  overflow: hidden; }\n\n.video-js .vjs-control-bar {\n  display: none;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 3.0em;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7); }\n\n.vjs-has-started .vjs-control-bar {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  visibility: visible;\n  opacity: 1;\n  -webkit-transition: visibility 0.1s, opacity 0.1s;\n  -moz-transition: visibility 0.1s, opacity 0.1s;\n  -ms-transition: visibility 0.1s, opacity 0.1s;\n  -o-transition: visibility 0.1s, opacity 0.1s;\n  transition: visibility 0.1s, opacity 0.1s; }\n\n.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n  visibility: visible;\n  opacity: 0;\n  -webkit-transition: visibility 1s, opacity 1s;\n  -moz-transition: visibility 1s, opacity 1s;\n  -ms-transition: visibility 1s, opacity 1s;\n  -o-transition: visibility 1s, opacity 1s;\n  transition: visibility 1s, opacity 1s; }\n\n.vjs-controls-disabled .vjs-control-bar,\n.vjs-using-native-controls .vjs-control-bar,\n.vjs-error .vjs-control-bar {\n  display: none !important; }\n\n.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n  opacity: 1;\n  visibility: visible; }\n\n.vjs-has-started.vjs-no-flex .vjs-control-bar {\n  display: table; }\n\n.video-js .vjs-control {\n  position: relative;\n  text-align: center;\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  width: 4em;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-button > .vjs-icon-placeholder:before {\n  font-size: 1.8em;\n  line-height: 1.67; }\n\n.video-js .vjs-control:focus:before,\n.video-js .vjs-control:hover:before,\n.video-js .vjs-control:focus {\n  text-shadow: 0em 0em 1em white; }\n\n.video-js .vjs-control-text {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px; }\n\n.vjs-no-flex .vjs-control {\n  display: table-cell;\n  vertical-align: middle; }\n\n.video-js .vjs-custom-control-spacer {\n  display: none; }\n\n.video-js .vjs-progress-control {\n  cursor: pointer;\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  align-items: center;\n  min-width: 4em;\n  touch-action: none; }\n\n.video-js .vjs-progress-control.disabled {\n  cursor: default; }\n\n.vjs-live .vjs-progress-control {\n  display: none; }\n\n.vjs-no-flex .vjs-progress-control {\n  width: auto; }\n\n.video-js .vjs-progress-holder {\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  -webkit-transition: all 0.2s;\n  -moz-transition: all 0.2s;\n  -ms-transition: all 0.2s;\n  -o-transition: all 0.2s;\n  transition: all 0.2s;\n  height: 0.3em; }\n\n.video-js .vjs-progress-control .vjs-progress-holder {\n  margin: 0 10px; }\n\n.video-js .vjs-progress-control:hover .vjs-progress-holder {\n  font-size: 1.666666666666666666em; }\n\n.video-js .vjs-progress-control:hover .vjs-progress-holder.disabled {\n  font-size: 1em; }\n\n.video-js .vjs-progress-holder .vjs-play-progress,\n.video-js .vjs-progress-holder .vjs-load-progress,\n.video-js .vjs-progress-holder .vjs-load-progress div {\n  position: absolute;\n  display: block;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  width: 0;\n  left: 0;\n  top: 0; }\n\n.video-js .vjs-play-progress {\n  background-color: #fff; }\n  .video-js .vjs-play-progress:before {\n    font-size: 0.9em;\n    position: absolute;\n    right: -0.5em;\n    top: -0.333333333333333em;\n    z-index: 1; }\n\n.video-js .vjs-load-progress {\n  background: #bfc7d3;\n  background: rgba(115, 133, 159, 0.5); }\n\n.video-js .vjs-load-progress div {\n  background: white;\n  background: rgba(115, 133, 159, 0.75); }\n\n.video-js .vjs-time-tooltip {\n  background-color: #fff;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-border-radius: 0.3em;\n  -moz-border-radius: 0.3em;\n  border-radius: 0.3em;\n  color: #000;\n  float: right;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 1em;\n  padding: 6px 8px 8px 8px;\n  pointer-events: none;\n  position: absolute;\n  top: -3.4em;\n  visibility: hidden;\n  z-index: 1; }\n\n.video-js .vjs-progress-holder:focus .vjs-time-tooltip {\n  display: none; }\n\n.video-js .vjs-progress-control:hover .vjs-time-tooltip,\n.video-js .vjs-progress-control:hover .vjs-progress-holder:focus .vjs-time-tooltip {\n  display: block;\n  font-size: 0.6em;\n  visibility: visible; }\n\n.video-js .vjs-progress-control.disabled:hover .vjs-time-tooltip {\n  font-size: 1em; }\n\n.video-js .vjs-progress-control .vjs-mouse-display {\n  display: none;\n  position: absolute;\n  width: 1px;\n  height: 100%;\n  background-color: #000;\n  z-index: 1; }\n\n.vjs-no-flex .vjs-progress-control .vjs-mouse-display {\n  z-index: 0; }\n\n.video-js .vjs-progress-control:hover .vjs-mouse-display {\n  display: block; }\n\n.video-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display {\n  visibility: hidden;\n  opacity: 0;\n  -webkit-transition: visibility 1s, opacity 1s;\n  -moz-transition: visibility 1s, opacity 1s;\n  -ms-transition: visibility 1s, opacity 1s;\n  -o-transition: visibility 1s, opacity 1s;\n  transition: visibility 1s, opacity 1s; }\n\n.video-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display {\n  display: none; }\n\n.vjs-mouse-display .vjs-time-tooltip {\n  color: #fff;\n  background-color: #000;\n  background-color: rgba(0, 0, 0, 0.8); }\n\n.video-js .vjs-slider {\n  position: relative;\n  cursor: pointer;\n  padding: 0;\n  margin: 0 0.45em 0 0.45em;\n  /* iOS Safari */\n  -webkit-touch-callout: none;\n  /* Safari */\n  -webkit-user-select: none;\n  /* Konqueror HTML */\n  -khtml-user-select: none;\n  /* Firefox */\n  -moz-user-select: none;\n  /* Internet Explorer/Edge */\n  -ms-user-select: none;\n  /* Non-prefixed version, currently supported by Chrome and Opera */\n  user-select: none;\n  background-color: #73859f;\n  background-color: rgba(115, 133, 159, 0.5); }\n\n.video-js .vjs-slider.disabled {\n  cursor: default; }\n\n.video-js .vjs-slider:focus {\n  text-shadow: 0em 0em 1em white;\n  -webkit-box-shadow: 0 0 1em #fff;\n  -moz-box-shadow: 0 0 1em #fff;\n  box-shadow: 0 0 1em #fff; }\n\n.video-js .vjs-mute-control {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none;\n  padding-left: 2em;\n  padding-right: 2em;\n  padding-bottom: 3em; }\n\n.video-js .vjs-volume-control {\n  cursor: pointer;\n  margin-right: 1em;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex; }\n\n.video-js .vjs-volume-control.vjs-volume-horizontal {\n  width: 5em; }\n\n.video-js .vjs-volume-panel .vjs-volume-control {\n  visibility: visible;\n  opacity: 0;\n  width: 1px;\n  height: 1px;\n  margin-left: -1px; }\n\n.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\"; }\n  .vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n  .vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical .vjs-volume-level {\n    -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\"; }\n\n.video-js .vjs-volume-panel {\n  -webkit-transition: width 1s;\n  -moz-transition: width 1s;\n  -ms-transition: width 1s;\n  -o-transition: width 1s;\n  transition: width 1s; }\n  .video-js .vjs-volume-panel:hover .vjs-volume-control,\n  .video-js .vjs-volume-panel:active .vjs-volume-control,\n  .video-js .vjs-volume-panel:focus .vjs-volume-control,\n  .video-js .vjs-volume-panel .vjs-volume-control:hover,\n  .video-js .vjs-volume-panel .vjs-volume-control:active,\n  .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control,\n  .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active {\n    visibility: visible;\n    opacity: 1;\n    position: relative;\n    -webkit-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -moz-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -ms-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    -o-transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s;\n    transition: visibility 0.1s, opacity 0.1s, height 0.1s, width 0.1s, left 0s, top 0s; }\n    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-horizontal,\n    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-horizontal {\n      width: 5em;\n      height: 3em; }\n    .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical,\n    .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical {\n      -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)\"; }\n      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control:hover.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-mute-control:hover ~ .vjs-volume-control.vjs-volume-vertical .vjs-volume-level,\n      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-bar,\n      .video-js .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-vertical .vjs-volume-level {\n        -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)\"; }\n  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:hover, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {\n    width: 9em;\n    -webkit-transition: width 0.1s;\n    -moz-transition: width 0.1s;\n    -ms-transition: width 0.1s;\n    -o-transition: width 0.1s;\n    transition: width 0.1s; }\n  .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {\n    width: 4em; }\n\n.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  height: 8em;\n  width: 3em;\n  left: -3.5em;\n  -webkit-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -moz-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -ms-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s;\n  transition: visibility 1s, opacity 1s, height 1s 1s, width 1s 1s, left 1s 1s, top 1s 1s; }\n\n.video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {\n  -webkit-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -moz-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -ms-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  -o-transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s;\n  transition: visibility 1s, opacity 1s, height 1s 1s, width 1s, left 1s 1s, top 1s 1s; }\n\n.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {\n  width: 5em;\n  height: 3em;\n  visibility: visible;\n  opacity: 1;\n  position: relative;\n  -webkit-transition: none;\n  -moz-transition: none;\n  -ms-transition: none;\n  -o-transition: none;\n  transition: none; }\n\n.video-js.vjs-no-flex .vjs-volume-control.vjs-volume-vertical,\n.video-js.vjs-no-flex .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical {\n  position: absolute;\n  bottom: 3em;\n  left: 0.5em; }\n\n.video-js .vjs-volume-panel {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex; }\n\n.video-js .vjs-volume-bar {\n  margin: 1.35em 0.45em; }\n\n.vjs-volume-bar.vjs-slider-horizontal {\n  width: 5em;\n  height: 0.3em; }\n\n.vjs-volume-bar.vjs-slider-vertical {\n  width: 0.3em;\n  height: 5em;\n  margin: 1.35em auto; }\n\n.video-js .vjs-volume-level {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background-color: #fff; }\n  .video-js .vjs-volume-level:before {\n    position: absolute;\n    font-size: 0.9em; }\n\n.vjs-slider-vertical .vjs-volume-level {\n  width: 0.3em; }\n  .vjs-slider-vertical .vjs-volume-level:before {\n    top: -0.5em;\n    left: -0.3em; }\n\n.vjs-slider-horizontal .vjs-volume-level {\n  height: 0.3em; }\n  .vjs-slider-horizontal .vjs-volume-level:before {\n    top: -0.3em;\n    right: -0.5em; }\n\n.video-js .vjs-volume-panel.vjs-volume-panel-vertical {\n  width: 4em; }\n\n.vjs-volume-bar.vjs-slider-vertical .vjs-volume-level {\n  height: 100%; }\n\n.vjs-volume-bar.vjs-slider-horizontal .vjs-volume-level {\n  width: 100%; }\n\n.video-js .vjs-volume-vertical {\n  width: 3em;\n  height: 8em;\n  bottom: 8em;\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.7); }\n\n.video-js .vjs-volume-horizontal .vjs-menu {\n  left: -2em; }\n\n.vjs-poster {\n  display: inline-block;\n  vertical-align: middle;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n  background-size: contain;\n  background-color: #000000;\n  cursor: pointer;\n  margin: 0;\n  padding: 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 100%; }\n\n.vjs-poster img {\n  display: block;\n  vertical-align: middle;\n  margin: 0 auto;\n  max-height: 100%;\n  padding: 0;\n  width: 100%; }\n\n.vjs-has-started .vjs-poster {\n  display: none; }\n\n.vjs-audio.vjs-has-started .vjs-poster {\n  display: block; }\n\n.vjs-using-native-controls .vjs-poster {\n  display: none; }\n\n.video-js .vjs-live-control {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: flex-start;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: flex-start;\n  align-items: flex-start;\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto;\n  font-size: 1em;\n  line-height: 3em; }\n\n.vjs-no-flex .vjs-live-control {\n  display: table-cell;\n  width: auto;\n  text-align: left; }\n\n.video-js .vjs-time-control {\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none;\n  font-size: 1em;\n  line-height: 3em;\n  min-width: 2em;\n  width: auto;\n  padding-left: 1em;\n  padding-right: 1em; }\n\n.vjs-live .vjs-time-control {\n  display: none; }\n\n.video-js .vjs-current-time,\n.vjs-no-flex .vjs-current-time {\n  display: none; }\n\n.vjs-no-flex .vjs-remaining-time.vjs-time-control.vjs-control {\n  width: 0px !important;\n  white-space: nowrap; }\n\n.video-js .vjs-duration,\n.vjs-no-flex .vjs-duration {\n  display: none; }\n\n.vjs-time-divider {\n  display: none;\n  line-height: 3em; }\n\n.vjs-live .vjs-time-divider {\n  display: none; }\n\n.video-js .vjs-play-control .vjs-icon-placeholder {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-text-track-display {\n  position: absolute;\n  bottom: 3em;\n  left: 0;\n  right: 0;\n  top: 0;\n  pointer-events: none; }\n\n.video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {\n  bottom: 1em; }\n\n.video-js .vjs-text-track {\n  font-size: 1.4em;\n  text-align: center;\n  margin-bottom: 0.1em;\n  background-color: #000;\n  background-color: rgba(0, 0, 0, 0.5); }\n\n.vjs-subtitles {\n  color: #fff; }\n\n.vjs-captions {\n  color: #fc6; }\n\n.vjs-tt-cue {\n  display: block; }\n\nvideo::-webkit-media-text-track-display {\n  -moz-transform: translateY(-3em);\n  -ms-transform: translateY(-3em);\n  -o-transform: translateY(-3em);\n  -webkit-transform: translateY(-3em);\n  transform: translateY(-3em); }\n\n.video-js.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {\n  -moz-transform: translateY(-1.5em);\n  -ms-transform: translateY(-1.5em);\n  -o-transform: translateY(-1.5em);\n  -webkit-transform: translateY(-1.5em);\n  transform: translateY(-1.5em); }\n\n.video-js .vjs-fullscreen-control {\n  cursor: pointer;\n  -webkit-box-flex: none;\n  -moz-box-flex: none;\n  -webkit-flex: none;\n  -ms-flex: none;\n  flex: none; }\n\n.vjs-playback-rate > .vjs-menu-button,\n.vjs-playback-rate .vjs-playback-rate-value {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.vjs-playback-rate .vjs-playback-rate-value {\n  pointer-events: none;\n  font-size: 1.5em;\n  line-height: 2;\n  text-align: center; }\n\n.vjs-playback-rate .vjs-menu {\n  width: 4em;\n  left: 0em; }\n\n.vjs-error .vjs-error-display .vjs-modal-dialog-content {\n  font-size: 1.4em;\n  text-align: center; }\n\n.vjs-error .vjs-error-display:before {\n  color: #fff;\n  content: 'X';\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 4em;\n  left: 0;\n  line-height: 1;\n  margin-top: -0.5em;\n  position: absolute;\n  text-shadow: 0.05em 0.05em 0.1em #000;\n  text-align: center;\n  top: 50%;\n  vertical-align: middle;\n  width: 100%; }\n\n.vjs-loading-spinner {\n  display: none;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin: -25px 0 0 -25px;\n  opacity: 0.85;\n  text-align: left;\n  border: 6px solid rgba(43, 51, 63, 0.7);\n  box-sizing: border-box;\n  background-clip: padding-box;\n  width: 50px;\n  height: 50px;\n  border-radius: 25px;\n  visibility: hidden; }\n\n.vjs-seeking .vjs-loading-spinner,\n.vjs-waiting .vjs-loading-spinner {\n  display: block;\n  animation: 0s linear 0.3s forwards vjs-spinner-show; }\n\n.vjs-loading-spinner:before,\n.vjs-loading-spinner:after {\n  content: \"\";\n  position: absolute;\n  margin: -6px;\n  box-sizing: inherit;\n  width: inherit;\n  height: inherit;\n  border-radius: inherit;\n  opacity: 1;\n  border: inherit;\n  border-color: transparent;\n  border-top-color: white; }\n\n.vjs-seeking .vjs-loading-spinner:before,\n.vjs-seeking .vjs-loading-spinner:after,\n.vjs-waiting .vjs-loading-spinner:before,\n.vjs-waiting .vjs-loading-spinner:after {\n  -webkit-animation: vjs-spinner-spin 1.1s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, vjs-spinner-fade 1.1s linear infinite;\n  animation: vjs-spinner-spin 1.1s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, vjs-spinner-fade 1.1s linear infinite; }\n\n.vjs-seeking .vjs-loading-spinner:before,\n.vjs-waiting .vjs-loading-spinner:before {\n  border-top-color: white; }\n\n.vjs-seeking .vjs-loading-spinner:after,\n.vjs-waiting .vjs-loading-spinner:after {\n  border-top-color: white;\n  -webkit-animation-delay: 0.44s;\n  animation-delay: 0.44s; }\n\n@keyframes vjs-spinner-show {\n  to {\n    visibility: visible; } }\n\n@-webkit-keyframes vjs-spinner-show {\n  to {\n    visibility: visible; } }\n\n@keyframes vjs-spinner-spin {\n  100% {\n    transform: rotate(360deg); } }\n\n@-webkit-keyframes vjs-spinner-spin {\n  100% {\n    -webkit-transform: rotate(360deg); } }\n\n@keyframes vjs-spinner-fade {\n  0% {\n    border-top-color: #73859f; }\n  20% {\n    border-top-color: #73859f; }\n  35% {\n    border-top-color: white; }\n  60% {\n    border-top-color: #73859f; }\n  100% {\n    border-top-color: #73859f; } }\n\n@-webkit-keyframes vjs-spinner-fade {\n  0% {\n    border-top-color: #73859f; }\n  20% {\n    border-top-color: #73859f; }\n  35% {\n    border-top-color: white; }\n  60% {\n    border-top-color: #73859f; }\n  100% {\n    border-top-color: #73859f; } }\n\n.vjs-chapters-button .vjs-menu ul {\n  width: 24em; }\n\n.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {\n  vertical-align: middle;\n  display: inline-block;\n  margin-bottom: -0.1em; }\n\n.video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {\n  font-family: VideoJS;\n  content: \"\\F10D\";\n  font-size: 1.5em;\n  line-height: inherit; }\n\n.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder {\n  vertical-align: middle;\n  display: inline-block;\n  margin-bottom: -0.1em; }\n\n.video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder:before {\n  font-family: VideoJS;\n  content: \" \\F11D\";\n  font-size: 1.5em;\n  line-height: inherit; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-custom-control-spacer {\n  -webkit-box-flex: auto;\n  -moz-box-flex: auto;\n  -webkit-flex: auto;\n  -ms-flex: auto;\n  flex: auto; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen).vjs-no-flex .vjs-custom-control-spacer {\n  width: auto; }\n\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-playback-rate, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-progress-control,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-tiny:not(.vjs-fullscreen) .vjs-audio-button {\n  display: none; }\n\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-playback-rate,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-subtitles-button, .video-js.vjs-layout-x-small:not(.vjs-fullscreen) .vjs-audio-button {\n  display: none; }\n\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-current-time, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-time-divider, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-duration, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-remaining-time,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-playback-rate,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-mute-control, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-volume-control,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-chapters-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-descriptions-button, .video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-captions-button,\n.video-js.vjs-layout-small:not(.vjs-fullscreen) .vjs-subtitles-button .vjs-audio-button {\n  display: none; }\n\n.vjs-modal-dialog.vjs-text-track-settings {\n  background-color: #2B333F;\n  background-color: rgba(43, 51, 63, 0.75);\n  color: #fff;\n  height: 70%; }\n\n.vjs-text-track-settings .vjs-modal-dialog-content {\n  display: table; }\n\n.vjs-text-track-settings .vjs-track-settings-colors,\n.vjs-text-track-settings .vjs-track-settings-font,\n.vjs-text-track-settings .vjs-track-settings-controls {\n  display: table-cell; }\n\n.vjs-text-track-settings .vjs-track-settings-controls {\n  text-align: right;\n  vertical-align: bottom; }\n\n@supports (display: grid) {\n  .vjs-text-track-settings .vjs-modal-dialog-content {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    grid-template-rows: 1fr auto; }\n  .vjs-text-track-settings .vjs-track-settings-colors {\n    display: block;\n    grid-column: 1;\n    grid-row: 1; }\n  .vjs-text-track-settings .vjs-track-settings-font {\n    grid-column: 2;\n    grid-row: 1; }\n  .vjs-text-track-settings .vjs-track-settings-controls {\n    grid-column: 2;\n    grid-row: 2; } }\n\n.vjs-track-setting > select {\n  margin-right: 5px; }\n\n.vjs-text-track-settings fieldset {\n  margin: 5px;\n  padding: 3px;\n  border: none; }\n\n.vjs-text-track-settings fieldset span {\n  display: inline-block; }\n\n.vjs-text-track-settings legend {\n  color: #fff;\n  margin: 0 0 5px 0; }\n\n.vjs-text-track-settings .vjs-label {\n  position: absolute;\n  clip: rect(1px 1px 1px 1px);\n  clip: rect(1px, 1px, 1px, 1px);\n  display: block;\n  margin: 0 0 5px 0;\n  padding: 0;\n  border: 0;\n  height: 1px;\n  width: 1px;\n  overflow: hidden; }\n\n.vjs-track-settings-controls button:focus,\n.vjs-track-settings-controls button:active {\n  outline-style: solid;\n  outline-width: medium;\n  background-image: linear-gradient(0deg, #fff 88%, #73859f 100%); }\n\n.vjs-track-settings-controls button:hover {\n  color: rgba(43, 51, 63, 0.75); }\n\n.vjs-track-settings-controls button {\n  background-color: #fff;\n  background-image: linear-gradient(-180deg, #fff 88%, #73859f 100%);\n  color: #2B333F;\n  cursor: pointer;\n  border-radius: 2px; }\n\n.vjs-track-settings-controls .vjs-default-button {\n  margin-right: 1em; }\n\n@media print {\n  .video-js > *:not(.vjs-tech):not(.vjs-poster) {\n    visibility: hidden; } }\n\n.vjs-resize-manager {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n  visibility: hidden; }\n\n@media \\0screen {\n  .vjs-user-inactive.vjs-playing .vjs-control-bar :before {\n    content: \"\";\n  }\n}\n\n@media \\0screen {\n  .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {\n    visibility: hidden;\n  }\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function escape(url) {
@@ -68870,13 +70132,13 @@ module.exports = function escape(url) {
 
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/video.js/dist/VideoJS.eot?46ac6629168546c71dbf115992aa4be9";
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -68922,7 +70184,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(113);
+var	fixUrls = __webpack_require__(118);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -69235,7 +70497,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports) {
 
 
@@ -69330,19 +70592,19 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(115)
+  __webpack_require__(120)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(117)
+var __vue_script__ = __webpack_require__(122)
 /* template */
-var __vue_template__ = __webpack_require__(118)
+var __vue_template__ = __webpack_require__(123)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69381,13 +70643,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(116);
+var content = __webpack_require__(121);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -69407,7 +70669,7 @@ if(false) {
 }
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -69421,7 +70683,7 @@ exports.push([module.i, "\n.facebook[data-v-558b1f66] {\n    width: 20px;\n}\n",
 
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69627,7 +70889,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69910,19 +71172,19 @@ if (false) {
 }
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(120)
+  __webpack_require__(125)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(122)
+var __vue_script__ = __webpack_require__(127)
 /* template */
-var __vue_template__ = __webpack_require__(123)
+var __vue_template__ = __webpack_require__(128)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69961,13 +71223,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(121);
+var content = __webpack_require__(126);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -69987,7 +71249,7 @@ if(false) {
 }
 
 /***/ }),
-/* 121 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -70001,7 +71263,7 @@ exports.push([module.i, "\n.facebook[data-v-55d1fc43] {\n    width: 20px;\n}\n",
 
 
 /***/ }),
-/* 122 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70270,7 +71532,7 @@ var test = [];
 });
 
 /***/ }),
-/* 123 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70638,25 +71900,21 @@ if (false) {
 }
 
 /***/ }),
-/* 124 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(125)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(127)
+var __vue_script__ = __webpack_require__(132)
 /* template */
-var __vue_template__ = __webpack_require__(128)
+var __vue_template__ = __webpack_require__(136)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-2c54313d"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -70689,47 +71947,9 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(126);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("5c52ee7a", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2c54313d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stepComponent.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2c54313d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stepComponent.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.facebook[data-v-2c54313d] {\n    width: 20px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 127 */
+/* 130 */,
+/* 131 */,
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70738,12 +71958,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -70904,7 +72118,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 128 */
+/* 133 */,
+/* 134 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 135 */,
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71164,1262 +72386,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
   }
 }
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(130)
-/* template */
-var __vue_template__ = __webpack_require__(133)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\user\\UserComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-459403d0", Component.options)
-  } else {
-    hotAPI.reload("data-v-459403d0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 130 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_videojs_vimeo__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_videojs_vimeo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_videojs_vimeo__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videojs_offset_js__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videojs_offset_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__videojs_offset_js__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
-  data: function data() {
-    return {
-      video_url: '',
-      video_data: {},
-      step_data: {},
-      radioGroup: '',
-      start_offset: 0,
-      end_offset: 0,
-      current_step: {},
-      step_oder: 0,
-      current_step_quiz: [],
-      current_step_answer: [],
-      quiz: false,
-      accept_btn: false,
-      next_btn: false,
-      replay_btn: false,
-      playerOptions: {
-        // videojs options
-        sources: [{
-          type: "video/vimeo",
-          src: 'https://vimeo.com/291838509'
-        }],
-        techOrder: ["vimeo"]
-
-      },
-      change_value: 20
-    };
-  },
-  mounted: function mounted() {
-    console.log('this is current player instance object', this.player);
-  },
-
-  computed: {
-    player: function player() {
-      return this.$refs.videoPlayer.player;
-    }
-  },
-  created: function created() {
-    this.get_quiz_info();
-  },
-
-  methods: {
-    replay_video: function replay_video() {
-      this.player.load();
-    },
-    next_video_step: function next_video_step() {
-      // this.start_offset = ;
-      // this.end_offset = ;
-      this.set_offset();
-    },
-    accept: function accept() {
-      console.log(this.current_step_answer);
-      var send_data = {};
-      send_data['selected_ids'] = this.current_step_answer;
-      send_data['current_quiz'] = this.current_step_quiz;
-      axios.post('/api/user/user-quiz/accept', {
-        data: JSON.stringify(send_data)
-      }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
-      }).then(function (response) {
-        if (this.response.check == true) {
-          this.next_btn = true;
-          this.quiz = false;
-        } else {
-          this.accept_btn = false;
-          this.replay_btn = true;
-          this.quiz = false;
-        }
-      }.bind(this)).catch(function (error) {
-        console.log(error.response);
-        this.showError('Error');
-      }.bind(this));
-    },
-    get_quiz_info: function get_quiz_info() {
-      axios.get('/api/user/user-quiz', {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
-      }).then(function (response) {
-        this.video_data = response.data.video_data;
-        this.step_data = response.data.step_data;
-        this.video_url = this.video_data.vimeo_url;
-        console.log('this.video_data++++++++++++===', this.video_data);
-        this.set_current_step();
-      }.bind(this)).catch(function (error) {
-        console.log(error.response);
-        this.showError('Error');
-      }.bind(this));
-    },
-    set_current_step: function set_current_step() {
-      this.current_step = this.step_data.end_times[this.step_oder];
-      this.questions = this.current_step.question_ids;
-      axios.post('/api/user/user-quiz/get_questions_answers', {
-        data: JSON.stringify(this.current_step.question_ids)
-      }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
-      }).then(function (response) {
-        this.current_step_quiz = response.data.questions;
-      }.bind(this)).catch(function (error) {
-        console.log(error.response);
-        this.showError('Error');
-      }.bind(this));
-    },
-    set_offset: function set_offset() {
-      console.log('+++++++++++', this.player);
-      // this.player.currentTime(10);
-      this.player.offset({
-        start: this.start_offset,
-        end: this.end_offset,
-        restart_beginning: false //Should the video go to the beginning when it ends
-      });
-    },
-    reload: function reload() {
-      this.change_value = 10;
-      // console.log(this.change_value);
-      // this.player.trigger('loadstart');
-
-      // this.player.load();
-    },
-
-    // listen event
-    onPlayerPlay: function onPlayerPlay(player) {
-      console.log('player play!', player);
-    },
-    onPlayerPause: function onPlayerPause(player) {
-      // console.log('player pause!', player)
-    },
-
-    // ...player event
-    // or listen state event
-    playerStateChanged: function playerStateChanged(playerCurrentState) {
-      // console.log('player current update state', playerCurrentState)
-    },
-
-    // player is ready
-    playerReadied: function playerReadied(player) {
-      console.log('the player is readied', player);
-      // you can use it to do something...
-      // player.[methods]
-    },
-    onPlayerTimeupdate: function onPlayerTimeupdate(player) {
-      console.log('this player time update', player);
-    },
-    onPlayerEnded: function onPlayerEnded(player) {
-      this.accept_btn = true;
-      this.quiz = true;
-    }
-  }
-});
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* The MIT License (MIT)
-Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. */
-(function (root, factory) {
-  if(true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(videojs){
-      return (root.Vimeo = factory(videojs));
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if(typeof module === 'object' && module.exports) {
-    module.exports = (root.Vimeo = factory(require('video.js')));
-  } else {
-    root.Vimeo = factory(root.videojs);
-  }
-}(this, function(videojs) {
-  'use strict';
-
-  var VimeoState = {
-    UNSTARTED: -1,
-    ENDED: 0,
-    PLAYING: 1,
-    PAUSED: 2,
-    BUFFERING: 3
-  };
-
-  var Tech = videojs.getComponent('Tech');
-
-  var Vimeo = videojs.extend(Tech, {
-    constructor: function(options, ready) {
-      Tech.call(this, options, ready);
-      if(options.poster != "") {this.setPoster(options.poster);}
-      this.setSrc(this.options_.source.src, true);
-
-      // Set the vjs-vimeo class to the player
-      // Parent is not set yet so we have to wait a tick
-      setTimeout(function() {
-        this.el_.parentNode.className += ' vjs-vimeo';
-      }.bind(this));
-
-    },
-
-    dispose: function() {
-      this.el_.parentNode.className = this.el_.parentNode.className.replace(' vjs-vimeo', '');
-    },
-
-    createEl: function() {
-      this.vimeo = {};
-      this.vimeoInfo = {};
-      this.baseUrl = 'https://player.vimeo.com/video/';
-      this.baseApiUrl = 'http://www.vimeo.com/api/v2/video/';
-      this.videoId = Vimeo.parseUrl(this.options_.source.src).videoId;
-
-      this.iframe = document.createElement('iframe');
-      this.iframe.setAttribute('id', this.options_.techId);
-      this.iframe.setAttribute('title', 'Vimeo Video Player');
-      this.iframe.setAttribute('class', 'vimeoplayer');
-      this.iframe.setAttribute('src', this.baseUrl + this.videoId + '?api=1&player_id=' + this.options_.techId);
-      this.iframe.setAttribute('frameborder', '0');
-      this.iframe.setAttribute('scrolling', 'no');
-      this.iframe.setAttribute('marginWidth', '0');
-      this.iframe.setAttribute('marginHeight', '0');
-      this.iframe.setAttribute('webkitAllowFullScreen', '0');
-      this.iframe.setAttribute('mozallowfullscreen', '0');
-      this.iframe.setAttribute('allowFullScreen', '0');
-
-      var divWrapper = document.createElement('div');
-      divWrapper.setAttribute('style', 'margin:0 auto;padding-bottom:56.25%;width:100%;height:0;position:relative;overflow:hidden;');
-      divWrapper.setAttribute('class', 'vimeoFrame');
-      divWrapper.appendChild(this.iframe);
-
-      if (!_isOnMobile && !this.options_.ytControls) {
-        var divBlocker = document.createElement('div');
-        divBlocker.setAttribute('class', 'vjs-iframe-blocker');
-        divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
-
-        // In case the blocker is still there and we want to pause
-        divBlocker.onclick = function() {
-          this.onPause();
-        }.bind(this);
-
-        divWrapper.appendChild(divBlocker);
-      }
-
-      if (Vimeo.isApiReady) {
-        this.initPlayer();
-      } else {
-        Vimeo.apiReadyQueue.push(this);
-      }
-
-      if(this.options_.poster == "") {
-        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
-          return function(data) {
-            // Set the low resolution first
-            _this.setPoster(data[0].thumbnail_large);
-          };
-        })(this));
-      }
-
-      return divWrapper;
-    },
-
-    initPlayer: function() {
-      var self = this;
-      var vimeoVideoID = Vimeo.parseUrl(this.options_.source.src).videoId;
-      //load vimeo
-      if (this.vimeo && this.vimeo.api) {
-        this.vimeo.api('unload');
-        delete this.vimeo;
-      }
-
-      self.vimeo = $f(self.iframe);
-
-      self.vimeoInfo = {
-        state: VimeoState.UNSTARTED,
-        volume: 1,
-        muted: false,
-        muteVolume: 1,
-        time: 0,
-        duration: 0,
-        buffered: 0,
-        url: self.baseUrl + self.videoId,
-        error: null
-      };
-
-      this.vimeo.addEvent('ready', function(id){
-        self.onReady();
-
-        self.vimeo.addEvent('loadProgress', function(data, id){ self.onLoadProgress(data); });
-        self.vimeo.addEvent('playProgress', function(data, id){ self.onPlayProgress(data); });
-        self.vimeo.addEvent('play', function(id){ self.onPlay(); });
-        self.vimeo.addEvent('pause', function(id){ self.onPause(); });
-        self.vimeo.addEvent('finish', function(id){ self.onFinish(); });
-        self.vimeo.addEvent('seek', function(data, id){ self.onSeek(data); });
-
-      });
-
-    },
-
-    onReady: function(){
-      this.isReady_ = true;
-      this.triggerReady();
-      this.trigger('loadedmetadata');
-      if (this.startMuted) {
-        this.setMuted(true);
-        this.startMuted = false;
-      }
-    },
-
-    onLoadProgress: function(data) {
-      var durationUpdate = !this.vimeoInfo.duration;
-      this.vimeoInfo.duration = data.duration;
-      this.vimeoInfo.buffered = data.percent;
-      this.trigger('progress');
-      if (durationUpdate) this.trigger('durationchange');
-    },
-    onPlayProgress: function(data) {
-      this.vimeoInfo.time = data.seconds;
-      this.trigger('timeupdate');
-    },
-    onPlay: function() {
-      this.vimeoInfo.state = VimeoState.PLAYING;
-      this.trigger('play');
-    },
-    onPause: function() {
-      this.vimeoInfo.state = VimeoState.PAUSED;
-      this.trigger('pause');
-    },
-    onFinish: function() {
-      this.vimeoInfo.state = VimeoState.ENDED;
-      this.trigger('ended');
-    },
-    onSeek: function(data) {
-      this.trigger('seeking');
-      this.vimeoInfo.time = data.seconds;
-      this.trigger('timeupdate');
-      this.trigger('seeked');
-    },
-    onError: function(error){
-      this.error = error;
-      this.trigger('error');
-    },
-
-    error: function() {
-      switch (this.errorNumber) {
-        case 2:
-          return { code: 'Unable to find the video' };
-
-        case 5:
-          return { code: 'Error while trying to play the video' };
-
-        case 100:
-          return { code: 'Unable to find the video' };
-
-        case 101:
-        case 150:
-          return { code: 'Playback on other Websites has been disabled by the video owner.' };
-      }
-
-      return { code: 'Vimeo unknown error (' + this.errorNumber + ')' };
-    },
-
-    src: function() {
-      return this.source;
-    },
-
-    poster: function() {
-      return this.poster_;
-    },
-
-    setPoster: function(poster) {
-      this.poster_ = poster;
-    },
-
-    setSrc: function(source) {
-      if (!source || !source.src) {
-        return;
-      }
-
-      this.source = source;
-      this.url = Vimeo.parseUrl(source.src);
-
-      if (!this.options_.poster) {
-        if (this.url.videoId) {
-          $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
-            return function(data) {
-              // Set the low resolution first
-              _this.poster_ = data[0].thumbnail_small;
-            };
-          })(this));
-
-          // Check if their is a high res
-          this.checkHighResPoster();
-        }
-      }
-
-      if (this.options_.autoplay && !_isOnMobile) {
-        if (this.isReady_) {
-          this.play();
-        } else {
-          this.playOnReady = true;
-        }
-      }
-    },
-
-    supportsFullScreen: function() {
-      return true;
-    },
-
-    //TRIGGER
-    load : function(){},
-    play : function(){ this.vimeo.api('play'); },
-    pause : function(){ this.vimeo.api('pause'); },
-    paused : function(){
-      return this.vimeoInfo.state !== VimeoState.PLAYING &&
-             this.vimeoInfo.state !== VimeoState.BUFFERING;
-    },
-
-    currentTime : function(){ return this.vimeoInfo.time || 0; },
-
-    setCurrentTime :function(seconds){
-      this.vimeo.api('seekTo', seconds);
-      this.player_.trigger('timeupdate');
-    },
-
-    duration :function(){ return this.vimeoInfo.duration || 0; },
-    buffered :function(){ return videojs.createTimeRange(0, (this.vimeoInfo.buffered*this.vimeoInfo.duration) || 0); },
-
-    volume :function() { return (this.vimeoInfo.muted)? this.vimeoInfo.muteVolume : this.vimeoInfo.volume; },
-    setVolume :function(percentAsDecimal){
-      this.vimeo.api('setvolume', percentAsDecimal);
-      this.vimeoInfo.volume = percentAsDecimal;
-      this.player_.trigger('volumechange');
-    },
-    currentSrc :function() {
-      return this.el_.src;
-    },
-    muted :function() { return this.vimeoInfo.muted || false; },
-    setMuted :function(muted) {
-      if (muted) {
-        this.vimeoInfo.muteVolume = this.vimeoInfo.volume;
-        this.setVolume(0);
-      } else {
-        this.setVolume(this.vimeoInfo.muteVolume);
-      }
-
-      this.vimeoInfo.muted = muted;
-      this.player_.trigger('volumechange');
-    },
-
-    // Tries to get the highest resolution thumbnail available for the video
-    checkHighResPoster: function(){
-      var uri = '';
-
-      try {
-
-        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_uri){
-          return function(data) {
-            // Set the low resolution first
-            _uri = data[0].thumbnail_large;
-          };
-        })(uri));
-
-        var image = new Image();
-        image.onload = function(){
-          // Onload thumbnail
-          if('naturalHeight' in this){
-            if(this.naturalHeight <= 90 || this.naturalWidth <= 120) {
-              this.onerror();
-              return;
-            }
-          } else if(this.height <= 90 || this.width <= 120) {
-            this.onerror();
-            return;
-          }
-
-          this.poster_ = uri;
-          this.trigger('posterchange');
-        }.bind(this);
-        image.onerror = function(){};
-        image.src = uri;
-      }
-      catch(e){}
-    }
-  });
-
-  Vimeo.isSupported = function() {
-    return true;
-  };
-
-  Vimeo.canPlaySource = function(e) {
-    return (e.type === 'video/vimeo');
-  };
-
-  var _isOnMobile = /(iPad|iPhone|iPod|Android)/g.test(navigator.userAgent);
-
-  Vimeo.parseUrl = function(url) {
-    var result = {
-      videoId: null
-    };
-
-    var regex = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
-    var match = url.match(regex);
-
-    if (match) {
-      result.videoId = match[5];
-    }
-
-    return result;
-  };
-
-  function injectCss() {
-    var css = // iframe blocker to catch mouse events
-              '.vjs-vimeo .vjs-iframe-blocker { display: none; }' +
-              '.vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
-              '.vjs-vimeo .vjs-poster { background-size: cover; }' +
-              '.vjs-vimeo { height:100%; }' +
-              '.vimeoplayer { width:100%; height:180%; position:absolute; left:0; top:-40%; }';
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-
-    var style = document.createElement('style');
-    style.type = 'text/css';
-
-    if (style.styleSheet){
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-
-    head.appendChild(style);
-  }
-
-  Vimeo.apiReadyQueue = [];
-
-  var vimeoIframeAPIReady = function() {
-    Vimeo.isApiReady = true;
-    injectCss();
-
-    for (var i = 0; i < Vimeo.apiReadyQueue.length; ++i) {
-      Vimeo.apiReadyQueue[i].initPlayer();
-    }
-  };
-
-  vimeoIframeAPIReady();
-
-  videojs.registerTech('Vimeo', Vimeo);
-
-
-
-  // Froogaloop API -------------------------------------------------------------
-
-  // From https://github.com/vimeo/player-api/blob/master/javascript/froogaloop.js
-  // Init style shamelessly stolen from jQuery http://jquery.com
-  var Froogaloop = (function(){
-      // Define a local copy of Froogaloop
-      function Froogaloop(iframe) {
-          // The Froogaloop object is actually just the init constructor
-          return new Froogaloop.fn.init(iframe);
-      }
-
-      var eventCallbacks = {},
-          hasWindowEvent = false,
-          isReady = false,
-          slice = Array.prototype.slice,
-          playerOrigin = '*';
-
-      Froogaloop.fn = Froogaloop.prototype = {
-          element: null,
-
-          init: function(iframe) {
-              if (typeof iframe === "string") {
-                  iframe = document.getElementById(iframe);
-              }
-
-              this.element = iframe;
-
-              return this;
-          },
-
-          /*
-           * Calls a function to act upon the player.
-           *
-           * @param {string} method The name of the Javascript API method to call. Eg: 'play'.
-           * @param {Array|Function} valueOrCallback params Array of parameters to pass when calling an API method
-           *                                or callback function when the method returns a value.
-           */
-          api: function(method, valueOrCallback) {
-              if (!this.element || !method) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null,
-                  params = !isFunction(valueOrCallback) ? valueOrCallback : null,
-                  callback = isFunction(valueOrCallback) ? valueOrCallback : null;
-
-              // Store the callback for get functions
-              if (callback) {
-                  storeCallback(method, callback, target_id);
-              }
-
-              postMessage(method, params, element);
-              return self;
-          },
-
-          /*
-           * Registers an event listener and a callback function that gets called when the event fires.
-           *
-           * @param eventName (String): Name of the event to listen for.
-           * @param callback (Function): Function that should be called when the event fires.
-           */
-          addEvent: function(eventName, callback) {
-              if (!this.element) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null;
-
-
-              storeCallback(eventName, callback, target_id);
-
-              // The ready event is not registered via postMessage. It fires regardless.
-              if (eventName != 'ready') {
-                  postMessage('addEventListener', eventName, element);
-              }
-              else if (eventName == 'ready' && isReady) {
-                  callback.call(null, target_id);
-              }
-
-              return self;
-          },
-
-          /*
-           * Unregisters an event listener that gets called when the event fires.
-           *
-           * @param eventName (String): Name of the event to stop listening for.
-           */
-          removeEvent: function(eventName) {
-              if (!this.element) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null,
-                  removed = removeCallback(eventName, target_id);
-
-              // The ready event is not registered
-              if (eventName != 'ready' && removed) {
-                  postMessage('removeEventListener', eventName, element);
-              }
-          }
-      };
-
-      /**
-       * Handles posting a message to the parent window.
-       *
-       * @param method (String): name of the method to call inside the player. For api calls
-       * this is the name of the api method (api_play or api_pause) while for events this method
-       * is api_addEventListener.
-       * @param params (Object or Array): List of parameters to submit to the method. Can be either
-       * a single param or an array list of parameters.
-       * @param target (HTMLElement): Target iframe to post the message to.
-       */
-      function postMessage(method, params, target) {
-          if (!target.contentWindow.postMessage) {
-              return false;
-          }
-
-          var data = JSON.stringify({
-              method: method,
-              value: params
-          });
-
-          target.contentWindow.postMessage(data, playerOrigin);
-      }
-
-      /**
-       * Event that fires whenever the window receives a message from its parent
-       * via window.postMessage.
-       */
-      function onMessageReceived(event) {
-          var data, method;
-
-          try {
-              data = JSON.parse(event.data);
-              method = data.event || data.method;
-          }
-          catch(e)  {
-              //fail silently... like a ninja!
-          }
-
-          if (method == 'ready' && !isReady) {
-              isReady = true;
-          }
-
-          // Handles messages from the vimeo player only
-          if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
-              return false;
-          }
-
-          if (playerOrigin === '*') {
-              playerOrigin = event.origin;
-          }
-
-          var value = data.value,
-              eventData = data.data,
-              target_id = target_id === '' ? null : data.player_id,
-
-              callback = getCallback(method, target_id),
-              params = [];
-
-          if (!callback) {
-              return false;
-          }
-
-          if (value !== undefined) {
-              params.push(value);
-          }
-
-          if (eventData) {
-              params.push(eventData);
-          }
-
-          if (target_id) {
-              params.push(target_id);
-          }
-
-          return params.length > 0 ? callback.apply(null, params) : callback.call();
-      }
-
-
-      /**
-       * Stores submitted callbacks for each iframe being tracked and each
-       * event for that iframe.
-       *
-       * @param eventName (String): Name of the event. Eg. api_onPlay
-       * @param callback (Function): Function that should get executed when the
-       * event is fired.
-       * @param target_id (String) [Optional]: If handling more than one iframe then
-       * it stores the different callbacks for different iframes based on the iframe's
-       * id.
-       */
-      function storeCallback(eventName, callback, target_id) {
-          if (target_id) {
-              if (!eventCallbacks[target_id]) {
-                  eventCallbacks[target_id] = {};
-              }
-              eventCallbacks[target_id][eventName] = callback;
-          }
-          else {
-              eventCallbacks[eventName] = callback;
-          }
-      }
-
-      /**
-       * Retrieves stored callbacks.
-       */
-      function getCallback(eventName, target_id) {
-          if (target_id && eventCallbacks[target_id]) {
-              return eventCallbacks[target_id][eventName];
-          }
-          else if (eventCallbacks[eventName]) {
-              return eventCallbacks[eventName];
-          }
-      }
-
-      function removeCallback(eventName, target_id) {
-          if (target_id && eventCallbacks[target_id]) {
-              if (!eventCallbacks[target_id][eventName]) {
-                  return false;
-              }
-              eventCallbacks[target_id][eventName] = null;
-          }
-          else {
-              if (!eventCallbacks[eventName]) {
-                  return false;
-              }
-              eventCallbacks[eventName] = null;
-          }
-
-          return true;
-      }
-
-      function isFunction(obj) {
-          return !!(obj && obj.constructor && obj.call && obj.apply);
-      }
-
-      function isArray(obj) {
-          return toString.call(obj) === '[object Array]';
-      }
-
-      // Give the init function the Froogaloop prototype for later instantiation
-      Froogaloop.fn.init.prototype = Froogaloop.fn;
-
-      // Listens for the message event.
-      // W3C
-      if (window.addEventListener) {
-          window.addEventListener('message', onMessageReceived, false);
-      }
-      // IE
-      else {
-          window.attachEvent('onmessage', onMessageReceived);
-      }
-
-      // Expose froogaloop to the global object
-      return (window.Froogaloop = window.$f = Froogaloop);
-
-  })();
-}));
-
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * videojs-offset
- * @version 2.0.0-beta.2
- * @copyright 2017 Carles Galan Cladera <cgcladera@gmail.com>
- * @license MIT
- */
-(function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory(__webpack_require__(9)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.videojsOffset = factory(global.videojs);
-})(this, function (videojs) {
-  'use strict';
-
-  videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
-
-  // Default options for the plugin.
-  var defaults = {};
-
-  // Cross-compatibility for Video.js 5 and 6.
-  var registerPlugin = videojs.registerPlugin || videojs.plugin;
-  // const dom = videojs.dom || videojs;
-
-  /**
-   * Checks whether the clip should be ended.
-   *
-   * @function onPlayerTimeUpdate
-   *
-   */
-  var onPlayerTimeUpdate = function onPlayerTimeUpdate() {
-    var curr = this.currentTime();
-
-    if (curr < 0) {
-      this.currentTime(0);
-      this.play();
-    }
-    if (this._offsetEnd > 0 && curr > this._offsetEnd - this._offsetStart) {
-      this.off('timeupdate', onPlayerTimeUpdate);
-      this.pause();
-      this.trigger('ended');
-
-      if (!this._restartBeginning) {
-        this.currentTime(this._offsetEnd - this._offsetStart);
-      } else {
-        this.trigger('loadstart');
-        this.currentTime(0);
-      }
-    }
-  };
-  /**
-   * Function to invoke when the player is ready.
-   *
-   * This is a great place for your plugin to initialize itself. When this
-   * function is called, the player will have its DOM and child components
-   * in place.
-   *
-   * @function onPlayerReady
-   * @param    {Player} player
-   *           A Video.js player.
-   * @param    {Object} [options={}]
-   *           An object of options left to the plugin author to define.
-   */
-  var onPlayerReady = function onPlayerReady(player, options) {
-    player.one('play', function () {
-      // player.on('timeupdate', onPlayerTimeUpdate);
-    });
-  };
-
-  /**
-   * A video.js plugin.
-   *
-   * In the plugin function, the value of `this` is a video.js `Player`
-   * instance. You cannot rely on the player being in a "ready" state here,
-   * depending on how the plugin is invoked. This may or may not be important
-   * to you; if not, remove the wait for "ready"!
-   *
-   * @function offset
-   * @param    {Object} [options={}]
-   *           An object of options left to the plugin author to define.
-   */
-  var offset = function offset(options) {
-    var _this = this;
-
-    options = options || {};
-    var Player = this.constructor;
-
-    this._offsetStart = options.start || 0;
-    this._offsetEnd = options.end || 0;
-    this._restartBeginning = options.restart_beginning || false;
-
-    if (!Player.__super__ || !Player.__super__.__offsetInit) {
-      Player.__super__ = {
-        __offsetInit: true,
-        duration: Player.prototype.duration,
-        currentTime: Player.prototype.currentTime,
-        bufferedPercent: Player.prototype.bufferedPercent,
-        remainingTime: Player.prototype.remainingTime
-      };
-
-      Player.prototype.duration = function () {
-        if (this._offsetEnd > 0) {
-          return this._offsetEnd - this._offsetStart;
-        }
-        return Player.__super__.duration.apply(this, arguments) - this._offsetStart;
-      };
-
-      Player.prototype.currentTime = function (seconds) {
-        if (seconds !== undefined) {
-          return Player.__super__.currentTime.call(this, seconds + this._offsetStart) - this._offsetStart;
-        }
-        return Player.__super__.currentTime.apply(this, arguments) - this._offsetStart;
-      };
-
-      Player.prototype.remainingTime = function () {
-        var curr = this.currentTime();
-
-        if (curr < this._offsetStart) {
-          curr = 0;
-        }
-        return this.duration() - curr;
-      };
-
-      Player.prototype.startOffset = function () {
-        return this._offsetStart;
-      };
-
-      Player.prototype.endOffset = function () {
-        if (this._offsetEnd > 0) {
-          return this._offsetEnd;
-        }
-        return this.duration();
-      };
-    }
-
-    this.ready(function () {
-      onPlayerReady(_this, videojs.mergeOptions(defaults, options));
-    });
-  };
-
-  // Register the plugin with video.js.
-  registerPlugin('offset', offset);
-  // Include the version number.
-  offset.VERSION = '__VERSION__';
-
-  return offset;
-});
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-layout",
-    [
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", "offset-sm3": "", "offset-sm2": "" } },
-        [
-          _c(
-            "v-card",
-            { attrs: { sm6: "" } },
-            [
-              _c("video-player", {
-                ref: "videoPlayer",
-                staticClass: "video-player-box",
-                attrs: {
-                  options: _vm.playerOptions,
-                  playsinline: true,
-                  customEventName: "customstatechangedeventname"
-                },
-                on: {
-                  play: function($event) {
-                    _vm.onPlayerPlay($event)
-                  },
-                  pause: function($event) {
-                    _vm.onPlayerPause($event)
-                  },
-                  ended: function($event) {
-                    _vm.onPlayerEnded($event)
-                  },
-                  ready: _vm.playerReadied
-                }
-              }),
-              _vm._v(" "),
-              _c("v-card-text", [
-                _c("span", { staticClass: "grey--text text-md-center" }, [
-                  _vm._v("Number 10")
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
-                  _vm._v("Kangaroo Valley Safari")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-md-center" }, [
-                  _vm._v("Whitehaven Beach")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-md-center" }, [
-                  _vm._v("Whitsunday Island, Whitsunday Islands")
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.quiz == false
-                ? _c(
-                    "v-list",
-                    [
-                      _vm._l(_vm.current_step_quiz, function(
-                        question_item,
-                        index
-                      ) {
-                        return [
-                          _c("h3", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(question_item.question))
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "v-radio-group",
-                            {
-                              staticClass: "ml-3",
-                              model: {
-                                value: _vm.current_step_answer[index],
-                                callback: function($$v) {
-                                  _vm.$set(_vm.current_step_answer, index, $$v)
-                                },
-                                expression: "current_step_answer[index]"
-                              }
-                            },
-                            _vm._l(question_item.answers, function(
-                              answer_item,
-                              answer_index
-                            ) {
-                              return _c("v-radio", {
-                                key: answer_index,
-                                attrs: {
-                                  label: answer_item.answer,
-                                  value: answer_index
-                                }
-                              })
-                            })
-                          )
-                        ]
-                      })
-                    ],
-                    2
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _vm.accept_btn == true
-                    ? _c(
-                        "v-btn",
-                        {
-                          attrs: { "flat-right": "", color: "orange" },
-                          on: { click: _vm.accept }
-                        },
-                        [_vm._v("OK")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.next_btn == true
-                    ? _c(
-                        "v-btn",
-                        {
-                          attrs: { "flat-right": "", color: "orange" },
-                          on: { click: _vm.next_video_step }
-                        },
-                        [_vm._v("Next")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.replay_btn == true
-                    ? _c(
-                        "v-btn",
-                        {
-                          attrs: { "flat-right": "", color: "orange" },
-                          on: { click: _vm.replay_video }
-                        },
-                        [_vm._v("Replay")]
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-459403d0", module.exports)
-  }
-}
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
