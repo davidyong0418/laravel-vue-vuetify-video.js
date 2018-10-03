@@ -49,13 +49,13 @@
         <v-list two-line v-if="review_system == true">
           <template v-for="(step_review_data, p_index) in review_data">
             <v-divider v-if="p_index == 0"></v-divider>
-            <v-list-tile :key="p_index * 10 + c_index" v-if="p_index == 0">
+            <v-list-tile :key="p_index * 10 + c_index" v-if="p_index == 0" class="purple">
                <v-list-tile-content >
-                 <p>Question</p>
+                 <h3>Question</h3>
               </v-list-tile-content>
 
               <v-list-tile-content >
-                  <p>Correct Answer</p>
+                  <h3>Correct Answer</h3>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider v-if="p_index == 0"></v-divider>
