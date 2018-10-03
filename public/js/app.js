@@ -42353,6 +42353,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -45187,7 +45201,7 @@ var render = function() {
             "v-card",
             { attrs: { sm6: "" } },
             [
-              (_vm.init_data = true)
+              _vm.init_data == true
                 ? _c("v-card-text", [
                     _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
                       _vm._v("Video and Question data aren't exsited")
@@ -45195,50 +45209,57 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.player_loading == true
-                ? _c("video-player", {
-                    ref: "videoPlayer",
-                    staticClass: "video-player-box",
-                    attrs: {
-                      options: _vm.playerOptions,
-                      playsinline: true,
-                      customEventName: "customstatechangedeventname"
-                    },
-                    on: {
-                      play: function($event) {
-                        _vm.onPlayerPlay($event)
-                      },
-                      pause: function($event) {
-                        _vm.onPlayerPause($event)
-                      },
-                      ended: function($event) {
-                        _vm.onPlayerEnded($event)
-                      },
-                      waiting: function($event) {
-                        _vm.onPlayerWaiting($event)
-                      },
-                      playing: function($event) {
-                        _vm.onPlayerPlaying($event)
-                      },
-                      loadeddata: function($event) {
-                        _vm.onPlayerLoadeddata($event)
-                      },
-                      timeupdate: function($event) {
-                        _vm.onPlayerTimeupdate($event)
-                      },
-                      canplay: function($event) {
-                        _vm.onPlayerCanplay($event)
-                      },
-                      canplaythrough: function($event) {
-                        _vm.onPlayerCanplaythrough($event)
-                      },
-                      statechanged: function($event) {
-                        _vm.playerStateChanged($event)
-                      },
-                      ready: _vm.playerReadied
-                    }
-                  })
-                : _vm._e(),
+              _c(
+                "div",
+                {},
+                [
+                  _vm.player_loading == true
+                    ? _c("video-player", {
+                        ref: "videoPlayer",
+                        staticClass: "video-player-box",
+                        attrs: {
+                          options: _vm.playerOptions,
+                          playsinline: true,
+                          customEventName: "customstatechangedeventname"
+                        },
+                        on: {
+                          play: function($event) {
+                            _vm.onPlayerPlay($event)
+                          },
+                          pause: function($event) {
+                            _vm.onPlayerPause($event)
+                          },
+                          ended: function($event) {
+                            _vm.onPlayerEnded($event)
+                          },
+                          waiting: function($event) {
+                            _vm.onPlayerWaiting($event)
+                          },
+                          playing: function($event) {
+                            _vm.onPlayerPlaying($event)
+                          },
+                          loadeddata: function($event) {
+                            _vm.onPlayerLoadeddata($event)
+                          },
+                          timeupdate: function($event) {
+                            _vm.onPlayerTimeupdate($event)
+                          },
+                          canplay: function($event) {
+                            _vm.onPlayerCanplay($event)
+                          },
+                          canplaythrough: function($event) {
+                            _vm.onPlayerCanplaythrough($event)
+                          },
+                          statechanged: function($event) {
+                            _vm.playerStateChanged($event)
+                          },
+                          ready: _vm.playerReadied
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("v-card-text", [
                 _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
@@ -45357,29 +45378,52 @@ var render = function() {
                             step_review_data,
                             p_index
                           ) {
-                            return _vm._l(step_review_data, function(
-                              quiz_data,
-                              c_index
-                            ) {
-                              return _c(
-                                "v-list-tile",
-                                { key: p_index * 10 + c_index },
-                                [
-                                  _c("v-list-tile-content", [
-                                    _c("p", [
-                                      _vm._v(_vm._s(quiz_data.question))
+                            return [
+                              p_index == 0 ? _c("v-divider") : _vm._e(),
+                              _vm._v(" "),
+                              p_index == 0
+                                ? _c(
+                                    "v-list-tile",
+                                    { key: p_index * 10 + _vm.c_index },
+                                    [
+                                      _c("v-list-tile-content", [
+                                        _c("p", [_vm._v("Question")])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-content", [
+                                        _c("p", [_vm._v("Correct Answer")])
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              p_index == 0 ? _c("v-divider") : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(step_review_data, function(
+                                quiz_data,
+                                c_index
+                              ) {
+                                return _c(
+                                  "v-list-tile",
+                                  { key: p_index * 10 + c_index },
+                                  [
+                                    _c("v-list-tile-content", [
+                                      _c("p", [
+                                        _vm._v(_vm._s(quiz_data.question))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-content", [
+                                      _c("p", [
+                                        _vm._v(_vm._s(quiz_data.correct_answer))
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-tile-content", [
-                                    _c("p", [
-                                      _vm._v(_vm._s(quiz_data.correct_answer))
-                                    ])
-                                  ])
-                                ],
-                                1
-                              )
-                            })
+                                  ],
+                                  1
+                                )
+                              })
+                            ]
                           })
                         ],
                         2
@@ -71169,11 +71213,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     add_video: function add_video() {
+      var send_info = {
+        'video_url': this.add_vimeo_url,
+        'video_alias': this.add_vimeo_alias,
+        'video_description': this.add_vimeo_description
+      };
+
       axios.post('/api/admin/video-management/create', {
-        video_url: this.add_vimeo_url,
-        video_alias: this.add_vimeo_alias,
-        video_description: add_vimeo_description,
-        _token: 'FFFFFFFFFFFFFFFFFFFFF'
+        data: JSON.stringify(send_info)
       }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
         console.log(response);
 
@@ -71189,6 +71236,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.add_vimeo_url = '';
       this.add_vimeo_alias = '';
+      this.add_vimeo_description = '';
     }
 
   },
@@ -71758,15 +71806,6 @@ var test = [];
         }).then(function (response) {
           console.log(this.editedIndex);
           Object.assign(this.desserts[this.editedIndex], this.editedItem);
-
-          // this.desserts[this.editedIndex].selected = this.editedItem.selected;
-          // this.desserts[this.editedIndex].question = this.editedItem.question;
-          // this.desserts[this.editedIndex].count = this.editedItem.count;
-          // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
-          // this.desserts[this.editedIndex].answers = [];
-          // this.desserts[this.editedIndex].answers = this.editedItem.answers;
-
-
           this.showMessage('Successfully Updated');
         }.bind(this)).catch(function (error) {
           console.log(error);

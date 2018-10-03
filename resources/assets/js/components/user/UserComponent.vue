@@ -3,7 +3,8 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
-        <v-card-text v-if="init_data = true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
+        <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
+        <div class="">
         <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
                  :options="playerOptions"
@@ -21,8 +22,8 @@
                   @statechanged="playerStateChanged($event)"
                  @ready="playerReadied">
         </video-player>
+        </div>
         <v-card-text>
-            <!-- <span class="grey--text text-md-center">Number 10</span><br> -->
             <h3 class="headline mb-0 text-md-center">This is Answer and Question system</h3>
             <p class="text-md-center">{{video_data.description}}</p>
         </v-card-text>
@@ -47,6 +48,19 @@
             <!-- <v-img :src="video.thumbnail"></v-img> -->
         <v-list two-line v-if="review_system == true">
           <template v-for="(step_review_data, p_index) in review_data">
+            <v-divider v-if="p_index == 0"></v-divider>
+            <v-list-tile :key="p_index * 10 + c_index" v-if="p_index == 0">
+               <v-list-tile-content >
+                 <p>Question</p>
+              </v-list-tile-content>
+
+              <v-list-tile-content >
+                  <p>Correct Answer</p>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-divider v-if="p_index == 0"></v-divider>
+
+
             <v-list-tile v-for="(quiz_data, c_index) in step_review_data" :key="p_index * 10 + c_index">
                <v-list-tile-content >
                  <p>{{quiz_data.question}}</p>

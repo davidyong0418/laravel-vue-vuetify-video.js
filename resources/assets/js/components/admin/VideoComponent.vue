@@ -167,11 +167,14 @@
         }.bind(this))
       },
       add_video: function() {
+        var send_info = {
+          'video_url' : this.add_vimeo_url,
+          'video_alias' : this.add_vimeo_alias,
+          'video_description' : this.add_vimeo_description
+        };
+
         axios.post('/api/admin/video-management/create', {
-          video_url:this.add_vimeo_url,
-          video_alias: this.add_vimeo_alias,
-          video_description: add_vimeo_description,
-          _token: 'FFFFFFFFFFFFFFFFFFFFF'
+          data:JSON.stringify(send_info)
         }, {headers: {'Content-Type': 'application/json', }})
         .then( function (response) {
           console.log(response)
@@ -192,6 +195,7 @@
 
         this.add_vimeo_url = '';
         this.add_vimeo_alias = '';
+        this.add_vimeo_description = '';
       },
      
     },

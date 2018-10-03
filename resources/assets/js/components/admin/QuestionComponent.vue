@@ -182,15 +182,6 @@ var test = [];
           }).then(function(response){
             console.log(this.editedIndex);
             Object.assign(this.desserts[this.editedIndex], this.editedItem);
-
-            // this.desserts[this.editedIndex].selected = this.editedItem.selected;
-            // this.desserts[this.editedIndex].question = this.editedItem.question;
-            // this.desserts[this.editedIndex].count = this.editedItem.count;
-            // this.desserts[this.editedIndex].correct_answer = this.editedItem.correct_answer;
-            // this.desserts[this.editedIndex].answers = [];
-            // this.desserts[this.editedIndex].answers = this.editedItem.answers;
-
-
             this.showMessage(`Successfully Updated`);
 
           }.bind(this)).catch(function (error){

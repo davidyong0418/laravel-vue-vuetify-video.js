@@ -24,6 +24,7 @@ class VideoController extends Controller
      */
     public function index()
     {
+        
         return view('admin/video');
     }
     public function get_videos()
@@ -38,9 +39,11 @@ class VideoController extends Controller
     }
     public function create(Request $request)
     {
-        $vimeo_url = $request->get('video_url', TRUE);
-        $vimeo_alias = $request->get('video_alias', TRUE);
-        $vimeo_description = $request->get('video_description', TRUE);
+        $result = $request->get('data');
+        $post = (array)json_decode($result);
+        $vimeo_url = $post['video_url'];
+        $vimeo_alias = $post['video_alias'];
+        $vimeo_description = $post['video_description'];
         $thumbnail_link = $this->grab_vimeo_thumbnail($vimeo_url);
         if($thumbnail_link == false)
         {
@@ -75,7 +78,7 @@ class VideoController extends Controller
     public function select_video(Request $request)
     {
         $selected_id = $request->get('data');
-
+        Video::where('_id','!=',$selected_id)->update(['select'=>0]);
         Video::where('_id',$selected_id)->update(['select'=>1]);
         return ['action'=>'success'];
     }
