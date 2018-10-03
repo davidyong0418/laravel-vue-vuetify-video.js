@@ -54,14 +54,6 @@
   top: 0;
 }
 
-.vjs-progress-control {
-  display: none !important;
-}
-
-.vp-controls {
-  display: none;
-}
-
 .banner-container {
   width: 100%;
   max-width: 1200px;
@@ -230,33 +222,6 @@ body {
 
 .top {
   padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  position: relative;
-}
-
-#vjs_video_3_Vimeo_api {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.wrapper {
-  position: relative;
-  padding-bottom: 200%;
-  -webkit-transform: translateY(-35.95%);
-          transform: translateY(-35.95%);
-}
-
-#vjs_video_3 {
-  position: relative;
-  padding-bottom: 43%;
-}
-
-.video-player-box {
-  padding-bottom: 42.25%;
   height: 0;
   overflow: hidden;
   position: relative;

@@ -28,7 +28,7 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function review_result(Request $request)
+    public function get_review_result(Request $request)
     {
         $user_id = $request->get('data');
         $user_quiz_data = Userhistory::where('user_id', $user_id)->get()->toArray();
@@ -97,21 +97,28 @@ class QuizController extends Controller
             {
                 $flag = true;
             }
+            else{
+                $flag = false;
+            }
         }
         $check = Userhistory::where('user_id', $user_id)->get()->toArray();
+
+
         if($flag == true)
         {
             if(empty($check))
             {
-                // $new = array();
-                $new= $current_quiz;
+                $new = array();
+                $new[]= $current_quiz;
                 $userhistory = new Userhistory();
                 $userhistory->user_id = $user_id;
                 $userhistory->step = $new;
                 $userhistory->save();
             }
             else{
-                Userhistory::where('user_id', $user_id)->push('step', $current_quiz);
+                $new = array();
+                $new[]= $current_quiz;
+                Userhistory::where('user_id', $user_id)->push('step', $new);
             }
         }
         return ['check'=>$flag];

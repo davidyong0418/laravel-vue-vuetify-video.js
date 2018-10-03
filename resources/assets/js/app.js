@@ -34,6 +34,8 @@ import withSnackbar from './components/mixins/withSnackbar'
 Vue.use(Vuetify)
 Vue.use(VueRouter);
 Vue.use(VueVideoPlayer);
+import vimeo from 'videojs-vimeo'
+Vue.use(vimeo);
 import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)
