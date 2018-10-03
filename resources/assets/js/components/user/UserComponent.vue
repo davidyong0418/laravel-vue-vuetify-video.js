@@ -4,7 +4,7 @@
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
         <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
-        <div class="">
+        <div class="video-player-content">
         <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
                  :options="playerOptions"
@@ -81,9 +81,7 @@
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
-  
   import './videojs-offset.js'
-  // console.log('vimeo_url', vimeo_url);
   export default {
     mixins: [withSnackbar],
      props:{
@@ -130,7 +128,6 @@
           techOrder: ["vimeo"],
         },
         change_value:20,
-        r_index:1
       }
     },
     watch:{
@@ -155,12 +152,6 @@
       set_offset()
       {
         console.log('+++++++++++',this.player)
-        // this.player.currentTime(10);
-        // this.player.offset({
-        //     start: this.start_offset,
-        //     end: this.end_offset,
-        //     restart_beginning: false //Should the video go to the beginning when it ends
-        //   });
       },
       cut_step(){
         this.player.currentTime(this.start_offset);
@@ -179,9 +170,7 @@
         var self = this;
          setTimeout(function(){
                 self.pause_state = false;
-                console.log(' setTimeout(function(){========', this.pause_state)
             }, 200);
-        // this.player.load();
       },
       next_video_step(){
         this.player.play();
@@ -189,7 +178,6 @@
          var self = this;
          setTimeout(function(){
                 self.pause_state = false;
-                console.log(' setTimeout(function(){========', this.pause_state)
             }, 200);
       },
       accept(){
@@ -197,7 +185,6 @@
         send_data['user_id'] = this.user_id;
         send_data['selected_ids'] = this.current_step_answer;
         send_data['current_quiz'] = this.current_step_quiz;
-        console.log(send_data)
         axios.post('/api/user/user-quiz/accept', 
         {
           data: JSON.stringify(send_data)
@@ -207,27 +194,21 @@
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(response)
             if(response.data.check == true)
             {
               
               this.quiz = false;
               this.accept_btn = false;
-              console.log(this.step_order);
-              console.log(this.step_count);
               if((this.step_order + 1) == this.step_count)
               {
-                console.log('review user info')
                 this.show_review_result();
                 
               }
               else{
                 this.next_btn = true;
-                console.log('current step_order+++++++++', this.step_order)
                this.step_order = this.step_order + 1;
                this.set_current_step();
                this.cut_step();
-               console.log('increated step_order---------', this.step_order)
               }
               this.showMessage('you can skip next step')
             }
@@ -238,12 +219,10 @@
               this.showError("Your answer isn't correct")
             }
           }.bind(this)).catch(function (error){
-            console.log(error.response);
             this.showError('Error')
           }.bind(this));
       },
       show_review_result(){
-        // this.player_loading = false;
          axios.post('/api/user/user-quiz/get_review_result',
         {
           data: this.user_id,
@@ -254,12 +233,10 @@
             }
           }).then(function(response){
             this.review_data = response.data.review_data;
-            console.log('this.review_data==============////////===============',this.review_data);
             this.player_loading = true;
             this.review_system = true;
             this.start_btn = false;
           }.bind(this)).catch(function (error){
-            console.log(error.response);
             this.showError('Error')
           }.bind(this));
       },
@@ -276,11 +253,6 @@
             this.video_data = response.data.video_data;
             this.step_data = response.data.step_data;
             this.step_order = response.data.step_order;
-            
-            console.log('this is step order ++++++++////////+++++++++', this.step_order);
-            console.log('this.step_data++++++++++++===',this.step_data);
-            console.log('this.step_order++++++++++++===',this.step_order);
-            // this.video_url = this.video_data.vimeo_url;
             this.player_loading = true;
             this.set_current_step();
           }.bind(this)).catch(function (error){
@@ -288,14 +260,11 @@
             this.init_data = false;
             this.quiz = false;
             this.review_system = false;
-            console.log(error.response);
             this.showError('Error')
           }.bind(this));
       },
       set_current_step(){
         this.step_count = this.step_data.end_times.length;
-        console.log('this.step_count////////////////////////////',this.step_count)
-        console.log('this.step_order////////////////////////////',this.step_order)
         if(this.step_count == this.step_order)
         {
           this.show_review_result();
@@ -303,15 +272,10 @@
         }
         this.current_step = this.step_data.end_times[this.step_order];
         this.questions = this.current_step.question_ids;
-        console.log('this.current_step++++++++++++++++++', this.current_step)
         var start = this.current_step.s_point;
         var end = this.current_step.point;
-        
-        // this.start_offset = 200;
-        
         this.start_offset = parseInt(parseInt(start.substring(0,2)) * 60) + parseInt(start.substring(2,4));
         this.end_offset = parseInt(parseInt(end.substring(0,2)) * 60) + parseInt(end.substring(2,4));
-
         axios.post('/api/user/user-quiz/get_questions_answers',{
           data:JSON.stringify(this.current_step.question_ids)
         },
@@ -321,15 +285,12 @@
             }
           }).then(function(response){
             this.current_step_quiz = response.data.questions
-
           }.bind(this)).catch(function (error){
-            console.log(error.response);
             this.showError('Error')
           }.bind(this));
       },
       reload(){
         this.change_value = 10;
-        // this.player.load();
       },
       // listen event
       onPlayerPlay(player) {
@@ -338,26 +299,16 @@
       onPlayerPause(player) {
         console.log('player pause!', player)
       },
-      // ...player event
-       // or listen state event
       playerStateChanged(playerCurrentState) {
         // console.log('player current update state', playerCurrentState)
       },
-      // player is ready
       playerReadied(player) {
         console.log('the player is readied', player)
         this.player.currentTime(this.start_offset);
         // this.set_offset()
-        // you can use it to do something...
-        // player.[methods]
       },
       onPlayerTimeupdate(player)
       {
-        // player.controlBar.playToggle.on('click')
-        console.log('this.start_offset-----',this.start_offset)
-        console.log('this.end_offset-----',this.end_offset)
-        console.log('this.pause_state-----------',this.pause_state)
-        console.log('player.currentTime()----------', player.currentTime())
         if(player.currentTime() > this.end_offset)
         {
           if(this.pause_state == false)
@@ -367,9 +318,6 @@
             this.player.pause();
             this.pause_state = true;
           }
-          
-
-          
         }
       },
       onPlayerEnded(player)

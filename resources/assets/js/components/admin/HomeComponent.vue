@@ -14,8 +14,6 @@
   </v-parallax>
 </template>
 
-
-
 <script>
   export default {
     data () {

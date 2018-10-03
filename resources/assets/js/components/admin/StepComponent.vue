@@ -48,7 +48,6 @@
 </template>
 
 <script>
-
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
   export default {
@@ -78,12 +77,9 @@
     methods: {
       onChange: function(_id)
       {
-        console.log(_id);
-        
         var param = {"_id":_id };
          axios.post('/api/admin/step-management/get_steps', {data:_id}, {headers: {'Content-Type': 'application/json'}})
         .then( function (response) {
-          console.log(response)
           this.loading = false
           this.loading_state = true
           if(response.data.action == 'true')
@@ -105,9 +101,6 @@
             this.steps = this.step_info.end_times;
             var new_step = {'point':'','sort': 1,'question_ids':[]};
             this.steps.push(new_step);
- console.log('this.step_info ==============',this.step_info);
-            console.log('this.defaultItem ++++++++====',this.defaultItem)
-            console.log('this.steps ++++++++====',this.steps)
           }
         }.bind(this))
         .catch(function (error) {
@@ -118,13 +111,11 @@
         this.steps.splice(index, 1);
       },
       add: function(){
-        console.log('step_info++++++++++++++++++++', this.steps);
         var new_step = {'point':'','sort':this.steps.length + 1, 'question_ids':[]};
         this.steps.push(new_step);
     
       },
       save: function(){
-          console.log('save step_info+++++++++++',this.step_info);
           axios.post('/api/admin/step-management/create', {data: JSON.stringify(this.step_info)}, {
             headers:{
               'Content-Type':'applicaton/json',
@@ -132,7 +123,6 @@
           }).then(function(response){
             this.showMessage(`Successfully Saved`)
           }.bind(this)).catch(function (error){
-            console.log(error.response);
             this.showError('Error')
           }.bind(this));
       },
@@ -150,18 +140,14 @@
             this.steps = this.step_info.end_times;
             var new_step = {'point':'','sort':1, 'question_ids':[]};
               this.steps.push(new_step);
-              console.log('new_step++++++++++++++++',this.steps)
           }
           else{
             this.step_info = response.data.init_steps;
             this.steps = this.step_info.end_times;
-            console.log('end_times++++++++++++++++',this.steps)
           }
-          console.log('step_info++++++++++++++++',this.step_info)
         }.bind(this))
         .catch(function (error) {
           this.loading = false
-          console.log(error)
         }.bind(this))
       },
     }

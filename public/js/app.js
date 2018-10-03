@@ -42371,8 +42371,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-// console.log('vimeo_url', vimeo_url);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
   props: {
@@ -42418,8 +42416,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }],
         techOrder: ["vimeo"]
       },
-      change_value: 20,
-      r_index: 1
+      change_value: 20
     };
   },
 
@@ -42446,12 +42443,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     set_offset: function set_offset() {
       console.log('+++++++++++', this.player);
-      // this.player.currentTime(10);
-      // this.player.offset({
-      //     start: this.start_offset,
-      //     end: this.end_offset,
-      //     restart_beginning: false //Should the video go to the beginning when it ends
-      //   });
     },
     cut_step: function cut_step() {
       this.player.currentTime(this.start_offset);
@@ -42470,9 +42461,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var self = this;
       setTimeout(function () {
         self.pause_state = false;
-        console.log(' setTimeout(function(){========', this.pause_state);
       }, 200);
-      // this.player.load();
     },
     next_video_step: function next_video_step() {
       this.player.play();
@@ -42480,7 +42469,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var self = this;
       setTimeout(function () {
         self.pause_state = false;
-        console.log(' setTimeout(function(){========', this.pause_state);
       }, 200);
     },
     accept: function accept() {
@@ -42488,7 +42476,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       send_data['user_id'] = this.user_id;
       send_data['selected_ids'] = this.current_step_answer;
       send_data['current_quiz'] = this.current_step_quiz;
-      console.log(send_data);
       axios.post('/api/user/user-quiz/accept', {
         data: JSON.stringify(send_data)
       }, {
@@ -42496,23 +42483,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           'Content-Type': 'applicaton/json'
         }
       }).then(function (response) {
-        console.log(response);
         if (response.data.check == true) {
 
           this.quiz = false;
           this.accept_btn = false;
-          console.log(this.step_order);
-          console.log(this.step_count);
           if (this.step_order + 1 == this.step_count) {
-            console.log('review user info');
             this.show_review_result();
           } else {
             this.next_btn = true;
-            console.log('current step_order+++++++++', this.step_order);
             this.step_order = this.step_order + 1;
             this.set_current_step();
             this.cut_step();
-            console.log('increated step_order---------', this.step_order);
           }
           this.showMessage('you can skip next step');
         } else {
@@ -42522,12 +42503,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           this.showError("Your answer isn't correct");
         }
       }.bind(this)).catch(function (error) {
-        console.log(error.response);
         this.showError('Error');
       }.bind(this));
     },
     show_review_result: function show_review_result() {
-      // this.player_loading = false;
       axios.post('/api/user/user-quiz/get_review_result', {
         data: this.user_id
       }, {
@@ -42536,12 +42515,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }).then(function (response) {
         this.review_data = response.data.review_data;
-        console.log('this.review_data==============////////===============', this.review_data);
         this.player_loading = true;
         this.review_system = true;
         this.start_btn = false;
       }.bind(this)).catch(function (error) {
-        console.log(error.response);
         this.showError('Error');
       }.bind(this));
     },
@@ -42556,11 +42533,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.video_data = response.data.video_data;
         this.step_data = response.data.step_data;
         this.step_order = response.data.step_order;
-
-        console.log('this is step order ++++++++////////+++++++++', this.step_order);
-        console.log('this.step_data++++++++++++===', this.step_data);
-        console.log('this.step_order++++++++++++===', this.step_order);
-        // this.video_url = this.video_data.vimeo_url;
         this.player_loading = true;
         this.set_current_step();
       }.bind(this)).catch(function (error) {
@@ -42568,29 +42540,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.init_data = false;
         this.quiz = false;
         this.review_system = false;
-        console.log(error.response);
         this.showError('Error');
       }.bind(this));
     },
     set_current_step: function set_current_step() {
       this.step_count = this.step_data.end_times.length;
-      console.log('this.step_count////////////////////////////', this.step_count);
-      console.log('this.step_order////////////////////////////', this.step_order);
       if (this.step_count == this.step_order) {
         this.show_review_result();
         return;
       }
       this.current_step = this.step_data.end_times[this.step_order];
       this.questions = this.current_step.question_ids;
-      console.log('this.current_step++++++++++++++++++', this.current_step);
       var start = this.current_step.s_point;
       var end = this.current_step.point;
-
-      // this.start_offset = 200;
-
       this.start_offset = parseInt(parseInt(start.substring(0, 2)) * 60) + parseInt(start.substring(2, 4));
       this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
-
       axios.post('/api/user/user-quiz/get_questions_answers', {
         data: JSON.stringify(this.current_step.question_ids)
       }, {
@@ -42600,13 +42564,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         this.current_step_quiz = response.data.questions;
       }.bind(this)).catch(function (error) {
-        console.log(error.response);
         this.showError('Error');
       }.bind(this));
     },
     reload: function reload() {
       this.change_value = 10;
-      // this.player.load();
     },
 
     // listen event
@@ -42616,27 +42578,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onPlayerPause: function onPlayerPause(player) {
       console.log('player pause!', player);
     },
-
-    // ...player event
-    // or listen state event
     playerStateChanged: function playerStateChanged(playerCurrentState) {
       // console.log('player current update state', playerCurrentState)
     },
-
-    // player is ready
     playerReadied: function playerReadied(player) {
       console.log('the player is readied', player);
       this.player.currentTime(this.start_offset);
       // this.set_offset()
-      // you can use it to do something...
-      // player.[methods]
     },
     onPlayerTimeupdate: function onPlayerTimeupdate(player) {
-      // player.controlBar.playToggle.on('click')
-      console.log('this.start_offset-----', this.start_offset);
-      console.log('this.end_offset-----', this.end_offset);
-      console.log('this.pause_state-----------', this.pause_state);
-      console.log('player.currentTime()----------', player.currentTime());
       if (player.currentTime() > this.end_offset) {
         if (this.pause_state == false) {
           this.accept_btn = true;
@@ -45211,7 +45161,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                {},
+                { staticClass: "video-player-content" },
                 [
                   _vm.player_loading == true
                     ? _c("video-player", {
@@ -70940,8 +70890,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71130,16 +71078,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -71173,8 +71111,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   watch: {
     selected: function selected(val) {
-      console.log(val);
-      console.log(this.transition);
       this.transition[this.prior_val] = false;
       this.transition[val] = true;
       this.prior_val = val;
@@ -71204,12 +71140,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.loading = true;
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
         this.loading = false;
-        console.log('response+++++++++++++++', response);
         this.videos = response.data.videos;
         this.selected = response.data.select_video;
       }.bind(this)).catch(function (error) {
         this.loading = false;
-        console.log(error.response);
       }.bind(this));
     },
     add_video: function add_video() {
@@ -71222,8 +71156,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/admin/video-management/create', {
         data: JSON.stringify(send_info)
       }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-        console.log(response);
-
         if (response.data.action == true) {
           this.showMessage('Successfully Saved');
           this.videos = response.data.result;
@@ -71233,12 +71165,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this)).catch(function (error) {
         console.log(error.response);
       }.bind(this));
-
       this.add_vimeo_url = '';
       this.add_vimeo_alias = '';
       this.add_vimeo_description = '';
     }
-
   },
   mounted: function mounted() {
     this.getvideos();
@@ -71533,21 +71463,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(126)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(128)
 /* template */
-var __vue_template__ = __webpack_require__(129)
+var __vue_template__ = __webpack_require__(135)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-55d1fc43"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -71580,46 +71506,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(127);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("08d4d92d", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-55d1fc43\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionComponent.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-55d1fc43\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuestionComponent.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.facebook[data-v-55d1fc43] {\n    width: 20px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 126 */,
+/* 127 */,
 /* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -71627,13 +71515,6 @@ exports.push([module.i, "\n.facebook[data-v-55d1fc43] {\n    width: 20px;\n}\n",
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -71782,9 +71663,7 @@ var test = [];
     remove: function remove(order) {
       this.editedItem.count = this.editedItem.count - 1;
       this.editedItem.answers.splice(order, 1);
-      console.log(this.editedItem);
       this.editedItem.selected = 1;
-      console.log(this.editedItem);
     },
     add: function add() {
       this.editedItem.count = this.editedItem.count + 1;
@@ -71795,23 +71674,19 @@ var test = [];
       this.editedItem.answers.push(answers);
     },
     save_qustions: function save_qustions() {
-      // var form = document.querySelector('question-management');
       if (this.editedIndex > -1) {
-        console.log('***************', this.editedItem);
         this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
         axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
           headers: {
             'Content-Type': 'applicaton/json'
           }
         }).then(function (response) {
-          console.log(this.editedIndex);
           Object.assign(this.desserts[this.editedIndex], this.editedItem);
           this.showMessage('Successfully Updated');
         }.bind(this)).catch(function (error) {
           console.log(error);
         }.bind(this));
       } else {
-        console.log(this.editedItem);
         axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
           headers: {
             'Content-Type': 'applicaton/json'
@@ -71827,7 +71702,6 @@ var test = [];
     },
     initialize: function initialize() {
       var params = new URLSearchParams();
-      console.log(params);
       this.loading = true;
       axios.get('/api/admin/question-management/read', { params: params, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
         this.loading = false;
@@ -71839,7 +71713,6 @@ var test = [];
     editItem: function editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.defaultItem = Object.assign({}, item);
-      console.log(item);
       this.editedItem.selected = item['selected'];
       this.editedItem.question = item['question'];
       this.editedItem.count = item['count'];
@@ -71859,7 +71732,6 @@ var test = [];
           this.loading = false;
           this.desserts.splice(index, 1);
           this.showMessage('Successfully Deleted');
-          // this.desserts = response.data.questions
         }.bind(this)).catch(function (error) {
           this.loading = false;
         }.bind(this));
@@ -71868,19 +71740,482 @@ var test = [];
     close: function close() {
       this.dialog = false;
     },
+    save: function save() {}
+  }
+});
+
+/***/ }),
+/* 129 */,
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(131)
+/* template */
+var __vue_template__ = __webpack_require__(132)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\stepComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c54313d", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c54313d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 131 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      select_video: '',
+      init: '00:00',
+      video: { 'alias': '', '_id': '' },
+      steps: [],
+      videos: [],
+      questions: [],
+      question: [],
+      select_questions: []
+    }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
+      video_id: '',
+      end_times: []
+    }), _defineProperty(_ref, 'loading_state', false), _ref;
+  },
+  created: function created() {
+    this.initialize();
+  },
+
+  methods: {
+    onChange: function onChange(_id) {
+      var param = { "_id": _id };
+      axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        this.loading = false;
+        this.loading_state = true;
+        if (response.data.action == 'true') {
+          this.step_info = response.data.steps;
+          this.steps = this.step_info.end_times;
+        } else {
+          this.step_info = [];
+          this.steps = [];
+          this.step_info = {
+            video_id: '',
+            end_times: []
+          };
+
+          this.step_info.video_id = response.data.steps;
+          this.step_info.end_times = [];
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+        }
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
+    },
+    remove: function remove(index) {
+      this.steps.splice(index, 1);
+    },
+    add: function add() {
+      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
+      this.steps.push(new_step);
+    },
     save: function save() {
-      // if (this.editedIndex > -1) {
-      //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      // } else {
-      //   this.desserts.push(this.editedItem)
-      // }
-      // this.close()
+      axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        this.showMessage('Successfully Saved');
+      }.bind(this)).catch(function (error) {
+        this.showError('Error');
+      }.bind(this));
+    },
+    initialize: function initialize() {
+      this.loading = true;
+      this.loading_state = false;
+      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
+        this.loading = false;
+        this.videos = response.data.videos;
+        this.questions = response.data.questions;
+        var flag = response.data.action;
+        if (flag == 'false') {
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+        } else {
+          this.step_info = response.data.init_steps;
+          this.steps = this.step_info.end_times;
+        }
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
     }
   }
 });
 
 /***/ }),
-/* 129 */
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  items: _vm.videos,
+                  "item-text": "alias",
+                  label: "Select Video",
+                  "item-value": "_id"
+                },
+                on: { change: _vm.onChange },
+                model: {
+                  value: _vm.video,
+                  callback: function($$v) {
+                    _vm.video = $$v
+                  },
+                  expression: "video"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-list",
+        [
+          _vm.loading_state == false
+            ? _c("v-card-text", {}, [
+                _c("h2", { staticClass: "text-sm-left" }, [
+                  _vm._v("Please select video")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.steps, function(step, index) {
+            return [
+              _c(
+                "v-container",
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs10: "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  index == 0
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: "",
+                                          mask: "##:##"
+                                        },
+                                        model: {
+                                          value: _vm.init,
+                                          callback: function($$v) {
+                                            _vm.init = $$v
+                                          },
+                                          expression: "init"
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  index != 0
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: "",
+                                          mask: "##:##"
+                                        },
+                                        model: {
+                                          value: _vm.steps[index - 1]["point"],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.steps[index - 1],
+                                              "point",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "steps[index - 1]['point']"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "End time", mask: "##:##" },
+                                    model: {
+                                      value: step.point,
+                                      callback: function($$v) {
+                                        _vm.$set(step, "point", $$v)
+                                      },
+                                      expression: "step.point"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.questions,
+                                  "item-text": "question",
+                                  "item-value": "_id",
+                                  label: "Select Question",
+                                  multiple: "",
+                                  chips: ""
+                                },
+                                model: {
+                                  value: step.question_ids,
+                                  callback: function($$v) {
+                                    _vm.$set(step, "question_ids", $$v)
+                                  },
+                                  expression: "step.question_ids"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { "xs-2": "" } },
+                        [
+                          index == 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      return _vm.add($event)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Add")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          index != 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      _vm.remove(index)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Close")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider")
+            ]
+          }),
+          _vm._v(" "),
+          _c(
+            "v-list-tile",
+            [
+              _vm.loading_state == true
+                ? _c(
+                    "v-list-tile-action",
+                    { attrs: { "flat-right": "" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.save($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
+  }
+}
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 134 */,
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72246,488 +72581,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-55d1fc43", module.exports)
   }
 }
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(131)
-/* template */
-var __vue_template__ = __webpack_require__(132)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\admin\\stepComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2c54313d", Component.options)
-  } else {
-    hotAPI.reload("data-v-2c54313d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 131 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
-  data: function data() {
-    var _ref;
-
-    return _ref = {
-      select_video: '',
-      init: '00:00',
-      video: { 'alias': '', '_id': '' },
-      steps: [],
-      videos: [],
-      questions: [],
-      question: [],
-      select_questions: []
-    }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
-      video_id: '',
-      end_times: []
-    }), _defineProperty(_ref, 'loading_state', false), _ref;
-  },
-  created: function created() {
-    this.initialize();
-  },
-
-  methods: {
-    onChange: function onChange(_id) {
-      console.log(_id);
-
-      var param = { "_id": _id };
-      axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-        console.log(response);
-        this.loading = false;
-        this.loading_state = true;
-        if (response.data.action == 'true') {
-          this.step_info = response.data.steps;
-          this.steps = this.step_info.end_times;
-        } else {
-          this.step_info = [];
-          this.steps = [];
-          this.step_info = {
-            video_id: '',
-            end_times: []
-          };
-
-          this.step_info.video_id = response.data.steps;
-          this.step_info.end_times = [];
-          this.steps = this.step_info.end_times;
-          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
-          this.steps.push(new_step);
-          console.log('this.step_info ==============', this.step_info);
-          console.log('this.defaultItem ++++++++====', this.defaultItem);
-          console.log('this.steps ++++++++====', this.steps);
-        }
-      }.bind(this)).catch(function (error) {
-        this.loading = false;
-      }.bind(this));
-    },
-    remove: function remove(index) {
-      this.steps.splice(index, 1);
-    },
-    add: function add() {
-      console.log('step_info++++++++++++++++++++', this.steps);
-      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
-      this.steps.push(new_step);
-    },
-    save: function save() {
-      console.log('save step_info+++++++++++', this.step_info);
-      axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
-      }).then(function (response) {
-        this.showMessage('Successfully Saved');
-      }.bind(this)).catch(function (error) {
-        console.log(error.response);
-        this.showError('Error');
-      }.bind(this));
-    },
-    initialize: function initialize() {
-      this.loading = true;
-      this.loading_state = false;
-      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
-        this.loading = false;
-        this.videos = response.data.videos;
-        this.questions = response.data.questions;
-        var flag = response.data.action;
-        if (flag == 'false') {
-          this.steps = this.step_info.end_times;
-          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
-          this.steps.push(new_step);
-          console.log('new_step++++++++++++++++', this.steps);
-        } else {
-          this.step_info = response.data.init_steps;
-          this.steps = this.step_info.end_times;
-          console.log('end_times++++++++++++++++', this.steps);
-        }
-        console.log('step_info++++++++++++++++', this.step_info);
-      }.bind(this)).catch(function (error) {
-        this.loading = false;
-        console.log(error);
-      }.bind(this));
-    }
-  }
-});
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-container",
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c("v-select", {
-                attrs: {
-                  items: _vm.videos,
-                  "item-text": "alias",
-                  label: "Select Video",
-                  "item-value": "_id"
-                },
-                on: { change: _vm.onChange },
-                model: {
-                  value: _vm.video,
-                  callback: function($$v) {
-                    _vm.video = $$v
-                  },
-                  expression: "video"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-list",
-        [
-          _vm.loading_state == false
-            ? _c("v-card-text", {}, [
-                _c("h2", { staticClass: "text-sm-left" }, [
-                  _vm._v("Please select video")
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.steps, function(step, index) {
-            return [
-              _c(
-                "v-container",
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { wrap: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs10: "" } },
-                        [
-                          _c(
-                            "v-layout",
-                            { attrs: { wrap: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                { attrs: { xs6: "" } },
-                                [
-                                  index == 0
-                                    ? _c("v-text-field", {
-                                        attrs: {
-                                          label: "start time",
-                                          disabled: "",
-                                          mask: "##:##"
-                                        },
-                                        model: {
-                                          value: _vm.init,
-                                          callback: function($$v) {
-                                            _vm.init = $$v
-                                          },
-                                          expression: "init"
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  index != 0
-                                    ? _c("v-text-field", {
-                                        attrs: {
-                                          label: "start time",
-                                          disabled: "",
-                                          mask: "##:##"
-                                        },
-                                        model: {
-                                          value: _vm.steps[index - 1]["point"],
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.steps[index - 1],
-                                              "point",
-                                              $$v
-                                            )
-                                          },
-                                          expression:
-                                            "steps[index - 1]['point']"
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs6: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "End time", mask: "##:##" },
-                                    model: {
-                                      value: step.point,
-                                      callback: function($$v) {
-                                        _vm.$set(step, "point", $$v)
-                                      },
-                                      expression: "step.point"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.questions,
-                                  "item-text": "question",
-                                  "item-value": "_id",
-                                  label: "Select Question",
-                                  multiple: "",
-                                  chips: ""
-                                },
-                                model: {
-                                  value: step.question_ids,
-                                  callback: function($$v) {
-                                    _vm.$set(step, "question_ids", $$v)
-                                  },
-                                  expression: "step.question_ids"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { "xs-2": "" } },
-                        [
-                          index == 0
-                            ? _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    small: "",
-                                    color: "primary",
-                                    "flat-right": ""
-                                  },
-                                  nativeOn: {
-                                    click: function($event) {
-                                      return _vm.add($event)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Add")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          index != 0
-                            ? _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    small: "",
-                                    color: "primary",
-                                    "flat-right": ""
-                                  },
-                                  nativeOn: {
-                                    click: function($event) {
-                                      _vm.remove(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Close")]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-divider")
-            ]
-          }),
-          _vm._v(" "),
-          _c(
-            "v-list-tile",
-            [
-              _vm.loading_state == true
-                ? _c(
-                    "v-list-tile-action",
-                    { attrs: { "flat-right": "" } },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "primary" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.save($event)
-                            }
-                          }
-                        },
-                        [_vm._v("Save")]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        2
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
-  }
-}
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

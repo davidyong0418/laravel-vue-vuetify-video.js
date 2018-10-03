@@ -35,7 +35,6 @@
                         </v-list-tile>
                       </v-radio-group>
                     </v-list>
-
             </v-container>
           </v-card-text>
 
@@ -82,12 +81,6 @@
     </v-data-table>
   </div>
 </template>
-
-<style scoped>
-    .facebook {
-        width: 20px;
-    }
-</style>
 
 <script>
 var test = [];
@@ -157,9 +150,7 @@ var test = [];
       remove: function(order){
         this.editedItem.count = this.editedItem.count - 1;
         this.editedItem.answers.splice(order, 1);
-        console.log(this.editedItem);
         this.editedItem.selected = 1;
-        console.log(this.editedItem);
       },
       add: function(){
         this.editedItem.count = this.editedItem.count + 1;
@@ -170,17 +161,14 @@ var test = [];
          this.editedItem.answers.push(answers);
       },
       save_qustions: function(){
-        // var form = document.querySelector('question-management');
         if(this.editedIndex > -1)
         {
-          console.log('***************',this.editedItem);
             this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
             axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.editedItem)}, {
             headers:{
               'Content-Type':'applicaton/json',
             }
           }).then(function(response){
-            console.log(this.editedIndex);
             Object.assign(this.desserts[this.editedIndex], this.editedItem);
             this.showMessage(`Successfully Updated`);
 
@@ -189,7 +177,6 @@ var test = [];
           }.bind(this));
         }
         else{
-          console.log(this.editedItem);
           axios.post('/api/admin/question-management/create', {data: JSON.stringify(this.editedItem)}, {
             headers:{
               'Content-Type':'applicaton/json',
@@ -205,7 +192,6 @@ var test = [];
       },
       initialize () {
         var params = new URLSearchParams();
-        console.log(params);
         this.loading = true
         axios.get('/api/admin/question-management/read', {params, _token:'kkkkkkkkkkkk'}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
         .then( function (response) {
@@ -220,7 +206,6 @@ var test = [];
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item);
         this.defaultItem = Object.assign({}, item);
-        console.log(item);
         this.editedItem.selected = item['selected'];
         this.editedItem.question = item['question'];
         this.editedItem.count = item['count'];
@@ -244,7 +229,6 @@ var test = [];
             this.loading = false
             this.desserts.splice(index, 1);
             this.showMessage(`Successfully Deleted`);
-            // this.desserts = response.data.questions
           }.bind(this))
           .catch(function (error) {
             this.loading = false
@@ -253,18 +237,12 @@ var test = [];
         }
         
       },
-
       close () {
         this.dialog = false
       },
 
       save () {
-        // if (this.editedIndex > -1) {
-        //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        // } else {
-        //   this.desserts.push(this.editedItem)
-        // }
-        // this.close()
+      
       }
     }
   }
