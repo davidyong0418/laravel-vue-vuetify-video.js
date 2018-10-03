@@ -17,6 +17,8 @@ export default {
     })
   },
   [ actions.UPDATE_USER ] (context, user) {
+    console.log('context+++++++++',context)
+    console.log('user++++++++++++',user)
     return new Promise((resolve, reject) => {
       users.update(user).then(response => {
         context.commit(mutations.USER, user)

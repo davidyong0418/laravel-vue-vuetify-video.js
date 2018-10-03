@@ -51,8 +51,8 @@
                         <gravatar :user="{{ Auth::user() }}" size="100px"></gravatar>
                     </v-flex>
                     <v-flex xs12>
-                        <h3>@{{  user.name }}</h3>
-                        <a href="https://en.gravatar.com/connect/">Change Avatar</a>
+                        <h2>@{{  user.name }}</h2>
+                        <!-- <a href="https://en.gravatar.com/connect/">Change Avatar</a> -->
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -80,7 +80,7 @@
                 <v-spacer></v-spacer>
                 <v-btn :loading="updatingUser" flat color="green" @click="updateUser" v-if="editingUser">
                     <v-icon right dark>save</v-icon>
-                    Guardar
+                    Save
                 </v-btn>
                 <v-btn flat color="orange" @click="editUser()" v-else>
                     <v-icon right dark>edit</v-icon>
@@ -93,12 +93,12 @@
             </v-card-actions>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn :loading="changingPassword" flat color="red" @click="changePassword">Change Password</v-btn>
+                <!-- <v-btn :loading="changingPassword" flat color="red" @click="changePassword">Change Password</v-btn> -->
                 <v-spacer></v-spacer>
             </v-card-actions>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <a href="https://en.gravatar.com/connect/">Change Avatar</a>
+                <!-- <a href="https://en.gravatar.com/connect/">Change Avatar</a> -->
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>

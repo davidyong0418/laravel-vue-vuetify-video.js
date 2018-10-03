@@ -10,6 +10,7 @@
             <v-card-title>
                 <span class="headline">Login</span>
             </v-card-title>
+            <v-divider></v-divider>
             <v-card-text>
                 <v-form ref="loginForm" v-model="valid">
                     <v-text-field
@@ -51,7 +52,7 @@
                         </v-flex> -->
                         <v-flex xs12>
                             <a href="/password/reset" color="blue darken-2">
-                                Remember password</a>
+                                Reset password</a>
                         </v-flex>
                         <v-flex xs12>
                             <a href="/register" color="blue darken-2">
@@ -63,8 +64,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <!-- <v-btn color="blue darken-2" flat @click.native="showLogin = false">Close</v-btn> -->
-                <v-btn color="blue darken-2"  block class="white--text" @click.native="login" :loading="loginLoading">Login</v-btn>
+                <v-btn color="blue darken-2" class="white--text" @click.native="showLogin = false">Close</v-btn>
+                <v-btn color="blue darken-2" class="white--text" @click.native="login" :loading="loginLoading">Login</v-btn>
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
@@ -143,7 +144,7 @@
           this.$store.dispatch(actions.LOGIN, credentials).then(response => {
             this.loginLoading = false
             this.showLogin = false
-            window.location = '/home'
+            window.location = '/admin'
           }).catch(error => {
             console.log('HEY:')
             console.log(error.response.data)

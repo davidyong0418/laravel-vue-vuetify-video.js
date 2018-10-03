@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 /**
@@ -19,7 +19,7 @@ class LoggedUserController extends Controller
      */
     public function update(Request $request)
     {
-        Auth::user()->update($request->only(['name','email']));
+        Auth::user()->update(Auth::user()->_id,$request->get('name'),$request->get('email'));
         return Auth::user();
     }
 }

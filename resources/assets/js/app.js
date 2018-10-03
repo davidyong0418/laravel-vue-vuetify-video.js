@@ -43,6 +43,7 @@ if (window.user) {
 const router = new VueRouter({
   mode: 'history',
   routes:[
+    {path: '/admin', component: require('./components/admin/HomeComponent.vue')},
     {path: '/admin/video-management', component: require('./components/admin/VideoComponent.vue')},
     {path: '/admin/question-management', component: require('./components/admin/QuestionComponent.vue')},
     {path: '/admin/step-management', component: require('./components/admin/stepComponent.vue')},

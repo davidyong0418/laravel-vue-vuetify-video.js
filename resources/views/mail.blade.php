@@ -1,3 +1,3 @@
-<h1>Hi, Customer</h1>
-<p>This is test</p>
-<span>Password is &nbsp;</span><h4>testman</h4>
+<h1>Hi, {{$name}}</h1>
+
+<span>Password is &nbsp;</span><h4>{{$password}}</h4>

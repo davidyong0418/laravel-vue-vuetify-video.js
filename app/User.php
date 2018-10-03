@@ -40,4 +40,12 @@ class User extends MonogoAuth
     {
         return $this->_id; // this looks for an admin column in your users table
     }
+    public function update($id=NULL, $name=NULL, $email=NULL)
+    {
+        $data = array(
+            'name' => $name,
+            'email' => $email
+        );
+        User::where('_id', $id)->update($data);
+    }
 }

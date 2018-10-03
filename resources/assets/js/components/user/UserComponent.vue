@@ -7,7 +7,6 @@
                  ref="videoPlayer"
                  :options="playerOptions"
                  :playsinline="true"
-                 playbackRates = [1]
                  customEventName="customstatechangedeventname"
                   @play="onPlayerPlay($event)"
                  @pause="onPlayerPause($event)"
@@ -119,11 +118,11 @@
       }
     },
     watch:{
-      step_oder()
-      {
-        this.player.currentTime(200);
-        this.set_offset()
-      }
+      // step_oder: function(val, oldval)
+      // {
+      //   this.player.currentTime(200);
+      //   this.set_offset()
+      // }
     },
     mounted() {
       console.log('this is current player instance object', this.vimeourl);

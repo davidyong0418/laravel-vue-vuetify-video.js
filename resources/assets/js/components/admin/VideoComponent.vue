@@ -89,11 +89,6 @@
   </v-layout>
 </template>
 
-<style scoped>
-    .facebook {
-        width: 20px;
-    }
-</style>
 
 <script>
   import * as actions from '../../store/action-types'

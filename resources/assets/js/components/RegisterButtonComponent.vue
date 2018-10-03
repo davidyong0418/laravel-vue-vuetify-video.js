@@ -8,6 +8,7 @@
             <v-card-title>
                 <span class="headline">User registration</span>
             </v-card-title>
+            <v-divider></v-divider>
             <v-card-text>
                 <v-form ref="registrationForm" v-model="valid">
                     <v-text-field
@@ -53,7 +54,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="showRegister = false">Close</v-btn>
+                <v-btn color="blue darken-1" class="white--text" @click.native="showRegister = false">Close</v-btn>
                 <v-btn :loading="registerLoading" color="blue darken-1" class="white--text" @click.native="register">Register</v-btn>
             </v-card-actions>
         </v-card>
@@ -130,7 +131,7 @@
           this.$store.dispatch(actions.REGISTER, user).then(response => {
             this.registerLoading = false
             this.showRegister = false
-            window.location = '/home'
+            window.location = '/user'
           }).catch(error => {
             if (error.response && error.response.status === 422) {
               this.showError({
