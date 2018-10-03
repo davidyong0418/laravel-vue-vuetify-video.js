@@ -42309,6 +42309,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -42319,6 +42345,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
   props: {
     vimeourl: {
+      type: String,
+      default: null
+    },
+    distinct: {
       type: String,
       default: null
     }
@@ -42333,24 +42363,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       end_offset: 0,
       current_step: {},
       step_oder: 0,
+      step_count: 0,
       current_step_quiz: [],
       current_step_answer: [],
       quiz: false,
-      accept_btn: true,
+      accept_btn: false,
       next_btn: false,
       replay_btn: false,
       player_loading: false,
+      user_id: this.distinct,
+      wrong_answer: false,
+      review_data: {},
       playerOptions: {
         // videojs options
         sources: [{
           type: "video/vimeo",
-          src: this.vimeourl
-        }],
-        techOrder: ["vimeo"]
+          src: this.vimeourl,
+          vimeo: { "ytControls": 0 }
 
+        }],
+        techOrder: ["vimeo"],
+        vimeo: { "iv_load_policy": 1 }
       },
       change_value: 20
     };
+  },
+
+  watch: {
+    step_oder: function step_oder() {
+      this.player.currentTime(200);
+      this.set_offset();
+    }
   },
   mounted: function mounted() {
     console.log('this is current player instance object', this.vimeourl);
@@ -42366,8 +42409,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    show_review_result: function show_review_result() {
+      this.player_loading = false;
+      axios.post('/api/user/user-quiz', {
+        data: this.user_id
+      }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        this.review_data = response.review_data;
+        this.player_loading = true;
+        this.set_current_step();
+      }.bind(this)).catch(function (error) {
+        console.log(error.response);
+        this.showError('Error');
+      }.bind(this));
+    },
+    set_offset: function set_offset() {
+      console.log('+++++++++++', this.player);
+      // this.player.currentTime(10);
+      this.player.offset({
+        start: this.start_offset,
+        end: this.end_offset,
+        restart_beginning: false //Should the video go to the beginning when it ends
+      });
+    },
     replay_video: function replay_video() {
-      this.player.load();
+      this.player.currentTime(200);
+      this.set_offset();
+      // this.player.load();
     },
     next_video_step: function next_video_step() {
       // this.start_offset = ;
@@ -42375,10 +42446,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.set_offset();
     },
     accept: function accept() {
-      console.log(this.current_step_answer);
       var send_data = {};
+      send_data['user_id'] = this.user_id;
       send_data['selected_ids'] = this.current_step_answer;
       send_data['current_quiz'] = this.current_step_quiz;
+      console.log(send_data);
       axios.post('/api/user/user-quiz/accept', {
         data: JSON.stringify(send_data)
       }, {
@@ -42387,13 +42459,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }).then(function (response) {
         console.log(response);
-        if (this.response.check == true) {
-          this.next_btn = true;
+        if (response.check == true) {
+
           this.quiz = false;
+          this.accept_btn = false;
+          if (this.step_oder == this.step_count) {
+            this.show_review_result();
+            console.log('review user info');
+          } else {
+            this.next_btn = true;
+            console.log('current step_oder+++++++++', this.step_oder);
+            this.step_oder = this.step_oder + 1;
+            console.log('increated step_oder---------', this.step_oder);
+          }
+          this.showMessage('you can skip next step');
         } else {
           this.accept_btn = false;
           this.replay_btn = true;
           this.quiz = false;
+          this.showError("Your answer isn't correct");
         }
       }.bind(this)).catch(function (error) {
         console.log(error.response);
@@ -42401,13 +42485,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     get_quiz_info: function get_quiz_info() {
-      axios.get('/api/user/user-quiz', {
+      axios.post('/api/user/user-quiz', {
+        data: this.user_id
+      }, {
         headers: {
           'Content-Type': 'applicaton/json'
         }
       }).then(function (response) {
         this.video_data = response.data.video_data;
         this.step_data = response.data.step_data;
+        this.step_oder = response.data.step_oder;
+        console.log('this is step order ++++++++', this.step_oder);
         console.log('this.step_data++++++++++++===', this.step_data);
 
         // this.video_url = this.video_data.vimeo_url;
@@ -42424,13 +42512,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log('this.current_step++++++++++++++++++', this.current_step);
       var start = this.current_step.s_point;
       var end = this.current_step.point;
-      console.log(start);
-      console.log(end);
-      this.start_offset = parseInt(start.substring(0, 2)) * 60 + parseInt(start.substring(3, 5));
-      this.end_offset = parseInt(end.substring(0, 2)) * 60 + parseInt(end.substring(3, 5));
-      conole.log(this.start_offset);
-      consoel.log('this.end_offset ====================', this.end_offset);
-      this.set_offset();
+      this.step_count = this.step_data.end_times.length;
+      this.start_offset = 200;
+
+      // this.start_offset = parseInt(parseInt(start.substring(0,2)) * 60) + parseInt(start.substring(2,4));
+      this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
+
       axios.post('/api/user/user-quiz/get_questions_answers', {
         data: JSON.stringify(this.current_step.question_ids)
       }, {
@@ -42444,20 +42531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.showError('Error');
       }.bind(this));
     },
-    set_offset: function set_offset() {
-      console.log('+++++++++++', this.player);
-      // this.player.currentTime(10);
-      this.player.offset({
-        start: this.start_offset,
-        end: this.end_offset,
-        restart_beginning: false //Should the video go to the beginning when it ends
-      });
-    },
     reload: function reload() {
       this.change_value = 10;
-      // console.log(this.change_value);
-      // this.player.trigger('loadstart');
-
       // this.player.load();
     },
 
@@ -42478,11 +42553,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // player is ready
     playerReadied: function playerReadied(player) {
       console.log('the player is readied', player);
+      this.player.currentTime(200);
+      this.set_offset();
       // you can use it to do something...
       // player.[methods]
     },
     onPlayerTimeupdate: function onPlayerTimeupdate(player) {
-      console.log('this player time update', player);
+      var timeoffset = this.end_offset - this.start_offset;
+      if (player.currentTime() > timeoffset) {
+        this.accept_btn = true;
+        this.quiz = true;
+        player.pause();
+        //  player.trigger('pause');
+      }
     },
     onPlayerEnded: function onPlayerEnded(player) {
       this.accept_btn = true;
@@ -45719,6 +45802,7 @@ var render = function() {
                     attrs: {
                       options: _vm.playerOptions,
                       playsinline: true,
+                      playbackRates: "[1]",
                       customEventName: "customstatechangedeventname"
                     },
                     on: {
@@ -45730,6 +45814,27 @@ var render = function() {
                       },
                       ended: function($event) {
                         _vm.onPlayerEnded($event)
+                      },
+                      waiting: function($event) {
+                        _vm.onPlayerWaiting($event)
+                      },
+                      playing: function($event) {
+                        _vm.onPlayerPlaying($event)
+                      },
+                      loadeddata: function($event) {
+                        _vm.onPlayerLoadeddata($event)
+                      },
+                      timeupdate: function($event) {
+                        _vm.onPlayerTimeupdate($event)
+                      },
+                      canplay: function($event) {
+                        _vm.onPlayerCanplay($event)
+                      },
+                      canplaythrough: function($event) {
+                        _vm.onPlayerCanplaythrough($event)
+                      },
+                      statechanged: function($event) {
+                        _vm.playerStateChanged($event)
                       },
                       ready: _vm.playerReadied
                     }
@@ -45755,7 +45860,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm.quiz == false
+              _vm.quiz == true
                 ? _c(
                     "v-list",
                     [
@@ -45835,6 +45940,46 @@ var render = function() {
                         [_vm._v("Replay")]
                       )
                     : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "v-list",
+                    { attrs: { "two-line": "" } },
+                    [
+                      _vm._l(_vm.review_data, function(
+                        step_review_data,
+                        p_index
+                      ) {
+                        return _vm._l(step_review_data, function(
+                          quiz_data,
+                          c_index
+                        ) {
+                          return _c(
+                            "v-list-tile",
+                            { key: p_index },
+                            [
+                              _c("v-list-tile-content", [
+                                _c("p", [_vm._v(_vm._s(quiz_data.question))])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-list-tile-content", [
+                                _c("p", [
+                                  _vm._v(_vm._s(quiz_data.correct_answer))
+                                ])
+                              ])
+                            ],
+                            1
+                          )
+                        })
+                      })
+                    ],
+                    2
+                  )
                 ],
                 1
               )

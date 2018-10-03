@@ -9,6 +9,7 @@ use App\Model\Question;
 use App\Model\Userhistory;
 use JavaScript;
 use Illuminate\Support\Facades\Auth;
+use Session;
 use App\Http\Controllers\Controller;
 class QuizController extends Controller
 {
@@ -27,13 +28,32 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_quiz_info()
+    public function review_result(Request $request)
     {
+        $user_id = $request->get('data');
+        $user_quiz_data = Userhistory::where('user_id', $user_id)->get()->toArray();
+        $response = array(
+            'review_data' => $user_quiz_data[0]['step']
+        );
+        return response()->json($response);
+    }
+    public function get_quiz_info(Request $request)
+    {
+        $user_id = $request->get('data');
+        $user_info = Userhistory::where('user_id', $user_id)->get()->toArray();
+        if(empty($user_info))
+        {   
+            $step_order = 0;
+        }
+        else{
+            $step_order = count($user_info[0]['step']);
+        }
         $video_data = Video::where('select', 1)->get()->toArray();
         $step_data = Step::where('video_id', $video_data[0]['_id'])->get()->toArray();
         $response = array(
             'video_data' => $video_data[0],
-            'step_data' => $step_data[0]
+            'step_data' => $step_data[0],
+            'step_order' => $step_order
         );
         return response()->json($response);
     }
@@ -62,25 +82,38 @@ class QuizController extends Controller
     }
     public function accept(Request $request)
     {
-        var_dump(Auth::user()->_id);exit;
         $response_data = (array)json_decode($request->get('data'));
         $selected_ids = $response_data['selected_ids'];
         $current_quiz = $response_data['current_quiz'];
-        $flag = true;
+        // print_r($current_quiz);
+        $user_id = $response_data['user_id'];
+        $flag = false;
         foreach ($current_quiz as $key => $item)
         {
             $current_quiz[$key]->user_select= $selected_ids[$key];
-            unset($current_quiz[$key]->_id);
             unset($current_quiz[$key]->updated_at);
             unset($current_quiz[$key]->created_at);
             if($current_quiz[$key]->selected == $selected_ids[$key] + 1 )
             {
-                $flag = false;
+                $flag = true;
             }
         }
-        $userhistory = new Userhistory();
-        $userhistory->user_id = 
-        Userhistory::create($current_quiz);
+        $check = Userhistory::where('user_id', $user_id)->get()->toArray();
+        if($flag == true)
+        {
+            if(empty($check))
+            {
+                // $new = array();
+                $new= $current_quiz;
+                $userhistory = new Userhistory();
+                $userhistory->user_id = $user_id;
+                $userhistory->step = $new;
+                $userhistory->save();
+            }
+            else{
+                Userhistory::where('user_id', $user_id)->push('step', $current_quiz);
+            }
+        }
         return ['check'=>$flag];
     }
     public function view()

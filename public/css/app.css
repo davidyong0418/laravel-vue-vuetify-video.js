@@ -31,3 +31,234 @@
   width: 100%;
 }
 
+.vjs-loading-spinner {
+  display: none !important;
+}
+
+.video-js .vjs-time-control {
+  display: block !important;
+}
+
+.video-js .vjs-remaining-time {
+  display: none !important;
+}
+
+.vjs-default-skin .vjs-progress-holder .vjs-play-progress,
+.vjs-default-skin .vjs-progress-holder .vjs-load-progress {
+  display: block;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+}
+
+.vjs-progress-control {
+  display: none !important;
+}
+
+.vp-controls {
+  display: none;
+}
+
+.banner-container {
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.bkgd-image-style {
+  position: relative;
+  width: 100%;
+}
+
+.video-wrapper {
+  width: 49.6%;
+  position: absolute;
+  top: 0px;
+  height: auto;
+}
+
+a.play-pause-button {
+  width: 50px;
+  height: 50px;
+}
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.embed-container:hover + .video-control {
+  opacity: 0.5;
+}
+
+.embed-container iframe #player .controls-wrapper {
+  display: none;
+}
+
+/* video button style */
+
+.video-control {
+  opacity: 0;
+  position: absolute;
+  width: 22.5%;
+  height: 40%;
+  top: 31%;
+  left: 38%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.video-control:hover {
+  opacity: 1;
+}
+
+.video-control:before,
+.video-control:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  max-width: 131px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: block;
+  position: absolute;
+}
+
+.video-control:before {
+  background-image: url("http://joekang.co/assets/image-hosting/video-buttons-black.png");
+  background-position: 53% 98%;
+  background-size: 332%;
+  /*content: "\ea1c";*/
+}
+
+.video-control:after {
+  background-image: url("http://joekang.co/assets/image-hosting/video-buttons-black.png");
+  background-position: -292px -292px;
+  background-size: 332%;
+  /*content: "\ea1d";*/
+}
+
+.video-control.paused:after,
+.video-control.playing:before {
+  opacity: 0;
+}
+
+.video-control-show {
+  opacity: 0.5;
+}
+
+/* audio button style */
+
+.audio-control {
+  opacity: 1;
+  position: absolute;
+  width: 6%;
+  height: 9%;
+  bottom: 3%;
+  left: 2%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.audio-control:hover {
+  opacity: 1;
+}
+
+.audio-control:before,
+.audio-control:after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  max-width: 36px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: block;
+}
+
+.audio-control:before {
+  background-image: url("http://joekang.co/assets/image-hosting/video-buttons-black.png");
+  background-position: -1% -2%;
+  background-size: 254%;
+}
+
+.audio-control:after {
+  background-image: url("http://joekang.co/assets/image-hosting/video-buttons-black.png");
+  background-position: 69% -1%;
+  background-size: 254%;
+}
+
+.audio-control.unmuted:after,
+.audio-control.muted:before {
+  opacity: 0;
+}
+
+/* default style */
+
+body {
+  background: -webkit-gradient(linear, left top, right top, from(#8e44ad), to(#c0392b));
+  background: linear-gradient(to right, #8e44ad, #c0392b);
+}
+
+.title-wrapper {
+  text-align: center;
+  margin: 3% 0;
+  font-size: 2.5vw;
+}
+
+.title-wrapper span {
+  color: #fff;
+}
+
+.top {
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#vjs_video_3_Vimeo_api {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.wrapper {
+  position: relative;
+  padding-bottom: 200%;
+  -webkit-transform: translateY(-35.95%);
+          transform: translateY(-35.95%);
+}
+
+#vjs_video_3 {
+  position: relative;
+  padding-bottom: 43%;
+}
+
+.video-player-box {
+  padding-bottom: 42.25%;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+}
+

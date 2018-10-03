@@ -36,4 +36,8 @@ class User extends MonogoAuth
     {
         return $this->is_admin; // this looks for an admin column in your users table
     }
+    public function get_userid()
+    {
+        return $this->_id; // this looks for an admin column in your users table
+    }
 }

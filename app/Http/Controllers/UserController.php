@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Video;
+use Session;
 class UserController extends Controller
 {
     /**
@@ -24,8 +25,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $id = Auth::user()->_id;
+        Session::put('user_id', $id);
         $video_data = Video::where('select', 1)->get()->toArray();
-        return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url']]);
+        return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url'], 'distinct' =>$id ]);
     }
     
 }
