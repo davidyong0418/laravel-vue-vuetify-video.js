@@ -3,6 +3,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
+        <v-card-text v-if="init_data = true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
         <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
                  :options="playerOptions"
@@ -46,7 +47,7 @@
             <!-- <v-img :src="video.thumbnail"></v-img> -->
         <v-list two-line v-if="review_system == true">
           <template v-for="(step_review_data, p_index) in review_data">
-            <v-list-tile v-for="(quiz_data, c_index) in step_review_data" :key="review_index">
+            <v-list-tile v-for="(quiz_data, c_index) in step_review_data" :key="p_index * 10 + c_index">
                <v-list-tile-content >
                  <p>{{quiz_data.question}}</p>
               </v-list-tile-content>
@@ -54,7 +55,6 @@
               <v-list-tile-content >
                   <p>{{quiz_data.correct_answer}}</p>
               </v-list-tile-content>
-
             </v-list-tile>
           </template>
         </v-list>
@@ -106,6 +106,7 @@
         pause_state:false,
         start_btn:true,
         review_system:false,
+        init_data:false,
         playerOptions: {
           // videojs options
           sources: [{
@@ -132,18 +133,11 @@
       player() {
         return this.$refs.videoPlayer.player
       },
-      review_index () {
-          this.increase_index();
-         return this.r_index + 1 ;
-      },
     },
     created () {
       this.get_quiz_info();
     },
     methods: {
-          increase_index(){
-            this.r_index = this.r_index +1;
-          },
       set_offset()
       {
         console.log('+++++++++++',this.player)
@@ -268,6 +262,7 @@
             this.video_data = response.data.video_data;
             this.step_data = response.data.step_data;
             this.step_order = response.data.step_order;
+            
             console.log('this is step order ++++++++////////+++++++++', this.step_order);
             console.log('this.step_data++++++++++++===',this.step_data);
             console.log('this.step_order++++++++++++===',this.step_order);
@@ -275,6 +270,10 @@
             this.player_loading = true;
             this.set_current_step();
           }.bind(this)).catch(function (error){
+            this.init_data = true;
+            this.init_data = false;
+            this.quiz = false;
+            this.review_system = false;
             console.log(error.response);
             this.showError('Error')
           }.bind(this));

@@ -42395,6 +42395,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       pause_state: false,
       start_btn: true,
       review_system: false,
+      init_data: false,
       playerOptions: {
         // videojs options
         sources: [{
@@ -42422,10 +42423,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     player: function player() {
       return this.$refs.videoPlayer.player;
-    },
-    review_index: function review_index() {
-      this.increase_index();
-      return this.r_index + 1;
     }
   },
   created: function created() {
@@ -42433,9 +42430,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    increase_index: function increase_index() {
-      this.r_index = this.r_index + 1;
-    },
     set_offset: function set_offset() {
       console.log('+++++++++++', this.player);
       // this.player.currentTime(10);
@@ -42548,6 +42542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.video_data = response.data.video_data;
         this.step_data = response.data.step_data;
         this.step_order = response.data.step_order;
+
         console.log('this is step order ++++++++////////+++++++++', this.step_order);
         console.log('this.step_data++++++++++++===', this.step_data);
         console.log('this.step_order++++++++++++===', this.step_order);
@@ -42555,6 +42550,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.player_loading = true;
         this.set_current_step();
       }.bind(this)).catch(function (error) {
+        this.init_data = true;
+        this.init_data = false;
+        this.quiz = false;
+        this.review_system = false;
         console.log(error.response);
         this.showError('Error');
       }.bind(this));
@@ -45188,6 +45187,14 @@ var render = function() {
             "v-card",
             { attrs: { sm6: "" } },
             [
+              (_vm.init_data = true)
+                ? _c("v-card-text", [
+                    _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
+                      _vm._v("Video and Question data aren't exsited")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _vm.player_loading == true
                 ? _c("video-player", {
                     ref: "videoPlayer",
@@ -45356,7 +45363,7 @@ var render = function() {
                             ) {
                               return _c(
                                 "v-list-tile",
-                                { key: _vm.review_index },
+                                { key: p_index * 10 + c_index },
                                 [
                                   _c("v-list-tile-content", [
                                     _c("p", [
