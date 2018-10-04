@@ -71167,6 +71167,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }.bind(this)).catch(function (error) {
         console.log(error.response);
+        this.showError("Invalid vimeo url");
       }.bind(this));
       this.add_vimeo_url = '';
       this.add_vimeo_alias = '';
@@ -72229,7 +72230,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return _ref = {
       select_video: '',
-      init: '00:00',
+      init: '0000',
       video: { 'alias': '', '_id': '' },
       steps: [],
       videos: [],

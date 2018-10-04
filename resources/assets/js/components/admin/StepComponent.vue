@@ -54,7 +54,7 @@
     mixins: [withSnackbar],
     data: () => ({
         select_video:'',
-        init:'00:00',
+        init:'0000',
         video:{'alias': '', '_id': ''},
         steps:[
         ],
@@ -138,7 +138,7 @@
           this.steps = this.step_info.end_times;
           var new_step = {'point':'','sort':1, 'question_ids':[]};
           this.steps.push(new_step);
-          
+
         }.bind(this))
         .catch(function (error) {
           this.loading = false
