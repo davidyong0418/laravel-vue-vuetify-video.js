@@ -41,7 +41,7 @@ class PasswordController extends Controller
         );
         User::where('_id', $id)->update($hash_password);
         Mail::to($email)->send(new SendMailable($name, $new_password));
-        echo "Basic Email Sent. Check your inbox.";
+        echo "Email sent successfully";
         return 'success';
     }
    

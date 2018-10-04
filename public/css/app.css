@@ -270,3 +270,7 @@ body {
   pointer-events: none;
 }
 
+.vjs-big-play-button {
+  display: none !important;
+}
+

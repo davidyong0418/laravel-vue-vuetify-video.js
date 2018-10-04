@@ -28,6 +28,7 @@ class StepController extends Controller
     {
         return view('admin/step');
     }
+    // Get all videos
     public function get_videos(Request $request)
     {
         $videos = Video::all();
@@ -35,54 +36,20 @@ class StepController extends Controller
         $steps = Step::all();
         return ['videos'=> $videos, 'questions'=>$questions, 'init_steps'=>$init_steps];
     }
+    // Get all steps
     public function get_steps(Request $request)
     {
         $video_id = $request->get('data');
-        $step = Step::raw(function($collection) use($video_id) {
-            return $collection->aggregate([
-                [
-                    '$match' =>
-                    [
-                        'video_id' =>$video_id
-                    ]
-                ],
-                [
-                    '$project'=> 
-                    [
-                        'object_video_id'=> ['$toObjectId'=> '$video_id'],
-                        'video_id'=>1,
-                        'end_times'=>1,
-                        'question_ids'=>1,
-                    ]
-                ],
-                [
-                 '$lookup'=>
-                    [
-                        'from'=>'video',
-                        'localField'=>'object_video_id',
-                        'foreignField'=> '_id',
-                        'as'=>'videos'
-                    ]
-                ],
-                [
-                    '$addFields'=> 
-                    [
-                        'alias' => '$videos.alias',
-                        'vimeo_url' => '$videos.vimeo_url'
-                    ]
-                ]
-            ]);
-        })->toArray();
-        
-        if(!empty($step))
+        $step = new Step();
+        $step_data = $step->get_by_video($video_id);
+        if(!empty($step_data))
         {
             $response = array(
                 'action'=> 'true',
-                'steps'=> $step[0]
+                'steps'=> $step_data[0]
             );
 
         }else{
-            $vimeo_url = Video::find($video_id);
             $response = array(
                 'action'=> 'false',
                 'steps' => $video_id,
@@ -102,50 +69,12 @@ class StepController extends Controller
                 ]
             ]);
         })->toArray();
-        // $questions = Question::all
-        $init_steps = Step::raw(function($collection){
-            return $collection->aggregate([
-                [
-                    '$project'=> 
-                    [
-                        'object_video_id'=> ['$toObjectId'=> '$video_id'],
-                        'video_id'=>1,
-                        'end_times'=>1,
-                        'question_ids'=>1,
-                    ]
-                ],
-                [
-                 '$lookup'=>
-                    [
-                        'from'=>'video',
-                        'localField'=>'object_video_id',
-                        'foreignField'=> '_id',
-                        'as'=>'videos'
-                    ]
-                ],
-                [
-                    '$addFields'=> 
-                    [
-                        'alias' => '$videos.alias',
-                        'vimeo_url' => '$videos.vimeo_url'
-                    ]
-                ]
-            ]);
-        })->toArray();
-        if(empty($init_steps))
-        {
-           $action = 'false';
-        }
-        else{
-           $action = 'false';
-        }
+        
         $send = array(
             'videos'=>$videos,
             'questions'=>$questions,
-            'init_steps'=>$init_steps[0],
-            'action' => $action
+            'action' => 'false'
         );
-        // return ['questions' => $questions];
         return response()->json($send);
     }
     public function create(Request $request)
@@ -156,17 +85,20 @@ class StepController extends Controller
         {
             if($key == 0)
             {
-             $item->s_point = '00:00';
+             $item->s_point = '0000';
             }
-            else{
+            else
+            {
                 $item->s_point = $new['end_times'][$key - 1]->point;
             }
         }
+
         if(empty($new['_id']))
         {
             Step::create($new);
         }
-        else{
+        else
+        {
             $update_step = array(
                 'video_id' => $new['video_id'],
                 'end_times' => $new['end_times']
@@ -175,6 +107,5 @@ class StepController extends Controller
         }
         $step = Step::all();
         return ['step' => $step];
-
     }
 }

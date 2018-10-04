@@ -27,11 +27,13 @@ class QuestionController extends Controller
     {
         return view('admin/question');
     }
+    // Get all questions
     public function get_questions()
     {
         $questions = Question::all();
        return ['questions' => $questions];
     }
+    // Create question
     public function create(Request $request)
     {
         $requests = $request->get('data');
@@ -44,6 +46,7 @@ class QuestionController extends Controller
         $questions = Question::all();
         return ['questions' => $questions];
     }
+    // Update question
     public function update(Request $request)
     {
         $result = $request->get('data');
@@ -68,14 +71,12 @@ class QuestionController extends Controller
             'result'=>'success'
         );
         return['send' => $send];
-        // return response()->json($update_data);
     }
     public function delete(Request $request)
     {
         $delete_id=$request->get('data');
         $question = Question::find($delete_id);
         $question->delete();
-        // Question::where('_id', $delete_id)->delete();
         return 'success';
     }
     

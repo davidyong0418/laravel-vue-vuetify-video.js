@@ -16,7 +16,6 @@ class VideoController extends Controller
     {
         // $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -51,7 +50,6 @@ class VideoController extends Controller
                 'action' => false,
                 'result' => "Vimeo URL isn't existed"
             );
-            
         }
         else{
             $video = new Video();

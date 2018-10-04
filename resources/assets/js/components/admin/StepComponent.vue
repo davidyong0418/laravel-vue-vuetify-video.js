@@ -135,16 +135,10 @@
           this.videos = response.data.videos;
           this.questions = response.data.questions;
           var flag = response.data.action;
-          if(flag == 'false')
-          {
-            this.steps = this.step_info.end_times;
-            var new_step = {'point':'','sort':1, 'question_ids':[]};
-              this.steps.push(new_step);
-          }
-          else{
-            this.step_info = response.data.init_steps;
-            this.steps = this.step_info.end_times;
-          }
+          this.steps = this.step_info.end_times;
+          var new_step = {'point':'','sort':1, 'question_ids':[]};
+          this.steps.push(new_step);
+          
         }.bind(this))
         .catch(function (error) {
           this.loading = false
