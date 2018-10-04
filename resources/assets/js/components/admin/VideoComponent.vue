@@ -175,6 +175,7 @@
         }.bind(this))
         .catch(function (error) {
           console.log(error.response)
+          this.showError("Invalid vimeo url");
         }.bind(this));
         this.add_vimeo_url = '';
         this.add_vimeo_alias = '';
