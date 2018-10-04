@@ -375,6 +375,31 @@ module.exports = {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOGOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return REGISTER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REMEMBER_PASSWORD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return RESET_PASSWORD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return UPDATE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SELECTED_USER; });
+// AUTH MODULE
+var LOGIN = 'LOGIN';
+var LOGOUT = 'LOGOUT';
+var REGISTER = 'REGISTER';
+var REMEMBER_PASSWORD = 'REMEMBER_PASSWORD';
+var RESET_PASSWORD = 'RESET_PASSWORD';
+
+// USERS MODULE
+var FETCH_USERS = 'FETCH_USERS';
+var UPDATE_USER = 'UPDATE_USER';
+var SELECTED_USER = 'SELECTED_USER';
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -483,37 +508,12 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOGIN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOGOUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return REGISTER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REMEMBER_PASSWORD; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return RESET_PASSWORD; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_USERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return UPDATE_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SELECTED_USER; });
-// AUTH MODULE
-var LOGIN = 'LOGIN';
-var LOGOUT = 'LOGOUT';
-var REGISTER = 'REGISTER';
-var REMEMBER_PASSWORD = 'REMEMBER_PASSWORD';
-var RESET_PASSWORD = 'RESET_PASSWORD';
-
-// USERS MODULE
-var FETCH_USERS = 'FETCH_USERS';
-var UPDATE_USER = 'UPDATE_USER';
-var SELECTED_USER = 'SELECTED_USER';
-
-/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_mutation_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(8);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -581,33 +581,6 @@ var SET_USERS = 'SET_USERS';
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports) {
 
 /*
@@ -689,7 +662,262 @@ function toComment(sourceMap) {
 
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(47)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1634,7 +1862,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -21968,18 +22196,18 @@ var Player = function (_Component) {
       _this2.on(_this2.tech_, event, _this2['handleTech' + toTitleCase(event) + '_']);
     });
 
-    // Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
-    //   _this2.on(_this2.tech_, event, function (eventObj) {
-    //     if (_this2.tech_.playbackRate() === 0 && _this2.tech_.seeking()) {
-    //       _this2.queuedCallbacks_.push({
-    //         callback: _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'].bind(_this2),
-    //         event: eventObj
-    //       });
-    //       return;
-    //     }
-    //     _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'](eventObj);
-    //   });
-    // });
+    Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
+      _this2.on(_this2.tech_, event, function (eventObj) {
+        if (_this2.tech_.playbackRate() === 0 && _this2.tech_.seeking()) {
+          _this2.queuedCallbacks_.push({
+            callback: _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'].bind(_this2),
+            event: eventObj
+          });
+          return;
+        }
+        _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'](eventObj);
+      });
+    });
 
     this.on(this.tech_, 'loadstart', this.handleTechLoadStart_);
     this.on(this.tech_, 'sourceset', this.handleTechSourceset_);
@@ -26591,13 +26819,13 @@ module.exports = videojs;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(24);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26701,7 +26929,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37664,235 +37892,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(42).setImmediate))
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(47)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(42).setImmediate))
 
 /***/ }),
 /* 13 */
@@ -37912,7 +37912,7 @@ if (typeof window !== "undefined") {
 
 module.exports = win;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 14 */
@@ -38390,7 +38390,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(22);
-module.exports = __webpack_require__(131);
+module.exports = __webpack_require__(132);
 
 
 /***/ }),
@@ -38399,15 +38399,15 @@ module.exports = __webpack_require__(131);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_video_player___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_video_player__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_mixins_withSnackbar__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_videojs_vimeo__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_videojs_vimeo__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_videojs_vimeo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_videojs_vimeo__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_video_js_dist_video_js_css__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_video_js_dist_video_js_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_video_js_dist_video_js_css__);
@@ -38421,7 +38421,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 __webpack_require__(23);
 
-window.Vue = __webpack_require__(11);
+window.Vue = __webpack_require__(12);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38436,7 +38436,7 @@ Vue.component('reset-password', __webpack_require__(58));
 Vue.component('snackbar', __webpack_require__(61));
 Vue.component('gravatar', __webpack_require__(64));
 Vue.component('user-course', __webpack_require__(76));
-window.Vuetify = __webpack_require__(95);
+window.Vuetify = __webpack_require__(96);
 
 
 
@@ -38458,7 +38458,7 @@ if (window.user) {
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/admin', component: __webpack_require__(119) }, { path: '/admin/video-management', component: __webpack_require__(122) }, { path: '/admin/question-management', component: __webpack_require__(125) }, { path: '/admin/step-management', component: __webpack_require__(128) }]
+  routes: [{ path: '/admin', component: __webpack_require__(134) }, { path: '/admin/video-management', component: __webpack_require__(119) }, { path: '/admin/question-management', component: __webpack_require__(124) }, { path: '/admin/step-management', component: __webpack_require__(129) }]
 });
 
 var app = new Vue({
@@ -38563,7 +38563,7 @@ var app = new Vue({
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(9);
+window.axios = __webpack_require__(10);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -38612,7 +38612,7 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(14);
 var Axios = __webpack_require__(26);
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(11);
 
 /**
  * Create an instance of Axios
@@ -38695,7 +38695,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(11);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(35);
 var dispatchRequest = __webpack_require__(36);
@@ -39234,7 +39234,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(37);
 var isCancel = __webpack_require__(18);
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(11);
 var isAbsoluteURL = __webpack_require__(38);
 var combineURLs = __webpack_require__(39);
 
@@ -39549,7 +39549,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 43 */
@@ -39742,7 +39742,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(15)))
 
 /***/ }),
 /* 44 */
@@ -39753,7 +39753,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(45)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(48)
 /* template */
@@ -39806,7 +39806,7 @@ var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("577e6c84", content, false, {});
+var update = __webpack_require__(7)("577e6c84", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -39825,7 +39825,7 @@ if(false) {
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -39874,7 +39874,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
 //
 //
@@ -40260,7 +40260,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(51)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(53)
 /* template */
@@ -40313,7 +40313,7 @@ var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("c1f1a542", content, false, {});
+var update = __webpack_require__(7)("c1f1a542", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -40332,7 +40332,7 @@ if(false) {
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -40348,7 +40348,7 @@ exports.push([module.i, "\n.facebook[data-v-53759da1] {\n    width: 20px;\n}\n",
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
 //
 //
@@ -40710,7 +40710,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(56)
 /* template */
@@ -40758,7 +40758,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
 //
@@ -41021,7 +41021,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(59)
 /* template */
@@ -41069,7 +41069,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
 //
@@ -41384,7 +41384,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(62)
 /* template */
@@ -41432,7 +41432,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_mutation_types__ = __webpack_require__(4);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -41526,7 +41526,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(65)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(67)
 /* template */
@@ -41579,7 +41579,7 @@ var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(12)("c2df46cc", content, false, {});
+var update = __webpack_require__(7)("c2df46cc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -41598,7 +41598,7 @@ if(false) {
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -42235,11 +42235,11 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(94)
+var __vue_template__ = __webpack_require__(95)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -42283,9 +42283,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videojs_offset_js__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videojs_offset_js__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videojs_offset_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videojs_offset_js__);
 //
 //
@@ -42537,10 +42537,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.set_current_step();
       }.bind(this)).catch(function (error) {
         this.init_data = true;
-        this.init_data = false;
+        // this.init_data = false;
+        this.start_btn = false;
         this.quiz = false;
         this.review_system = false;
-        this.showError('Error');
+        // this.showError('Error')
       }.bind(this));
     },
     set_current_step: function set_current_step() {
@@ -42607,154 +42608,674 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * videojs-offset
- * @version 2.0.0-beta.2
- * @copyright 2017 Carles Galan Cladera <cgcladera@gmail.com>
- * @license MIT
- */
-(function (global, factory) {
-  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory(__webpack_require__(8)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.videojsOffset = factory(global.videojs);
-})(this, function (videojs) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* The MIT License (MIT)
+Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE. */
+(function (root, factory) {
+  if(true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(videojs){
+      return (root.Vimeo = factory(videojs));
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if(typeof module === 'object' && module.exports) {
+    module.exports = (root.Vimeo = factory(require('video.js')));
+  } else {
+    root.Vimeo = factory(root.videojs);
+  }
+}(this, function(videojs) {
   'use strict';
 
-  videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
+  var VimeoState = {
+    UNSTARTED: -1,
+    ENDED: 0,
+    PLAYING: 1,
+    PAUSED: 2,
+    BUFFERING: 3
+  };
 
-  // Default options for the plugin.
-  var defaults = {};
+  var Tech = videojs.getComponent('Tech');
 
-  // Cross-compatibility for Video.js 5 and 6.
-  var registerPlugin = videojs.registerPlugin || videojs.plugin;
-  // const dom = videojs.dom || videojs;
+  var Vimeo = videojs.extend(Tech, {
+    constructor: function(options, ready) {
+      Tech.call(this, options, ready);
+      if(options.poster != "") {this.setPoster(options.poster);}
+      this.setSrc(this.options_.source.src, true);
 
-  /**
-   * Checks whether the clip should be ended.
-   *
-   * @function onPlayerTimeUpdate
-   *
-   */
-  var onPlayerTimeUpdate = function onPlayerTimeUpdate() {
-    var curr = this.currentTime();
+      // Set the vjs-vimeo class to the player
+      // Parent is not set yet so we have to wait a tick
+      setTimeout(function() {
+        this.el_.parentNode.className += ' vjs-vimeo';
+      }.bind(this));
 
-    if (curr < 0) {
-      this.currentTime(0);
-      this.play();
-    }
-    if (this._offsetEnd > 0 && curr > this._offsetEnd - this._offsetStart) {
-      this.off('timeupdate', onPlayerTimeUpdate);
-      this.pause();
-      this.trigger('ended');
+    },
 
-      if (!this._restartBeginning) {
-        this.currentTime(this._offsetEnd - this._offsetStart);
-      } else {
-        this.trigger('loadstart');
-        this.currentTime(0);
+    dispose: function() {
+      this.el_.parentNode.className = this.el_.parentNode.className.replace(' vjs-vimeo', '');
+    },
+
+    createEl: function() {
+      this.vimeo = {};
+      this.vimeoInfo = {};
+      this.baseUrl = 'https://player.vimeo.com/video/';
+      this.baseApiUrl = 'http://www.vimeo.com/api/v2/video/';
+      this.videoId = Vimeo.parseUrl(this.options_.source.src).videoId;
+
+      this.iframe = document.createElement('iframe');
+      this.iframe.setAttribute('id', this.options_.techId);
+      this.iframe.setAttribute('title', 'Vimeo Video Player');
+      this.iframe.setAttribute('class', 'vimeoplayer');
+      this.iframe.setAttribute('src', this.baseUrl + this.videoId + '?api=1&player_id=' + this.options_.techId);
+      this.iframe.setAttribute('frameborder', '0');
+      this.iframe.setAttribute('scrolling', 'no');
+      this.iframe.setAttribute('marginWidth', '0');
+      this.iframe.setAttribute('marginHeight', '0');
+      this.iframe.setAttribute('webkitAllowFullScreen', '0');
+      this.iframe.setAttribute('mozallowfullscreen', '0');
+      this.iframe.setAttribute('allowFullScreen', '0');
+
+      var divWrapper = document.createElement('div');
+      divWrapper.setAttribute('style', 'margin:0 auto;padding-bottom:56.25%;width:100%;height:0;position:relative;overflow:hidden;');
+      divWrapper.setAttribute('class', 'vimeoFrame');
+      divWrapper.appendChild(this.iframe);
+
+      if (!_isOnMobile && !this.options_.ytControls) {
+        var divBlocker = document.createElement('div');
+        divBlocker.setAttribute('class', 'vjs-iframe-blocker');
+        divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
+
+        // In case the blocker is still there and we want to pause
+        divBlocker.onclick = function() {
+          this.onPause();
+        }.bind(this);
+
+        divWrapper.appendChild(divBlocker);
       }
+
+      if (Vimeo.isApiReady) {
+        this.initPlayer();
+      } else {
+        Vimeo.apiReadyQueue.push(this);
+      }
+
+      if(this.options_.poster == "") {
+        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
+          return function(data) {
+            // Set the low resolution first
+            _this.setPoster(data[0].thumbnail_large);
+          };
+        })(this));
+      }
+
+      return divWrapper;
+    },
+
+    initPlayer: function() {
+      var self = this;
+      var vimeoVideoID = Vimeo.parseUrl(this.options_.source.src).videoId;
+      //load vimeo
+      if (this.vimeo && this.vimeo.api) {
+        this.vimeo.api('unload');
+        delete this.vimeo;
+      }
+
+      self.vimeo = $f(self.iframe);
+
+      self.vimeoInfo = {
+        state: VimeoState.UNSTARTED,
+        volume: 1,
+        muted: false,
+        muteVolume: 1,
+        time: 0,
+        duration: 0,
+        buffered: 0,
+        url: self.baseUrl + self.videoId,
+        error: null
+      };
+
+      this.vimeo.addEvent('ready', function(id){
+        self.onReady();
+
+        self.vimeo.addEvent('loadProgress', function(data, id){ self.onLoadProgress(data); });
+        self.vimeo.addEvent('playProgress', function(data, id){ self.onPlayProgress(data); });
+        self.vimeo.addEvent('play', function(id){ self.onPlay(); });
+        self.vimeo.addEvent('pause', function(id){ self.onPause(); });
+        self.vimeo.addEvent('finish', function(id){ self.onFinish(); });
+        self.vimeo.addEvent('seek', function(data, id){ self.onSeek(data); });
+
+      });
+
+    },
+
+    onReady: function(){
+      this.isReady_ = true;
+      this.triggerReady();
+      this.trigger('loadedmetadata');
+      if (this.startMuted) {
+        this.setMuted(true);
+        this.startMuted = false;
+      }
+    },
+
+    onLoadProgress: function(data) {
+      var durationUpdate = !this.vimeoInfo.duration;
+      this.vimeoInfo.duration = data.duration;
+      this.vimeoInfo.buffered = data.percent;
+      this.trigger('progress');
+      if (durationUpdate) this.trigger('durationchange');
+    },
+    onPlayProgress: function(data) {
+      this.vimeoInfo.time = data.seconds;
+      this.trigger('timeupdate');
+    },
+    onPlay: function() {
+      this.vimeoInfo.state = VimeoState.PLAYING;
+      this.trigger('play');
+    },
+    onPause: function() {
+      this.vimeoInfo.state = VimeoState.PAUSED;
+      this.trigger('pause');
+    },
+    onFinish: function() {
+      this.vimeoInfo.state = VimeoState.ENDED;
+      this.trigger('ended');
+    },
+    onSeek: function(data) {
+      this.trigger('seeking');
+      this.vimeoInfo.time = data.seconds;
+      this.trigger('timeupdate');
+      this.trigger('seeked');
+    },
+    onError: function(error){
+      this.error = error;
+      this.trigger('error');
+    },
+
+    error: function() {
+      switch (this.errorNumber) {
+        case 2:
+          return { code: 'Unable to find the video' };
+
+        case 5:
+          return { code: 'Error while trying to play the video' };
+
+        case 100:
+          return { code: 'Unable to find the video' };
+
+        case 101:
+        case 150:
+          return { code: 'Playback on other Websites has been disabled by the video owner.' };
+      }
+
+      return { code: 'Vimeo unknown error (' + this.errorNumber + ')' };
+    },
+
+    src: function() {
+      return this.source;
+    },
+
+    poster: function() {
+      return this.poster_;
+    },
+
+    setPoster: function(poster) {
+      this.poster_ = poster;
+    },
+
+    setSrc: function(source) {
+      if (!source || !source.src) {
+        return;
+      }
+
+      this.source = source;
+      this.url = Vimeo.parseUrl(source.src);
+
+      if (!this.options_.poster) {
+        if (this.url.videoId) {
+          $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
+            return function(data) {
+              // Set the low resolution first
+              _this.poster_ = data[0].thumbnail_small;
+            };
+          })(this));
+
+          // Check if their is a high res
+          this.checkHighResPoster();
+        }
+      }
+
+      if (this.options_.autoplay && !_isOnMobile) {
+        if (this.isReady_) {
+          this.play();
+        } else {
+          this.playOnReady = true;
+        }
+      }
+    },
+
+    supportsFullScreen: function() {
+      return true;
+    },
+
+    //TRIGGER
+    load : function(){},
+    play : function(){ this.vimeo.api('play'); },
+    pause : function(){ this.vimeo.api('pause'); },
+    paused : function(){
+      return this.vimeoInfo.state !== VimeoState.PLAYING &&
+             this.vimeoInfo.state !== VimeoState.BUFFERING;
+    },
+
+    currentTime : function(){ return this.vimeoInfo.time || 0; },
+
+    setCurrentTime :function(seconds){
+      this.vimeo.api('seekTo', seconds);
+      this.player_.trigger('timeupdate');
+    },
+
+    duration :function(){ return this.vimeoInfo.duration || 0; },
+    buffered :function(){ return videojs.createTimeRange(0, (this.vimeoInfo.buffered*this.vimeoInfo.duration) || 0); },
+
+    volume :function() { return (this.vimeoInfo.muted)? this.vimeoInfo.muteVolume : this.vimeoInfo.volume; },
+    setVolume :function(percentAsDecimal){
+      this.vimeo.api('setvolume', percentAsDecimal);
+      this.vimeoInfo.volume = percentAsDecimal;
+      this.player_.trigger('volumechange');
+    },
+    currentSrc :function() {
+      return this.el_.src;
+    },
+    muted :function() { return this.vimeoInfo.muted || false; },
+    setMuted :function(muted) {
+      if (muted) {
+        this.vimeoInfo.muteVolume = this.vimeoInfo.volume;
+        this.setVolume(0);
+      } else {
+        this.setVolume(this.vimeoInfo.muteVolume);
+      }
+
+      this.vimeoInfo.muted = muted;
+      this.player_.trigger('volumechange');
+    },
+
+    // Tries to get the highest resolution thumbnail available for the video
+    checkHighResPoster: function(){
+      var uri = '';
+
+      try {
+
+        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_uri){
+          return function(data) {
+            // Set the low resolution first
+            _uri = data[0].thumbnail_large;
+          };
+        })(uri));
+
+        var image = new Image();
+        image.onload = function(){
+          // Onload thumbnail
+          if('naturalHeight' in this){
+            if(this.naturalHeight <= 90 || this.naturalWidth <= 120) {
+              this.onerror();
+              return;
+            }
+          } else if(this.height <= 90 || this.width <= 120) {
+            this.onerror();
+            return;
+          }
+
+          this.poster_ = uri;
+          this.trigger('posterchange');
+        }.bind(this);
+        image.onerror = function(){};
+        image.src = uri;
+      }
+      catch(e){}
+    }
+  });
+
+  Vimeo.isSupported = function() {
+    return true;
+  };
+
+  Vimeo.canPlaySource = function(e) {
+    return (e.type === 'video/vimeo');
+  };
+
+  var _isOnMobile = /(iPad|iPhone|iPod|Android)/g.test(navigator.userAgent);
+
+  Vimeo.parseUrl = function(url) {
+    var result = {
+      videoId: null
+    };
+
+    var regex = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
+    var match = url.match(regex);
+
+    if (match) {
+      result.videoId = match[5];
+    }
+
+    return result;
+  };
+
+  function injectCss() {
+    var css = // iframe blocker to catch mouse events
+              '.vjs-vimeo .vjs-iframe-blocker { display: none; }' +
+              '.vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
+              '.vjs-vimeo .vjs-poster { background-size: cover; }' +
+              '.vjs-vimeo { height:100%; }' +
+              '.vimeoplayer { width:100%; height:180%; position:absolute; left:0; top:-40%; }';
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (style.styleSheet){
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+  }
+
+  Vimeo.apiReadyQueue = [];
+
+  var vimeoIframeAPIReady = function() {
+    Vimeo.isApiReady = true;
+    injectCss();
+
+    for (var i = 0; i < Vimeo.apiReadyQueue.length; ++i) {
+      Vimeo.apiReadyQueue[i].initPlayer();
     }
   };
-  /**
-   * Function to invoke when the player is ready.
-   *
-   * This is a great place for your plugin to initialize itself. When this
-   * function is called, the player will have its DOM and child components
-   * in place.
-   *
-   * @function onPlayerReady
-   * @param    {Player} player
-   *           A Video.js player.
-   * @param    {Object} [options={}]
-   *           An object of options left to the plugin author to define.
-   */
-  var onPlayerReady = function onPlayerReady(player, options) {
-    player.one('play', function () {
-      // player.on('timeupdate', onPlayerTimeUpdate);
-    });
-  };
 
-  /**
-   * A video.js plugin.
-   *
-   * In the plugin function, the value of `this` is a video.js `Player`
-   * instance. You cannot rely on the player being in a "ready" state here,
-   * depending on how the plugin is invoked. This may or may not be important
-   * to you; if not, remove the wait for "ready"!
-   *
-   * @function offset
-   * @param    {Object} [options={}]
-   *           An object of options left to the plugin author to define.
-   */
-  var offset = function offset(options) {
-    var _this = this;
+  vimeoIframeAPIReady();
 
-    options = options || {};
-    var Player = this.constructor;
+  videojs.registerTech('Vimeo', Vimeo);
 
-    this._offsetStart = options.start || 0;
-    this._offsetEnd = options.end || 0;
-    this._restartBeginning = options.restart_beginning || false;
 
-    if (!Player.__super__ || !Player.__super__.__offsetInit) {
-      Player.__super__ = {
-        __offsetInit: true,
-        duration: Player.prototype.duration,
-        currentTime: Player.prototype.currentTime,
-        bufferedPercent: Player.prototype.bufferedPercent,
-        remainingTime: Player.prototype.remainingTime
+
+  // Froogaloop API -------------------------------------------------------------
+
+  // From https://github.com/vimeo/player-api/blob/master/javascript/froogaloop.js
+  // Init style shamelessly stolen from jQuery http://jquery.com
+  var Froogaloop = (function(){
+      // Define a local copy of Froogaloop
+      function Froogaloop(iframe) {
+          // The Froogaloop object is actually just the init constructor
+          return new Froogaloop.fn.init(iframe);
+      }
+
+      var eventCallbacks = {},
+          hasWindowEvent = false,
+          isReady = false,
+          slice = Array.prototype.slice,
+          playerOrigin = '*';
+
+      Froogaloop.fn = Froogaloop.prototype = {
+          element: null,
+
+          init: function(iframe) {
+              if (typeof iframe === "string") {
+                  iframe = document.getElementById(iframe);
+              }
+
+              this.element = iframe;
+
+              return this;
+          },
+
+          /*
+           * Calls a function to act upon the player.
+           *
+           * @param {string} method The name of the Javascript API method to call. Eg: 'play'.
+           * @param {Array|Function} valueOrCallback params Array of parameters to pass when calling an API method
+           *                                or callback function when the method returns a value.
+           */
+          api: function(method, valueOrCallback) {
+              if (!this.element || !method) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null,
+                  params = !isFunction(valueOrCallback) ? valueOrCallback : null,
+                  callback = isFunction(valueOrCallback) ? valueOrCallback : null;
+
+              // Store the callback for get functions
+              if (callback) {
+                  storeCallback(method, callback, target_id);
+              }
+
+              postMessage(method, params, element);
+              return self;
+          },
+
+          /*
+           * Registers an event listener and a callback function that gets called when the event fires.
+           *
+           * @param eventName (String): Name of the event to listen for.
+           * @param callback (Function): Function that should be called when the event fires.
+           */
+          addEvent: function(eventName, callback) {
+              if (!this.element) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null;
+
+
+              storeCallback(eventName, callback, target_id);
+
+              // The ready event is not registered via postMessage. It fires regardless.
+              if (eventName != 'ready') {
+                  postMessage('addEventListener', eventName, element);
+              }
+              else if (eventName == 'ready' && isReady) {
+                  callback.call(null, target_id);
+              }
+
+              return self;
+          },
+
+          /*
+           * Unregisters an event listener that gets called when the event fires.
+           *
+           * @param eventName (String): Name of the event to stop listening for.
+           */
+          removeEvent: function(eventName) {
+              if (!this.element) {
+                  return false;
+              }
+
+              var self = this,
+                  element = self.element,
+                  target_id = element.id !== '' ? element.id : null,
+                  removed = removeCallback(eventName, target_id);
+
+              // The ready event is not registered
+              if (eventName != 'ready' && removed) {
+                  postMessage('removeEventListener', eventName, element);
+              }
+          }
       };
 
-      Player.prototype.duration = function () {
-        if (this._offsetEnd > 0) {
-          return this._offsetEnd - this._offsetStart;
-        }
-        return Player.__super__.duration.apply(this, arguments) - this._offsetStart;
-      };
+      /**
+       * Handles posting a message to the parent window.
+       *
+       * @param method (String): name of the method to call inside the player. For api calls
+       * this is the name of the api method (api_play or api_pause) while for events this method
+       * is api_addEventListener.
+       * @param params (Object or Array): List of parameters to submit to the method. Can be either
+       * a single param or an array list of parameters.
+       * @param target (HTMLElement): Target iframe to post the message to.
+       */
+      function postMessage(method, params, target) {
+          if (!target.contentWindow.postMessage) {
+              return false;
+          }
 
-      Player.prototype.currentTime = function (seconds) {
-        if (seconds !== undefined) {
-          return Player.__super__.currentTime.call(this, seconds + this._offsetStart) - this._offsetStart;
-        }
-        return Player.__super__.currentTime.apply(this, arguments) - this._offsetStart;
-      };
+          var data = JSON.stringify({
+              method: method,
+              value: params
+          });
 
-      Player.prototype.remainingTime = function () {
-        var curr = this.currentTime();
+          target.contentWindow.postMessage(data, playerOrigin);
+      }
 
-        if (curr < this._offsetStart) {
-          curr = 0;
-        }
-        return this.duration() - curr;
-      };
+      /**
+       * Event that fires whenever the window receives a message from its parent
+       * via window.postMessage.
+       */
+      function onMessageReceived(event) {
+          var data, method;
 
-      Player.prototype.startOffset = function () {
-        return this._offsetStart;
-      };
+          try {
+              data = JSON.parse(event.data);
+              method = data.event || data.method;
+          }
+          catch(e)  {
+              //fail silently... like a ninja!
+          }
 
-      Player.prototype.endOffset = function () {
-        if (this._offsetEnd > 0) {
-          return this._offsetEnd;
-        }
-        return this.duration();
-      };
-    }
+          if (method == 'ready' && !isReady) {
+              isReady = true;
+          }
 
-    this.ready(function () {
-      onPlayerReady(_this, videojs.mergeOptions(defaults, options));
-    });
-  };
+          // Handles messages from the vimeo player only
+          if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
+              return false;
+          }
 
-  // Register the plugin with video.js.
-  registerPlugin('offset', offset);
-  // Include the version number.
-  offset.VERSION = '__VERSION__';
+          if (playerOrigin === '*') {
+              playerOrigin = event.origin;
+          }
 
-  return offset;
-});
+          var value = data.value,
+              eventData = data.data,
+              target_id = target_id === '' ? null : data.player_id,
+
+              callback = getCallback(method, target_id),
+              params = [];
+
+          if (!callback) {
+              return false;
+          }
+
+          if (value !== undefined) {
+              params.push(value);
+          }
+
+          if (eventData) {
+              params.push(eventData);
+          }
+
+          if (target_id) {
+              params.push(target_id);
+          }
+
+          return params.length > 0 ? callback.apply(null, params) : callback.call();
+      }
+
+
+      /**
+       * Stores submitted callbacks for each iframe being tracked and each
+       * event for that iframe.
+       *
+       * @param eventName (String): Name of the event. Eg. api_onPlay
+       * @param callback (Function): Function that should get executed when the
+       * event is fired.
+       * @param target_id (String) [Optional]: If handling more than one iframe then
+       * it stores the different callbacks for different iframes based on the iframe's
+       * id.
+       */
+      function storeCallback(eventName, callback, target_id) {
+          if (target_id) {
+              if (!eventCallbacks[target_id]) {
+                  eventCallbacks[target_id] = {};
+              }
+              eventCallbacks[target_id][eventName] = callback;
+          }
+          else {
+              eventCallbacks[eventName] = callback;
+          }
+      }
+
+      /**
+       * Retrieves stored callbacks.
+       */
+      function getCallback(eventName, target_id) {
+          if (target_id && eventCallbacks[target_id]) {
+              return eventCallbacks[target_id][eventName];
+          }
+          else if (eventCallbacks[eventName]) {
+              return eventCallbacks[eventName];
+          }
+      }
+
+      function removeCallback(eventName, target_id) {
+          if (target_id && eventCallbacks[target_id]) {
+              if (!eventCallbacks[target_id][eventName]) {
+                  return false;
+              }
+              eventCallbacks[target_id][eventName] = null;
+          }
+          else {
+              if (!eventCallbacks[eventName]) {
+                  return false;
+              }
+              eventCallbacks[eventName] = null;
+          }
+
+          return true;
+      }
+
+      function isFunction(obj) {
+          return !!(obj && obj.constructor && obj.call && obj.apply);
+      }
+
+      function isArray(obj) {
+          return toString.call(obj) === '[object Array]';
+      }
+
+      // Give the init function the Froogaloop prototype for later instantiation
+      Froogaloop.fn.init.prototype = Froogaloop.fn;
+
+      // Listens for the message event.
+      // W3C
+      if (window.addEventListener) {
+          window.addEventListener('message', onMessageReceived, false);
+      }
+      // IE
+      else {
+          window.attachEvent('onmessage', onMessageReceived);
+      }
+
+      // Expose froogaloop to the global object
+      return (window.Froogaloop = window.$f = Froogaloop);
+
+  })();
+}));
+
 
 /***/ }),
 /* 79 */
@@ -42778,7 +43299,7 @@ if (typeof document !== 'undefined') {
 
 module.exports = doccy;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 80 */
@@ -45136,6 +45657,159 @@ module.exports = VTTRegion;
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * videojs-offset
+ * @version 2.0.0-beta.2
+ * @copyright 2017 Carles Galan Cladera <cgcladera@gmail.com>
+ * @license MIT
+ */
+(function (global, factory) {
+  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory(__webpack_require__(9)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.videojsOffset = factory(global.videojs);
+})(this, function (videojs) {
+  'use strict';
+
+  videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
+
+  // Default options for the plugin.
+  var defaults = {};
+
+  // Cross-compatibility for Video.js 5 and 6.
+  var registerPlugin = videojs.registerPlugin || videojs.plugin;
+  // const dom = videojs.dom || videojs;
+
+  /**
+   * Checks whether the clip should be ended.
+   *
+   * @function onPlayerTimeUpdate
+   *
+   */
+  var onPlayerTimeUpdate = function onPlayerTimeUpdate() {
+    var curr = this.currentTime();
+
+    if (curr < 0) {
+      this.currentTime(0);
+      this.play();
+    }
+    if (this._offsetEnd > 0 && curr > this._offsetEnd - this._offsetStart) {
+      this.off('timeupdate', onPlayerTimeUpdate);
+      this.pause();
+      this.trigger('ended');
+
+      if (!this._restartBeginning) {
+        this.currentTime(this._offsetEnd - this._offsetStart);
+      } else {
+        this.trigger('loadstart');
+        this.currentTime(0);
+      }
+    }
+  };
+  /**
+   * Function to invoke when the player is ready.
+   *
+   * This is a great place for your plugin to initialize itself. When this
+   * function is called, the player will have its DOM and child components
+   * in place.
+   *
+   * @function onPlayerReady
+   * @param    {Player} player
+   *           A Video.js player.
+   * @param    {Object} [options={}]
+   *           An object of options left to the plugin author to define.
+   */
+  var onPlayerReady = function onPlayerReady(player, options) {
+    player.one('play', function () {
+      // player.on('timeupdate', onPlayerTimeUpdate);
+    });
+  };
+
+  /**
+   * A video.js plugin.
+   *
+   * In the plugin function, the value of `this` is a video.js `Player`
+   * instance. You cannot rely on the player being in a "ready" state here,
+   * depending on how the plugin is invoked. This may or may not be important
+   * to you; if not, remove the wait for "ready"!
+   *
+   * @function offset
+   * @param    {Object} [options={}]
+   *           An object of options left to the plugin author to define.
+   */
+  var offset = function offset(options) {
+    var _this = this;
+
+    options = options || {};
+    var Player = this.constructor;
+
+    this._offsetStart = options.start || 0;
+    this._offsetEnd = options.end || 0;
+    this._restartBeginning = options.restart_beginning || false;
+
+    if (!Player.__super__ || !Player.__super__.__offsetInit) {
+      Player.__super__ = {
+        __offsetInit: true,
+        duration: Player.prototype.duration,
+        currentTime: Player.prototype.currentTime,
+        bufferedPercent: Player.prototype.bufferedPercent,
+        remainingTime: Player.prototype.remainingTime
+      };
+
+      Player.prototype.duration = function () {
+        if (this._offsetEnd > 0) {
+          return this._offsetEnd - this._offsetStart;
+        }
+        return Player.__super__.duration.apply(this, arguments) - this._offsetStart;
+      };
+
+      Player.prototype.currentTime = function (seconds) {
+        if (seconds !== undefined) {
+          return Player.__super__.currentTime.call(this, seconds + this._offsetStart) - this._offsetStart;
+        }
+        return Player.__super__.currentTime.apply(this, arguments) - this._offsetStart;
+      };
+
+      Player.prototype.remainingTime = function () {
+        var curr = this.currentTime();
+
+        if (curr < this._offsetStart) {
+          curr = 0;
+        }
+        return this.duration() - curr;
+      };
+
+      Player.prototype.startOffset = function () {
+        return this._offsetStart;
+      };
+
+      Player.prototype.endOffset = function () {
+        if (this._offsetEnd > 0) {
+          return this._offsetEnd;
+        }
+        return this.duration();
+      };
+    }
+
+    this.ready(function () {
+      onPlayerReady(_this, videojs.mergeOptions(defaults, options));
+    });
+  };
+
+  // Register the plugin with video.js.
+  registerPlugin('offset', offset);
+  // Include the version number.
+  offset.VERSION = '__VERSION__';
+
+  return offset;
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -45154,7 +45828,7 @@ var render = function() {
               _vm.init_data == true
                 ? _c("v-card-text", [
                     _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
-                      _vm._v("Video and Question data aren't exsited")
+                      _vm._v("Video and Question, Step data aren't exsited")
                     ])
                   ])
                 : _vm._e(),
@@ -45340,11 +46014,11 @@ var render = function() {
                                     },
                                     [
                                       _c("v-list-tile-content", [
-                                        _c("p", [_vm._v("Question")])
+                                        _c("h3", [_vm._v("Question")])
                                       ]),
                                       _vm._v(" "),
                                       _c("v-list-tile-content", [
-                                        _c("p", [_vm._v("Correct Answer")])
+                                        _c("h3", [_vm._v("Correct Answer")])
                                       ])
                                     ],
                                     1
@@ -45406,12 +46080,12 @@ if (false) {
 }
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
-		module.exports = factory(__webpack_require__(11));
+		module.exports = factory(__webpack_require__(12));
 	else if(typeof define === 'function' && define.amd)
 		define(["vue"], factory);
 	else if(typeof exports === 'object')
@@ -66609,7 +67283,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69239,16 +69913,16 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(107);
 
 
 
@@ -69269,13 +69943,13 @@ var debug = "development" !== 'production';
 }));
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(103);
 
 
 
@@ -69294,7 +69968,7 @@ var state = {
 });
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69314,13 +69988,13 @@ var state = {
 });
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(102);
 var _actions$LOGIN$action;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -69375,11 +70049,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$LOGIN$action);
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 
@@ -69412,7 +70086,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69430,12 +70104,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$LOGGED$types$U);
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(106);
 
 
 
@@ -69454,7 +70128,7 @@ var state = {
 });
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69477,7 +70151,7 @@ var state = {
 });
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69501,13 +70175,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SET_SNACKBAR_S);
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(111);
 
 
 
@@ -69525,7 +70199,7 @@ var state = {
 });
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69539,13 +70213,13 @@ var state = {
 });
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(110);
 var _actions$SELECTED_USE;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -69579,11 +70253,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$SELECTED_USE);
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 
@@ -69600,7 +70274,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69618,683 +70292,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SELECTED_USER$);
 
 /***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(e,t){ true?module.exports=t(__webpack_require__(8)):"function"==typeof define&&define.amd?define(["videojs"],t):"object"==typeof exports?exports.VueVideoPlayer=t(require("video.js")):e.VueVideoPlayer=t(e.videojs)}(this,function(e){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),s=window.videojs||o.default;"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e,t){if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var n=Object(e),i=1;i<arguments.length;i++){var r=arguments[i];if(null!=r)for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(n[o]=r[o])}return n},writable:!0,configurable:!0});var a=["loadeddata","canplay","canplaythrough","play","pause","waiting","playing","ended","error"];t.default={name:"video-player",props:{start:{type:Number,default:0},crossOrigin:{type:String,default:""},playsinline:{type:Boolean,default:!1},customEventName:{type:String,default:"statechanged"},options:{type:Object,required:!0},events:{type:Array,default:function(){return[]}},globalOptions:{type:Object,default:function(){return{controls:!0,controlBar:{remainingTimeDisplay:!1,playToggle:{},progressControl:{},fullscreenToggle:{},volumeMenuButton:{inline:!1,vertical:!0}},techOrder:["html5"],plugins:{}}}},globalEvents:{type:Array,default:function(){return[]}}},data:function(){return{player:null,reseted:!0}},mounted:function(){this.player||this.initialize()},beforeDestroy:function(){this.player&&this.dispose()},methods:{initialize:function(){var e=this,t=Object.assign({},this.globalOptions,this.options);this.playsinline&&(this.$refs.video.setAttribute("playsinline",this.playsinline),this.$refs.video.setAttribute("webkit-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-video-player-type","h5"),this.$refs.video.setAttribute("x5-video-player-fullscreen",!1)),""!==this.crossOrigin&&(this.$refs.video.crossOrigin=this.crossOrigin,this.$refs.video.setAttribute("crossOrigin",this.crossOrigin));var n=function(t,n){t&&e.$emit(t,e.player),n&&e.$emit(e.customEventName,i({},t,n))};t.plugins&&delete t.plugins.__ob__;var r=this;this.player=s(this.$refs.video,t,function(){for(var e=this,t=a.concat(r.events).concat(r.globalEvents),i={},o=0;o<t.length;o++)"string"==typeof t[o]&&void 0===i[t[o]]&&function(t){i[t]=null,e.on(t,function(){n(t,!0)})}(t[o]);this.on("timeupdate",function(){n("timeupdate",this.currentTime())}),r.$emit("ready",this)})},dispose:function(e){var t=this;this.player&&this.player.dispose&&("Flash"!==this.player.techName_&&this.player.pause&&this.player.pause(),this.player.dispose(),this.player=null,this.$nextTick(function(){t.reseted=!1,t.$nextTick(function(){t.reseted=!0,t.$nextTick(function(){e&&e()})})}))}},watch:{options:{deep:!0,handler:function(e,t){var n=this;this.dispose(function(){e&&e.sources&&e.sources.length&&n.initialize()})}}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(1),r=n.n(i);for(var o in i)["default","default"].indexOf(o)<0&&function(e){n.d(t,e,function(){return i[e]})}(o);var s=n(5),a=n(4),l=a(r.a,s.a,!1,null,null,null);t.default=l.exports},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.install=t.videoPlayer=t.videojs=void 0;var r=n(0),o=i(r),s=n(2),a=i(s),l=window.videojs||o.default,u=function(e,t){t&&(t.options&&(a.default.props.globalOptions.default=function(){return t.options}),t.events&&(a.default.props.globalEvents.default=function(){return t.events})),e.component(a.default.name,a.default)},d={videojs:l,videoPlayer:a.default,install:u};t.default=d,t.videojs=l,t.videoPlayer=a.default,t.install=u},function(e,t){e.exports=function(e,t,n,i,r,o){var s,a=e=e||{},l=typeof e.default;"object"!==l&&"function"!==l||(s=e,a=e.default);var u="function"==typeof a?a.options:a;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns,u._compiled=!0),n&&(u.functional=!0),r&&(u._scopeId=r);var d;if(o?(d=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},u._ssrRegister=d):i&&(d=i),d){var c=u.functional,f=c?u.render:u.beforeCreate;c?(u._injectStyles=d,u.render=function(e,t){return d.call(t),f(e,t)}):u.beforeCreate=f?[].concat(f,d):[d]}return{esModule:s,exports:a,options:u}}},function(e,t,n){"use strict";var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.reseted?n("div",{staticClass:"video-player"},[n("video",{ref:"video",staticClass:"video-js"})]):e._e()},r=[],o={render:i,staticRenderFns:r};t.a=o}])});
-
-/***/ }),
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* The MIT License (MIT)
-Copyright (c) 2014-2015 Benoit Tremblay <trembl.ben@gmail.com>
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. */
-(function (root, factory) {
-  if(true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(videojs){
-      return (root.Vimeo = factory(videojs));
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if(typeof module === 'object' && module.exports) {
-    module.exports = (root.Vimeo = factory(require('video.js')));
-  } else {
-    root.Vimeo = factory(root.videojs);
-  }
-}(this, function(videojs) {
-  'use strict';
-
-  var VimeoState = {
-    UNSTARTED: -1,
-    ENDED: 0,
-    PLAYING: 1,
-    PAUSED: 2,
-    BUFFERING: 3
-  };
-
-  var Tech = videojs.getComponent('Tech');
-
-  var Vimeo = videojs.extend(Tech, {
-    constructor: function(options, ready) {
-      Tech.call(this, options, ready);
-      if(options.poster != "") {this.setPoster(options.poster);}
-      this.setSrc(this.options_.source.src, true);
-
-      // Set the vjs-vimeo class to the player
-      // Parent is not set yet so we have to wait a tick
-      setTimeout(function() {
-        this.el_.parentNode.className += ' vjs-vimeo';
-      }.bind(this));
-
-    },
-
-    dispose: function() {
-      this.el_.parentNode.className = this.el_.parentNode.className.replace(' vjs-vimeo', '');
-    },
-
-    createEl: function() {
-      this.vimeo = {};
-      this.vimeoInfo = {};
-      this.baseUrl = 'https://player.vimeo.com/video/';
-      this.baseApiUrl = 'http://www.vimeo.com/api/v2/video/';
-      this.videoId = Vimeo.parseUrl(this.options_.source.src).videoId;
-
-      this.iframe = document.createElement('iframe');
-      this.iframe.setAttribute('id', this.options_.techId);
-      this.iframe.setAttribute('title', 'Vimeo Video Player');
-      this.iframe.setAttribute('class', 'vimeoplayer');
-      this.iframe.setAttribute('src', this.baseUrl + this.videoId + '?api=1&player_id=' + this.options_.techId);
-      this.iframe.setAttribute('frameborder', '0');
-      this.iframe.setAttribute('scrolling', 'no');
-      this.iframe.setAttribute('marginWidth', '0');
-      this.iframe.setAttribute('marginHeight', '0');
-      this.iframe.setAttribute('webkitAllowFullScreen', '0');
-      this.iframe.setAttribute('mozallowfullscreen', '0');
-      this.iframe.setAttribute('allowFullScreen', '0');
-
-      var divWrapper = document.createElement('div');
-      divWrapper.setAttribute('style', 'margin:0 auto;padding-bottom:56.25%;width:100%;height:0;position:relative;overflow:hidden;');
-      divWrapper.setAttribute('class', 'vimeoFrame');
-      divWrapper.appendChild(this.iframe);
-
-      if (!_isOnMobile && !this.options_.ytControls) {
-        var divBlocker = document.createElement('div');
-        divBlocker.setAttribute('class', 'vjs-iframe-blocker');
-        divBlocker.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%');
-
-        // In case the blocker is still there and we want to pause
-        divBlocker.onclick = function() {
-          this.onPause();
-        }.bind(this);
-
-        divWrapper.appendChild(divBlocker);
-      }
-
-      if (Vimeo.isApiReady) {
-        this.initPlayer();
-      } else {
-        Vimeo.apiReadyQueue.push(this);
-      }
-
-      if(this.options_.poster == "") {
-        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
-          return function(data) {
-            // Set the low resolution first
-            _this.setPoster(data[0].thumbnail_large);
-          };
-        })(this));
-      }
-
-      return divWrapper;
-    },
-
-    initPlayer: function() {
-      var self = this;
-      var vimeoVideoID = Vimeo.parseUrl(this.options_.source.src).videoId;
-      //load vimeo
-      if (this.vimeo && this.vimeo.api) {
-        this.vimeo.api('unload');
-        delete this.vimeo;
-      }
-
-      self.vimeo = $f(self.iframe);
-
-      self.vimeoInfo = {
-        state: VimeoState.UNSTARTED,
-        volume: 1,
-        muted: false,
-        muteVolume: 1,
-        time: 0,
-        duration: 0,
-        buffered: 0,
-        url: self.baseUrl + self.videoId,
-        error: null
-      };
-
-      this.vimeo.addEvent('ready', function(id){
-        self.onReady();
-
-        self.vimeo.addEvent('loadProgress', function(data, id){ self.onLoadProgress(data); });
-        self.vimeo.addEvent('playProgress', function(data, id){ self.onPlayProgress(data); });
-        self.vimeo.addEvent('play', function(id){ self.onPlay(); });
-        self.vimeo.addEvent('pause', function(id){ self.onPause(); });
-        self.vimeo.addEvent('finish', function(id){ self.onFinish(); });
-        self.vimeo.addEvent('seek', function(data, id){ self.onSeek(data); });
-
-      });
-
-    },
-
-    onReady: function(){
-      this.isReady_ = true;
-      this.triggerReady();
-      this.trigger('loadedmetadata');
-      if (this.startMuted) {
-        this.setMuted(true);
-        this.startMuted = false;
-      }
-    },
-
-    onLoadProgress: function(data) {
-      var durationUpdate = !this.vimeoInfo.duration;
-      this.vimeoInfo.duration = data.duration;
-      this.vimeoInfo.buffered = data.percent;
-      this.trigger('progress');
-      if (durationUpdate) this.trigger('durationchange');
-    },
-    onPlayProgress: function(data) {
-      this.vimeoInfo.time = data.seconds;
-      this.trigger('timeupdate');
-    },
-    onPlay: function() {
-      this.vimeoInfo.state = VimeoState.PLAYING;
-      this.trigger('play');
-    },
-    onPause: function() {
-      this.vimeoInfo.state = VimeoState.PAUSED;
-      this.trigger('pause');
-    },
-    onFinish: function() {
-      this.vimeoInfo.state = VimeoState.ENDED;
-      this.trigger('ended');
-    },
-    onSeek: function(data) {
-      this.trigger('seeking');
-      this.vimeoInfo.time = data.seconds;
-      this.trigger('timeupdate');
-      this.trigger('seeked');
-    },
-    onError: function(error){
-      this.error = error;
-      this.trigger('error');
-    },
-
-    error: function() {
-      switch (this.errorNumber) {
-        case 2:
-          return { code: 'Unable to find the video' };
-
-        case 5:
-          return { code: 'Error while trying to play the video' };
-
-        case 100:
-          return { code: 'Unable to find the video' };
-
-        case 101:
-        case 150:
-          return { code: 'Playback on other Websites has been disabled by the video owner.' };
-      }
-
-      return { code: 'Vimeo unknown error (' + this.errorNumber + ')' };
-    },
-
-    src: function() {
-      return this.source;
-    },
-
-    poster: function() {
-      return this.poster_;
-    },
-
-    setPoster: function(poster) {
-      this.poster_ = poster;
-    },
-
-    setSrc: function(source) {
-      if (!source || !source.src) {
-        return;
-      }
-
-      this.source = source;
-      this.url = Vimeo.parseUrl(source.src);
-
-      if (!this.options_.poster) {
-        if (this.url.videoId) {
-          $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_this){
-            return function(data) {
-              // Set the low resolution first
-              _this.poster_ = data[0].thumbnail_small;
-            };
-          })(this));
-
-          // Check if their is a high res
-          this.checkHighResPoster();
-        }
-      }
-
-      if (this.options_.autoplay && !_isOnMobile) {
-        if (this.isReady_) {
-          this.play();
-        } else {
-          this.playOnReady = true;
-        }
-      }
-    },
-
-    supportsFullScreen: function() {
-      return true;
-    },
-
-    //TRIGGER
-    load : function(){},
-    play : function(){ this.vimeo.api('play'); },
-    pause : function(){ this.vimeo.api('pause'); },
-    paused : function(){
-      return this.vimeoInfo.state !== VimeoState.PLAYING &&
-             this.vimeoInfo.state !== VimeoState.BUFFERING;
-    },
-
-    currentTime : function(){ return this.vimeoInfo.time || 0; },
-
-    setCurrentTime :function(seconds){
-      this.vimeo.api('seekTo', seconds);
-      this.player_.trigger('timeupdate');
-    },
-
-    duration :function(){ return this.vimeoInfo.duration || 0; },
-    buffered :function(){ return videojs.createTimeRange(0, (this.vimeoInfo.buffered*this.vimeoInfo.duration) || 0); },
-
-    volume :function() { return (this.vimeoInfo.muted)? this.vimeoInfo.muteVolume : this.vimeoInfo.volume; },
-    setVolume :function(percentAsDecimal){
-      this.vimeo.api('setvolume', percentAsDecimal);
-      this.vimeoInfo.volume = percentAsDecimal;
-      this.player_.trigger('volumechange');
-    },
-    currentSrc :function() {
-      return this.el_.src;
-    },
-    muted :function() { return this.vimeoInfo.muted || false; },
-    setMuted :function(muted) {
-      if (muted) {
-        this.vimeoInfo.muteVolume = this.vimeoInfo.volume;
-        this.setVolume(0);
-      } else {
-        this.setVolume(this.vimeoInfo.muteVolume);
-      }
-
-      this.vimeoInfo.muted = muted;
-      this.player_.trigger('volumechange');
-    },
-
-    // Tries to get the highest resolution thumbnail available for the video
-    checkHighResPoster: function(){
-      var uri = '';
-
-      try {
-
-        $.getJSON(this.baseApiUrl + this.videoId + '.json?callback=?', {format: "json"}, (function(_uri){
-          return function(data) {
-            // Set the low resolution first
-            _uri = data[0].thumbnail_large;
-          };
-        })(uri));
-
-        var image = new Image();
-        image.onload = function(){
-          // Onload thumbnail
-          if('naturalHeight' in this){
-            if(this.naturalHeight <= 90 || this.naturalWidth <= 120) {
-              this.onerror();
-              return;
-            }
-          } else if(this.height <= 90 || this.width <= 120) {
-            this.onerror();
-            return;
-          }
-
-          this.poster_ = uri;
-          this.trigger('posterchange');
-        }.bind(this);
-        image.onerror = function(){};
-        image.src = uri;
-      }
-      catch(e){}
-    }
-  });
-
-  Vimeo.isSupported = function() {
-    return true;
-  };
-
-  Vimeo.canPlaySource = function(e) {
-    return (e.type === 'video/vimeo');
-  };
-
-  var _isOnMobile = /(iPad|iPhone|iPod|Android)/g.test(navigator.userAgent);
-
-  Vimeo.parseUrl = function(url) {
-    var result = {
-      videoId: null
-    };
-
-    var regex = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
-    var match = url.match(regex);
-
-    if (match) {
-      result.videoId = match[5];
-    }
-
-    return result;
-  };
-
-  function injectCss() {
-    var css = // iframe blocker to catch mouse events
-              '.vjs-vimeo .vjs-iframe-blocker { display: none; }' +
-              '.vjs-vimeo.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
-              '.vjs-vimeo .vjs-poster { background-size: cover; }' +
-              '.vjs-vimeo { height:100%; }' +
-              '.vimeoplayer { width:100%; height:180%; position:absolute; left:0; top:-40%; }';
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-
-    var style = document.createElement('style');
-    style.type = 'text/css';
-
-    if (style.styleSheet){
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-
-    head.appendChild(style);
-  }
-
-  Vimeo.apiReadyQueue = [];
-
-  var vimeoIframeAPIReady = function() {
-    Vimeo.isApiReady = true;
-    injectCss();
-
-    for (var i = 0; i < Vimeo.apiReadyQueue.length; ++i) {
-      Vimeo.apiReadyQueue[i].initPlayer();
-    }
-  };
-
-  vimeoIframeAPIReady();
-
-  videojs.registerTech('Vimeo', Vimeo);
-
-
-
-  // Froogaloop API -------------------------------------------------------------
-
-  // From https://github.com/vimeo/player-api/blob/master/javascript/froogaloop.js
-  // Init style shamelessly stolen from jQuery http://jquery.com
-  var Froogaloop = (function(){
-      // Define a local copy of Froogaloop
-      function Froogaloop(iframe) {
-          // The Froogaloop object is actually just the init constructor
-          return new Froogaloop.fn.init(iframe);
-      }
-
-      var eventCallbacks = {},
-          hasWindowEvent = false,
-          isReady = false,
-          slice = Array.prototype.slice,
-          playerOrigin = '*';
-
-      Froogaloop.fn = Froogaloop.prototype = {
-          element: null,
-
-          init: function(iframe) {
-              if (typeof iframe === "string") {
-                  iframe = document.getElementById(iframe);
-              }
-
-              this.element = iframe;
-
-              return this;
-          },
-
-          /*
-           * Calls a function to act upon the player.
-           *
-           * @param {string} method The name of the Javascript API method to call. Eg: 'play'.
-           * @param {Array|Function} valueOrCallback params Array of parameters to pass when calling an API method
-           *                                or callback function when the method returns a value.
-           */
-          api: function(method, valueOrCallback) {
-              if (!this.element || !method) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null,
-                  params = !isFunction(valueOrCallback) ? valueOrCallback : null,
-                  callback = isFunction(valueOrCallback) ? valueOrCallback : null;
-
-              // Store the callback for get functions
-              if (callback) {
-                  storeCallback(method, callback, target_id);
-              }
-
-              postMessage(method, params, element);
-              return self;
-          },
-
-          /*
-           * Registers an event listener and a callback function that gets called when the event fires.
-           *
-           * @param eventName (String): Name of the event to listen for.
-           * @param callback (Function): Function that should be called when the event fires.
-           */
-          addEvent: function(eventName, callback) {
-              if (!this.element) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null;
-
-
-              storeCallback(eventName, callback, target_id);
-
-              // The ready event is not registered via postMessage. It fires regardless.
-              if (eventName != 'ready') {
-                  postMessage('addEventListener', eventName, element);
-              }
-              else if (eventName == 'ready' && isReady) {
-                  callback.call(null, target_id);
-              }
-
-              return self;
-          },
-
-          /*
-           * Unregisters an event listener that gets called when the event fires.
-           *
-           * @param eventName (String): Name of the event to stop listening for.
-           */
-          removeEvent: function(eventName) {
-              if (!this.element) {
-                  return false;
-              }
-
-              var self = this,
-                  element = self.element,
-                  target_id = element.id !== '' ? element.id : null,
-                  removed = removeCallback(eventName, target_id);
-
-              // The ready event is not registered
-              if (eventName != 'ready' && removed) {
-                  postMessage('removeEventListener', eventName, element);
-              }
-          }
-      };
-
-      /**
-       * Handles posting a message to the parent window.
-       *
-       * @param method (String): name of the method to call inside the player. For api calls
-       * this is the name of the api method (api_play or api_pause) while for events this method
-       * is api_addEventListener.
-       * @param params (Object or Array): List of parameters to submit to the method. Can be either
-       * a single param or an array list of parameters.
-       * @param target (HTMLElement): Target iframe to post the message to.
-       */
-      function postMessage(method, params, target) {
-          if (!target.contentWindow.postMessage) {
-              return false;
-          }
-
-          var data = JSON.stringify({
-              method: method,
-              value: params
-          });
-
-          target.contentWindow.postMessage(data, playerOrigin);
-      }
-
-      /**
-       * Event that fires whenever the window receives a message from its parent
-       * via window.postMessage.
-       */
-      function onMessageReceived(event) {
-          var data, method;
-
-          try {
-              data = JSON.parse(event.data);
-              method = data.event || data.method;
-          }
-          catch(e)  {
-              //fail silently... like a ninja!
-          }
-
-          if (method == 'ready' && !isReady) {
-              isReady = true;
-          }
-
-          // Handles messages from the vimeo player only
-          if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
-              return false;
-          }
-
-          if (playerOrigin === '*') {
-              playerOrigin = event.origin;
-          }
-
-          var value = data.value,
-              eventData = data.data,
-              target_id = target_id === '' ? null : data.player_id,
-
-              callback = getCallback(method, target_id),
-              params = [];
-
-          if (!callback) {
-              return false;
-          }
-
-          if (value !== undefined) {
-              params.push(value);
-          }
-
-          if (eventData) {
-              params.push(eventData);
-          }
-
-          if (target_id) {
-              params.push(target_id);
-          }
-
-          return params.length > 0 ? callback.apply(null, params) : callback.call();
-      }
-
-
-      /**
-       * Stores submitted callbacks for each iframe being tracked and each
-       * event for that iframe.
-       *
-       * @param eventName (String): Name of the event. Eg. api_onPlay
-       * @param callback (Function): Function that should get executed when the
-       * event is fired.
-       * @param target_id (String) [Optional]: If handling more than one iframe then
-       * it stores the different callbacks for different iframes based on the iframe's
-       * id.
-       */
-      function storeCallback(eventName, callback, target_id) {
-          if (target_id) {
-              if (!eventCallbacks[target_id]) {
-                  eventCallbacks[target_id] = {};
-              }
-              eventCallbacks[target_id][eventName] = callback;
-          }
-          else {
-              eventCallbacks[eventName] = callback;
-          }
-      }
-
-      /**
-       * Retrieves stored callbacks.
-       */
-      function getCallback(eventName, target_id) {
-          if (target_id && eventCallbacks[target_id]) {
-              return eventCallbacks[target_id][eventName];
-          }
-          else if (eventCallbacks[eventName]) {
-              return eventCallbacks[eventName];
-          }
-      }
-
-      function removeCallback(eventName, target_id) {
-          if (target_id && eventCallbacks[target_id]) {
-              if (!eventCallbacks[target_id][eventName]) {
-                  return false;
-              }
-              eventCallbacks[target_id][eventName] = null;
-          }
-          else {
-              if (!eventCallbacks[eventName]) {
-                  return false;
-              }
-              eventCallbacks[eventName] = null;
-          }
-
-          return true;
-      }
-
-      function isFunction(obj) {
-          return !!(obj && obj.constructor && obj.call && obj.apply);
-      }
-
-      function isArray(obj) {
-          return toString.call(obj) === '[object Array]';
-      }
-
-      // Give the init function the Froogaloop prototype for later instantiation
-      Froogaloop.fn.init.prototype = Froogaloop.fn;
-
-      // Listens for the message event.
-      // W3C
-      if (window.addEventListener) {
-          window.addEventListener('message', onMessageReceived, false);
-      }
-      // IE
-      else {
-          window.attachEvent('onmessage', onMessageReceived);
-      }
-
-      // Expose froogaloop to the global object
-      return (window.Froogaloop = window.$f = Froogaloop);
-
-  })();
-}));
-
+!function(e,t){ true?module.exports=t(__webpack_require__(9)):"function"==typeof define&&define.amd?define(["videojs"],t):"object"==typeof exports?exports.VueVideoPlayer=t(require("video.js")):e.VueVideoPlayer=t(e.videojs)}(this,function(e){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),s=window.videojs||o.default;"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e,t){if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var n=Object(e),i=1;i<arguments.length;i++){var r=arguments[i];if(null!=r)for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(n[o]=r[o])}return n},writable:!0,configurable:!0});var a=["loadeddata","canplay","canplaythrough","play","pause","waiting","playing","ended","error"];t.default={name:"video-player",props:{start:{type:Number,default:0},crossOrigin:{type:String,default:""},playsinline:{type:Boolean,default:!1},customEventName:{type:String,default:"statechanged"},options:{type:Object,required:!0},events:{type:Array,default:function(){return[]}},globalOptions:{type:Object,default:function(){return{controls:!0,controlBar:{remainingTimeDisplay:!1,playToggle:{},progressControl:{},fullscreenToggle:{},volumeMenuButton:{inline:!1,vertical:!0}},techOrder:["html5"],plugins:{}}}},globalEvents:{type:Array,default:function(){return[]}}},data:function(){return{player:null,reseted:!0}},mounted:function(){this.player||this.initialize()},beforeDestroy:function(){this.player&&this.dispose()},methods:{initialize:function(){var e=this,t=Object.assign({},this.globalOptions,this.options);this.playsinline&&(this.$refs.video.setAttribute("playsinline",this.playsinline),this.$refs.video.setAttribute("webkit-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-video-player-type","h5"),this.$refs.video.setAttribute("x5-video-player-fullscreen",!1)),""!==this.crossOrigin&&(this.$refs.video.crossOrigin=this.crossOrigin,this.$refs.video.setAttribute("crossOrigin",this.crossOrigin));var n=function(t,n){t&&e.$emit(t,e.player),n&&e.$emit(e.customEventName,i({},t,n))};t.plugins&&delete t.plugins.__ob__;var r=this;this.player=s(this.$refs.video,t,function(){for(var e=this,t=a.concat(r.events).concat(r.globalEvents),i={},o=0;o<t.length;o++)"string"==typeof t[o]&&void 0===i[t[o]]&&function(t){i[t]=null,e.on(t,function(){n(t,!0)})}(t[o]);this.on("timeupdate",function(){n("timeupdate",this.currentTime())}),r.$emit("ready",this)})},dispose:function(e){var t=this;this.player&&this.player.dispose&&("Flash"!==this.player.techName_&&this.player.pause&&this.player.pause(),this.player.dispose(),this.player=null,this.$nextTick(function(){t.reseted=!1,t.$nextTick(function(){t.reseted=!0,t.$nextTick(function(){e&&e()})})}))}},watch:{options:{deep:!0,handler:function(e,t){var n=this;this.dispose(function(){e&&e.sources&&e.sources.length&&n.initialize()})}}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(1),r=n.n(i);for(var o in i)["default","default"].indexOf(o)<0&&function(e){n.d(t,e,function(){return i[e]})}(o);var s=n(5),a=n(4),l=a(r.a,s.a,!1,null,null,null);t.default=l.exports},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.install=t.videoPlayer=t.videojs=void 0;var r=n(0),o=i(r),s=n(2),a=i(s),l=window.videojs||o.default,u=function(e,t){t&&(t.options&&(a.default.props.globalOptions.default=function(){return t.options}),t.events&&(a.default.props.globalEvents.default=function(){return t.events})),e.component(a.default.name,a.default)},d={videojs:l,videoPlayer:a.default,install:u};t.default=d,t.videojs=l,t.videoPlayer=a.default,t.install=u},function(e,t){e.exports=function(e,t,n,i,r,o){var s,a=e=e||{},l=typeof e.default;"object"!==l&&"function"!==l||(s=e,a=e.default);var u="function"==typeof a?a.options:a;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns,u._compiled=!0),n&&(u.functional=!0),r&&(u._scopeId=r);var d;if(o?(d=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},u._ssrRegister=d):i&&(d=i),d){var c=u.functional,f=c?u.render:u.beforeCreate;c?(u._injectStyles=d,u.render=function(e,t){return d.call(t),f(e,t)}):u.beforeCreate=f?[].concat(f,d):[d]}return{esModule:s,exports:a,options:u}}},function(e,t,n){"use strict";var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.reseted?n("div",{staticClass:"video-player"},[n("video",{ref:"video",staticClass:"video-js"})]):e._e()},r=[],o={render:i,staticRenderFns:r};t.a=o}])});
 
 /***/ }),
 /* 113 */
@@ -70332,7 +70333,7 @@ if(false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(115);
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -70829,131 +70830,11 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(120)
+var __vue_script__ = __webpack_require__(122)
 /* template */
-var __vue_template__ = __webpack_require__(121)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\admin\\HomeComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-524639ea", Component.options)
-  } else {
-    hotAPI.reload("data-v-524639ea", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 120 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  }
-});
-
-/***/ }),
-/* 121 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-parallax",
-    {
-      attrs: {
-        dark: "",
-        src: "https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-      }
-    },
-    [
-      _c(
-        "v-layout",
-        { attrs: { "align-center": "", column: "", "justify-center": "" } },
-        [
-          _c("h1", { staticClass: "display-2 font-weight-thin mb-3" }, [
-            _vm._v("Answer and Question System")
-          ]),
-          _vm._v(" "),
-          _c("h4", { staticClass: "subheading" }, [
-            _vm._v("Enjoy your system!")
-          ])
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-524639ea", module.exports)
-  }
-}
-
-/***/ }),
-/* 122 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(123)
-/* template */
-var __vue_template__ = __webpack_require__(124)
+var __vue_template__ = __webpack_require__(137)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -70992,12 +70873,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 123 */
+/* 120 */,
+/* 121 */,
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
 //
 //
@@ -71179,7 +71062,884 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+/* 123 */,
 /* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(127)
+/* template */
+var __vue_template__ = __webpack_require__(138)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\QuestionComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55d1fc43", Component.options)
+  } else {
+    hotAPI.reload("data-v-55d1fc43", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 125 */,
+/* 126 */,
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var test = [];
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
+  data: function data() {
+    return {
+      selected: 1,
+      question: '',
+      dialog: false,
+      count: 1,
+      answer: [],
+      loginLoading: false,
+      headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct', value: 'correct', align: 'center' }, { text: 'Answer Count', value: 'count', align: 'center' }, { text: 'Create Date', value: 'created_at', align: 'center' }, { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        question: '',
+        count: 0,
+        answers: [],
+        selected: 0,
+        _id: '',
+        correct_answer: ''
+      },
+      defaultItem: {
+        question: '',
+        count: 0,
+        selected: 0,
+        answers: [],
+        _id: '',
+        correct_answer: ''
+      }
+    };
+  },
+
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'New Question' : 'Edit Question';
+    }
+  },
+
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
+
+  methods: {
+    new_question: function new_question() {
+      this.editedItem.question = '';
+      this.editedItem.count = 1;
+      this.editedItem.answers = [];
+      this.editedItem.selected = 1;
+      this.editedItem._id = '';
+      var answers = { 'answer': '', 'valid': 0 };
+      this.editedItem.answers.push(answers);
+    },
+    remove: function remove(order) {
+      this.editedItem.count = this.editedItem.count - 1;
+      this.editedItem.answers.splice(order, 1);
+      this.editedItem.selected = 1;
+    },
+    add: function add() {
+      this.editedItem.count = this.editedItem.count + 1;
+      var answers = {
+        'answer': '',
+        'valid': 0
+      };
+      this.editedItem.answers.push(answers);
+    },
+    save_qustions: function save_qustions() {
+      if (this.editedIndex > -1) {
+        this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
+        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          Object.assign(this.desserts[this.editedIndex], this.editedItem);
+          this.showMessage('Successfully Updated');
+        }.bind(this)).catch(function (error) {
+          console.log(error);
+        }.bind(this));
+      } else {
+        axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          this.desserts = response.data.questions;
+          this.showMessage('Successfully Saved');
+        }.bind(this)).catch(function (error) {
+          console.log(error.response);
+        }.bind(this));
+      }
+      this.dialog = false;
+    },
+    initialize: function initialize() {
+      var params = new URLSearchParams();
+      this.loading = true;
+      axios.get('/api/admin/question-management/read', { params: params, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+        this.loading = false;
+        this.desserts = response.data.questions;
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.defaultItem = Object.assign({}, item);
+      this.editedItem.selected = item['selected'];
+      this.editedItem.question = item['question'];
+      this.editedItem.count = item['count'];
+      this.editedItem.correct_answer = item['correct_answer'];
+      this.editedItem._id = item['_id'];
+      this.editedItem.answers = [];
+      for (var i = 0; i < item['answers'].length; i++) {
+        this.editedItem.answers.push({ 'answer': item['answers'][i]['answer'], 'valid': item['answers'][i]['valid'] });
+      }
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.desserts.indexOf(item);
+      var delete_item = Object.assign({}, item);
+      if (confirm('Are you sure you want to delete this item?')) {
+        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+          this.loading = false;
+          this.desserts.splice(index, 1);
+          this.showMessage('Successfully Deleted');
+        }.bind(this)).catch(function (error) {
+          this.loading = false;
+        }.bind(this));
+      }
+    },
+    close: function close() {
+      this.dialog = false;
+    },
+    save: function save() {}
+  }
+});
+
+/***/ }),
+/* 128 */,
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(130)
+/* template */
+var __vue_template__ = __webpack_require__(131)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\stepComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c54313d", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c54313d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      select_video: '',
+      init: '00:00',
+      video: { 'alias': '', '_id': '' },
+      steps: [],
+      videos: [],
+      questions: [],
+      question: [],
+      select_questions: []
+    }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
+      video_id: '',
+      end_times: []
+    }), _defineProperty(_ref, 'loading_state', false), _ref;
+  },
+  created: function created() {
+    this.initialize();
+  },
+
+  methods: {
+    onChange: function onChange(_id) {
+      var param = { "_id": _id };
+      axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+        this.loading = false;
+        this.loading_state = true;
+        if (response.data.action == 'true') {
+          this.step_info = response.data.steps;
+          this.steps = this.step_info.end_times;
+        } else {
+          this.step_info = [];
+          this.steps = [];
+          this.step_info = {
+            video_id: '',
+            end_times: []
+          };
+
+          this.step_info.video_id = response.data.steps;
+          this.step_info.end_times = [];
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+        }
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
+    },
+    remove: function remove(index) {
+      this.steps.splice(index, 1);
+    },
+    add: function add() {
+      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
+      this.steps.push(new_step);
+    },
+    save: function save() {
+      axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        this.showMessage('Successfully Saved');
+      }.bind(this)).catch(function (error) {
+        this.showError('Error');
+      }.bind(this));
+    },
+    initialize: function initialize() {
+      this.loading = true;
+      this.loading_state = false;
+      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
+        this.loading = false;
+        this.videos = response.data.videos;
+        this.questions = response.data.questions;
+        var flag = response.data.action;
+        if (flag == 'false') {
+          this.steps = this.step_info.end_times;
+          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
+          this.steps.push(new_step);
+        } else {
+          this.step_info = response.data.init_steps;
+          this.steps = this.step_info.end_times;
+        }
+      }.bind(this)).catch(function (error) {
+        this.loading = false;
+      }.bind(this));
+    }
+  }
+});
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  items: _vm.videos,
+                  "item-text": "alias",
+                  label: "Select Video",
+                  "item-value": "_id"
+                },
+                on: { change: _vm.onChange },
+                model: {
+                  value: _vm.video,
+                  callback: function($$v) {
+                    _vm.video = $$v
+                  },
+                  expression: "video"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-list",
+        [
+          _vm.loading_state == false
+            ? _c("v-card-text", {}, [
+                _c("h2", { staticClass: "text-sm-left" }, [
+                  _vm._v("Please select video")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.steps, function(step, index) {
+            return [
+              _c(
+                "v-container",
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs10: "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  index == 0
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: "",
+                                          mask: "##:##"
+                                        },
+                                        model: {
+                                          value: _vm.init,
+                                          callback: function($$v) {
+                                            _vm.init = $$v
+                                          },
+                                          expression: "init"
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  index != 0
+                                    ? _c("v-text-field", {
+                                        attrs: {
+                                          label: "start time",
+                                          disabled: "",
+                                          mask: "##:##"
+                                        },
+                                        model: {
+                                          value: _vm.steps[index - 1]["point"],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.steps[index - 1],
+                                              "point",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "steps[index - 1]['point']"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "End time", mask: "##:##" },
+                                    model: {
+                                      value: step.point,
+                                      callback: function($$v) {
+                                        _vm.$set(step, "point", $$v)
+                                      },
+                                      expression: "step.point"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.questions,
+                                  "item-text": "question",
+                                  "item-value": "_id",
+                                  label: "Select Question",
+                                  multiple: "",
+                                  chips: ""
+                                },
+                                model: {
+                                  value: step.question_ids,
+                                  callback: function($$v) {
+                                    _vm.$set(step, "question_ids", $$v)
+                                  },
+                                  expression: "step.question_ids"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { "xs-2": "" } },
+                        [
+                          index == 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      return _vm.add($event)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Add")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          index != 0
+                            ? _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    small: "",
+                                    color: "primary",
+                                    "flat-right": ""
+                                  },
+                                  nativeOn: {
+                                    click: function($event) {
+                                      _vm.remove(index)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Close")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider")
+            ]
+          }),
+          _vm._v(" "),
+          _c(
+            "v-list-tile",
+            [
+              _vm.loading_state == true
+                ? _c(
+                    "v-list-tile-action",
+                    { attrs: { "flat-right": "" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.save($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
+  }
+}
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 133 */,
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(135)
+/* template */
+var __vue_template__ = __webpack_require__(136)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\HomeComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-524639ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-524639ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-parallax",
+    {
+      attrs: {
+        dark: "",
+        src: "https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+      }
+    },
+    [
+      _c(
+        "v-layout",
+        { attrs: { "align-center": "", column: "", "justify-center": "" } },
+        [
+          _c("h1", { staticClass: "display-2 font-weight-thin mb-3" }, [
+            _vm._v("Answer and Question System")
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "subheading" }, [
+            _vm._v("Enjoy your system!")
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-524639ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71462,291 +72222,7 @@ if (false) {
 }
 
 /***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(126)
-/* template */
-var __vue_template__ = __webpack_require__(127)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\admin\\QuestionComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-55d1fc43", Component.options)
-  } else {
-    hotAPI.reload("data-v-55d1fc43", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 126 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var test = [];
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
-  data: function data() {
-    return {
-      selected: 1,
-      question: '',
-      dialog: false,
-      count: 1,
-      answer: [],
-      loginLoading: false,
-      headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct', value: 'correct', align: 'center' }, { text: 'Answer Count', value: 'count', align: 'center' }, { text: 'Create Date', value: 'created_at', align: 'center' }, { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        question: '',
-        count: 0,
-        answers: [],
-        selected: 0,
-        _id: '',
-        correct_answer: ''
-      },
-      defaultItem: {
-        question: '',
-        count: 0,
-        selected: 0,
-        answers: [],
-        _id: '',
-        correct_answer: ''
-      }
-    };
-  },
-
-  computed: {
-    formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'New Question' : 'Edit Question';
-    }
-  },
-
-  watch: {
-    dialog: function dialog(val) {
-      val || this.close();
-    }
-  },
-  created: function created() {
-    this.initialize();
-  },
-
-  methods: {
-    new_question: function new_question() {
-      this.editedItem.question = '';
-      this.editedItem.count = 1;
-      this.editedItem.answers = [];
-      this.editedItem.selected = 1;
-      this.editedItem._id = '';
-      var answers = { 'answer': '', 'valid': 0 };
-      this.editedItem.answers.push(answers);
-    },
-    remove: function remove(order) {
-      this.editedItem.count = this.editedItem.count - 1;
-      this.editedItem.answers.splice(order, 1);
-      this.editedItem.selected = 1;
-    },
-    add: function add() {
-      this.editedItem.count = this.editedItem.count + 1;
-      var answers = {
-        'answer': '',
-        'valid': 0
-      };
-      this.editedItem.answers.push(answers);
-    },
-    save_qustions: function save_qustions() {
-      if (this.editedIndex > -1) {
-        this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
-        axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
-          headers: {
-            'Content-Type': 'applicaton/json'
-          }
-        }).then(function (response) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem);
-          this.showMessage('Successfully Updated');
-        }.bind(this)).catch(function (error) {
-          console.log(error);
-        }.bind(this));
-      } else {
-        axios.post('/api/admin/question-management/create', { data: JSON.stringify(this.editedItem) }, {
-          headers: {
-            'Content-Type': 'applicaton/json'
-          }
-        }).then(function (response) {
-          this.desserts = response.data.questions;
-          this.showMessage('Successfully Saved');
-        }.bind(this)).catch(function (error) {
-          console.log(error.response);
-        }.bind(this));
-      }
-      this.dialog = false;
-    },
-    initialize: function initialize() {
-      var params = new URLSearchParams();
-      this.loading = true;
-      axios.get('/api/admin/question-management/read', { params: params, _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
-        this.loading = false;
-        this.desserts = response.data.questions;
-      }.bind(this)).catch(function (error) {
-        this.loading = false;
-      }.bind(this));
-    },
-    editItem: function editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.defaultItem = Object.assign({}, item);
-      this.editedItem.selected = item['selected'];
-      this.editedItem.question = item['question'];
-      this.editedItem.count = item['count'];
-      this.editedItem.correct_answer = item['correct_answer'];
-      this.editedItem._id = item['_id'];
-      this.editedItem.answers = [];
-      for (var i = 0; i < item['answers'].length; i++) {
-        this.editedItem.answers.push({ 'answer': item['answers'][i]['answer'], 'valid': item['answers'][i]['valid'] });
-      }
-      this.dialog = true;
-    },
-    deleteItem: function deleteItem(item) {
-      var index = this.desserts.indexOf(item);
-      var delete_item = Object.assign({}, item);
-      if (confirm('Are you sure you want to delete this item?')) {
-        axios.post('/api/admin/question-management/delete', { data: delete_item['_id'] }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-          this.loading = false;
-          this.desserts.splice(index, 1);
-          this.showMessage('Successfully Deleted');
-        }.bind(this)).catch(function (error) {
-          this.loading = false;
-        }.bind(this));
-      }
-    },
-    close: function close() {
-      this.dialog = false;
-    },
-    save: function save() {}
-  }
-});
-
-/***/ }),
-/* 127 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72112,474 +72588,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-55d1fc43", module.exports)
   }
 }
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(129)
-/* template */
-var __vue_template__ = __webpack_require__(130)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\admin\\stepComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2c54313d", Component.options)
-  } else {
-    hotAPI.reload("data-v-2c54313d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
-  data: function data() {
-    var _ref;
-
-    return _ref = {
-      select_video: '',
-      init: '00:00',
-      video: { 'alias': '', '_id': '' },
-      steps: [],
-      videos: [],
-      questions: [],
-      question: [],
-      select_questions: []
-    }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
-      video_id: '',
-      end_times: []
-    }), _defineProperty(_ref, 'loading_state', false), _ref;
-  },
-  created: function created() {
-    this.initialize();
-  },
-
-  methods: {
-    onChange: function onChange(_id) {
-      var param = { "_id": _id };
-      axios.post('/api/admin/step-management/get_steps', { data: _id }, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-        this.loading = false;
-        this.loading_state = true;
-        if (response.data.action == 'true') {
-          this.step_info = response.data.steps;
-          this.steps = this.step_info.end_times;
-        } else {
-          this.step_info = [];
-          this.steps = [];
-          this.step_info = {
-            video_id: '',
-            end_times: []
-          };
-
-          this.step_info.video_id = response.data.steps;
-          this.step_info.end_times = [];
-          this.steps = this.step_info.end_times;
-          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
-          this.steps.push(new_step);
-        }
-      }.bind(this)).catch(function (error) {
-        this.loading = false;
-      }.bind(this));
-    },
-    remove: function remove(index) {
-      this.steps.splice(index, 1);
-    },
-    add: function add() {
-      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
-      this.steps.push(new_step);
-    },
-    save: function save() {
-      axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
-      }).then(function (response) {
-        this.showMessage('Successfully Saved');
-      }.bind(this)).catch(function (error) {
-        this.showError('Error');
-      }.bind(this));
-    },
-    initialize: function initialize() {
-      this.loading = true;
-      this.loading_state = false;
-      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
-        this.loading = false;
-        this.videos = response.data.videos;
-        this.questions = response.data.questions;
-        var flag = response.data.action;
-        if (flag == 'false') {
-          this.steps = this.step_info.end_times;
-          var new_step = { 'point': '', 'sort': 1, 'question_ids': [] };
-          this.steps.push(new_step);
-        } else {
-          this.step_info = response.data.init_steps;
-          this.steps = this.step_info.end_times;
-        }
-      }.bind(this)).catch(function (error) {
-        this.loading = false;
-      }.bind(this));
-    }
-  }
-});
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-container",
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c("v-select", {
-                attrs: {
-                  items: _vm.videos,
-                  "item-text": "alias",
-                  label: "Select Video",
-                  "item-value": "_id"
-                },
-                on: { change: _vm.onChange },
-                model: {
-                  value: _vm.video,
-                  callback: function($$v) {
-                    _vm.video = $$v
-                  },
-                  expression: "video"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-list",
-        [
-          _vm.loading_state == false
-            ? _c("v-card-text", {}, [
-                _c("h2", { staticClass: "text-sm-left" }, [
-                  _vm._v("Please select video")
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.steps, function(step, index) {
-            return [
-              _c(
-                "v-container",
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { wrap: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs10: "" } },
-                        [
-                          _c(
-                            "v-layout",
-                            { attrs: { wrap: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                { attrs: { xs6: "" } },
-                                [
-                                  index == 0
-                                    ? _c("v-text-field", {
-                                        attrs: {
-                                          label: "start time",
-                                          disabled: "",
-                                          mask: "##:##"
-                                        },
-                                        model: {
-                                          value: _vm.init,
-                                          callback: function($$v) {
-                                            _vm.init = $$v
-                                          },
-                                          expression: "init"
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  index != 0
-                                    ? _c("v-text-field", {
-                                        attrs: {
-                                          label: "start time",
-                                          disabled: "",
-                                          mask: "##:##"
-                                        },
-                                        model: {
-                                          value: _vm.steps[index - 1]["point"],
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.steps[index - 1],
-                                              "point",
-                                              $$v
-                                            )
-                                          },
-                                          expression:
-                                            "steps[index - 1]['point']"
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs6: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "End time", mask: "##:##" },
-                                    model: {
-                                      value: step.point,
-                                      callback: function($$v) {
-                                        _vm.$set(step, "point", $$v)
-                                      },
-                                      expression: "step.point"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.questions,
-                                  "item-text": "question",
-                                  "item-value": "_id",
-                                  label: "Select Question",
-                                  multiple: "",
-                                  chips: ""
-                                },
-                                model: {
-                                  value: step.question_ids,
-                                  callback: function($$v) {
-                                    _vm.$set(step, "question_ids", $$v)
-                                  },
-                                  expression: "step.question_ids"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { "xs-2": "" } },
-                        [
-                          index == 0
-                            ? _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    small: "",
-                                    color: "primary",
-                                    "flat-right": ""
-                                  },
-                                  nativeOn: {
-                                    click: function($event) {
-                                      return _vm.add($event)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Add")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          index != 0
-                            ? _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    small: "",
-                                    color: "primary",
-                                    "flat-right": ""
-                                  },
-                                  nativeOn: {
-                                    click: function($event) {
-                                      _vm.remove(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Close")]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-divider")
-            ]
-          }),
-          _vm._v(" "),
-          _c(
-            "v-list-tile",
-            [
-              _vm.loading_state == true
-                ? _c(
-                    "v-list-tile-action",
-                    { attrs: { "flat-right": "" } },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "primary" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.save($event)
-                            }
-                          }
-                        },
-                        [_vm._v("Save")]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        2
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2c54313d", module.exports)
-  }
-}
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
