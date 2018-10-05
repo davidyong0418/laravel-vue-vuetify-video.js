@@ -72219,7 +72219,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -72229,6 +72228,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _ref;
 
     return _ref = {
+      valid: false,
       select_video: '',
       init: '0000',
       video: { 'alias': '', '_id': '' },
@@ -72240,7 +72240,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, 'question', ''), _defineProperty(_ref, 'step_info', []), _defineProperty(_ref, 'loginLoading', false), _defineProperty(_ref, 'defaultItem', {
       video_id: '',
       end_times: []
-    }), _defineProperty(_ref, 'loading_state', false), _ref;
+    }), _defineProperty(_ref, 'loading_state', false), _defineProperty(_ref, 'end_time_rule', [function (v) {
+      return !!v || 'Time is required';
+    }, function (v) {
+      return v && v.length == 4 || 'Time must be 4 characters';
+    }]), _defineProperty(_ref, 'questions_rule', [function (v) {
+      if (v.length == 0) {
+        return 'it should be selected';
+      } else {
+        return true;
+      }
+    }]), _ref;
   },
   created: function created() {
     this.initialize();
@@ -72262,7 +72272,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             video_id: '',
             end_times: []
           };
-
           this.step_info.video_id = response.data.steps;
           this.step_info.end_times = [];
           this.steps = this.step_info.end_times;
@@ -72277,10 +72286,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.steps.splice(index, 1);
     },
     add: function add() {
-      var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
-      this.steps.push(new_step);
+      this.$refs.form.validate();
+      console.log('this.valid', this.valid);
+      if (this.valid != false) {
+        var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
+        this.steps.push(new_step);
+      }
     },
     save: function save() {
+      this.$refs.form.validate();
+      if (this.valid == false) {
+        return;
+      }
       axios.post('/api/admin/step-management/create', { data: JSON.stringify(this.step_info) }, {
         headers: {
           'Content-Type': 'applicaton/json'
@@ -72351,7 +72368,17 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-list",
+        "v-form",
+        {
+          ref: "form",
+          model: {
+            value: _vm.valid,
+            callback: function($$v) {
+              _vm.valid = $$v
+            },
+            expression: "valid"
+          }
+        },
         [
           _vm.loading_state == false
             ? _c("v-card-text", {}, [
@@ -72429,7 +72456,12 @@ var render = function() {
                                 { attrs: { xs6: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "End time", mask: "##:##" },
+                                    attrs: {
+                                      name: "end_time",
+                                      label: "End time",
+                                      mask: "##:##",
+                                      rules: _vm.end_time_rule
+                                    },
                                     model: {
                                       value: step.point,
                                       callback: function($$v) {
@@ -72455,7 +72487,9 @@ var render = function() {
                                   "item-value": "_id",
                                   label: "Select Question",
                                   multiple: "",
-                                  chips: ""
+                                  chips: "",
+                                  rules: _vm.questions_rule,
+                                  required: ""
                                 },
                                 model: {
                                   value: step.question_ids,
@@ -72483,7 +72517,8 @@ var render = function() {
                                   attrs: {
                                     small: "",
                                     color: "primary",
-                                    "flat-right": ""
+                                    "flat-right": "",
+                                    disabled: !_vm.valid
                                   },
                                   nativeOn: {
                                     click: function($event) {
@@ -72538,7 +72573,7 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          attrs: { color: "primary" },
+                          attrs: { color: "primary", disabled: !_vm.valid },
                           nativeOn: {
                             click: function($event) {
                               return _vm.save($event)
