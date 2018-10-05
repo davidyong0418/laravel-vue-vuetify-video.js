@@ -87,12 +87,12 @@
       return {
         errors: [],
         internalAction: this.action,
-        email: 'rrr@gmail.com',
+        email: '',
         emailRules: [
           (v) => !!v || 'Email is mandatory',
           (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Email have to be a valid email'
         ],
-        password: '181142',
+        password: '',
         passwordRules: [
           (v) => !!v || 'Password is mandatory',
           (v) => v.length >= 6 || 'Password have to be at least 6 characters long'
