@@ -14,7 +14,7 @@ class VideoController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+
     }
     /**
      * Show the application dashboard.
@@ -29,10 +29,17 @@ class VideoController extends Controller
     public function get_videos()
     {
         $videos = Video::all();
-        $selected_video_id = Video::where('select', 1)->get()->toArray();
+        $selected_videos= Video::where('select', 1)->get()->toArray();
+        if(!empty($selected_videos))
+        {
+            $selected_video_id = $selected_videos[0]['_id'];
+        }
+        else{
+            $selected_video_id = '';
+        }
         $response = array(
             'videos' => $videos,
-            'selected_video' =>$selected_video_id[0]['_id']
+            'selected_video' =>$selected_video_id
         );
        return response()->json($response);
     }

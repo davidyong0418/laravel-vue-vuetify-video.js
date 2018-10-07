@@ -3,14 +3,14 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
-        <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
+        <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question, Step data aren't existed</h3></v-card-text>
         <div class="video-player-content">
         <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
                  :options="playerOptions"
                  :playsinline="true"
                  customEventName="customstatechangedeventname"
-                  @play="onPlayerPlay($event)"
+                 @play="onPlayerPlay($event)"
                  @pause="onPlayerPause($event)"
                  @ended="onPlayerEnded($event)"
                  @waiting="onPlayerWaiting($event)"
@@ -19,7 +19,7 @@
                  @timeupdate="onPlayerTimeupdate($event)"
                  @canplay="onPlayerCanplay($event)"
                  @canplaythrough="onPlayerCanplaythrough($event)"
-                  @statechanged="playerStateChanged($event)"
+                 @statechanged="playerStateChanged($event)"
                  @ready="playerReadied">
         </video-player>
         </div>
@@ -45,7 +45,6 @@
           <v-btn flat-right v-if="replay_btn == true" color="orange" @click="replay_video">Replay</v-btn>
         </v-card-actions>
         <div>
-            <!-- <v-img :src="video.thumbnail"></v-img> -->
         <v-list two-line v-if="review_system == true">
           <template v-for="(step_review_data, p_index) in review_data">
             <v-divider v-if="p_index == 0"></v-divider>
@@ -130,13 +129,6 @@
         change_value:20,
       }
     },
-    watch:{
-      // step_order: function(val, oldval)
-      // {
-      //   this.player.currentTime(200);
-      //   this.set_offset()
-      // }
-    },
     mounted() {
       console.log('this is current player instance object', this.vimeourl);
     },
@@ -149,13 +141,8 @@
       this.get_quiz_info();
     },
     methods: {
-      set_offset()
-      {
-        console.log('+++++++++++',this.player)
-      },
       cut_step(){
         this.player.currentTime(this.start_offset);
-        this.set_offset()
       },
       start_video_step(){
         this.start_btn = false;
@@ -252,15 +239,23 @@
           }).then(function(response){
             this.video_data = response.data.video_data;
             this.step_data = response.data.step_data;
-            this.step_order = response.data.step_order;
-            this.player_loading = true;
-            this.set_current_step();
+            if(this.video_data == '' || this.step_data == '')
+            {
+              this.init_data = true;
+              this.start_btn = false;
+              this.quiz = false;
+              this.review_system = false;
+            }
+            else{
+              this.step_order = response.data.step_order;
+              this.player_loading = true;
+              this.set_current_step();
+            }
           }.bind(this)).catch(function (error){
             this.init_data = true;
-            this.init_data = false;
+            this.start_btn = false;
             this.quiz = false;
             this.review_system = false;
-            this.showError('Error')
           }.bind(this));
       },
       set_current_step(){
@@ -294,18 +289,16 @@
       },
       // listen event
       onPlayerPlay(player) {
-        console.log('player play!', player)
+        // console.log('player play!', player)
       },
       onPlayerPause(player) {
-        console.log('player pause!', player)
+        // console.log('player pause!', player)
       },
       playerStateChanged(playerCurrentState) {
         // console.log('player current update state', playerCurrentState)
       },
       playerReadied(player) {
-        console.log('the player is readied', player)
         this.player.currentTime(this.start_offset);
-        // this.set_offset()
       },
       onPlayerTimeupdate(player)
       {

@@ -20,7 +20,7 @@ class QuizController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+
     }
 
     /**
@@ -49,10 +49,19 @@ class QuizController extends Controller
             $step_order = count($user_info[0]['step']);
         }
         $video_data = Video::where('select', 1)->get()->toArray();
-        $step_data = Step::where('video_id', $video_data[0]['_id'])->get()->toArray();
+        if(!empty($video_data))
+        {
+            $step_data = Step::where('video_id', $video_data[0]['_id'])->get()->toArray();
+            $steps = $step_data[0];
+            $videos = $video_data[0];
+        }
+        else{
+            $steps = '';
+            $videos = '';
+        }
         $response = array(
-            'video_data' => $video_data[0],
-            'step_data' => $step_data[0],
+            'video_data' => $videos,
+            'step_data' => $steps,
             'step_order' => $step_order
         );
         return response()->json($response);
@@ -85,7 +94,6 @@ class QuizController extends Controller
         $response_data = (array)json_decode($request->get('data'));
         $selected_ids = $response_data['selected_ids'];
         $current_quiz = $response_data['current_quiz'];
-        // print_r($current_quiz);
         $user_id = $response_data['user_id'];
         $flag = false;
         foreach ($current_quiz as $key => $item)
@@ -102,7 +110,6 @@ class QuizController extends Controller
             }
         }
         $check = Userhistory::where('user_id', $user_id)->get()->toArray();
-
 
         if($flag == true)
         {

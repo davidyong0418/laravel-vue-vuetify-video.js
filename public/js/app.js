@@ -39965,14 +39965,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       errors: [],
       internalAction: this.action,
-      email: 'rrr@gmail.com',
+      email: '',
       emailRules: [function (v) {
         return !!v || 'Email is mandatory';
       }, function (v) {
         return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Email have to be a valid email'
         );
       }],
-      password: '181142',
+      password: '',
       passwordRules: [function (v) {
         return !!v || 'Password is mandatory';
       }, function (v) {
@@ -42366,7 +42366,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -42419,14 +42418,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       change_value: 20
     };
   },
-
-  watch: {
-    // step_order: function(val, oldval)
-    // {
-    //   this.player.currentTime(200);
-    //   this.set_offset()
-    // }
-  },
   mounted: function mounted() {
     console.log('this is current player instance object', this.vimeourl);
   },
@@ -42441,12 +42432,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    set_offset: function set_offset() {
-      console.log('+++++++++++', this.player);
-    },
     cut_step: function cut_step() {
       this.player.currentTime(this.start_offset);
-      this.set_offset();
     },
     start_video_step: function start_video_step() {
       this.start_btn = false;
@@ -42532,15 +42519,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         this.video_data = response.data.video_data;
         this.step_data = response.data.step_data;
-        this.step_order = response.data.step_order;
-        this.player_loading = true;
-        this.set_current_step();
+        if (this.video_data == '' || this.step_data == '') {
+          this.init_data = true;
+          this.start_btn = false;
+          this.quiz = false;
+          this.review_system = false;
+        } else {
+          this.step_order = response.data.step_order;
+          this.player_loading = true;
+          this.set_current_step();
+        }
       }.bind(this)).catch(function (error) {
         this.init_data = true;
-        this.init_data = false;
+        this.start_btn = false;
         this.quiz = false;
         this.review_system = false;
-        this.showError('Error');
       }.bind(this));
     },
     set_current_step: function set_current_step() {
@@ -42573,18 +42566,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     // listen event
     onPlayerPlay: function onPlayerPlay(player) {
-      console.log('player play!', player);
+      // console.log('player play!', player)
     },
     onPlayerPause: function onPlayerPause(player) {
-      console.log('player pause!', player);
+      // console.log('player pause!', player)
     },
     playerStateChanged: function playerStateChanged(playerCurrentState) {
       // console.log('player current update state', playerCurrentState)
     },
     playerReadied: function playerReadied(player) {
-      console.log('the player is readied', player);
       this.player.currentTime(this.start_offset);
-      // this.set_offset()
     },
     onPlayerTimeupdate: function onPlayerTimeupdate(player) {
       if (player.currentTime() > this.end_offset) {
@@ -45154,7 +45145,7 @@ var render = function() {
               _vm.init_data == true
                 ? _c("v-card-text", [
                     _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
-                      _vm._v("Video and Question data aren't exsited")
+                      _vm._v("Video and Question, Step data aren't existed")
                     ])
                   ])
                 : _vm._e(),
@@ -71081,6 +71072,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -71098,7 +71092,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       prior_val: '',
       add_vimeo_url: '',
       add_vimeo_alias: '',
-      add_vimeo_description: ''
+      add_vimeo_description: '',
+      exist_video: false
     };
   },
 
@@ -71144,7 +71139,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/admin/video-management/', params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
         this.loading = false;
         this.videos = response.data.videos;
-        this.selected = response.data.select_video;
+        this.selected = response.data.selected_video;
+        this.exist_video = false;
+        if (this.selected == '') {
+          this.exist_video = true;
+        }
       }.bind(this)).catch(function (error) {
         this.loading = false;
       }.bind(this));
@@ -71203,6 +71202,12 @@ var render = function() {
                 [_c("v-toolbar-title", [_vm._v("Video list")])],
                 1
               ),
+              _vm._v(" "),
+              _c("v-card-title", [
+                _vm.exist_video == true
+                  ? _c("span", [_vm._v("No Selected Video")])
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c(
                 "v-list",
@@ -72287,7 +72292,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     add: function add() {
       this.$refs.form.validate();
-      console.log('this.valid', this.valid);
       if (this.valid != false) {
         var new_step = { 'point': '', 'sort': this.steps.length + 1, 'question_ids': [] };
         this.steps.push(new_step);

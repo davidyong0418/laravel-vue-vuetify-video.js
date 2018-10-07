@@ -5,6 +5,9 @@
         <v-toolbar>
           <v-toolbar-title>Video list</v-toolbar-title>
         </v-toolbar>
+        <v-card-title>
+            <span v-if="exist_video == true">No Selected Video</span>
+          </v-card-title>
         <v-list>
         <v-radio-group v-model="selected">
           <div v-for="video in videos">
@@ -98,6 +101,7 @@
         add_vimeo_url:'',
         add_vimeo_alias:'',
         add_vimeo_description:'',
+        exist_video:false,
       }
     },
     props: {
@@ -146,7 +150,12 @@
         .then( function (response) {
           this.loading = false
           this.videos = response.data.videos
-          this.selected = response.data.select_video
+          this.selected = response.data.selected_video
+          this.exist_video = false
+          if(this.selected == '')
+          {
+            this.exist_video = true
+          }
         }.bind(this))
         .catch(function (error) {
           this.loading = false

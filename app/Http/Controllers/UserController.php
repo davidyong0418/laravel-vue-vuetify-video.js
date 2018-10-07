@@ -28,7 +28,15 @@ class UserController extends Controller
         $id = Auth::user()->_id;
         Session::put('user_id', $id);
         $video_data = Video::where('select', 1)->get()->toArray();
-        return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url'], 'distinct' =>$id ]);
+        if(!empty($video_data))
+        {
+            $response = $video_data[0]['vimeo_url'];
+        }
+        else
+        {
+            $response = '';
+        }
+        return view('user/user', ['vimeo_url' => $response, 'distinct' =>$id ]);
     }
     
 }

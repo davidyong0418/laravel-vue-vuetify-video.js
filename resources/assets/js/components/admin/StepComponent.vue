@@ -125,7 +125,6 @@
       },
       add: function(){
         this.$refs.form.validate();
-        console.log('this.valid', this.valid)
         if(this.valid != false)
         {
           var new_step = {'point':'','sort':this.steps.length + 1, 'question_ids':[]};
