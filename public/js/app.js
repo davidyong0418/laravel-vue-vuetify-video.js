@@ -21968,18 +21968,18 @@ var Player = function (_Component) {
       _this2.on(_this2.tech_, event, _this2['handleTech' + toTitleCase(event) + '_']);
     });
 
-    // Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
-    //   _this2.on(_this2.tech_, event, function (eventObj) {
-    //     if (_this2.tech_.playbackRate() === 0 && _this2.tech_.seeking()) {
-    //       _this2.queuedCallbacks_.push({
-    //         callback: _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'].bind(_this2),
-    //         event: eventObj
-    //       });
-    //       return;
-    //     }
-    //     _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'](eventObj);
-    //   });
-    // });
+    Object.keys(TECH_EVENTS_QUEUE).forEach(function (event) {
+      _this2.on(_this2.tech_, event, function (eventObj) {
+        if (_this2.tech_.playbackRate() === 0 && _this2.tech_.seeking()) {
+          _this2.queuedCallbacks_.push({
+            callback: _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'].bind(_this2),
+            event: eventObj
+          });
+          return;
+        }
+        _this2['handleTech' + TECH_EVENTS_QUEUE[event] + '_'](eventObj);
+      });
+    });
 
     this.on(this.tech_, 'loadstart', this.handleTechLoadStart_);
     this.on(this.tech_, 'sourceset', this.handleTechSourceset_);
@@ -39965,14 +39965,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       errors: [],
       internalAction: this.action,
-      email: 'rrr@gmail.com',
+      email: '',
       emailRules: [function (v) {
         return !!v || 'Email is mandatory';
       }, function (v) {
         return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Email have to be a valid email'
         );
       }],
-      password: '181142',
+      password: '',
       passwordRules: [function (v) {
         return !!v || 'Password is mandatory';
       }, function (v) {
@@ -42537,10 +42537,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.set_current_step();
       }.bind(this)).catch(function (error) {
         this.init_data = true;
-        this.init_data = false;
+        // this.init_data = false;
+        this.start_btn = false;
         this.quiz = false;
         this.review_system = false;
-        this.showError('Error');
+        // this.showError('Error')
       }.bind(this));
     },
     set_current_step: function set_current_step() {
@@ -45154,7 +45155,7 @@ var render = function() {
               _vm.init_data == true
                 ? _c("v-card-text", [
                     _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
-                      _vm._v("Video and Question data aren't exsited")
+                      _vm._v("Video and Question, Step data aren't exsited")
                     ])
                   ])
                 : _vm._e(),

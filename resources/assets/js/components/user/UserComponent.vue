@@ -3,7 +3,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3 offset-sm2>
       <v-card sm6>
-        <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question data aren't exsited</h3></v-card-text>
+        <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question, Step data aren't exsited</h3></v-card-text>
         <div class="video-player-content">
         <video-player  class="video-player-box" v-if="player_loading == true"
                  ref="videoPlayer"
@@ -257,10 +257,11 @@
             this.set_current_step();
           }.bind(this)).catch(function (error){
             this.init_data = true;
-            this.init_data = false;
+            // this.init_data = false;
+            this.start_btn = false;
             this.quiz = false;
             this.review_system = false;
-            this.showError('Error')
+            // this.showError('Error')
           }.bind(this));
       },
       set_current_step(){

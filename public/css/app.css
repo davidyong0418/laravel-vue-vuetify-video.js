@@ -54,6 +54,10 @@
   top: 0;
 }
 
+.vjs-big-play-button {
+  display: none !important;
+}
+
 .banner-container {
   width: 100%;
   max-width: 1200px;
