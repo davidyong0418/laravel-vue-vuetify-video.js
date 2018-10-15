@@ -150,7 +150,7 @@
       initialize () {
         this.loading = true
          this.loading_state = false
-        axios.get('/api/admin/step-management/get_init_data', {data:'ddd',_token:'kkkkkkkkkkkk'}, {headers: {'Content-Type':'applicaton/json',}})
+        axios.get('/api/admin/step-management/get_init_data', {headers: {'Content-Type':'applicaton/json',}})
         .then( function (response) {
           this.loading = false
           this.videos = response.data.videos;

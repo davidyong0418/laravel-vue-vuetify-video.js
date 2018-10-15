@@ -10,8 +10,6 @@
                  :options="playerOptions"
                  :playsinline="true"
                  customEventName="customstatechangedeventname"
-                 @play="onPlayerPlay($event)"
-                 @pause="onPlayerPause($event)"
                  @ended="onPlayerEnded($event)"
                  @waiting="onPlayerWaiting($event)"
                  @playing="onPlayerPlaying($event)"
@@ -19,8 +17,7 @@
                  @timeupdate="onPlayerTimeupdate($event)"
                  @canplay="onPlayerCanplay($event)"
                  @canplaythrough="onPlayerCanplaythrough($event)"
-                 @statechanged="playerStateChanged($event)"
-                 @ready="playerReadied">
+                 >
         </video-player>
         </div>
         <v-card-text>
@@ -48,7 +45,7 @@
         <v-list two-line v-if="review_system == true">
           <template v-for="(step_review_data, p_index) in review_data">
             <v-divider v-if="p_index == 0"></v-divider>
-            <v-list-tile :key="p_index * 10 + c_index" v-if="p_index == 0" class="purple">
+            <v-list-tile :key="p_index - 1" v-if="p_index == 0" class="purple">
                <v-list-tile-content >
                  <h3>Question</h3>
               </v-list-tile-content>
@@ -128,9 +125,6 @@
         },
         change_value:20,
       }
-    },
-    mounted() {
-      console.log('this is current player instance object', this.vimeourl);
     },
     computed: {
       player() {
@@ -288,18 +282,6 @@
         this.change_value = 10;
       },
       // listen event
-      onPlayerPlay(player) {
-        // console.log('player play!', player)
-      },
-      onPlayerPause(player) {
-        // console.log('player pause!', player)
-      },
-      playerStateChanged(playerCurrentState) {
-        // console.log('player current update state', playerCurrentState)
-      },
-      playerReadied(player) {
-        this.player.currentTime(this.start_offset);
-      },
       onPlayerTimeupdate(player)
       {
         if(player.currentTime() > this.end_offset)

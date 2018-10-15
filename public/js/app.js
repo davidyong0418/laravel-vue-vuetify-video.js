@@ -42363,9 +42363,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -42417,9 +42414,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       change_value: 20
     };
-  },
-  mounted: function mounted() {
-    console.log('this is current player instance object', this.vimeourl);
   },
 
   computed: {
@@ -42565,18 +42559,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     // listen event
-    onPlayerPlay: function onPlayerPlay(player) {
-      // console.log('player play!', player)
-    },
-    onPlayerPause: function onPlayerPause(player) {
-      // console.log('player pause!', player)
-    },
-    playerStateChanged: function playerStateChanged(playerCurrentState) {
-      // console.log('player current update state', playerCurrentState)
-    },
-    playerReadied: function playerReadied(player) {
-      this.player.currentTime(this.start_offset);
-    },
     onPlayerTimeupdate: function onPlayerTimeupdate(player) {
       if (player.currentTime() > this.end_offset) {
         if (this.pause_state == false) {
@@ -45164,12 +45146,6 @@ var render = function() {
                           customEventName: "customstatechangedeventname"
                         },
                         on: {
-                          play: function($event) {
-                            _vm.onPlayerPlay($event)
-                          },
-                          pause: function($event) {
-                            _vm.onPlayerPause($event)
-                          },
                           ended: function($event) {
                             _vm.onPlayerEnded($event)
                           },
@@ -45190,11 +45166,7 @@ var render = function() {
                           },
                           canplaythrough: function($event) {
                             _vm.onPlayerCanplaythrough($event)
-                          },
-                          statechanged: function($event) {
-                            _vm.playerStateChanged($event)
-                          },
-                          ready: _vm.playerReadied
+                          }
                         }
                       })
                     : _vm._e()
@@ -45325,10 +45297,7 @@ var render = function() {
                               p_index == 0
                                 ? _c(
                                     "v-list-tile",
-                                    {
-                                      key: p_index * 10 + _vm.c_index,
-                                      staticClass: "purple"
-                                    },
+                                    { key: p_index - 1, staticClass: "purple" },
                                     [
                                       _c("v-list-tile-content", [
                                         _c("h3", [_vm._v("Question")])
@@ -71605,7 +71574,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 var test = [];
 
@@ -71620,6 +71588,7 @@ var test = [];
       count: 1,
       answer: [],
       loginLoading: false,
+      valid: false,
       headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct', value: 'correct', align: 'center' }, { text: 'Answer Count', value: 'count', align: 'center' }, { text: 'Create Date', value: 'created_at', align: 'center' }, { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
       desserts: [],
       editedIndex: -1,
@@ -71666,12 +71635,15 @@ var test = [];
       this.editedItem._id = '';
       var answers = { 'answer': '', 'valid': 0 };
       this.editedItem.answers.push(answers);
+      this.editedIndex = -1;
     },
     remove: function remove(order) {
       this.editedItem.count = this.editedItem.count - 1;
       this.editedItem.answers.splice(order, 1);
       this.editedItem.selected = 1;
+      this.reset_selectitem();
     },
+
     add: function add() {
       this.editedItem.count = this.editedItem.count + 1;
       var answers = {
@@ -71681,6 +71653,10 @@ var test = [];
       this.editedItem.answers.push(answers);
     },
     save_qustions: function save_qustions() {
+      this.$refs.form.validate();
+      if (this.valid == false) {
+        return;
+      }
       if (this.editedIndex > -1) {
         this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
         axios.post('/api/admin/question-management/update', { data: JSON.stringify(this.editedItem) }, {
@@ -71747,7 +71723,13 @@ var test = [];
     close: function close() {
       this.dialog = false;
     },
-    save: function save() {}
+
+    reset_selectitem: function reset_selectitem() {
+      var self = this;
+      setTimeout(function () {
+        self.editedItem.selected = 1;
+      }, 30);
+    }
   }
 });
 
@@ -71798,6 +71780,16 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-form",
+                {
+                  ref: "form",
+                  model: {
+                    value: _vm.valid,
+                    callback: function($$v) {
+                      _vm.valid = $$v
+                    },
+                    expression: "valid"
+                  }
+                },
                 [
                   _c(
                     "v-card",
@@ -71821,7 +71813,18 @@ var render = function() {
                                 "v-list",
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "Question" },
+                                    attrs: {
+                                      label: "Question",
+                                      required: "",
+                                      rules: [
+                                        function() {
+                                          return (
+                                            _vm.editedItem.question.length >
+                                              0 || "Required field"
+                                          )
+                                        }
+                                      ]
+                                    },
                                     model: {
                                       value: _vm.editedItem.question,
                                       callback: function($$v) {
@@ -71857,6 +71860,7 @@ var render = function() {
                                         "v-list-tile",
                                         {
                                           key: video,
+                                          staticClass: "mt-2",
                                           on: {
                                             click: function($event) {
                                               _vm.editedItem.selected = video
@@ -71886,7 +71890,20 @@ var render = function() {
                                             "v-list-tile-content",
                                             [
                                               _c("v-text-field", {
-                                                attrs: { label: "Answer" },
+                                                attrs: {
+                                                  label: "Answer",
+                                                  required: "",
+                                                  rules: [
+                                                    function() {
+                                                      return (
+                                                        _vm.editedItem.answers[
+                                                          video - 1
+                                                        ]["answer"].length >
+                                                          0 || "Required field"
+                                                      )
+                                                    }
+                                                  ]
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.editedItem.answers[
@@ -71936,7 +71953,7 @@ var render = function() {
                                                         color: "primary",
                                                         "flat-right": ""
                                                       },
-                                                      nativeOn: {
+                                                      on: {
                                                         click: function(
                                                           $event
                                                         ) {
@@ -72315,7 +72332,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     initialize: function initialize() {
       this.loading = true;
       this.loading_state = false;
-      axios.get('/api/admin/step-management/get_init_data', { data: 'ddd', _token: 'kkkkkkkkkkkk' }, { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
+      axios.get('/api/admin/step-management/get_init_data', { headers: { 'Content-Type': 'applicaton/json' } }).then(function (response) {
         this.loading = false;
         this.videos = response.data.videos;
         this.questions = response.data.questions;

@@ -4,7 +4,7 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <v-btn slot="activator" color="primary" dark class="mb-2" @click.native="new_question">New Question</v-btn>
-        <v-form>
+        <v-form v-model="valid" ref="form">
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -13,9 +13,9 @@
           <v-card-text>
             <v-container grid-list-md>
                 <v-list>
-                  <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
+                  <v-text-field v-model="editedItem.question" label="Question" required :rules="[() => editedItem.question.length > 0 || 'Required field']"></v-text-field>
                     <v-radio-group v-model="editedItem.selected">
-                        <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video">
+                        <v-list-tile v-for="video in editedItem.count" :key="video" @click="editedItem.selected = video" class="mt-2">
                           <v-list-tile-action>
                             <v-radio 
                             name="video"
@@ -24,15 +24,14 @@
                             /></v-radio>
                           </v-list-tile-action>
                           <v-list-tile-content>
-                            <v-text-field v-model="editedItem.answers[video-1]['answer']" label="Answer"></v-text-field>
+                            <v-text-field v-model="editedItem.answers[video-1]['answer']" label="Answer" required :rules="[() => editedItem.answers[video-1]['answer'].length > 0 || 'Required field']"></v-text-field>
                           </v-list-tile-content>
-
                           <v-list-tile-content>
                             <v-btn v-if="video == 1" small color="primary" flat-right @click="add">Add</v-btn>
-                            <v-btn v-if="video != 1" small color="primary" flat-right @click.native="remove(video-1)">Close</v-btn>
+                            <v-btn v-if="video != 1" small color="primary" flat-right @click="remove(video-1)">Close</v-btn>
                           </v-list-tile-content>
-
                         </v-list-tile>
+                        
                       </v-radio-group>
                     </v-list>
             </v-container>
@@ -95,6 +94,7 @@ var test = [];
       count: 1,
       answer:[],
       loginLoading: false,
+      valid: false,
       headers: [
         { text: 'Questions',align: 'center',sortable: false, value: 'question'},
         { text: 'Correct', value: 'correct', align: 'center', },
@@ -146,12 +146,15 @@ var test = [];
          this.editedItem._id = '';
          var answers = {'answer': '', 'valid' : 0};
          this.editedItem.answers.push(answers);
+         this.editedIndex = -1;
       },
       remove: function(order){
         this.editedItem.count = this.editedItem.count - 1;
         this.editedItem.answers.splice(order, 1);
         this.editedItem.selected = 1;
+        this.reset_selectitem();
       },
+      
       add: function(){
         this.editedItem.count = this.editedItem.count + 1;
         var answers = {
@@ -161,6 +164,10 @@ var test = [];
          this.editedItem.answers.push(answers);
       },
       save_qustions: function(){
+        this.$refs.form.validate();
+        if(this.valid == false){
+          return;
+        }
         if(this.editedIndex > -1)
         {
             this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
@@ -235,15 +242,16 @@ var test = [];
           }.bind(this));
 
         }
-        
       },
       close () {
         this.dialog = false
       },
-
-      save () {
-      
-      }
+      reset_selectitem: function(){
+        var self = this;
+        setTimeout(function(){
+                self.editedItem.selected = 1;
+            }, 30);
+      },
     }
   }
 </script>
