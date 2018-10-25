@@ -77,7 +77,7 @@
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
-  import './videojs-offset.js'
+  import './Vimeo.js'
   export default {
     mixins: [withSnackbar],
      props:{
