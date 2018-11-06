@@ -30,28 +30,13 @@ class StepController extends Controller
     public function get_steps(Request $request)
     {
         $video_id = $request->get('data');
-        $step = new Step();
-        $step_data = $step->get_by_video($video_id);
-        if(!empty($step_data))
-        {
-            $response = array(
-                'action'=> 'true',
-                'steps'=> $step_data[0]
-            );
-            
-        }else{
-            $response = array(
-                'action'=> 'false',
-                'steps' => $video_id,
-            );
-        }
-        return response()->json($response);
+        $steps = Step::where('video_id', $video_id)->get()->toArray();
+        return response()->json($steps);
     }
     public function show(Request $request)
     {
         $videos = Video::all();
-        $questionObj = new Question();
-        $questions = $questionObj->all_questions();
+        $questions = Question::all();
         $response = array(
             'videos'=>$videos,
             'questions'=>$questions,
@@ -61,32 +46,25 @@ class StepController extends Controller
     public function create(Request $request)
     {
         $requests = $request->get('data');
-        $new = (array)json_decode($requests);
-        foreach ($new['end_times'] as $key =>$item)
+        $data = (array)json_decode($requests);
+        $newSteps = [];
+        $video_id = '';
+        foreach ($data as $key =>$item)
         {
+            $middleStep = [];
             if($key == 0)
             {
-             $item->s_point = '0000';
+                $video_id = $item->video_id;
             }
-            else
-            {
-                $item->s_point = $new['end_times'][$key - 1]->point;
-            }
+            $middleStep['video_id'] = $video_id;
+            $middleStep['point'] = $item->point;
+            $middleStep['question_ids'] = implode(',', $item->questions);
+            array_push($newSteps, $middleStep);
         }
-
-        if(empty($new['_id']))
+        Step::where('video_id', $video_id)->delete();
+        if (Step::insert($newSteps))
         {
-            Step::create($new);
+            return 'success';
         }
-        else
-        {
-            $update_step = array(
-                'video_id' => $new['video_id'],
-                'end_times' => $new['end_times']
-            );
-            Step::where('_id',$new['_id'])->update($update_step);
-        }
-        $step = Step::all();
-        return ['step' => $step];
     }
 }

@@ -48,12 +48,12 @@
       </v-dialog>
       
     </v-toolbar>
+
     <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.question }}</td>
         <!-- <td class="text-xs-center">{{ props.item.correct_answer }}</td> -->
         <td class="text-xs-center">{{ props.item.count }}</td>
-        <!-- <td class="text-xs-center">{{ props.item.created_at }}</td> -->
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
@@ -64,6 +64,7 @@
         </td>
       </template>
     </v-data-table>
+
   </div>
 </template>
 
@@ -89,10 +90,7 @@
       editedIndex: -1,
       editedItem: [],
       initQuestion: {
-        'question':'',
-        'count':0,
         'answer':'',
-        'correct_answer':0,
         'id':0
       },
       actionUrl:'',
@@ -125,15 +123,18 @@
             this.editedItem.splice(index, 1); 
           }
         });
-        this.selection = this.editedItem[0].id;
-        // this.reset_selectitem();
+        console.log('this.editedItem[0].id', this.editedItem[0].id);
+        console.log('this.editItem+++++',this.editedItem);
+        var self = this;
+        setTimeout(function(){
+          self.selection = self.editedItem[0].id;
+        },100);
       },
       
       add: function(){
         this.initQuestion.id = parseInt(Math.random()*1000);
         let clone = {...this.initQuestion};
         this.editedItem.push(clone);
-        console.log('this.editedItem+++++++++++',this.editedItem);
       },
       save_qustions: function(){
         this.$refs.form.validate();
@@ -148,7 +149,7 @@
           action = 'update';
         }
         else{
-          this.actionUrl = '/api/admin/question-management/update';
+          this.actionUrl = '/api/admin/question-management/create';
         }
 
         axios.get(this.actionUrl, {params:{data: JSON.stringify(this.editedItem), question:this.question, selection: this.selection, action:action}}, {
@@ -157,7 +158,6 @@
           }
         }).then(function(response){
           this.desserts = response.data.questions;
-          this.count = response.data.questions.length;
           this.showMessage(`Successfully Saved`);
         }.bind(this)).catch(function (error){
           console.log(error.response);
@@ -172,7 +172,6 @@
         .then( function (response) {
           this.loading = false
           this.desserts = response.data.questions;
-          this.count = response.data.questions.length;
            console.log('response.data.questions', this.desserts);
         }.bind(this))
         .catch(function (error) {
@@ -182,15 +181,12 @@
 
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item);
-        var itemQuestion = item.question;
+        var questionId = item.id;
         var self = this;
-        axios.get('/api/admin/question-management/edit', 
-                  {params:{
-                    itemQuestion : itemQuestion
-                  }})
+        axios.get('/api/admin/question-management/edit', {params:{questionId : questionId}})
               .then((response) => {
-                this.editedItem = response.data;
-                this.question = this.editedItem[0].question;
+                this.editedItem = response.data.answers;
+                this.question = response.data.question;
                 this.editedItem.forEach(element => {
                   if(element.answer === element.correct_answer)
                   {
@@ -207,7 +203,7 @@
 
       deleteItem (item) {
         const index = this.desserts.indexOf(item);
-        let deleteQuestion = item.question;
+        let deleteQuestion = item.id;
         if(confirm('Are you sure you want to delete this item?'))
         {
           axios.get('/api/admin/question-management/delete', {params:{deleteQuestion:deleteQuestion}}, {headers: {'Content-Type': 'application/json'}})

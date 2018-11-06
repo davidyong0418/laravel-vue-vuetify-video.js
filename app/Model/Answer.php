@@ -3,12 +3,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
  
-class Question extends Model
+class Answer extends Model
 {
     //
-
     protected $fillable = [
-        'question','correct_answer'
+        'questionId','correct_answer','answer'
     ];
-    
 }

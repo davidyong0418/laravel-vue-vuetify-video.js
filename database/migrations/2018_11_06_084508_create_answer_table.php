@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStepTable extends Migration
+class CreateAnswerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateStepTable extends Migration
      */
     public function up()
     {
-        Schema::create('steps', function (Blueprint $table) {
+        Schema::create('answer', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('video_id');
-            $table->string('end_time');
-            $table->timestamps();
+            $table->integer('questionId');
+            $table->string('answer');
+            $table->string('correct_answer');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateStepTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('step');
+        Schema::dropIfExists('answer');
     }
 }
