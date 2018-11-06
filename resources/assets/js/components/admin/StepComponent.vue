@@ -27,6 +27,7 @@
       required></v-select>
               </v-layout>
             </v-flex>
+            
             <v-flex xs-2>
               <v-btn v-if="index == 0" small color="primary" flat-right @click.native="add" :disabled="!valid">Add</v-btn>
               <v-btn v-if="index != 0" small color="primary" flat-right @click.native="remove(index)">Close</v-btn>
@@ -150,12 +151,11 @@
       initialize () {
         this.loading = true
          this.loading_state = false
-        axios.get('/api/admin/step-management/get_init_data', {headers: {'Content-Type':'applicaton/json',}})
+        axios.get('/api/admin/step-management/show', {headers: {'Content-Type':'applicaton/json',}})
         .then( function (response) {
           this.loading = false
           this.videos = response.data.videos;
           this.questions = response.data.questions;
-          var flag = response.data.action;
           this.steps = this.step_info.end_times;
           var new_step = {'point':'','sort':1, 'question_ids':[]};
           this.steps.push(new_step);

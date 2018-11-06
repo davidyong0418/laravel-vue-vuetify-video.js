@@ -32,7 +32,7 @@ class VideoController extends Controller
         $selected_videos= Video::where('select', 1)->get()->toArray();
         if(!empty($selected_videos))
         {
-            $selected_video_id = $selected_videos[0]['_id'];
+            $selected_video_id = $selected_videos[0]['id'];
         }
         else{
             $selected_video_id = '';
@@ -60,6 +60,7 @@ class VideoController extends Controller
         }
         else{
             $video = new Video();
+
             $video->alias = $vimeo_alias;
             $video->vimeo_url = $vimeo_url;
             $video->description = $vimeo_description;
@@ -83,8 +84,8 @@ class VideoController extends Controller
     public function select_video(Request $request)
     {
         $selected_id = $request->get('data');
-        Video::where('_id','!=',$selected_id)->update(['select'=>0]);
-        Video::where('_id',$selected_id)->update(['select'=>1]);
+        Video::where('id','!=',$selected_id)->update(['select'=>0]);
+        Video::where('id',$selected_id)->update(['select'=>1]);
         return ['action'=>'success'];
     }
     

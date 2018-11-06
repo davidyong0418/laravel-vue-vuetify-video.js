@@ -13,22 +13,22 @@
           <v-card-text>
             <v-container grid-list-md>
                 <v-list>
-                  <v-text-field v-model="question" label="Question" required :rules="[() => question.length > 0 || 'Required field']"></v-text-field>
-                    <v-radio-group v-model="selection">
+                  <v-text-field v-model="editedItem.question" label="Question" required :rules="[() => editedItem.question.length > 0 || 'Required field']"></v-text-field>
+                    <v-radio-group v-model="editedItem.selected">
                         
-                        <v-list-tile v-for="(item, key) in editedItem" :key="item.id" @click="selection = item.id" class="mt-2">
-                            {{item.id}}
+                        <v-list-tile v-for="video in editedItem" :key="video" @click="editedItem.selected = video" class="mt-2">
+                          
                           <v-list-tile-action>
-                            <v-radio name="video" v-bind:value="item.id" @click.prevent=""/></v-radio>
+                            <v-radio name="video" v-bind:value="video" @click.prevent=""/></v-radio>
                           </v-list-tile-action>
                           
                           <v-list-tile-content>
-                            <v-text-field v-model="item.answer" label="Answer" required :rules="[() => item.answer.length > 0 || 'Required field']"></v-text-field>
+                            <v-text-field v-model="editedItem.answers[video-1]['answer']" label="Answer" required :rules="[() => editedItem.answers[video-1]['answer'].length > 0 || 'Required field']"></v-text-field>
                           </v-list-tile-content>
 
                           <v-list-tile-content>
-                            <v-btn v-if="key == 0" small color="primary" flat-right @click="add">Add</v-btn>
-                            <v-btn v-if="key != 0" small color="primary" flat-right @click="remove(item.id)">Close</v-btn>
+                            <v-btn v-if="video == 1" small color="primary" flat-right @click="add">Add</v-btn>
+                            <v-btn v-if="video != 1" small color="primary" flat-right @click="remove(video-1)">Close</v-btn>
                           </v-list-tile-content>
                         
                         </v-list-tile>
@@ -51,7 +51,7 @@
     <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.question }}</td>
-        <!-- <td class="text-xs-center">{{ props.item.correct_answer }}</td> -->
+        <td class="text-xs-center">{{ props.item.correct_answer }}</td>
         <td class="text-xs-center">{{ props.item.count }}</td>
         <!-- <td class="text-xs-center">{{ props.item.created_at }}</td> -->
         <td class="justify-center layout px-0">
@@ -68,14 +68,17 @@
 </template>
 
 <script>
+var test = [];
+  import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
   export default {
     mixins: [withSnackbar],
     data: () => ({
-      selection: 1,
+      selected: 1,
       question:'',
       dialog: false,
       count: 1,
+      answer:[],
       loginLoading: false,
       valid: false,
       headers: [
@@ -87,20 +90,24 @@
       ],
       desserts: [],
       editedIndex: -1,
-      editedItem: [],
-      initQuestion: {
-        'question':'',
-        'count':0,
-        'answer':'',
-        'correct_answer':0,
-        'id':0
+      editedItem: {
+        question: '',
+        count: 0,
+        answers: [],
+        selected: 0,
+        _id: '',
+        correct_answer:''
       },
-      actionUrl:'',
-
     }),
+
     computed: {
       formTitle () {
         return this.editedIndex === -1 ? 'New Question' : 'Edit Question'
+      }
+    },
+    watch: {
+      dialog (val) {
+        val || this.close()
       }
     },
     created () {
@@ -109,71 +116,70 @@
     methods: {
       new_question: function()
       {
-        while(this.editedItem.length > 0) {this.editedItem.pop();}
-        this.initQuestion.id = parseInt(Math.random()*1000);
-        this.selection = this.initQuestion.id;
-        let clone = {...this.initQuestion};
-        this.editedItem.push(clone);
-        this.question = '';
-        this.editedIndex = -1;
-        console.log(this.editedItem);
+         this.editedItem.question = '';
+         this.editedItem.count = 1;
+         this.editedItem.answers = [];
+         this.editedItem.selected = 1;
+         this.editedItem._id = '';
+         var answers = {'answer': '', 'valid' : 0};
+         this.editedItem.answers.push(answers);
+         this.editedIndex = -1;
       },
-      remove: function(delete_id){
-        this.editedItem.forEach((element, index) => {
-          if(element.id == delete_id)
-          {
-            this.editedItem.splice(index, 1); 
-          }
-        });
-        this.selection = this.editedItem[0].id;
-        // this.reset_selectitem();
+      remove: function(order){
+        this.editedItem.count = this.editedItem.count - 1;
+        this.editedItem.answers.splice(order, 1);
+        this.editedItem.selected = 1;
+        this.reset_selectitem();
       },
       
       add: function(){
-        this.initQuestion.id = parseInt(Math.random()*1000);
-        let clone = {...this.initQuestion};
-        this.editedItem.push(clone);
-        console.log('this.editedItem+++++++++++',this.editedItem);
+        this.editedItem.count = this.editedItem.count + 1;
+        var answers = {
+           'answer': '',
+           'valid' : 0
+        };
+         this.editedItem.answers.push(answers);
       },
       save_qustions: function(){
         this.$refs.form.validate();
         if(this.valid == false){
           return;
         }
-        let action = 'create';
-        
         if(this.editedIndex > -1)
         {
-          this.actionUrl = '/api/admin/question-management/update';
-          action = 'update';
+            this.editedItem.correct_answer = this.editedItem.answers[this.editedItem.selected - 1].answer;
+            axios.post('/api/admin/question-management/update',{data: JSON.stringify(this.editedItem)}, {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            Object.assign(this.desserts[this.editedIndex], this.editedItem);
+            this.showMessage(`Successfully Updated`);
+
+          }.bind(this)).catch(function (error){
+            console.log(error);
+          }.bind(this));
         }
         else{
-          this.actionUrl = '/api/admin/question-management/update';
+          axios.post('/api/admin/question-management/create', {data: JSON.stringify(this.editedItem)}, {
+            headers:{
+              'Content-Type':'applicaton/json',
+            }
+          }).then(function(response){
+            this.desserts = response.data.questions;
+            this.showMessage(`Successfully Saved`);
+          }.bind(this)).catch(function (error){
+            console.log(error.response);
+          }.bind(this));
         }
-
-        axios.get(this.actionUrl, {params:{data: JSON.stringify(this.editedItem), question:this.question, selection: this.selection, action:action}}, {
-          headers:{
-            'Content-Type':'applicaton/json',
-          }
-        }).then(function(response){
-          this.desserts = response.data.questions;
-          this.count = response.data.questions.length;
-          this.showMessage(`Successfully Saved`);
-        }.bind(this)).catch(function (error){
-          console.log(error.response);
-        }.bind(this));
-
         this.dialog = false
-
       },
       init () {
         this.loading = true
         axios.get('/api/admin/question-management/show', {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
         .then( function (response) {
           this.loading = false
-          this.desserts = response.data.questions;
-          this.count = response.data.questions.length;
-           console.log('response.data.questions', this.desserts);
+          this.desserts = response.data.questions
         }.bind(this))
         .catch(function (error) {
           this.loading = false
@@ -182,35 +188,40 @@
 
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item);
-        var itemQuestion = item.question;
-        var self = this;
+        console.log('item+++',item);
+        console.log('index+++', this.editedIndex);
+        let itemQuestion = item.question;
         axios.get('/api/admin/question-management/edit', 
                   {params:{
                     itemQuestion : itemQuestion
-                  }})
-              .then((response) => {
-                this.editedItem = response.data;
-                this.question = this.editedItem[0].question;
-                this.editedItem.forEach(element => {
-                  if(element.answer === element.correct_answer)
-                  {
-                    this.selection = element.id;
-                  }
-                });
+                  }},
+                  {headers: {'Content-Type':'application/json'}})
+              .then(function (response){
+                console.log('response+++', response);
               })
-              .catch((error) => {
-                console.log('error', error);
+              .catch(function (error){
+                console.log('error---', error);
               });
-              
-        this.dialog = true
+        // this.dialog = true
+      //   this.editedItem.selected = item['selected'];
+      //   this.editedItem.question = item['question'];
+      //   this.editedItem.count = item['count'];
+      //   this.editedItem.correct_answer = item['correct_answer'];
+      //   this.editedItem._id = item['_id'];
+      //   this.editedItem.answers = [];
+      //   for (var i=0;i<item['answers'].length;i++)
+      //   {
+      //        this.editedItem.answers.push({'answer':item['answers'][i]['answer'], 'valid':item['answers'][i]['valid']})
+      //   }
+      //   this.dialog = true
       },
 
       deleteItem (item) {
         const index = this.desserts.indexOf(item);
-        let deleteQuestion = item.question;
+        let delete_item = Object.assign({}, item);
         if(confirm('Are you sure you want to delete this item?'))
         {
-          axios.get('/api/admin/question-management/delete', {params:{deleteQuestion:deleteQuestion}}, {headers: {'Content-Type': 'application/json'}})
+          axios.post('/api/admin/question-management/delete', {data:delete_item['_id']}, {headers: {'Content-Type': 'application/json'}})
           .then( function (response) {
             this.loading = false
             this.desserts.splice(index, 1);
@@ -219,10 +230,17 @@
           .catch(function (error) {
             this.loading = false
           }.bind(this));
+
         }
       },
       close () {
         this.dialog = false
+      },
+      reset_selectitem: function(){
+        var self = this;
+        setTimeout(function(){
+                self.editedItem.selected = 1;
+            }, 30);
       },
     }
   }

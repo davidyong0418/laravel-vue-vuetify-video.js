@@ -1,15 +1,18 @@
 <?php
 namespace App\Model;
 
-use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
  
 class Question extends Model
 {
     //
-    protected $connection = 'mongodb';
-    protected $collection = 'question';
-    
+
     protected $fillable = [
         'count','question','answers','selected','correct_answer'
     ];
+    public function all_questions()
+    {
+        $questions = Question::groupBy('question')->get()->toArray();
+        return $questions;
+    }
 }

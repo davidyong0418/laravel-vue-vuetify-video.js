@@ -11,12 +11,12 @@
         <v-list>
         <v-radio-group v-model="selected">
           <div v-for="video in videos">
-            <v-list-tile :key="video._id" @click="selected = video._id">
+            <v-list-tile :key="video.id" @click="selected = video.id">
             
               <v-list-tile-action>
                 <v-radio 
                 name="video"
-                v-bind:value="video._id"
+                v-bind:value="video.id"
                 @click.prevent=""
                 /></v-radio>
               </v-list-tile-action>
@@ -29,7 +29,7 @@
               </v-list-tile-content>
             </v-list-tile>
             <v-slide-y-transition>
-                <v-layout v-show="transition[video._id]" row wrap ml-5>
+                <v-layout v-show="transition[video.id]" row wrap ml-5>
                   <v-flex sm3>
                     <v-img :src="video.thumbnail"></v-img>
                   </v-flex>
@@ -38,7 +38,7 @@
                     {{video.description}}
                   </v-flex>
                   <v-flex sm10 class="text-xs-right">
-                    <v-btn color="success" small @click="select_video(video._id)">Select</v-btn>
+                    <v-btn color="success" small @click="selectVideo(video.id)">Select</v-btn>
                   </v-flex>
                 </v-layout>
               </v-slide-y-transition>
@@ -73,7 +73,7 @@
             </v-text-field>
           </v-flex>
           <v-flex sm3 offset-sm6>
-            <v-btn color="primary" flat-right @click="add_video">Add</v-btn>
+            <v-btn color="primary" flat-right @click="addVideo">Add</v-btn>
             </v-text-field>
           </v-flex>
         </v-list>
@@ -96,7 +96,6 @@
         selected:0,
         videos:[],
         transition: [],
-        tt:false,
         prior_val:'',
         add_vimeo_url:'',
         add_vimeo_alias:'',
@@ -133,8 +132,12 @@
         }
       }
     },
-    methods: {
-      select_video: function(selected_id){
+      mounted(){
+          this.getVideos();
+      },
+      methods: {
+
+      selectVideo: function(selected_id){
         axios.post('/api/admin/video-management/select_video', {data:selected_id}, {headers: {'Content-Type': 'application/json'}})
         .then( function (response) {
           this.showMessage(`Successfully Selected`);
@@ -143,7 +146,7 @@
           this.showError('Not selected');
         }.bind(this))
       },
-      getvideos: function() {
+      getVideos: function() {
         var params = new URLSearchParams()
         this.loading = true
         axios.get('/api/admin/video-management/', params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
@@ -161,7 +164,7 @@
           this.loading = false
         }.bind(this))
       },
-      add_video: function() {
+      addVideo: function() {
         var send_info = {
           'video_url' : this.add_vimeo_url,
           'video_alias' : this.add_vimeo_alias,
@@ -174,8 +177,8 @@
         .then( function (response) {
           if(response.data.action == true)
           {
-            this.showMessage(`Successfully Saved`);
-             this.videos = response.data.result;
+              this.showMessage(`Successfully Saved`);
+              this.videos = response.data.result;
           }
           else
           {
@@ -191,8 +194,6 @@
         this.add_vimeo_description = '';
       },
     },
-    mounted(){
-        this.getvideos();
-    }    
+
   }
 </script>

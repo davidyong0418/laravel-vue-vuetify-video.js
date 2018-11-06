@@ -104,7 +104,6 @@
     </v-content>
     
 </v-app>
-
 @stack('beforeScripts')
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>

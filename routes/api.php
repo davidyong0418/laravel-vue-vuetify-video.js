@@ -25,17 +25,18 @@ Route::post('admin/video-management/create', 'Admin\VideoController@create');
 Route::post('admin/video-management/select_video', 'Admin\VideoController@select_video');
 
 // Question management
-Route::get('admin/question-management/read', 'Admin\QuestionController@get_questions');
-Route::post('admin/question-management/create', 'Admin\QuestionController@create');
-Route::post('admin/question-management/update', 'Admin\QuestionController@update');
-Route::post('admin/question-management/delete', 'Admin\QuestionController@delete');
+Route::get('admin/question-management/show', 'Admin\QuestionController@show');
+Route::get('admin/question-management/edit', 'Admin\QuestionController@edit');
+Route::get('admin/question-management/create', 'Admin\QuestionController@update');
+Route::get('admin/question-management/update', 'Admin\QuestionController@update');
+Route::get('admin/question-management/delete', 'Admin\QuestionController@delete');
 //Step management
 Route::get('admin/step-management', 'Admin\StepController@get_questions');
 Route::post('admin/step-management/create', 'Admin\StepController@create');
 Route::post('admin/step-management/update', 'Admin\StepController@update');
 Route::post('admin/step-management/delete', 'Admin\StepController@delete');
 Route::post('admin/step-management/get_steps', 'Admin\StepController@get_steps');
-Route::get('admin/step-management/get_init_data', 'Admin\StepController@get_init_data');
+Route::get('admin/step-management/show', 'Admin\StepController@show');
 //User management
 Route::post('user/user-quiz', 'User\QuizController@get_quiz_info');
 Route::post('user/user-quiz/get_questions_answers', 'User\QuizController@get_questions_answers');

@@ -5,20 +5,7 @@
       <v-card sm6>
         <v-card-text v-if="init_data == true"><h3 class="headline mb-0 text-md-center">Video and Question, Step data aren't existed</h3></v-card-text>
         <div class="video-player-content">
-        <video-player  class="video-player-box" v-if="player_loading == true"
-                 ref="videoPlayer"
-                 :options="playerOptions"
-                 :playsinline="true"
-                 customEventName="customstatechangedeventname"
-                 @ended="onPlayerEnded($event)"
-                 @waiting="onPlayerWaiting($event)"
-                 @playing="onPlayerPlaying($event)"
-                 @loadeddata="onPlayerLoadeddata($event)"
-                 @timeupdate="onPlayerTimeupdate($event)"
-                 @canplay="onPlayerCanplay($event)"
-                 @canplaythrough="onPlayerCanplaythrough($event)"
-                 >
-        </video-player>
+            <iframe v-bind:src="video_url" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="autoplay; encrypted-media"></iframe>
         </div>
         <v-card-text>
             <h3 class="headline mb-0 text-md-center">This is Answer and Question system</h3>
@@ -27,10 +14,10 @@
        
           <v-list v-if="quiz == true">
             <template v-for="(question_item, index) in current_step_quiz">
-                  <h3 class="text-left">{{question_item.question}}</h3>
-                    <v-radio-group v-model="current_step_answer[index]" class="ml-3">
-                        <v-radio v-for="(answer_item, answer_index) in question_item.answers" :key="answer_index" :label="answer_item.answer" :value="answer_index"></v-radio>
-                    </v-radio-group>
+              <h3 class="text-left">{{question_item.question}}</h3>
+                <v-radio-group v-model="current_step_answer[index]" class="ml-3">
+                    <v-radio v-for="(answer_item, answer_index) in question_item.answers" :key="answer_index" :label="answer_item.answer" :value="answer_index"></v-radio>
+                </v-radio-group>
           </template>
         </v-list>
 
@@ -56,7 +43,7 @@
             </v-list-tile>
             <v-divider v-if="p_index == 0"></v-divider>
 
-
+        
             <v-list-tile v-for="(quiz_data, c_index) in step_review_data" :key="p_index * 10 + c_index">
                <v-list-tile-content >
                  <p>{{quiz_data.question}}</p>
@@ -69,15 +56,14 @@
           </template>
         </v-list>
           </div>
+          <div id="made-in-ny"></div>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
-
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
-  import './videojs-offset.js'
   export default {
     mixins: [withSnackbar],
      props:{
@@ -124,8 +110,17 @@
           techOrder: ["vimeo"],
         },
         change_value:20,
+          baseUrl:'https://player.vimeo.com/video/',
+          baseUrlParam:'?portrait=0&autoplay=0&background=1'
       }
     },
+     mounted() {
+        this.video_url = this.baseUrl +this.get_videoId(this.vimeourl) + this.baseUrlParam;
+        console.log(this.video_url);
+        let recaptchaScript = document.createElement('script')
+        recaptchaScript.setAttribute('src', 'https://player.vimeo.com/api/player.js')
+        document.head.appendChild(recaptchaScript)
+  },
     computed: {
       player() {
         return this.$refs.videoPlayer.player
@@ -135,10 +130,18 @@
       this.get_quiz_info();
     },
     methods: {
+        get_videoId(url){
+            var match = url.substr(url.lastIndexOf('/') + 1);
+            return match;
+        },
       cut_step(){
         this.player.currentTime(this.start_offset);
       },
       start_video_step(){
+         var iframe = document.querySelector('iframe');
+      var player = new Vimeo.Player(iframe);
+      player.play();
+
         this.start_btn = false;
         this.player.play();
       },
@@ -166,7 +169,7 @@
         send_data['user_id'] = this.user_id;
         send_data['selected_ids'] = this.current_step_answer;
         send_data['current_quiz'] = this.current_step_quiz;
-        axios.post('/api/user/user-quiz/accept', 
+        axios.post('/api/user/user-quiz/accept',
         {
           data: JSON.stringify(send_data)
         },
@@ -177,13 +180,13 @@
           }).then(function(response){
             if(response.data.check == true)
             {
-              
+
               this.quiz = false;
               this.accept_btn = false;
               if((this.step_order + 1) == this.step_count)
               {
                 this.show_review_result();
-                
+
               }
               else{
                 this.next_btn = true;

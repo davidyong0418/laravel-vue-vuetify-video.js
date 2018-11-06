@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-use DesignMyNight\Mongodb\Auth\User as MonogoAuth;
-class User extends MonogoAuth
+class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
@@ -15,8 +14,7 @@ class User extends MonogoAuth
      *
      * @var array
      */
-    protected $connection = 'mongodb';
-    protected $collection = 'User';
+
     protected $fillable = [
         'name', 'email', 'password', 'is_admin'
     ];

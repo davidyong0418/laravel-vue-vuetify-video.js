@@ -25,7 +25,7 @@ Vue.component('user-course', require('./components/user/UserComponent.vue'));
 window.Vuetify = require('vuetify');
 import VueRouter from 'vue-router';
 import store from './store'
-import VueVideoPlayer from 'vue-video-player'
+
 import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
 
@@ -33,9 +33,10 @@ import { mapGetters } from 'vuex'
 import withSnackbar from './components/mixins/withSnackbar'
 Vue.use(Vuetify)
 Vue.use(VueRouter);
+import VueVideoPlayer from 'vue-video-player'
 Vue.use(VueVideoPlayer);
-import vimeo from 'videojs-vimeo'
-Vue.use(vimeo);
+// import vimeo from 'videojs-vimeo'
+// Vue.use(vimeo);
 import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)

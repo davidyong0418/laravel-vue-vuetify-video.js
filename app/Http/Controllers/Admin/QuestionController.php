@@ -9,16 +9,6 @@ use App\Http\Controllers\Controller;
 class QuestionController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -28,56 +18,59 @@ class QuestionController extends Controller
         return view('admin/question');
     }
     // Get all questions
-    public function get_questions()
+    public function show()
     {
-        $questions = Question::all();
+        $question_obj = new Question();
+        $questions = $question_obj->all_questions();
        return ['questions' => $questions];
     }
     // Create question
-    public function create(Request $request)
-    {
-        $requests = $request->get('data');
-        $new = (array)json_decode($requests);
-        $selected = $new['selected'] - 1 ;
-        $new['answers'][$selected]->valid = 1;
-        unset($new['_id']);
-        $new['correct_answer'] = $new['answers'][$selected]->answer;
-        Question::create($new);
-        $questions = Question::all();
-        return ['questions' => $questions];
-    }
-    // Update question
     public function update(Request $request)
     {
-        $result = $request->get('data');
-        $update = (array)json_decode($result);
-        $update_id = $update['_id'];
-        $selected = $update['selected'];
-        if($selected > $update['count'])
+        $requests = $request->get('data');
+        $question = $request->get('question');
+        $selection = $request->get('selection');
+        $new = (array)json_decode($requests);
+        $action = $request->get('action');
+        if($action == 'update')
         {
-            $selected = 1;
+            $old_question = $new[0]->question;
+            Question::where('question', $old_question)->delete();
         }
-        $correct_answer = $update['answers'][$selected-1]->answer;
-        $update_data = array(
-            'question' => $update['question'],
-            'count' => $update['count'],
-            'answers' => $update['answers'],
-            'selected' => $update['selected'],
-            'correct_answer' => $correct_answer,
-        );
-        Question::where('_id', $update_id)->update($update_data);
-        $send = array(
-            'action' => 'true',
-            'result'=>'success'
-        );
-        return['send' => $send];
+        $new_question  = [];
+        foreach ($new as $item)
+        {
+            $sub_question = [];
+            $sub_question['question'] = $question;
+            if($item->id == $selection)
+            {
+                $sub_question['correct_answer'] = $item->answer;
+            }
+            else{
+                $sub_question['correct_answer'] = '';
+            }
+            $sub_question['answer'] = $item->answer;
+            array_push($new_question, $sub_question);
+        }
+        Question::insert($new_question);
+        $question_obj = new Question();
+        $questions = $question_obj->all_questions();
+       return ['questions' => $questions];
     }
+    // Update question
     public function delete(Request $request)
     {
-        $delete_id=$request->get('data');
-        $question = Question::find($delete_id);
-        $question->delete();
-        return 'success';
+        $deleteQuestion = $request->get('deleteQuestion');
+        Question::where('question', $deleteQuestion)->delete();
+        $question_obj = new Question();
+        $questions = $question_obj->all_questions();
+        return ['questions' => $questions];
+    }
+    public function edit(Request $request)
+    {
+        $itemQuestion = $request->get('itemQuestion');
+        $editQuestions = Question::where('question', $itemQuestion)->get()->toArray();
+        return response()->json($editQuestions);
     }
     
 }

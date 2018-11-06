@@ -10,16 +10,6 @@ use App\Http\Controllers\Controller;
 class StepController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +38,7 @@ class StepController extends Controller
                 'action'=> 'true',
                 'steps'=> $step_data[0]
             );
-
+            
         }else{
             $response = array(
                 'action'=> 'false',
@@ -57,25 +47,16 @@ class StepController extends Controller
         }
         return response()->json($response);
     }
-    public function get_init_data(Request $request)
+    public function show(Request $request)
     {
         $videos = Video::all();
-        $questions = Question::raw(function($collection){
-            return $collection->aggregate([
-                [
-                    '$project'=>[
-                        'answers'=>0
-                    ]
-                ]
-            ]);
-        })->toArray();
-        
-        $send = array(
+        $questionObj = new Question();
+        $questions = $questionObj->all_questions();
+        $response = array(
             'videos'=>$videos,
             'questions'=>$questions,
-            'action' => 'false'
         );
-        return response()->json($send);
+        return response()->json($response);
     }
     public function create(Request $request)
     {

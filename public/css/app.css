@@ -225,7 +225,6 @@ body {
 }
 
 .top {
-  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   position: relative;
@@ -248,18 +247,6 @@ body {
   padding-bottom: 200%;
   -webkit-transform: translateY(-35.95%);
           transform: translateY(-35.95%);
-}
-
-#vjs_video_3 {
-  position: relative;
-  padding-bottom: 43%;
-}
-
-.video-player-box {
-  padding-bottom: 42.25%;
-  height: 0;
-  overflow: hidden;
-  position: relative;
 }
 
 .vjs-progress-control {
