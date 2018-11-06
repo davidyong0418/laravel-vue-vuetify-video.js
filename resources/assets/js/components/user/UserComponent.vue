@@ -64,6 +64,10 @@
 <script>
   import * as actions from '../../store/action-types'
   import withSnackbar from '../mixins/withSnackbar'
+<<<<<<< HEAD
+=======
+  import './Vimeo.js'
+>>>>>>> 280e3b6ae475818a64ded2a42c5f499b4b1dcf43
   export default {
     mixins: [withSnackbar],
      props:{

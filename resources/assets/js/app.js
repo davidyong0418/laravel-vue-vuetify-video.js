@@ -35,8 +35,11 @@ Vue.use(Vuetify)
 Vue.use(VueRouter);
 import VueVideoPlayer from 'vue-video-player'
 Vue.use(VueVideoPlayer);
+<<<<<<< HEAD
 // import vimeo from 'videojs-vimeo'
 // Vue.use(vimeo);
+=======
+>>>>>>> 280e3b6ae475818a64ded2a42c5f499b4b1dcf43
 import 'video.js/dist/video-js.css'
 if (window.user) {
   store.commit(mutations.USER,  user)
