@@ -17,7 +17,6 @@
                     <v-radio-group v-model="selection">
                         
                         <v-list-tile v-for="(item, key) in editedItem" :key="item.id" @click="selection = item.id" class="mt-2">
-                            {{item.id}}
                           <v-list-tile-action>
                             <v-radio name="video" v-bind:value="item.id" @click.prevent=""/></v-radio>
                           </v-list-tile-action>
@@ -52,7 +51,7 @@
     <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.question }}</td>
-        <!-- <td class="text-xs-center">{{ props.item.correct_answer }}</td> -->
+        <td class="text-xs-center">2018.10.16</td>
         <td class="text-xs-center">{{ props.item.count }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
@@ -93,7 +92,6 @@
         'answer':'',
         'id':0
       },
-      actionUrl:'',
 
     }),
     computed: {
@@ -114,7 +112,6 @@
         this.editedItem.push(clone);
         this.question = '';
         this.editedIndex = -1;
-        console.log(this.editedItem);
       },
       remove: function(delete_id){
         this.editedItem.forEach((element, index) => {
@@ -123,8 +120,6 @@
             this.editedItem.splice(index, 1); 
           }
         });
-        console.log('this.editedItem[0].id', this.editedItem[0].id);
-        console.log('this.editItem+++++',this.editedItem);
         var self = this;
         setTimeout(function(){
           self.selection = self.editedItem[0].id;
@@ -145,14 +140,10 @@
         
         if(this.editedIndex > -1)
         {
-          this.actionUrl = '/api/admin/question-management/update';
           action = 'update';
         }
-        else{
-          this.actionUrl = '/api/admin/question-management/create';
-        }
 
-        axios.get(this.actionUrl, {params:{data: JSON.stringify(this.editedItem), question:this.question, selection: this.selection, action:action}}, {
+        axios.get('/api/admin/question-management/update', {params:{data: JSON.stringify(this.editedItem), question:this.question, selection: this.selection, action:action}}, {
           headers:{
             'Content-Type':'applicaton/json',
           }
@@ -172,7 +163,6 @@
         .then( function (response) {
           this.loading = false
           this.desserts = response.data.questions;
-           console.log('response.data.questions', this.desserts);
         }.bind(this))
         .catch(function (error) {
           this.loading = false

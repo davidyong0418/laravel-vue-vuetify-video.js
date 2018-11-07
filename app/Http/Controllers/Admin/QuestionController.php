@@ -39,7 +39,8 @@ class QuestionController extends Controller
         {
             $old_question = $new[0]->questionId;
             Answer::where('questionId', $old_question)->delete();
-            Question::where('id', $old_question)->update(array('question' => $question));
+            // Question::where('id', $old_question)->update(array('question' => $question));
+            Question::where('id', $old_question)->delete();
         }
         $createdQuestion = Question::insert(array('question' => $question));
         $questionId = DB::getPdo()->lastInsertId();

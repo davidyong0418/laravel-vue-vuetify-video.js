@@ -66,7 +66,7 @@ const app = new Vue({
     changingPassword: false,
     updatingUser: false,
     items: [
-      { icon: 'home', text: 'Home', href: '/home' },
+      { icon: 'home', text: 'Home', href: '/admin' },
       { icon: 'home', text: 'Landing Page', href: '/' },
       { icon: 'folder_open', text: 'Video course management', href: '/admin/video-management' },
       { icon: 'widgets', text: 'Question management', href: '/admin/question-management' },

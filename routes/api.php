@@ -27,7 +27,6 @@ Route::post('admin/video-management/select_video', 'Admin\VideoController@select
 // Question management
 Route::get('admin/question-management/show', 'Admin\QuestionController@show');
 Route::get('admin/question-management/edit', 'Admin\QuestionController@edit');
-Route::get('admin/question-management/create', 'Admin\QuestionController@update');
 Route::get('admin/question-management/update', 'Admin\QuestionController@update');
 Route::get('admin/question-management/delete', 'Admin\QuestionController@delete');
 //Step management

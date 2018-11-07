@@ -13,7 +13,6 @@
             <v-container>
               <v-layout wrap>
                 <v-flex xs10>
-                  {{index}}
                   <v-layout wrap>
                     <v-flex xs6>
                       <v-text-field v-if="index == 0" v-model="init" label="start time" disabled mask="##:##"></v-text-field>
@@ -93,7 +92,7 @@
     methods: {
       onChange: function(id)
       {
-         axios.post('/api/admin/step-management/get_steps', {data:id}, {headers: {'Content-Type': 'application/json'}})
+        axios.post('/api/admin/step-management/get_steps', {data:id}, {headers: {'Content-Type': 'application/json'}})
         .then( function (response) {
           this.loading = false
           this.loading_state = true
@@ -136,15 +135,15 @@
         if(this.valid == false){
           return;
         }
-          axios.post('/api/admin/step-management/create', {data: JSON.stringify(this.steps)}, {
-            headers:{
-              'Content-Type':'applicaton/json',
-            }
-          }).then(function(response){
-            this.showMessage(`Successfully Saved`)
-          }.bind(this)).catch(function (error){
-            this.showError('Error')
-          }.bind(this));
+        axios.post('/api/admin/step-management/create', {data: JSON.stringify(this.steps)}, {
+          headers:{
+            'Content-Type':'applicaton/json',
+          }
+        }).then(function(response){
+          this.showMessage(`Successfully Saved`)
+        }.bind(this)).catch(function (error){
+          this.showError('Error')
+        }.bind(this));
       },
       initialize: function() {
         this.loading = true

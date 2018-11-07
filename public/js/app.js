@@ -13511,7 +13511,7 @@ var app = new Vue({
       logoutLoading: false,
       changingPassword: false,
       updatingUser: false,
-      items: [{ icon: 'home', text: 'Home', href: '/home' }, { icon: 'home', text: 'Landing Page', href: '/' }, { icon: 'folder_open', text: 'Video course management', href: '/admin/video-management' }, { icon: 'widgets', text: 'Question management', href: '/admin/question-management' }, { icon: 'gavel', text: 'Step management', href: '/admin/step-management' }]
+      items: [{ icon: 'home', text: 'Home', href: '/admin' }, { icon: 'home', text: 'Landing Page', href: '/' }, { icon: 'folder_open', text: 'Video course management', href: '/admin/video-management' }, { icon: 'widgets', text: 'Question management', href: '/admin/question-management' }, { icon: 'gavel', text: 'Step management', href: '/admin/step-management' }]
     };
   },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
@@ -71756,7 +71756,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71778,8 +71777,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       initQuestion: {
         'answer': '',
         'id': 0
-      },
-      actionUrl: ''
+      }
 
     };
   },
@@ -71803,7 +71801,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.editedItem.push(clone);
       this.question = '';
       this.editedIndex = -1;
-      console.log(this.editedItem);
     },
     remove: function remove(delete_id) {
       var _this = this;
@@ -71813,8 +71810,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this.editedItem.splice(index, 1);
         }
       });
-      console.log('this.editedItem[0].id', this.editedItem[0].id);
-      console.log('this.editItem+++++', this.editedItem);
       var self = this;
       setTimeout(function () {
         self.selection = self.editedItem[0].id;
@@ -71834,13 +71829,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var action = 'create';
 
       if (this.editedIndex > -1) {
-        this.actionUrl = '/api/admin/question-management/update';
         action = 'update';
-      } else {
-        this.actionUrl = '/api/admin/question-management/create';
       }
 
-      axios.get(this.actionUrl, { params: { data: JSON.stringify(this.editedItem), question: this.question, selection: this.selection, action: action } }, {
+      axios.get('/api/admin/question-management/update', { params: { data: JSON.stringify(this.editedItem), question: this.question, selection: this.selection, action: action } }, {
         headers: {
           'Content-Type': 'applicaton/json'
         }
@@ -71858,7 +71850,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       axios.get('/api/admin/question-management/show', { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
         this.loading = false;
         this.desserts = response.data.questions;
-        console.log('response.data.questions', this.desserts);
       }.bind(this)).catch(function (error) {
         this.loading = false;
       }.bind(this));
@@ -72027,11 +72018,6 @@ var render = function() {
                                           }
                                         },
                                         [
-                                          _vm._v(
-                                            "\n                          " +
-                                              _vm._s(item.id) +
-                                              "\n                        "
-                                          ),
                                           _c(
                                             "v-list-tile-action",
                                             [
@@ -72211,6 +72197,10 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(props.item.question))]),
                 _vm._v(" "),
                 _c("td", { staticClass: "text-xs-center" }, [
+                  _vm._v("2018.10.16")
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-center" }, [
                   _vm._v(_vm._s(props.item.count))
                 ]),
                 _vm._v(" "),
@@ -72322,7 +72312,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_withSnackbar__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
 //
 //
 //
@@ -72550,11 +72539,6 @@ var render = function() {
                         "v-flex",
                         { attrs: { xs10: "" } },
                         [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(index) +
-                              "\n                "
-                          ),
                           _c(
                             "v-layout",
                             { attrs: { wrap: "" } },
