@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Userhistory extends Model
 {
     //
-
     protected $fillable = [
-        'video_id','end_times'
+        'user_id'
     ];
 }

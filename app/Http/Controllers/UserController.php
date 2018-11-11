@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->_id;
+        $id = Auth::user()->id;
         Session::put('user_id', $id);
         $video_data = Video::where('select', 1)->get()->toArray();
         if(!empty($video_data))

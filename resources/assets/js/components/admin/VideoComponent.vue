@@ -18,7 +18,7 @@
                 name="video"
                 v-bind:value="video.id"
                 @click.prevent=""
-                /></v-radio>
+                />
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>{{video.alias}}</v-list-tile-title>
@@ -58,23 +58,23 @@
             <v-text-field
                             label="Vimeo Url"
                             v-model="add_vimeo_url" 
-                            required class="mb-3"></v-text-field>
+                            required class="mb-3">
                             <v-spacer></v-spacer>
+            </v-text-field>
             <v-text-field
                             label="Vimeo Alias"
                             v-model="add_vimeo_alias"
-                            required class="mb-3"></v-text-field>
-            </v-text-field>
+                            required class="mb-3">
 
+            </v-text-field>
             <v-text-field
                             label="Vimeo Description"
                             v-model="add_vimeo_description"
-                            required class="mb-3"></v-text-field>
+                            required class="mb-3">
             </v-text-field>
           </v-flex>
           <v-flex sm3 offset-sm6>
             <v-btn color="primary" flat-right @click="addVideo">Add</v-btn>
-            </v-text-field>
           </v-flex>
         </v-list>
       </v-card>

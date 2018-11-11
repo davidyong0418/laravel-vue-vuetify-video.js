@@ -17388,6 +17388,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17405,7 +17412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      video_url: this.vimeourl,
+      video_url: 'https://player.vimeo.com/video/' + this.get_videoId(this.vimeourl) + '?portrait=0&autoplay=0&background=1',
       video_data: {},
       step_data: {},
       radioGroup: '',
@@ -17455,7 +17462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-    this.get_quiz_info();
+    this.init();
   },
 
   methods: {
@@ -17544,26 +17551,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.showError('Error');
       }.bind(this));
     },
-    get_quiz_info: function get_quiz_info() {
-      axios.post('/api/user/user-quiz', {
-        data: this.user_id
-      }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
-        }
+    init: function init() {
+      console.log('user_id', this.user_id);
+      axios.get('/api/user/user-quiz/show', {
+        params: { data: this.user_id }
       }).then(function (response) {
-        this.video_data = response.data.video_data;
-        this.step_data = response.data.step_data;
-        if (this.video_data == '' || this.step_data == '') {
-          this.init_data = true;
-          this.start_btn = false;
-          this.quiz = false;
-          this.review_system = false;
-        } else {
-          this.step_order = response.data.step_order;
-          this.player_loading = true;
-          this.set_current_step();
-        }
+        this.step_data = response.data.historySteps;
+        // this.is_history = response.data.is_history;
+
+        // this.step_data = response.data.step_data;
+        // if(this.video_data == '' || this.step_data == '')
+        // {
+        //   this.init_data = true;
+        //   this.start_btn = false;
+        //   this.quiz = false;
+        //   this.review_system = false;
+        // }
+        // else{
+        //   this.step_order = response.data.step_order;
+        //   this.player_loading = true;
+        this.set_current_step();
+        // }
       }.bind(this)).catch(function (error) {
         this.init_data = true;
         this.start_btn = false;
@@ -17572,28 +17580,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     set_current_step: function set_current_step() {
-      this.step_count = this.step_data.end_times.length;
-      if (this.step_count == this.step_order) {
-        this.show_review_result();
-        return;
-      }
-      this.current_step = this.step_data.end_times[this.step_order];
-      this.questions = this.current_step.question_ids;
-      var start = this.current_step.s_point;
-      var end = this.current_step.point;
-      this.start_offset = parseInt(parseInt(start.substring(0, 2)) * 60) + parseInt(start.substring(2, 4));
-      this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
-      axios.post('/api/user/user-quiz/get_questions_answers', {
-        data: JSON.stringify(this.current_step.question_ids)
-      }, {
-        headers: {
-          'Content-Type': 'applicaton/json'
+      var _this = this;
+
+      if (this.step_data.length) {
+        this.current_step = this.step_data[0];
+        this.questions = this.current_step.question_ids;
+
+        var start = this.current_step.old_point;
+        var end = this.current_step.point;
+        // this.start_offset = parseInt(parseInt(start.substring(0,2)) * 60) + parseInt(start.substring(2,4));
+
+        this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
+        console.log(this.current_step.question_ids);
+        axios.post('/api/user/user-quiz/get_questions_answers', {
+          data: this.current_step.question_ids
+        }, {
+          headers: {
+            'Content-Type': 'applicaton/json'
+          }
+        }).then(function (response) {
+          _this.current_step_quiz = response.data.questionAnswers;
+        }).catch(function (error) {
+          this.showError('Error');
+        }.bind(this));
+      } else {
+        if (!this.is_history.length) {
+          this.show_review_result();
+          return;
         }
-      }).then(function (response) {
-        this.current_step_quiz = response.data.questions;
-      }.bind(this)).catch(function (error) {
-        this.showError('Error');
-      }.bind(this));
+      }
     },
     reload: function reload() {
       this.change_value = 10;
@@ -17678,35 +17693,49 @@ var render = function() {
                         index
                       ) {
                         return [
-                          _c("h3", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(question_item.question))
-                          ]),
+                          _vm.current_step_quiz[index].question !=
+                          _vm.current_step_quiz[index - 1].question
+                            ? [
+                                _c("h3", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(question_item.question))
+                                ])
+                              ]
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c(
-                            "v-radio-group",
-                            {
-                              staticClass: "ml-3",
-                              model: {
-                                value: _vm.current_step_answer[index],
-                                callback: function($$v) {
-                                  _vm.$set(_vm.current_step_answer, index, $$v)
-                                },
-                                expression: "current_step_answer[index]"
-                              }
-                            },
-                            _vm._l(question_item.answers, function(
-                              answer_item,
-                              answer_index
-                            ) {
-                              return _c("v-radio", {
-                                key: answer_index,
-                                attrs: {
-                                  label: answer_item.answer,
-                                  value: answer_index
-                                }
-                              })
-                            })
-                          )
+                          _vm.current_step_quiz[index].question !=
+                          _vm.current_step_quiz[index - 1].question
+                            ? [
+                                _c(
+                                  "v-radio-group",
+                                  {
+                                    staticClass: "ml-3",
+                                    model: {
+                                      value: _vm.current_step_answer[index],
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.current_step_answer,
+                                          index,
+                                          $$v
+                                        )
+                                      },
+                                      expression: "current_step_answer[index]"
+                                    }
+                                  },
+                                  _vm._l(question_item.answers, function(
+                                    answer_item,
+                                    answer_index
+                                  ) {
+                                    return _c("v-radio", {
+                                      key: answer_index,
+                                      attrs: {
+                                        label: answer_item.answer,
+                                        value: answer_index
+                                      }
+                                    })
+                                  })
+                                )
+                              ]
+                            : _vm._e()
                         ]
                       })
                     ],
@@ -71552,19 +71581,22 @@ var render = function() {
                     "v-flex",
                     { attrs: { sm7: "", "offset-sm1": "" } },
                     [
-                      _c("v-text-field", {
-                        staticClass: "mb-3",
-                        attrs: { label: "Vimeo Url", required: "" },
-                        model: {
-                          value: _vm.add_vimeo_url,
-                          callback: function($$v) {
-                            _vm.add_vimeo_url = $$v
-                          },
-                          expression: "add_vimeo_url"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-spacer"),
+                      _c(
+                        "v-text-field",
+                        {
+                          staticClass: "mb-3",
+                          attrs: { label: "Vimeo Url", required: "" },
+                          model: {
+                            value: _vm.add_vimeo_url,
+                            callback: function($$v) {
+                              _vm.add_vimeo_url = $$v
+                            },
+                            expression: "add_vimeo_url"
+                          }
+                        },
+                        [_c("v-spacer")],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("v-text-field", {
                         staticClass: "mb-3",

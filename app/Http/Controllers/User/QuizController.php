@@ -7,22 +7,15 @@ use App\Model\Video;
 use App\Model\Step;
 use App\Model\Question;
 use App\Model\Userhistory;
+use App\Model\History;
+use App\Model\Answer;
 use JavaScript;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Http\Controllers\Controller;
+use DB;
 class QuizController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -39,30 +32,26 @@ class QuizController extends Controller
     }
     public function get_quiz_info(Request $request)
     {
+
         $user_id = $request->get('data');
-        $user_info = Userhistory::where('user_id', $user_id)->get()->toArray();
-        if(empty($user_info))
-        {   
-            $step_order = 0;
-        }
-        else{
-            $step_order = count($user_info[0]['step']);
-        }
-        $video_data = Video::where('select', 1)->get()->toArray();
-        if(!empty($video_data))
-        {
-            $step_data = Step::where('video_id', $video_data[0]['_id'])->get()->toArray();
-            $steps = $step_data[0];
-            $videos = $video_data[0];
-        }
-        else{
-            $steps = '';
-            $videos = '';
-        }
+        $is_history = History::where('user_id', $user_id)->get()->toArray();
+        $selectedSteps = Video::select('*')
+            ->join("steps",function ($join){
+                $join->on("steps.video_id", "=", "videos.id");
+            })->where('videos.select', 1)->get()->toArray();
+        print_r($selectedSteps);
+        exit();
+//        $historySteps = History::select('*')
+//                ->join("steps",function($join){
+//                    $join->on("steps.id","!=","histories.step_id")
+//                        ->on('steps.video_id',"=",'histories.video_id');
+//                })
+//                ->where('histories.user_id', $user_id)
+//                ->get()->toArray();
+//
         $response = array(
-            'video_data' => $videos,
-            'step_data' => $steps,
-            'step_order' => $step_order
+            'historySteps' => $historySteps,
+            'is_history' => $is_history
         );
         return response()->json($response);
     }
@@ -85,9 +74,12 @@ class QuizController extends Controller
     }
     public function get_questions_answers(Request $request)
     {
-        $question_ids = json_decode($request->get('data', TRUE));
-        $questions = Question::whereIn('_id', $question_ids)->get();
-        return ['questions' => $questions];
+        $question_ids = $request->get('data');
+        $question_array = explode(',', $question_ids);
+        $questionAnswers = Answer::select('*')->leftjoin("questions",function($join){
+            $join->on("questions.id","=","answers.questionId");
+        })->whereIn('questionId', $question_array)->get()->toArray();
+        return ['questionAnswers' => $questionAnswers];
     }
     public function accept(Request $request)
     {

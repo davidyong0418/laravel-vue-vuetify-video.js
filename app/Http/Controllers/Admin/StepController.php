@@ -46,22 +46,32 @@ class StepController extends Controller
     public function create(Request $request)
     {
         $requests = $request->get('data');
+
         $data = (array)json_decode($requests);
         $newSteps = [];
         $video_id = '';
         foreach ($data as $key =>$item)
         {
             $middleStep = [];
+
             if($key == 0)
             {
                 $video_id = $item->video_id;
+                $middleStep['old_point'] = '0000';
+            }
+            else{
+                $middleStep['old_point'] = $data[$key - 1]->point;
             }
             $middleStep['video_id'] = $video_id;
             $middleStep['point'] = $item->point;
             $middleStep['question_ids'] = implode(',', $item->questions);
+
             array_push($newSteps, $middleStep);
+
         }
+
         Step::where('video_id', $video_id)->delete();
+
         if (Step::insert($newSteps))
         {
             return 'success';
