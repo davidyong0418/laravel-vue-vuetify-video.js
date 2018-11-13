@@ -46,7 +46,6 @@ class StepController extends Controller
     public function create(Request $request)
     {
         $requests = $request->get('data');
-
         $data = (array)json_decode($requests);
         $newSteps = [];
         $video_id = '';
@@ -65,13 +64,10 @@ class StepController extends Controller
             $middleStep['video_id'] = $video_id;
             $middleStep['point'] = $item->point;
             $middleStep['question_ids'] = implode(',', $item->questions);
-
             array_push($newSteps, $middleStep);
 
         }
-
         Step::where('video_id', $video_id)->delete();
-
         if (Step::insert($newSteps))
         {
             return 'success';

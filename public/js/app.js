@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(13);
-var isBuffer = __webpack_require__(24);
+var isBuffer = __webpack_require__(25);
 
 /*global toString:true*/
 
@@ -1555,7 +1555,7 @@ var index_esm = {
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(23);
+module.exports = __webpack_require__(24);
 
 /***/ }),
 /* 8 */
@@ -1565,7 +1565,7 @@ module.exports = __webpack_require__(23);
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(26);
+var normalizeHeaderName = __webpack_require__(27);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -12625,7 +12625,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(19).setImmediate))
 
 /***/ }),
 /* 10 */
@@ -13173,12 +13173,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(27);
-var buildURL = __webpack_require__(29);
-var parseHeaders = __webpack_require__(30);
-var isURLSameOrigin = __webpack_require__(31);
+var settle = __webpack_require__(28);
+var buildURL = __webpack_require__(30);
+var parseHeaders = __webpack_require__(31);
+var isURLSameOrigin = __webpack_require__(32);
 var createError = __webpack_require__(16);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(33);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13275,7 +13275,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(33);
+      var cookies = __webpack_require__(34);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13359,7 +13359,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(28);
+var enhanceError = __webpack_require__(29);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13417,6 +13417,76 @@ module.exports = Cancel;
 
 /***/ }),
 /* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(42);
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ }),
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13429,26 +13499,26 @@ module.exports = Cancel;
 });
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(21);
-module.exports = __webpack_require__(123);
+__webpack_require__(22);
+module.exports = __webpack_require__(124);
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_action_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mixins_withSnackbar__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_video_player__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_video_player__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_video_player___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vue_video_player__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -13458,7 +13528,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(22);
+__webpack_require__(23);
 
 window.Vue = __webpack_require__(9);
 
@@ -13475,7 +13545,7 @@ Vue.component('reset-password', __webpack_require__(57));
 Vue.component('snackbar', __webpack_require__(60));
 Vue.component('gravatar', __webpack_require__(63));
 Vue.component('user-course', __webpack_require__(75));
-window.Vuetify = __webpack_require__(78);
+window.Vuetify = __webpack_require__(79);
 
 
 
@@ -13495,7 +13565,7 @@ if (window.user) {
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/admin', component: __webpack_require__(111) }, { path: '/admin/video-management', component: __webpack_require__(114) }, { path: '/admin/question-management', component: __webpack_require__(117) }, { path: '/admin/step-management', component: __webpack_require__(120) }]
+  routes: [{ path: '/admin', component: __webpack_require__(112) }, { path: '/admin/video-management', component: __webpack_require__(115) }, { path: '/admin/question-management', component: __webpack_require__(118) }, { path: '/admin/step-management', component: __webpack_require__(121) }]
 });
 
 var app = new Vue({
@@ -13591,7 +13661,7 @@ var app = new Vue({
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13640,7 +13710,7 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 // });
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13648,7 +13718,7 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(13);
-var Axios = __webpack_require__(25);
+var Axios = __webpack_require__(26);
 var defaults = __webpack_require__(8);
 
 /**
@@ -13683,14 +13753,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(18);
-axios.CancelToken = __webpack_require__(39);
+axios.CancelToken = __webpack_require__(40);
 axios.isCancel = __webpack_require__(17);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(40);
+axios.spread = __webpack_require__(41);
 
 module.exports = axios;
 
@@ -13699,7 +13769,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /*!
@@ -13726,7 +13796,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13734,8 +13804,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(8);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(34);
-var dispatchRequest = __webpack_require__(35);
+var InterceptorManager = __webpack_require__(35);
+var dispatchRequest = __webpack_require__(36);
 
 /**
  * Create a new instance of Axios
@@ -13812,7 +13882,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13831,7 +13901,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13864,7 +13934,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13892,7 +13962,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13965,7 +14035,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14025,7 +14095,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14100,7 +14170,7 @@ module.exports = (
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14143,7 +14213,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14203,7 +14273,7 @@ module.exports = (
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14262,18 +14332,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(36);
+var transformData = __webpack_require__(37);
 var isCancel = __webpack_require__(17);
 var defaults = __webpack_require__(8);
-var isAbsoluteURL = __webpack_require__(37);
-var combineURLs = __webpack_require__(38);
+var isAbsoluteURL = __webpack_require__(38);
+var combineURLs = __webpack_require__(39);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -14355,7 +14425,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14382,7 +14452,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14403,7 +14473,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14424,7 +14494,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14488,7 +14558,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14520,76 +14590,6 @@ module.exports = function spread(callback) {
   };
 };
 
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(42);
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 42 */
@@ -15799,7 +15799,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
 //
 //
@@ -16110,7 +16110,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_sleep__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_withSnackbar__ = __webpack_require__(3);
 //
 //
@@ -17279,7 +17279,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17325,6 +17325,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_action_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vimeo_player__ = __webpack_require__(77);
 //
 //
 //
@@ -17398,6 +17399,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+var player;
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_withSnackbar__["a" /* default */]],
   props: {
@@ -17412,14 +17415,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
+
       video_url: 'https://player.vimeo.com/video/' + this.get_videoId(this.vimeourl) + '?portrait=0&autoplay=0&background=1',
-      video_data: {},
       step_data: {},
-      radioGroup: '',
       start_offset: 0,
       end_offset: 0,
       current_step: {},
-      step_order: 0,
       step_count: 0,
       current_step_quiz: [],
       current_step_answer: [],
@@ -17427,11 +17428,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       accept_btn: false,
       next_btn: false,
       replay_btn: false,
-      player_loading: false,
       user_id: this.distinct,
-      wrong_answer: false,
       review_data: {},
-      pause_state: false,
       start_btn: true,
       review_system: false,
       init_data: false,
@@ -17443,17 +17441,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }],
         techOrder: ["vimeo"]
       },
-      change_value: 20,
       baseUrl: 'https://player.vimeo.com/video/',
-      baseUrlParam: '?portrait=0&autoplay=0&background=1'
+      // baseUrlParam:'?portrait=0&autoplay=0&background=1',
+      baseUrlParam: '',
+      passIndex: 0
     };
   },
   mounted: function mounted() {
     this.video_url = this.baseUrl + this.get_videoId(this.vimeourl) + this.baseUrlParam;
     console.log(this.video_url);
-    var recaptchaScript = document.createElement('script');
-    recaptchaScript.setAttribute('src', 'https://player.vimeo.com/api/player.js');
-    document.head.appendChild(recaptchaScript);
   },
 
   computed: {
@@ -17466,65 +17462,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    get_question_answer: function get_question_answer() {
+      var _this = this;
+
+      var vm = this;
+      axios.post('/api/user/user-quiz/get_questions_answers', {
+        data: this.current_step.question_ids
+      }, {
+        headers: {
+          'Content-Type': 'applicaton/json'
+        }
+      }).then(function (response) {
+        _this.current_step_quiz = response.data;
+      });
+    },
     get_videoId: function get_videoId(url) {
       var match = url.substr(url.lastIndexOf('/') + 1);
       return match;
     },
-    cut_step: function cut_step() {
-      this.player.currentTime(this.start_offset);
-    },
     start_video_step: function start_video_step() {
-      var iframe = document.querySelector('iframe');
-      var player = new Vimeo.Player(iframe);
       player.play();
-
+      var vm = this;
       this.start_btn = false;
-      this.player.play();
+      player.on('timeupdate', function (data) {
+        console.log('datasecond', data);
+        console.log('this.endoffest', vm.end_offset);
+        if (data.seconds > vm.end_offset && data.seconds < vm.end_offset + 1) {
+          player.pause();
+          vm.quiz = true;
+          vm.accept_btn = true;
+        }
+      });
     },
-    replay_video: function replay_video() {
-      this.player.currentTime(this.start_offset);
+    replay: function replay() {
+      console.log(this.start_offset);
+      player.setCurrentTime(this.start_offset).then(function () {
+        player.play();
+      });
       this.replay_btn = false;
       this.accept_btn = false;
       this.quiz = false;
-      this.player.play();
-      var self = this;
-      setTimeout(function () {
-        self.pause_state = false;
-      }, 200);
     },
     next_video_step: function next_video_step() {
-      this.player.play();
+      this.passIndex = this.passIndex + 1;
+      this.start_video_step();
       this.next_btn = false;
-      var self = this;
-      setTimeout(function () {
-        self.pause_state = false;
-      }, 200);
     },
     accept: function accept() {
-      var send_data = {};
-      send_data['user_id'] = this.user_id;
-      send_data['selected_ids'] = this.current_step_answer;
-      send_data['current_quiz'] = this.current_step_quiz;
+      var _this2 = this;
+
+      var sendData = [];
+      this.current_step_answer.map(function (element, index) {
+        var _answer = { questionId: _this2.current_step_quiz[index][0].id, answer: element };
+        sendData.push(_answer);
+      });
+      this.current_step_answer = [];
       axios.post('/api/user/user-quiz/accept', {
-        data: JSON.stringify(send_data)
+        data: JSON.stringify(sendData)
       }, {
         headers: {
           'Content-Type': 'applicaton/json'
         }
       }).then(function (response) {
         if (response.data.check == true) {
-
           this.quiz = false;
           this.accept_btn = false;
-          if (this.step_order + 1 == this.step_count) {
+          if (this.passIndex == this.step_count) {
             this.show_review_result();
           } else {
             this.next_btn = true;
-            this.step_order = this.step_order + 1;
+            this.passIndex = this.passIndex + 1;
             this.set_current_step();
-            this.cut_step();
+            this.showMessage('you can skip next step');
           }
-          this.showMessage('you can skip next step');
         } else {
           this.accept_btn = false;
           this.replay_btn = true;
@@ -17543,8 +17553,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           'Content-Type': 'applicaton/json'
         }
       }).then(function (response) {
-        this.review_data = response.data.review_data;
-        this.player_loading = true;
+        this.review_data = response.data.result;
         this.review_system = true;
         this.start_btn = false;
       }.bind(this)).catch(function (error) {
@@ -17552,26 +17561,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     init: function init() {
-      console.log('user_id', this.user_id);
       axios.get('/api/user/user-quiz/show', {
         params: { data: this.user_id }
       }).then(function (response) {
-        this.step_data = response.data.historySteps;
-        // this.is_history = response.data.is_history;
-
-        // this.step_data = response.data.step_data;
-        // if(this.video_data == '' || this.step_data == '')
-        // {
-        //   this.init_data = true;
-        //   this.start_btn = false;
-        //   this.quiz = false;
-        //   this.review_system = false;
-        // }
-        // else{
-        //   this.step_order = response.data.step_order;
-        //   this.player_loading = true;
-        this.set_current_step();
-        // }
+        var iframe = document.querySelector('iframe');
+        player = new __WEBPACK_IMPORTED_MODULE_2__vimeo_player__["a" /* default */](iframe);
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].pass_status == 0) {
+            this.passIndex = i;
+            break;
+          }
+        }
+        this.step_data = response.data;
+        this.step_count = this.step_data.length;
+        if (this.step_count) {
+          this.set_current_step('initStatus');
+        } else {
+          this.init_data = true;
+        }
       }.bind(this)).catch(function (error) {
         this.init_data = true;
         this.start_btn = false;
@@ -17580,60 +17587,2055 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }.bind(this));
     },
     set_current_step: function set_current_step() {
-      var _this = this;
+      var initStatus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if (this.step_data.length) {
-        this.current_step = this.step_data[0];
+        this.current_step = this.step_data[this.passIndex];
         this.questions = this.current_step.question_ids;
 
         var start = this.current_step.old_point;
         var end = this.current_step.point;
-        // this.start_offset = parseInt(parseInt(start.substring(0,2)) * 60) + parseInt(start.substring(2,4));
-
+        if (start != '0') {
+          this.start_offset = parseInt(parseInt(start.substring(0, 2)) * 60) + parseInt(start.substring(2, 4));
+        } else {
+          this.start_offset = 0;
+        }
         this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
-        console.log(this.current_step.question_ids);
-        axios.post('/api/user/user-quiz/get_questions_answers', {
-          data: this.current_step.question_ids
-        }, {
-          headers: {
-            'Content-Type': 'applicaton/json'
-          }
-        }).then(function (response) {
-          _this.current_step_quiz = response.data.questionAnswers;
-        }).catch(function (error) {
-          this.showError('Error');
-        }.bind(this));
+        var vm = this;
+        if (initStatus != null) {
+          player.setCurrentTime(this.start_offset);
+        }
+        this.get_question_answer();
       } else {
         if (!this.is_history.length) {
           this.show_review_result();
           return;
         }
       }
-    },
-    reload: function reload() {
-      this.change_value = 10;
-    },
-
-    // listen event
-    onPlayerTimeupdate: function onPlayerTimeupdate(player) {
-      if (player.currentTime() > this.end_offset) {
-        if (this.pause_state == false) {
-          this.accept_btn = true;
-          this.quiz = true;
-          this.player.pause();
-          this.pause_state = true;
-        }
-      }
-    },
-    onPlayerEnded: function onPlayerEnded(player) {
-      this.accept_btn = true;
-      this.quiz = true;
     }
   }
 });
 
 /***/ }),
 /* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*! @vimeo/player v2.6.5 | (c) 2018 Vimeo | MIT License | https://github.com/vimeo/player.js */
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+/**
+ * @module lib/functions
+ */
+
+/**
+ * Check to see this is a node environment.
+ * @type {Boolean}
+ */
+
+/* global global */
+var isNode = typeof global !== 'undefined' && {}.toString.call(global) === '[object global]';
+/**
+ * Get the name of the method for a given getter or setter.
+ *
+ * @param {string} prop The name of the property.
+ * @param {string} type Either “get” or “set”.
+ * @return {string}
+ */
+
+function getMethodName(prop, type) {
+  if (prop.indexOf(type.toLowerCase()) === 0) {
+    return prop;
+  }
+
+  return "".concat(type.toLowerCase()).concat(prop.substr(0, 1).toUpperCase()).concat(prop.substr(1));
+}
+/**
+ * Check to see if the object is a DOM Element.
+ *
+ * @param {*} element The object to check.
+ * @return {boolean}
+ */
+
+function isDomElement(element) {
+  return element instanceof window.HTMLElement;
+}
+/**
+ * Check to see whether the value is a number.
+ *
+ * @see http://dl.dropboxusercontent.com/u/35146/js/tests/isNumber.html
+ * @param {*} value The value to check.
+ * @param {boolean} integer Check if the value is an integer.
+ * @return {boolean}
+ */
+
+function isInteger(value) {
+  // eslint-disable-next-line eqeqeq
+  return !isNaN(parseFloat(value)) && isFinite(value) && Math.floor(value) == value;
+}
+/**
+ * Check to see if the URL is a Vimeo url.
+ *
+ * @param {string} url The url string.
+ * @return {boolean}
+ */
+
+function isVimeoUrl(url) {
+  return /^(https?:)?\/\/((player|www)\.)?vimeo\.com(?=$|\/)/.test(url);
+}
+/**
+ * Get the Vimeo URL from an element.
+ * The element must have either a data-vimeo-id or data-vimeo-url attribute.
+ *
+ * @param {object} oEmbedParameters The oEmbed parameters.
+ * @return {string}
+ */
+
+function getVimeoUrl() {
+  var oEmbedParameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var id = oEmbedParameters.id;
+  var url = oEmbedParameters.url;
+  var idOrUrl = id || url;
+
+  if (!idOrUrl) {
+    throw new Error('An id or url must be passed, either in an options object or as a data-vimeo-id or data-vimeo-url attribute.');
+  }
+
+  if (isInteger(idOrUrl)) {
+    return "https://vimeo.com/".concat(idOrUrl);
+  }
+
+  if (isVimeoUrl(idOrUrl)) {
+    return idOrUrl.replace('http:', 'https:');
+  }
+
+  if (id) {
+    throw new TypeError("\u201C".concat(id, "\u201D is not a valid video id."));
+  }
+
+  throw new TypeError("\u201C".concat(idOrUrl, "\u201D is not a vimeo.com url."));
+}
+
+var arrayIndexOfSupport = typeof Array.prototype.indexOf !== 'undefined';
+var postMessageSupport = typeof window !== 'undefined' && typeof window.postMessage !== 'undefined';
+
+if (!isNode && (!arrayIndexOfSupport || !postMessageSupport)) {
+  throw new Error('Sorry, the Vimeo Player API is not available in this browser.');
+}
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+/*!
+ * weakmap-polyfill v2.0.0 - ECMAScript6 WeakMap polyfill
+ * https://github.com/polygonplanet/weakmap-polyfill
+ * Copyright (c) 2015-2016 polygon planet <polygon.planet.aqua@gmail.com>
+ * @license MIT
+ */
+(function (self) {
+
+  if (self.WeakMap) {
+    return;
+  }
+
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+  var defineProperty = function (object, name, value) {
+    if (Object.defineProperty) {
+      Object.defineProperty(object, name, {
+        configurable: true,
+        writable: true,
+        value: value
+      });
+    } else {
+      object[name] = value;
+    }
+  };
+
+  self.WeakMap = function () {
+    // ECMA-262 23.3 WeakMap Objects
+    function WeakMap() {
+      if (this === void 0) {
+        throw new TypeError("Constructor WeakMap requires 'new'");
+      }
+
+      defineProperty(this, '_id', genId('_WeakMap')); // ECMA-262 23.3.1.1 WeakMap([iterable])
+
+      if (arguments.length > 0) {
+        // Currently, WeakMap `iterable` argument is not supported
+        throw new TypeError('WeakMap iterable is not supported');
+      }
+    } // ECMA-262 23.3.3.2 WeakMap.prototype.delete(key)
+
+
+    defineProperty(WeakMap.prototype, 'delete', function (key) {
+      checkInstance(this, 'delete');
+
+      if (!isObject(key)) {
+        return false;
+      }
+
+      var entry = key[this._id];
+
+      if (entry && entry[0] === key) {
+        delete key[this._id];
+        return true;
+      }
+
+      return false;
+    }); // ECMA-262 23.3.3.3 WeakMap.prototype.get(key)
+
+    defineProperty(WeakMap.prototype, 'get', function (key) {
+      checkInstance(this, 'get');
+
+      if (!isObject(key)) {
+        return void 0;
+      }
+
+      var entry = key[this._id];
+
+      if (entry && entry[0] === key) {
+        return entry[1];
+      }
+
+      return void 0;
+    }); // ECMA-262 23.3.3.4 WeakMap.prototype.has(key)
+
+    defineProperty(WeakMap.prototype, 'has', function (key) {
+      checkInstance(this, 'has');
+
+      if (!isObject(key)) {
+        return false;
+      }
+
+      var entry = key[this._id];
+
+      if (entry && entry[0] === key) {
+        return true;
+      }
+
+      return false;
+    }); // ECMA-262 23.3.3.5 WeakMap.prototype.set(key, value)
+
+    defineProperty(WeakMap.prototype, 'set', function (key, value) {
+      checkInstance(this, 'set');
+
+      if (!isObject(key)) {
+        throw new TypeError('Invalid value used as weak map key');
+      }
+
+      var entry = key[this._id];
+
+      if (entry && entry[0] === key) {
+        entry[1] = value;
+        return this;
+      }
+
+      defineProperty(key, this._id, [key, value]);
+      return this;
+    });
+
+    function checkInstance(x, methodName) {
+      if (!isObject(x) || !hasOwnProperty.call(x, '_id')) {
+        throw new TypeError(methodName + ' method called on incompatible receiver ' + typeof x);
+      }
+    }
+
+    function genId(prefix) {
+      return prefix + '_' + rand() + '.' + rand();
+    }
+
+    function rand() {
+      return Math.random().toString().substring(2);
+    }
+
+    defineProperty(WeakMap, '_polyfill', true);
+    return WeakMap;
+  }();
+
+  function isObject(x) {
+    return Object(x) === x;
+  }
+})(typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : commonjsGlobal);
+
+var npo_src = createCommonjsModule(function (module) {
+/*! Native Promise Only
+    v0.8.1 (c) Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+(function UMD(name, context, definition) {
+  // special form of UMD for polyfilling across evironments
+  context[name] = context[name] || definition();
+
+  if (module.exports) {
+    module.exports = context[name];
+  }
+})("Promise", typeof commonjsGlobal != "undefined" ? commonjsGlobal : commonjsGlobal, function DEF() {
+
+  var builtInProp,
+      cycle,
+      scheduling_queue,
+      ToString = Object.prototype.toString,
+      timer = typeof setImmediate != "undefined" ? function timer(fn) {
+    return setImmediate(fn);
+  } : setTimeout; // dammit, IE8.
+
+  try {
+    Object.defineProperty({}, "x", {});
+
+    builtInProp = function builtInProp(obj, name, val, config) {
+      return Object.defineProperty(obj, name, {
+        value: val,
+        writable: true,
+        configurable: config !== false
+      });
+    };
+  } catch (err) {
+    builtInProp = function builtInProp(obj, name, val) {
+      obj[name] = val;
+      return obj;
+    };
+  } // Note: using a queue instead of array for efficiency
+
+
+  scheduling_queue = function Queue() {
+    var first, last, item;
+
+    function Item(fn, self) {
+      this.fn = fn;
+      this.self = self;
+      this.next = void 0;
+    }
+
+    return {
+      add: function add(fn, self) {
+        item = new Item(fn, self);
+
+        if (last) {
+          last.next = item;
+        } else {
+          first = item;
+        }
+
+        last = item;
+        item = void 0;
+      },
+      drain: function drain() {
+        var f = first;
+        first = last = cycle = void 0;
+
+        while (f) {
+          f.fn.call(f.self);
+          f = f.next;
+        }
+      }
+    };
+  }();
+
+  function schedule(fn, self) {
+    scheduling_queue.add(fn, self);
+
+    if (!cycle) {
+      cycle = timer(scheduling_queue.drain);
+    }
+  } // promise duck typing
+
+
+  function isThenable(o) {
+    var _then,
+        o_type = typeof o;
+
+    if (o != null && (o_type == "object" || o_type == "function")) {
+      _then = o.then;
+    }
+
+    return typeof _then == "function" ? _then : false;
+  }
+
+  function notify() {
+    for (var i = 0; i < this.chain.length; i++) {
+      notifyIsolated(this, this.state === 1 ? this.chain[i].success : this.chain[i].failure, this.chain[i]);
+    }
+
+    this.chain.length = 0;
+  } // NOTE: This is a separate function to isolate
+  // the `try..catch` so that other code can be
+  // optimized better
+
+
+  function notifyIsolated(self, cb, chain) {
+    var ret, _then;
+
+    try {
+      if (cb === false) {
+        chain.reject(self.msg);
+      } else {
+        if (cb === true) {
+          ret = self.msg;
+        } else {
+          ret = cb.call(void 0, self.msg);
+        }
+
+        if (ret === chain.promise) {
+          chain.reject(TypeError("Promise-chain cycle"));
+        } else if (_then = isThenable(ret)) {
+          _then.call(ret, chain.resolve, chain.reject);
+        } else {
+          chain.resolve(ret);
+        }
+      }
+    } catch (err) {
+      chain.reject(err);
+    }
+  }
+
+  function resolve(msg) {
+    var _then,
+        self = this; // already triggered?
+
+
+    if (self.triggered) {
+      return;
+    }
+
+    self.triggered = true; // unwrap
+
+    if (self.def) {
+      self = self.def;
+    }
+
+    try {
+      if (_then = isThenable(msg)) {
+        schedule(function () {
+          var def_wrapper = new MakeDefWrapper(self);
+
+          try {
+            _then.call(msg, function $resolve$() {
+              resolve.apply(def_wrapper, arguments);
+            }, function $reject$() {
+              reject.apply(def_wrapper, arguments);
+            });
+          } catch (err) {
+            reject.call(def_wrapper, err);
+          }
+        });
+      } else {
+        self.msg = msg;
+        self.state = 1;
+
+        if (self.chain.length > 0) {
+          schedule(notify, self);
+        }
+      }
+    } catch (err) {
+      reject.call(new MakeDefWrapper(self), err);
+    }
+  }
+
+  function reject(msg) {
+    var self = this; // already triggered?
+
+    if (self.triggered) {
+      return;
+    }
+
+    self.triggered = true; // unwrap
+
+    if (self.def) {
+      self = self.def;
+    }
+
+    self.msg = msg;
+    self.state = 2;
+
+    if (self.chain.length > 0) {
+      schedule(notify, self);
+    }
+  }
+
+  function iteratePromises(Constructor, arr, resolver, rejecter) {
+    for (var idx = 0; idx < arr.length; idx++) {
+      (function IIFE(idx) {
+        Constructor.resolve(arr[idx]).then(function $resolver$(msg) {
+          resolver(idx, msg);
+        }, rejecter);
+      })(idx);
+    }
+  }
+
+  function MakeDefWrapper(self) {
+    this.def = self;
+    this.triggered = false;
+  }
+
+  function MakeDef(self) {
+    this.promise = self;
+    this.state = 0;
+    this.triggered = false;
+    this.chain = [];
+    this.msg = void 0;
+  }
+
+  function Promise(executor) {
+    if (typeof executor != "function") {
+      throw TypeError("Not a function");
+    }
+
+    if (this.__NPO__ !== 0) {
+      throw TypeError("Not a promise");
+    } // instance shadowing the inherited "brand"
+    // to signal an already "initialized" promise
+
+
+    this.__NPO__ = 1;
+    var def = new MakeDef(this);
+
+    this["then"] = function then(success, failure) {
+      var o = {
+        success: typeof success == "function" ? success : true,
+        failure: typeof failure == "function" ? failure : false
+      }; // Note: `then(..)` itself can be borrowed to be used against
+      // a different promise constructor for making the chained promise,
+      // by substituting a different `this` binding.
+
+      o.promise = new this.constructor(function extractChain(resolve, reject) {
+        if (typeof resolve != "function" || typeof reject != "function") {
+          throw TypeError("Not a function");
+        }
+
+        o.resolve = resolve;
+        o.reject = reject;
+      });
+      def.chain.push(o);
+
+      if (def.state !== 0) {
+        schedule(notify, def);
+      }
+
+      return o.promise;
+    };
+
+    this["catch"] = function $catch$(failure) {
+      return this.then(void 0, failure);
+    };
+
+    try {
+      executor.call(void 0, function publicResolve(msg) {
+        resolve.call(def, msg);
+      }, function publicReject(msg) {
+        reject.call(def, msg);
+      });
+    } catch (err) {
+      reject.call(def, err);
+    }
+  }
+
+  var PromisePrototype = builtInProp({}, "constructor", Promise,
+  /*configurable=*/
+  false); // Note: Android 4 cannot use `Object.defineProperty(..)` here
+
+  Promise.prototype = PromisePrototype; // built-in "brand" to signal an "uninitialized" promise
+
+  builtInProp(PromisePrototype, "__NPO__", 0,
+  /*configurable=*/
+  false);
+  builtInProp(Promise, "resolve", function Promise$resolve(msg) {
+    var Constructor = this; // spec mandated checks
+    // note: best "isPromise" check that's practical for now
+
+    if (msg && typeof msg == "object" && msg.__NPO__ === 1) {
+      return msg;
+    }
+
+    return new Constructor(function executor(resolve, reject) {
+      if (typeof resolve != "function" || typeof reject != "function") {
+        throw TypeError("Not a function");
+      }
+
+      resolve(msg);
+    });
+  });
+  builtInProp(Promise, "reject", function Promise$reject(msg) {
+    return new this(function executor(resolve, reject) {
+      if (typeof resolve != "function" || typeof reject != "function") {
+        throw TypeError("Not a function");
+      }
+
+      reject(msg);
+    });
+  });
+  builtInProp(Promise, "all", function Promise$all(arr) {
+    var Constructor = this; // spec mandated checks
+
+    if (ToString.call(arr) != "[object Array]") {
+      return Constructor.reject(TypeError("Not an array"));
+    }
+
+    if (arr.length === 0) {
+      return Constructor.resolve([]);
+    }
+
+    return new Constructor(function executor(resolve, reject) {
+      if (typeof resolve != "function" || typeof reject != "function") {
+        throw TypeError("Not a function");
+      }
+
+      var len = arr.length,
+          msgs = Array(len),
+          count = 0;
+      iteratePromises(Constructor, arr, function resolver(idx, msg) {
+        msgs[idx] = msg;
+
+        if (++count === len) {
+          resolve(msgs);
+        }
+      }, reject);
+    });
+  });
+  builtInProp(Promise, "race", function Promise$race(arr) {
+    var Constructor = this; // spec mandated checks
+
+    if (ToString.call(arr) != "[object Array]") {
+      return Constructor.reject(TypeError("Not an array"));
+    }
+
+    return new Constructor(function executor(resolve, reject) {
+      if (typeof resolve != "function" || typeof reject != "function") {
+        throw TypeError("Not a function");
+      }
+
+      iteratePromises(Constructor, arr, function resolver(idx, msg) {
+        resolve(msg);
+      }, reject);
+    });
+  });
+  return Promise;
+});
+});
+
+/**
+ * @module lib/callbacks
+ */
+var callbackMap = new WeakMap();
+/**
+ * Store a callback for a method or event for a player.
+ *
+ * @param {Player} player The player object.
+ * @param {string} name The method or event name.
+ * @param {(function(this:Player, *): void|{resolve: function, reject: function})} callback
+ *        The callback to call or an object with resolve and reject functions for a promise.
+ * @return {void}
+ */
+
+function storeCallback(player, name, callback) {
+  var playerCallbacks = callbackMap.get(player.element) || {};
+
+  if (!(name in playerCallbacks)) {
+    playerCallbacks[name] = [];
+  }
+
+  playerCallbacks[name].push(callback);
+  callbackMap.set(player.element, playerCallbacks);
+}
+/**
+ * Get the callbacks for a player and event or method.
+ *
+ * @param {Player} player The player object.
+ * @param {string} name The method or event name
+ * @return {function[]}
+ */
+
+function getCallbacks(player, name) {
+  var playerCallbacks = callbackMap.get(player.element) || {};
+  return playerCallbacks[name] || [];
+}
+/**
+ * Remove a stored callback for a method or event for a player.
+ *
+ * @param {Player} player The player object.
+ * @param {string} name The method or event name
+ * @param {function} [callback] The specific callback to remove.
+ * @return {boolean} Was this the last callback?
+ */
+
+function removeCallback(player, name, callback) {
+  var playerCallbacks = callbackMap.get(player.element) || {};
+
+  if (!playerCallbacks[name]) {
+    return true;
+  } // If no callback is passed, remove all callbacks for the event
+
+
+  if (!callback) {
+    playerCallbacks[name] = [];
+    callbackMap.set(player.element, playerCallbacks);
+    return true;
+  }
+
+  var index = playerCallbacks[name].indexOf(callback);
+
+  if (index !== -1) {
+    playerCallbacks[name].splice(index, 1);
+  }
+
+  callbackMap.set(player.element, playerCallbacks);
+  return playerCallbacks[name] && playerCallbacks[name].length === 0;
+}
+/**
+ * Return the first stored callback for a player and event or method.
+ *
+ * @param {Player} player The player object.
+ * @param {string} name The method or event name.
+ * @return {function} The callback, or false if there were none
+ */
+
+function shiftCallbacks(player, name) {
+  var playerCallbacks = getCallbacks(player, name);
+
+  if (playerCallbacks.length < 1) {
+    return false;
+  }
+
+  var callback = playerCallbacks.shift();
+  removeCallback(player, name, callback);
+  return callback;
+}
+/**
+ * Move callbacks associated with an element to another element.
+ *
+ * @param {HTMLElement} oldElement The old element.
+ * @param {HTMLElement} newElement The new element.
+ * @return {void}
+ */
+
+function swapCallbacks(oldElement, newElement) {
+  var playerCallbacks = callbackMap.get(oldElement);
+  callbackMap.set(newElement, playerCallbacks);
+  callbackMap.delete(oldElement);
+}
+
+/**
+ * @module lib/embed
+ */
+var oEmbedParameters = ['autopause', 'autoplay', 'background', 'byline', 'color', 'height', 'id', 'loop', 'maxheight', 'maxwidth', 'muted', 'playsinline', 'portrait', 'responsive', 'speed', 'title', 'transparent', 'url', 'width'];
+/**
+ * Get the 'data-vimeo'-prefixed attributes from an element as an object.
+ *
+ * @param {HTMLElement} element The element.
+ * @param {Object} [defaults={}] The default values to use.
+ * @return {Object<string, string>}
+ */
+
+function getOEmbedParameters(element) {
+  var defaults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return oEmbedParameters.reduce(function (params, param) {
+    var value = element.getAttribute("data-vimeo-".concat(param));
+
+    if (value || value === '') {
+      params[param] = value === '' ? 1 : value;
+    }
+
+    return params;
+  }, defaults);
+}
+/**
+ * Create an embed from oEmbed data inside an element.
+ *
+ * @param {object} data The oEmbed data.
+ * @param {HTMLElement} element The element to put the iframe in.
+ * @return {HTMLIFrameElement} The iframe embed.
+ */
+
+function createEmbed(_ref, element) {
+  var html = _ref.html;
+
+  if (!element) {
+    throw new TypeError('An element must be provided');
+  }
+
+  if (element.getAttribute('data-vimeo-initialized') !== null) {
+    return element.querySelector('iframe');
+  }
+
+  var div = document.createElement('div');
+  div.innerHTML = html;
+  element.appendChild(div.firstChild);
+  element.setAttribute('data-vimeo-initialized', 'true');
+  return element.querySelector('iframe');
+}
+/**
+ * Make an oEmbed call for the specified URL.
+ *
+ * @param {string} videoUrl The vimeo.com url for the video.
+ * @param {Object} [params] Parameters to pass to oEmbed.
+ * @param {HTMLElement} element The element.
+ * @return {Promise}
+ */
+
+function getOEmbedData(videoUrl) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var element = arguments.length > 2 ? arguments[2] : undefined;
+  return new Promise(function (resolve, reject) {
+    if (!isVimeoUrl(videoUrl)) {
+      throw new TypeError("\u201C".concat(videoUrl, "\u201D is not a vimeo.com url."));
+    }
+
+    var url = "https://vimeo.com/api/oembed.json?url=".concat(encodeURIComponent(videoUrl), "&domain=").concat(window.location.hostname);
+
+    for (var param in params) {
+      if (params.hasOwnProperty(param)) {
+        url += "&".concat(param, "=").concat(encodeURIComponent(params[param]));
+      }
+    }
+
+    var xhr = 'XDomainRequest' in window ? new XDomainRequest() : new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onload = function () {
+      if (xhr.status === 404) {
+        reject(new Error("\u201C".concat(videoUrl, "\u201D was not found.")));
+        return;
+      }
+
+      if (xhr.status === 403) {
+        reject(new Error("\u201C".concat(videoUrl, "\u201D is not embeddable.")));
+        return;
+      }
+
+      try {
+        var json = JSON.parse(xhr.responseText); // Check api response for 403 on oembed
+
+        if (json.domain_status_code === 403) {
+          // We still want to create the embed to give users visual feedback
+          createEmbed(json, element);
+          reject(new Error("\u201C".concat(videoUrl, "\u201D is not embeddable.")));
+          return;
+        }
+
+        resolve(json);
+      } catch (error) {
+        reject(error);
+      }
+    };
+
+    xhr.onerror = function () {
+      var status = xhr.status ? " (".concat(xhr.status, ")") : '';
+      reject(new Error("There was an error fetching the embed code from Vimeo".concat(status, ".")));
+    };
+
+    xhr.send();
+  });
+}
+/**
+ * Initialize all embeds within a specific element
+ *
+ * @param {HTMLElement} [parent=document] The parent element.
+ * @return {void}
+ */
+
+function initializeEmbeds() {
+  var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+  var elements = [].slice.call(parent.querySelectorAll('[data-vimeo-id], [data-vimeo-url]'));
+
+  var handleError = function handleError(error) {
+    if ('console' in window && console.error) {
+      console.error("There was an error creating an embed: ".concat(error));
+    }
+  };
+
+  elements.forEach(function (element) {
+    try {
+      // Skip any that have data-vimeo-defer
+      if (element.getAttribute('data-vimeo-defer') !== null) {
+        return;
+      }
+
+      var params = getOEmbedParameters(element);
+      var url = getVimeoUrl(params);
+      getOEmbedData(url, params, element).then(function (data) {
+        return createEmbed(data, element);
+      }).catch(handleError);
+    } catch (error) {
+      handleError(error);
+    }
+  });
+}
+/**
+ * Resize embeds when messaged by the player.
+ *
+ * @param {HTMLElement} [parent=document] The parent element.
+ * @return {void}
+ */
+
+function resizeEmbeds() {
+  var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+
+  // Prevent execution if users include the player.js script multiple times.
+  if (window.VimeoPlayerResizeEmbeds_) {
+    return;
+  }
+
+  window.VimeoPlayerResizeEmbeds_ = true;
+
+  var onMessage = function onMessage(event) {
+    if (!isVimeoUrl(event.origin)) {
+      return;
+    } // 'spacechange' is fired only on embeds with cards
+
+
+    if (!event.data || event.data.event !== 'spacechange') {
+      return;
+    }
+
+    var iframes = parent.querySelectorAll('iframe');
+
+    for (var i = 0; i < iframes.length; i++) {
+      if (iframes[i].contentWindow !== event.source) {
+        continue;
+      } // Change padding-bottom of the enclosing div to accommodate
+      // card carousel without distorting aspect ratio
+
+
+      var space = iframes[i].parentElement;
+      space.style.paddingBottom = "".concat(event.data.data[0].bottom, "px");
+      break;
+    }
+  };
+
+  if (window.addEventListener) {
+    window.addEventListener('message', onMessage, false);
+  } else if (window.attachEvent) {
+    window.attachEvent('onmessage', onMessage);
+  }
+}
+
+/**
+ * @module lib/postmessage
+ */
+/**
+ * Parse a message received from postMessage.
+ *
+ * @param {*} data The data received from postMessage.
+ * @return {object}
+ */
+
+function parseMessageData(data) {
+  if (typeof data === 'string') {
+    data = JSON.parse(data);
+  }
+
+  return data;
+}
+/**
+ * Post a message to the specified target.
+ *
+ * @param {Player} player The player object to use.
+ * @param {string} method The API method to call.
+ * @param {object} params The parameters to send to the player.
+ * @return {void}
+ */
+
+function postMessage(player, method, params) {
+  if (!player.element.contentWindow || !player.element.contentWindow.postMessage) {
+    return;
+  }
+
+  var message = {
+    method: method
+  };
+
+  if (params !== undefined) {
+    message.value = params;
+  } // IE 8 and 9 do not support passing messages, so stringify them
+
+
+  var ieVersion = parseFloat(navigator.userAgent.toLowerCase().replace(/^.*msie (\d+).*$/, '$1'));
+
+  if (ieVersion >= 8 && ieVersion < 10) {
+    message = JSON.stringify(message);
+  }
+
+  player.element.contentWindow.postMessage(message, player.origin);
+}
+/**
+ * Parse the data received from a message event.
+ *
+ * @param {Player} player The player that received the message.
+ * @param {(Object|string)} data The message data. Strings will be parsed into JSON.
+ * @return {void}
+ */
+
+function processData(player, data) {
+  data = parseMessageData(data);
+  var callbacks = [];
+  var param;
+
+  if (data.event) {
+    if (data.event === 'error') {
+      var promises = getCallbacks(player, data.data.method);
+      promises.forEach(function (promise) {
+        var error = new Error(data.data.message);
+        error.name = data.data.name;
+        promise.reject(error);
+        removeCallback(player, data.data.method, promise);
+      });
+    }
+
+    callbacks = getCallbacks(player, "event:".concat(data.event));
+    param = data.data;
+  } else if (data.method) {
+    var callback = shiftCallbacks(player, data.method);
+
+    if (callback) {
+      callbacks.push(callback);
+      param = data.value;
+    }
+  }
+
+  callbacks.forEach(function (callback) {
+    try {
+      if (typeof callback === 'function') {
+        callback.call(player, param);
+        return;
+      }
+
+      callback.resolve(param);
+    } catch (e) {// empty
+    }
+  });
+}
+
+var playerMap = new WeakMap();
+var readyMap = new WeakMap();
+
+var Player =
+/*#__PURE__*/
+function () {
+  /**
+   * Create a Player.
+   *
+   * @param {(HTMLIFrameElement|HTMLElement|string|jQuery)} element A reference to the Vimeo
+   *        player iframe, and id, or a jQuery object.
+   * @param {object} [options] oEmbed parameters to use when creating an embed in the element.
+   * @return {Player}
+   */
+  function Player(element) {
+    var _this = this;
+
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, Player);
+
+    /* global jQuery */
+    if (window.jQuery && element instanceof jQuery) {
+      if (element.length > 1 && window.console && console.warn) {
+        console.warn('A jQuery object with multiple elements was passed, using the first element.');
+      }
+
+      element = element[0];
+    } // Find an element by ID
+
+
+    if (typeof document !== 'undefined' && typeof element === 'string') {
+      element = document.getElementById(element);
+    } // Not an element!
+
+
+    if (!isDomElement(element)) {
+      throw new TypeError('You must pass either a valid element or a valid id.');
+    } // Already initialized an embed in this div, so grab the iframe
+
+
+    if (element.nodeName !== 'IFRAME') {
+      var iframe = element.querySelector('iframe');
+
+      if (iframe) {
+        element = iframe;
+      }
+    } // iframe url is not a Vimeo url
+
+
+    if (element.nodeName === 'IFRAME' && !isVimeoUrl(element.getAttribute('src') || '')) {
+      throw new Error('The player element passed isn’t a Vimeo embed.');
+    } // If there is already a player object in the map, return that
+
+
+    if (playerMap.has(element)) {
+      return playerMap.get(element);
+    }
+
+    this.element = element;
+    this.origin = '*';
+    var readyPromise = new npo_src(function (resolve, reject) {
+      var onMessage = function onMessage(event) {
+        if (!isVimeoUrl(event.origin) || _this.element.contentWindow !== event.source) {
+          return;
+        }
+
+        if (_this.origin === '*') {
+          _this.origin = event.origin;
+        }
+
+        var data = parseMessageData(event.data);
+        var isReadyEvent = 'event' in data && data.event === 'ready';
+        var isPingResponse = 'method' in data && data.method === 'ping';
+
+        if (isReadyEvent || isPingResponse) {
+          _this.element.setAttribute('data-ready', 'true');
+
+          resolve();
+          return;
+        }
+
+        processData(_this, data);
+      };
+
+      if (window.addEventListener) {
+        window.addEventListener('message', onMessage, false);
+      } else if (window.attachEvent) {
+        window.attachEvent('onmessage', onMessage);
+      }
+
+      if (_this.element.nodeName !== 'IFRAME') {
+        var params = getOEmbedParameters(element, options);
+        var url = getVimeoUrl(params);
+        getOEmbedData(url, params, element).then(function (data) {
+          var iframe = createEmbed(data, element); // Overwrite element with the new iframe,
+          // but store reference to the original element
+
+          _this.element = iframe;
+          _this._originalElement = element;
+          swapCallbacks(element, iframe);
+          playerMap.set(_this.element, _this);
+          return data;
+        }).catch(function (error) {
+          return reject(error);
+        });
+      }
+    }); // Store a copy of this Player in the map
+
+    readyMap.set(this, readyPromise);
+    playerMap.set(this.element, this); // Send a ping to the iframe so the ready promise will be resolved if
+    // the player is already ready.
+
+    if (this.element.nodeName === 'IFRAME') {
+      postMessage(this, 'ping');
+    }
+
+    return this;
+  }
+  /**
+   * Get a promise for a method.
+   *
+   * @param {string} name The API method to call.
+   * @param {Object} [args={}] Arguments to send via postMessage.
+   * @return {Promise}
+   */
+
+
+  _createClass(Player, [{
+    key: "callMethod",
+    value: function callMethod(name) {
+      var _this2 = this;
+
+      var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return new npo_src(function (resolve, reject) {
+        // We are storing the resolve/reject handlers to call later, so we
+        // can’t return here.
+        // eslint-disable-next-line promise/always-return
+        return _this2.ready().then(function () {
+          storeCallback(_this2, name, {
+            resolve: resolve,
+            reject: reject
+          });
+          postMessage(_this2, name, args);
+        }).catch(function (error) {
+          reject(error);
+        });
+      });
+    }
+    /**
+     * Get a promise for the value of a player property.
+     *
+     * @param {string} name The property name
+     * @return {Promise}
+     */
+
+  }, {
+    key: "get",
+    value: function get(name) {
+      var _this3 = this;
+
+      return new npo_src(function (resolve, reject) {
+        name = getMethodName(name, 'get'); // We are storing the resolve/reject handlers to call later, so we
+        // can’t return here.
+        // eslint-disable-next-line promise/always-return
+
+        return _this3.ready().then(function () {
+          storeCallback(_this3, name, {
+            resolve: resolve,
+            reject: reject
+          });
+          postMessage(_this3, name);
+        });
+      });
+    }
+    /**
+     * Get a promise for setting the value of a player property.
+     *
+     * @param {string} name The API method to call.
+     * @param {mixed} value The value to set.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "set",
+    value: function set(name, value) {
+      var _this4 = this;
+
+      return npo_src.resolve(value).then(function (val) {
+        name = getMethodName(name, 'set');
+
+        if (val === undefined || val === null) {
+          throw new TypeError('There must be a value to set.');
+        }
+
+        return _this4.ready().then(function () {
+          return new npo_src(function (resolve, reject) {
+            storeCallback(_this4, name, {
+              resolve: resolve,
+              reject: reject
+            });
+            postMessage(_this4, name, val);
+          });
+        });
+      });
+    }
+    /**
+     * Add an event listener for the specified event. Will call the
+     * callback with a single parameter, `data`, that contains the data for
+     * that event.
+     *
+     * @param {string} eventName The name of the event.
+     * @param {function(*)} callback The function to call when the event fires.
+     * @return {void}
+     */
+
+  }, {
+    key: "on",
+    value: function on(eventName, callback) {
+      if (!eventName) {
+        throw new TypeError('You must pass an event name.');
+      }
+
+      if (!callback) {
+        throw new TypeError('You must pass a callback function.');
+      }
+
+      if (typeof callback !== 'function') {
+        throw new TypeError('The callback must be a function.');
+      }
+
+      var callbacks = getCallbacks(this, "event:".concat(eventName));
+
+      if (callbacks.length === 0) {
+        this.callMethod('addEventListener', eventName).catch(function () {// Ignore the error. There will be an error event fired that
+          // will trigger the error callback if they are listening.
+        });
+      }
+
+      storeCallback(this, "event:".concat(eventName), callback);
+    }
+    /**
+     * Remove an event listener for the specified event. Will remove all
+     * listeners for that event if a `callback` isn’t passed, or only that
+     * specific callback if it is passed.
+     *
+     * @param {string} eventName The name of the event.
+     * @param {function} [callback] The specific callback to remove.
+     * @return {void}
+     */
+
+  }, {
+    key: "off",
+    value: function off(eventName, callback) {
+      if (!eventName) {
+        throw new TypeError('You must pass an event name.');
+      }
+
+      if (callback && typeof callback !== 'function') {
+        throw new TypeError('The callback must be a function.');
+      }
+
+      var lastCallback = removeCallback(this, "event:".concat(eventName), callback); // If there are no callbacks left, remove the listener
+
+      if (lastCallback) {
+        this.callMethod('removeEventListener', eventName).catch(function (e) {// Ignore the error. There will be an error event fired that
+          // will trigger the error callback if they are listening.
+        });
+      }
+    }
+    /**
+     * A promise to load a new video.
+     *
+     * @promise LoadVideoPromise
+     * @fulfill {number} The video with this id successfully loaded.
+     * @reject {TypeError} The id was not a number.
+     */
+
+    /**
+     * Load a new video into this embed. The promise will be resolved if
+     * the video is successfully loaded, or it will be rejected if it could
+     * not be loaded.
+     *
+     * @param {number} id The id of the video.
+     * @return {LoadVideoPromise}
+     */
+
+  }, {
+    key: "loadVideo",
+    value: function loadVideo(id) {
+      return this.callMethod('loadVideo', id);
+    }
+    /**
+     * A promise to perform an action when the Player is ready.
+     *
+     * @todo document errors
+     * @promise LoadVideoPromise
+     * @fulfill {void}
+     */
+
+    /**
+     * Trigger a function when the player iframe has initialized. You do not
+     * need to wait for `ready` to trigger to begin adding event listeners
+     * or calling other methods.
+     *
+     * @return {ReadyPromise}
+     */
+
+  }, {
+    key: "ready",
+    value: function ready() {
+      var readyPromise = readyMap.get(this) || new npo_src(function (resolve, reject) {
+        reject(new Error('Unknown player. Probably unloaded.'));
+      });
+      return npo_src.resolve(readyPromise);
+    }
+    /**
+     * A promise to add a cue point to the player.
+     *
+     * @promise AddCuePointPromise
+     * @fulfill {string} The id of the cue point to use for removeCuePoint.
+     * @reject {RangeError} the time was less than 0 or greater than the
+     *         video’s duration.
+     * @reject {UnsupportedError} Cue points are not supported with the current
+     *         player or browser.
+     */
+
+    /**
+     * Add a cue point to the player.
+     *
+     * @param {number} time The time for the cue point.
+     * @param {object} [data] Arbitrary data to be returned with the cue point.
+     * @return {AddCuePointPromise}
+     */
+
+  }, {
+    key: "addCuePoint",
+    value: function addCuePoint(time) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return this.callMethod('addCuePoint', {
+        time: time,
+        data: data
+      });
+    }
+    /**
+     * A promise to remove a cue point from the player.
+     *
+     * @promise AddCuePointPromise
+     * @fulfill {string} The id of the cue point that was removed.
+     * @reject {InvalidCuePoint} The cue point with the specified id was not
+     *         found.
+     * @reject {UnsupportedError} Cue points are not supported with the current
+     *         player or browser.
+     */
+
+    /**
+     * Remove a cue point from the video.
+     *
+     * @param {string} id The id of the cue point to remove.
+     * @return {RemoveCuePointPromise}
+     */
+
+  }, {
+    key: "removeCuePoint",
+    value: function removeCuePoint(id) {
+      return this.callMethod('removeCuePoint', id);
+    }
+    /**
+     * A representation of a text track on a video.
+     *
+     * @typedef {Object} VimeoTextTrack
+     * @property {string} language The ISO language code.
+     * @property {string} kind The kind of track it is (captions or subtitles).
+     * @property {string} label The human‐readable label for the track.
+     */
+
+    /**
+     * A promise to enable a text track.
+     *
+     * @promise EnableTextTrackPromise
+     * @fulfill {VimeoTextTrack} The text track that was enabled.
+     * @reject {InvalidTrackLanguageError} No track was available with the
+     *         specified language.
+     * @reject {InvalidTrackError} No track was available with the specified
+     *         language and kind.
+     */
+
+    /**
+     * Enable the text track with the specified language, and optionally the
+     * specified kind (captions or subtitles).
+     *
+     * When set via the API, the track language will not change the viewer’s
+     * stored preference.
+     *
+     * @param {string} language The two‐letter language code.
+     * @param {string} [kind] The kind of track to enable (captions or subtitles).
+     * @return {EnableTextTrackPromise}
+     */
+
+  }, {
+    key: "enableTextTrack",
+    value: function enableTextTrack(language, kind) {
+      if (!language) {
+        throw new TypeError('You must pass a language.');
+      }
+
+      return this.callMethod('enableTextTrack', {
+        language: language,
+        kind: kind
+      });
+    }
+    /**
+     * A promise to disable the active text track.
+     *
+     * @promise DisableTextTrackPromise
+     * @fulfill {void} The track was disabled.
+     */
+
+    /**
+     * Disable the currently-active text track.
+     *
+     * @return {DisableTextTrackPromise}
+     */
+
+  }, {
+    key: "disableTextTrack",
+    value: function disableTextTrack() {
+      return this.callMethod('disableTextTrack');
+    }
+    /**
+     * A promise to pause the video.
+     *
+     * @promise PausePromise
+     * @fulfill {void} The video was paused.
+     */
+
+    /**
+     * Pause the video if it’s playing.
+     *
+     * @return {PausePromise}
+     */
+
+  }, {
+    key: "pause",
+    value: function pause() {
+      return this.callMethod('pause');
+    }
+    /**
+     * A promise to play the video.
+     *
+     * @promise PlayPromise
+     * @fulfill {void} The video was played.
+     */
+
+    /**
+     * Play the video if it’s paused. **Note:** on iOS and some other
+     * mobile devices, you cannot programmatically trigger play. Once the
+     * viewer has tapped on the play button in the player, however, you
+     * will be able to use this function.
+     *
+     * @return {PlayPromise}
+     */
+
+  }, {
+    key: "play",
+    value: function play() {
+      return this.callMethod('play');
+    }
+    /**
+     * A promise to unload the video.
+     *
+     * @promise UnloadPromise
+     * @fulfill {void} The video was unloaded.
+     */
+
+    /**
+     * Return the player to its initial state.
+     *
+     * @return {UnloadPromise}
+     */
+
+  }, {
+    key: "unload",
+    value: function unload() {
+      return this.callMethod('unload');
+    }
+    /**
+     * Cleanup the player and remove it from the DOM
+     *
+     * It won't be usable and a new one should be constructed
+     *  in order to do any operations.
+     *
+     * @return {Promise}
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      var _this5 = this;
+
+      return new npo_src(function (resolve) {
+        readyMap.delete(_this5);
+        playerMap.delete(_this5.element);
+
+        if (_this5._originalElement) {
+          playerMap.delete(_this5._originalElement);
+
+          _this5._originalElement.removeAttribute('data-vimeo-initialized');
+        }
+
+        if (_this5.element && _this5.element.nodeName === 'IFRAME' && _this5.element.parentNode) {
+          _this5.element.parentNode.removeChild(_this5.element);
+        }
+
+        resolve();
+      });
+    }
+    /**
+     * A promise to get the autopause behavior of the video.
+     *
+     * @promise GetAutopausePromise
+     * @fulfill {boolean} Whether autopause is turned on or off.
+     * @reject {UnsupportedError} Autopause is not supported with the current
+     *         player or browser.
+     */
+
+    /**
+     * Get the autopause behavior for this player.
+     *
+     * @return {GetAutopausePromise}
+     */
+
+  }, {
+    key: "getAutopause",
+    value: function getAutopause() {
+      return this.get('autopause');
+    }
+    /**
+     * A promise to set the autopause behavior of the video.
+     *
+     * @promise SetAutopausePromise
+     * @fulfill {boolean} Whether autopause is turned on or off.
+     * @reject {UnsupportedError} Autopause is not supported with the current
+     *         player or browser.
+     */
+
+    /**
+     * Enable or disable the autopause behavior of this player.
+     *
+     * By default, when another video is played in the same browser, this
+     * player will automatically pause. Unless you have a specific reason
+     * for doing so, we recommend that you leave autopause set to the
+     * default (`true`).
+     *
+     * @param {boolean} autopause
+     * @return {SetAutopausePromise}
+     */
+
+  }, {
+    key: "setAutopause",
+    value: function setAutopause(autopause) {
+      return this.set('autopause', autopause);
+    }
+    /**
+     * A promise to get the color of the player.
+     *
+     * @promise GetColorPromise
+     * @fulfill {string} The hex color of the player.
+     */
+
+    /**
+     * Get the color for this player.
+     *
+     * @return {GetColorPromise}
+     */
+
+  }, {
+    key: "getColor",
+    value: function getColor() {
+      return this.get('color');
+    }
+    /**
+     * A promise to set the color of the player.
+     *
+     * @promise SetColorPromise
+     * @fulfill {string} The color was successfully set.
+     * @reject {TypeError} The string was not a valid hex or rgb color.
+     * @reject {ContrastError} The color was set, but the contrast is
+     *         outside of the acceptable range.
+     * @reject {EmbedSettingsError} The owner of the player has chosen to
+     *         use a specific color.
+     */
+
+    /**
+     * Set the color of this player to a hex or rgb string. Setting the
+     * color may fail if the owner of the video has set their embed
+     * preferences to force a specific color.
+     *
+     * @param {string} color The hex or rgb color string to set.
+     * @return {SetColorPromise}
+     */
+
+  }, {
+    key: "setColor",
+    value: function setColor(color) {
+      return this.set('color', color);
+    }
+    /**
+     * A representation of a cue point.
+     *
+     * @typedef {Object} VimeoCuePoint
+     * @property {number} time The time of the cue point.
+     * @property {object} data The data passed when adding the cue point.
+     * @property {string} id The unique id for use with removeCuePoint.
+     */
+
+    /**
+     * A promise to get the cue points of a video.
+     *
+     * @promise GetCuePointsPromise
+     * @fulfill {VimeoCuePoint[]} The cue points added to the video.
+     * @reject {UnsupportedError} Cue points are not supported with the current
+     *         player or browser.
+     */
+
+    /**
+     * Get an array of the cue points added to the video.
+     *
+     * @return {GetCuePointsPromise}
+     */
+
+  }, {
+    key: "getCuePoints",
+    value: function getCuePoints() {
+      return this.get('cuePoints');
+    }
+    /**
+     * A promise to get the current time of the video.
+     *
+     * @promise GetCurrentTimePromise
+     * @fulfill {number} The current time in seconds.
+     */
+
+    /**
+     * Get the current playback position in seconds.
+     *
+     * @return {GetCurrentTimePromise}
+     */
+
+  }, {
+    key: "getCurrentTime",
+    value: function getCurrentTime() {
+      return this.get('currentTime');
+    }
+    /**
+     * A promise to set the current time of the video.
+     *
+     * @promise SetCurrentTimePromise
+     * @fulfill {number} The actual current time that was set.
+     * @reject {RangeError} the time was less than 0 or greater than the
+     *         video’s duration.
+     */
+
+    /**
+     * Set the current playback position in seconds. If the player was
+     * paused, it will remain paused. Likewise, if the player was playing,
+     * it will resume playing once the video has buffered.
+     *
+     * You can provide an accurate time and the player will attempt to seek
+     * to as close to that time as possible. The exact time will be the
+     * fulfilled value of the promise.
+     *
+     * @param {number} currentTime
+     * @return {SetCurrentTimePromise}
+     */
+
+  }, {
+    key: "setCurrentTime",
+    value: function setCurrentTime(currentTime) {
+      return this.set('currentTime', currentTime);
+    }
+    /**
+     * A promise to get the duration of the video.
+     *
+     * @promise GetDurationPromise
+     * @fulfill {number} The duration in seconds.
+     */
+
+    /**
+     * Get the duration of the video in seconds. It will be rounded to the
+     * nearest second before playback begins, and to the nearest thousandth
+     * of a second after playback begins.
+     *
+     * @return {GetDurationPromise}
+     */
+
+  }, {
+    key: "getDuration",
+    value: function getDuration() {
+      return this.get('duration');
+    }
+    /**
+     * A promise to get the ended state of the video.
+     *
+     * @promise GetEndedPromise
+     * @fulfill {boolean} Whether or not the video has ended.
+     */
+
+    /**
+     * Get the ended state of the video. The video has ended if
+     * `currentTime === duration`.
+     *
+     * @return {GetEndedPromise}
+     */
+
+  }, {
+    key: "getEnded",
+    value: function getEnded() {
+      return this.get('ended');
+    }
+    /**
+     * A promise to get the loop state of the player.
+     *
+     * @promise GetLoopPromise
+     * @fulfill {boolean} Whether or not the player is set to loop.
+     */
+
+    /**
+     * Get the loop state of the player.
+     *
+     * @return {GetLoopPromise}
+     */
+
+  }, {
+    key: "getLoop",
+    value: function getLoop() {
+      return this.get('loop');
+    }
+    /**
+     * A promise to set the loop state of the player.
+     *
+     * @promise SetLoopPromise
+     * @fulfill {boolean} The loop state that was set.
+     */
+
+    /**
+     * Set the loop state of the player. When set to `true`, the player
+     * will start over immediately once playback ends.
+     *
+     * @param {boolean} loop
+     * @return {SetLoopPromise}
+     */
+
+  }, {
+    key: "setLoop",
+    value: function setLoop(loop) {
+      return this.set('loop', loop);
+    }
+    /**
+     * A promise to get the paused state of the player.
+     *
+     * @promise GetLoopPromise
+     * @fulfill {boolean} Whether or not the video is paused.
+     */
+
+    /**
+     * Get the paused state of the player.
+     *
+     * @return {GetLoopPromise}
+     */
+
+  }, {
+    key: "getPaused",
+    value: function getPaused() {
+      return this.get('paused');
+    }
+    /**
+     * A promise to get the playback rate of the player.
+     *
+     * @promise GetPlaybackRatePromise
+     * @fulfill {number} The playback rate of the player on a scale from 0.5 to 2.
+     */
+
+    /**
+     * Get the playback rate of the player on a scale from `0.5` to `2`.
+     *
+     * @return {GetPlaybackRatePromise}
+     */
+
+  }, {
+    key: "getPlaybackRate",
+    value: function getPlaybackRate() {
+      return this.get('playbackRate');
+    }
+    /**
+     * A promise to set the playbackrate of the player.
+     *
+     * @promise SetPlaybackRatePromise
+     * @fulfill {number} The playback rate was set.
+     * @reject {RangeError} The playback rate was less than 0.5 or greater than 2.
+     */
+
+    /**
+     * Set the playback rate of the player on a scale from `0.5` to `2`. When set
+     * via the API, the playback rate will not be synchronized to other
+     * players or stored as the viewer's preference.
+     *
+     * @param {number} playbackRate
+     * @return {SetPlaybackRatePromise}
+     */
+
+  }, {
+    key: "setPlaybackRate",
+    value: function setPlaybackRate(playbackRate) {
+      return this.set('playbackRate', playbackRate);
+    }
+    /**
+     * A promise to get the text tracks of a video.
+     *
+     * @promise GetTextTracksPromise
+     * @fulfill {VimeoTextTrack[]} The text tracks associated with the video.
+     */
+
+    /**
+     * Get an array of the text tracks that exist for the video.
+     *
+     * @return {GetTextTracksPromise}
+     */
+
+  }, {
+    key: "getTextTracks",
+    value: function getTextTracks() {
+      return this.get('textTracks');
+    }
+    /**
+     * A promise to get the embed code for the video.
+     *
+     * @promise GetVideoEmbedCodePromise
+     * @fulfill {string} The `<iframe>` embed code for the video.
+     */
+
+    /**
+     * Get the `<iframe>` embed code for the video.
+     *
+     * @return {GetVideoEmbedCodePromise}
+     */
+
+  }, {
+    key: "getVideoEmbedCode",
+    value: function getVideoEmbedCode() {
+      return this.get('videoEmbedCode');
+    }
+    /**
+     * A promise to get the id of the video.
+     *
+     * @promise GetVideoIdPromise
+     * @fulfill {number} The id of the video.
+     */
+
+    /**
+     * Get the id of the video.
+     *
+     * @return {GetVideoIdPromise}
+     */
+
+  }, {
+    key: "getVideoId",
+    value: function getVideoId() {
+      return this.get('videoId');
+    }
+    /**
+     * A promise to get the title of the video.
+     *
+     * @promise GetVideoTitlePromise
+     * @fulfill {number} The title of the video.
+     */
+
+    /**
+     * Get the title of the video.
+     *
+     * @return {GetVideoTitlePromise}
+     */
+
+  }, {
+    key: "getVideoTitle",
+    value: function getVideoTitle() {
+      return this.get('videoTitle');
+    }
+    /**
+     * A promise to get the native width of the video.
+     *
+     * @promise GetVideoWidthPromise
+     * @fulfill {number} The native width of the video.
+     */
+
+    /**
+     * Get the native width of the currently‐playing video. The width of
+     * the highest‐resolution available will be used before playback begins.
+     *
+     * @return {GetVideoWidthPromise}
+     */
+
+  }, {
+    key: "getVideoWidth",
+    value: function getVideoWidth() {
+      return this.get('videoWidth');
+    }
+    /**
+     * A promise to get the native height of the video.
+     *
+     * @promise GetVideoHeightPromise
+     * @fulfill {number} The native height of the video.
+     */
+
+    /**
+     * Get the native height of the currently‐playing video. The height of
+     * the highest‐resolution available will be used before playback begins.
+     *
+     * @return {GetVideoHeightPromise}
+     */
+
+  }, {
+    key: "getVideoHeight",
+    value: function getVideoHeight() {
+      return this.get('videoHeight');
+    }
+    /**
+     * A promise to get the vimeo.com url for the video.
+     *
+     * @promise GetVideoUrlPromise
+     * @fulfill {number} The vimeo.com url for the video.
+     * @reject {PrivacyError} The url isn’t available because of the video’s privacy setting.
+     */
+
+    /**
+     * Get the vimeo.com url for the video.
+     *
+     * @return {GetVideoUrlPromise}
+     */
+
+  }, {
+    key: "getVideoUrl",
+    value: function getVideoUrl() {
+      return this.get('videoUrl');
+    }
+    /**
+     * A promise to get the volume level of the player.
+     *
+     * @promise GetVolumePromise
+     * @fulfill {number} The volume level of the player on a scale from 0 to 1.
+     */
+
+    /**
+     * Get the current volume level of the player on a scale from `0` to `1`.
+     *
+     * Most mobile devices do not support an independent volume from the
+     * system volume. In those cases, this method will always return `1`.
+     *
+     * @return {GetVolumePromise}
+     */
+
+  }, {
+    key: "getVolume",
+    value: function getVolume() {
+      return this.get('volume');
+    }
+    /**
+     * A promise to set the volume level of the player.
+     *
+     * @promise SetVolumePromise
+     * @fulfill {number} The volume was set.
+     * @reject {RangeError} The volume was less than 0 or greater than 1.
+     */
+
+    /**
+     * Set the volume of the player on a scale from `0` to `1`. When set
+     * via the API, the volume level will not be synchronized to other
+     * players or stored as the viewer’s preference.
+     *
+     * Most mobile devices do not support setting the volume. An error will
+     * *not* be triggered in that situation.
+     *
+     * @param {number} volume
+     * @return {SetVolumePromise}
+     */
+
+  }, {
+    key: "setVolume",
+    value: function setVolume(volume) {
+      return this.set('volume', volume);
+    }
+  }]);
+
+  return Player;
+}(); // Setup embed only if this is not a node environment
+
+
+if (!isNode) {
+  initializeEmbeds();
+  resizeEmbeds();
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Player);
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5), __webpack_require__(19).setImmediate))
+
+/***/ }),
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17677,10 +19679,6 @@ var render = function() {
               _c("v-card-text", [
                 _c("h3", { staticClass: "headline mb-0 text-md-center" }, [
                   _vm._v("This is Answer and Question system")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-md-center" }, [
-                  _vm._v(_vm._s(_vm.video_data.description))
                 ])
               ]),
               _vm._v(" "),
@@ -17693,49 +19691,35 @@ var render = function() {
                         index
                       ) {
                         return [
-                          _vm.current_step_quiz[index].question !=
-                          _vm.current_step_quiz[index - 1].question
-                            ? [
-                                _c("h3", { staticClass: "text-left" }, [
-                                  _vm._v(_vm._s(question_item.question))
-                                ])
-                              ]
-                            : _vm._e(),
+                          _c("h3", { staticClass: "text-left" }, [
+                            _vm._v(_vm._s(question_item[0].question))
+                          ]),
                           _vm._v(" "),
-                          _vm.current_step_quiz[index].question !=
-                          _vm.current_step_quiz[index - 1].question
-                            ? [
-                                _c(
-                                  "v-radio-group",
-                                  {
-                                    staticClass: "ml-3",
-                                    model: {
-                                      value: _vm.current_step_answer[index],
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.current_step_answer,
-                                          index,
-                                          $$v
-                                        )
-                                      },
-                                      expression: "current_step_answer[index]"
-                                    }
-                                  },
-                                  _vm._l(question_item.answers, function(
-                                    answer_item,
-                                    answer_index
-                                  ) {
-                                    return _c("v-radio", {
-                                      key: answer_index,
-                                      attrs: {
-                                        label: answer_item.answer,
-                                        value: answer_index
-                                      }
-                                    })
-                                  })
-                                )
-                              ]
-                            : _vm._e()
+                          _c(
+                            "v-radio-group",
+                            {
+                              staticClass: "ml-3",
+                              model: {
+                                value: _vm.current_step_answer[index],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.current_step_answer, index, $$v)
+                                },
+                                expression: "current_step_answer[index]"
+                              }
+                            },
+                            _vm._l(question_item, function(
+                              answer_item,
+                              answer_index
+                            ) {
+                              return _c("v-radio", {
+                                key: answer_index,
+                                attrs: {
+                                  label: answer_item.answer,
+                                  value: answer_item.answer
+                                }
+                              })
+                            })
+                          )
                         ]
                       })
                     ],
@@ -17784,7 +19768,7 @@ var render = function() {
                         "v-btn",
                         {
                           attrs: { "flat-right": "", color: "orange" },
-                          on: { click: _vm.replay_video }
+                          on: { click: _vm.replay }
                         },
                         [_vm._v("Replay")]
                       )
@@ -17811,8 +19795,12 @@ var render = function() {
                               p_index == 0
                                 ? _c(
                                     "v-list-tile",
-                                    { key: p_index - 1, staticClass: "purple" },
+                                    { key: p_index - 1, staticClass: "blue" },
                                     [
+                                      _c("v-list-tile-content", [
+                                        _c("h3", [_vm._v("Step")])
+                                      ]),
+                                      _vm._v(" "),
                                       _c("v-list-tile-content", [
                                         _c("h3", [_vm._v("Question")])
                                       ]),
@@ -17827,29 +19815,34 @@ var render = function() {
                               _vm._v(" "),
                               p_index == 0 ? _c("v-divider") : _vm._e(),
                               _vm._v(" "),
-                              _vm._l(step_review_data, function(
-                                quiz_data,
-                                c_index
-                              ) {
-                                return _c(
-                                  "v-list-tile",
-                                  { key: p_index * 10 + c_index },
-                                  [
-                                    _c("v-list-tile-content", [
-                                      _c("p", [
-                                        _vm._v(_vm._s(quiz_data.question))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-tile-content", [
-                                      _c("p", [
-                                        _vm._v(_vm._s(quiz_data.correct_answer))
-                                      ])
+                              _c(
+                                "v-list-tile",
+                                { key: p_index },
+                                [
+                                  _c("v-list-tile-content", [
+                                    _c("p", [
+                                      _vm._v(
+                                        "step " + _vm._s(step_review_data.step)
+                                      )
                                     ])
-                                  ],
-                                  1
-                                )
-                              })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-list-tile-content", [
+                                    _c("p", [
+                                      _vm._v(_vm._s(step_review_data.question))
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-list-tile-content", [
+                                    _c("p", [
+                                      _vm._v(
+                                        _vm._s(step_review_data.correct_answer)
+                                      )
+                                    ])
+                                  ])
+                                ],
+                                1
+                              )
                             ]
                           })
                         ],
@@ -17882,7 +19875,7 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -40661,7 +42654,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43291,16 +45284,16 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_snackbar__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__(90);
 
 
 
@@ -43321,13 +45314,13 @@ var debug = "development" !== 'production';
 }));
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(86);
 
 
 
@@ -43346,7 +45339,7 @@ var state = {
 });
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43366,13 +45359,13 @@ var state = {
 });
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_auth__ = __webpack_require__(85);
 var _actions$LOGIN$action;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43427,7 +45420,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$LOGIN$action);
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43464,7 +45457,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43482,12 +45475,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$LOGGED$types$U);
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mutations__ = __webpack_require__(89);
 
 
 
@@ -43506,7 +45499,7 @@ var state = {
 });
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43529,7 +45522,7 @@ var state = {
 });
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43553,13 +45546,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SET_SNACKBAR_S);
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getters__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutations__ = __webpack_require__(94);
 
 
 
@@ -43577,7 +45570,7 @@ var state = {
 });
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43591,13 +45584,13 @@ var state = {
 });
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__action_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_users__ = __webpack_require__(93);
 var _actions$SELECTED_USE;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43631,7 +45624,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _actions$SELECTED_USE);
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43652,7 +45645,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43670,13 +45663,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _types$SELECTED_USER$);
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(e,t){ true?module.exports=t(__webpack_require__(95)):"function"==typeof define&&define.amd?define(["videojs"],t):"object"==typeof exports?exports.VueVideoPlayer=t(require("video.js")):e.VueVideoPlayer=t(e.videojs)}(this,function(e){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),s=window.videojs||o.default;"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e,t){if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var n=Object(e),i=1;i<arguments.length;i++){var r=arguments[i];if(null!=r)for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(n[o]=r[o])}return n},writable:!0,configurable:!0});var a=["loadeddata","canplay","canplaythrough","play","pause","waiting","playing","ended","error"];t.default={name:"video-player",props:{start:{type:Number,default:0},crossOrigin:{type:String,default:""},playsinline:{type:Boolean,default:!1},customEventName:{type:String,default:"statechanged"},options:{type:Object,required:!0},events:{type:Array,default:function(){return[]}},globalOptions:{type:Object,default:function(){return{controls:!0,controlBar:{remainingTimeDisplay:!1,playToggle:{},progressControl:{},fullscreenToggle:{},volumeMenuButton:{inline:!1,vertical:!0}},techOrder:["html5"],plugins:{}}}},globalEvents:{type:Array,default:function(){return[]}}},data:function(){return{player:null,reseted:!0}},mounted:function(){this.player||this.initialize()},beforeDestroy:function(){this.player&&this.dispose()},methods:{initialize:function(){var e=this,t=Object.assign({},this.globalOptions,this.options);this.playsinline&&(this.$refs.video.setAttribute("playsinline",this.playsinline),this.$refs.video.setAttribute("webkit-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-video-player-type","h5"),this.$refs.video.setAttribute("x5-video-player-fullscreen",!1)),""!==this.crossOrigin&&(this.$refs.video.crossOrigin=this.crossOrigin,this.$refs.video.setAttribute("crossOrigin",this.crossOrigin));var n=function(t,n){t&&e.$emit(t,e.player),n&&e.$emit(e.customEventName,i({},t,n))};t.plugins&&delete t.plugins.__ob__;var r=this;this.player=s(this.$refs.video,t,function(){for(var e=this,t=a.concat(r.events).concat(r.globalEvents),i={},o=0;o<t.length;o++)"string"==typeof t[o]&&void 0===i[t[o]]&&function(t){i[t]=null,e.on(t,function(){n(t,!0)})}(t[o]);this.on("timeupdate",function(){n("timeupdate",this.currentTime())}),r.$emit("ready",this)})},dispose:function(e){var t=this;this.player&&this.player.dispose&&("Flash"!==this.player.techName_&&this.player.pause&&this.player.pause(),this.player.dispose(),this.player=null,this.$nextTick(function(){t.reseted=!1,t.$nextTick(function(){t.reseted=!0,t.$nextTick(function(){e&&e()})})}))}},watch:{options:{deep:!0,handler:function(e,t){var n=this;this.dispose(function(){e&&e.sources&&e.sources.length&&n.initialize()})}}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(1),r=n.n(i);for(var o in i)["default","default"].indexOf(o)<0&&function(e){n.d(t,e,function(){return i[e]})}(o);var s=n(5),a=n(4),l=a(r.a,s.a,!1,null,null,null);t.default=l.exports},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.install=t.videoPlayer=t.videojs=void 0;var r=n(0),o=i(r),s=n(2),a=i(s),l=window.videojs||o.default,u=function(e,t){t&&(t.options&&(a.default.props.globalOptions.default=function(){return t.options}),t.events&&(a.default.props.globalEvents.default=function(){return t.events})),e.component(a.default.name,a.default)},d={videojs:l,videoPlayer:a.default,install:u};t.default=d,t.videojs=l,t.videoPlayer=a.default,t.install=u},function(e,t){e.exports=function(e,t,n,i,r,o){var s,a=e=e||{},l=typeof e.default;"object"!==l&&"function"!==l||(s=e,a=e.default);var u="function"==typeof a?a.options:a;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns,u._compiled=!0),n&&(u.functional=!0),r&&(u._scopeId=r);var d;if(o?(d=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},u._ssrRegister=d):i&&(d=i),d){var c=u.functional,f=c?u.render:u.beforeCreate;c?(u._injectStyles=d,u.render=function(e,t){return d.call(t),f(e,t)}):u.beforeCreate=f?[].concat(f,d):[d]}return{esModule:s,exports:a,options:u}}},function(e,t,n){"use strict";var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.reseted?n("div",{staticClass:"video-player"},[n("video",{ref:"video",staticClass:"video-js"})]):e._e()},r=[],o={render:i,staticRenderFns:r};t.a=o}])});
+!function(e,t){ true?module.exports=t(__webpack_require__(96)):"function"==typeof define&&define.amd?define(["videojs"],t):"object"==typeof exports?exports.VueVideoPlayer=t(require("video.js")):e.VueVideoPlayer=t(e.videojs)}(this,function(e){return function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),s=window.videojs||o.default;"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e,t){if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var n=Object(e),i=1;i<arguments.length;i++){var r=arguments[i];if(null!=r)for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(n[o]=r[o])}return n},writable:!0,configurable:!0});var a=["loadeddata","canplay","canplaythrough","play","pause","waiting","playing","ended","error"];t.default={name:"video-player",props:{start:{type:Number,default:0},crossOrigin:{type:String,default:""},playsinline:{type:Boolean,default:!1},customEventName:{type:String,default:"statechanged"},options:{type:Object,required:!0},events:{type:Array,default:function(){return[]}},globalOptions:{type:Object,default:function(){return{controls:!0,controlBar:{remainingTimeDisplay:!1,playToggle:{},progressControl:{},fullscreenToggle:{},volumeMenuButton:{inline:!1,vertical:!0}},techOrder:["html5"],plugins:{}}}},globalEvents:{type:Array,default:function(){return[]}}},data:function(){return{player:null,reseted:!0}},mounted:function(){this.player||this.initialize()},beforeDestroy:function(){this.player&&this.dispose()},methods:{initialize:function(){var e=this,t=Object.assign({},this.globalOptions,this.options);this.playsinline&&(this.$refs.video.setAttribute("playsinline",this.playsinline),this.$refs.video.setAttribute("webkit-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-playsinline",this.playsinline),this.$refs.video.setAttribute("x5-video-player-type","h5"),this.$refs.video.setAttribute("x5-video-player-fullscreen",!1)),""!==this.crossOrigin&&(this.$refs.video.crossOrigin=this.crossOrigin,this.$refs.video.setAttribute("crossOrigin",this.crossOrigin));var n=function(t,n){t&&e.$emit(t,e.player),n&&e.$emit(e.customEventName,i({},t,n))};t.plugins&&delete t.plugins.__ob__;var r=this;this.player=s(this.$refs.video,t,function(){for(var e=this,t=a.concat(r.events).concat(r.globalEvents),i={},o=0;o<t.length;o++)"string"==typeof t[o]&&void 0===i[t[o]]&&function(t){i[t]=null,e.on(t,function(){n(t,!0)})}(t[o]);this.on("timeupdate",function(){n("timeupdate",this.currentTime())}),r.$emit("ready",this)})},dispose:function(e){var t=this;this.player&&this.player.dispose&&("Flash"!==this.player.techName_&&this.player.pause&&this.player.pause(),this.player.dispose(),this.player=null,this.$nextTick(function(){t.reseted=!1,t.$nextTick(function(){t.reseted=!0,t.$nextTick(function(){e&&e()})})}))}},watch:{options:{deep:!0,handler:function(e,t){var n=this;this.dispose(function(){e&&e.sources&&e.sources.length&&n.initialize()})}}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(1),r=n.n(i);for(var o in i)["default","default"].indexOf(o)<0&&function(e){n.d(t,e,function(){return i[e]})}(o);var s=n(5),a=n(4),l=a(r.a,s.a,!1,null,null,null);t.default=l.exports},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.install=t.videoPlayer=t.videojs=void 0;var r=n(0),o=i(r),s=n(2),a=i(s),l=window.videojs||o.default,u=function(e,t){t&&(t.options&&(a.default.props.globalOptions.default=function(){return t.options}),t.events&&(a.default.props.globalEvents.default=function(){return t.events})),e.component(a.default.name,a.default)},d={videojs:l,videoPlayer:a.default,install:u};t.default=d,t.videojs=l,t.videoPlayer=a.default,t.install=u},function(e,t){e.exports=function(e,t,n,i,r,o){var s,a=e=e||{},l=typeof e.default;"object"!==l&&"function"!==l||(s=e,a=e.default);var u="function"==typeof a?a.options:a;t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns,u._compiled=!0),n&&(u.functional=!0),r&&(u._scopeId=r);var d;if(o?(d=function(e){e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,e||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(o)},u._ssrRegister=d):i&&(d=i),d){var c=u.functional,f=c?u.render:u.beforeCreate;c?(u._injectStyles=d,u.render=function(e,t){return d.call(t),f(e,t)}):u.beforeCreate=f?[].concat(f,d):[d]}return{esModule:s,exports:a,options:u}}},function(e,t,n){"use strict";var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.reseted?n("div",{staticClass:"video-player"},[n("video",{ref:"video",staticClass:"video-js"})]):e._e()},r=[],o={render:i,staticRenderFns:r};t.a=o}])});
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -43694,11 +45687,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var window = _interopDefault(__webpack_require__(12));
-var document = _interopDefault(__webpack_require__(96));
-var tsml = _interopDefault(__webpack_require__(98));
-var safeParseTuple = _interopDefault(__webpack_require__(99));
-var xhr = _interopDefault(__webpack_require__(100));
-var vtt = _interopDefault(__webpack_require__(107));
+var document = _interopDefault(__webpack_require__(97));
+var tsml = _interopDefault(__webpack_require__(99));
+var safeParseTuple = _interopDefault(__webpack_require__(100));
+var xhr = _interopDefault(__webpack_require__(101));
+var vtt = _interopDefault(__webpack_require__(108));
 
 var version = "6.12.1";
 
@@ -68633,12 +70626,12 @@ module.exports = videojs;
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(97);
+var minDoc = __webpack_require__(98);
 
 var doccy;
 
@@ -68657,13 +70650,13 @@ module.exports = doccy;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 function clean (s) {
@@ -68682,7 +70675,7 @@ module.exports = function tsml (sa) {
 }
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = SafeParseTuple
@@ -68702,15 +70695,15 @@ function SafeParseTuple(obj, reviver) {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var window = __webpack_require__(12)
-var isFunction = __webpack_require__(101)
-var parseHeaders = __webpack_require__(102)
-var xtend = __webpack_require__(106)
+var isFunction = __webpack_require__(102)
+var parseHeaders = __webpack_require__(103)
+var xtend = __webpack_require__(107)
 
 module.exports = createXHR
 createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -68950,7 +70943,7 @@ function noop() {}
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = isFunction
@@ -68971,11 +70964,11 @@ function isFunction (fn) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var trim = __webpack_require__(103)
-  , forEach = __webpack_require__(104)
+var trim = __webpack_require__(104)
+  , forEach = __webpack_require__(105)
   , isArray = function(arg) {
       return Object.prototype.toString.call(arg) === '[object Array]';
     }
@@ -69007,7 +71000,7 @@ module.exports = function (headers) {
 }
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 
@@ -69027,13 +71020,13 @@ exports.right = function(str){
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isCallable = __webpack_require__(105);
+var isCallable = __webpack_require__(106);
 
 var toStr = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -69096,7 +71089,7 @@ module.exports = forEach;
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69140,7 +71133,7 @@ module.exports = function isCallable(value) {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -69165,7 +71158,7 @@ function extend() {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -69192,9 +71185,9 @@ function extend() {
 var window = __webpack_require__(12);
 
 var vttjs = module.exports = {
-  WebVTT: __webpack_require__(108),
-  VTTCue: __webpack_require__(109),
-  VTTRegion: __webpack_require__(110)
+  WebVTT: __webpack_require__(109),
+  VTTCue: __webpack_require__(110),
+  VTTRegion: __webpack_require__(111)
 };
 
 window.vttjs = vttjs;
@@ -69221,7 +71214,7 @@ if (!window.VTTCue) {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports) {
 
 /**
@@ -70556,7 +72549,7 @@ module.exports = WebVTT;
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports) {
 
 /**
@@ -70867,7 +72860,7 @@ module.exports = VTTCue;
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 /**
@@ -71007,15 +73000,15 @@ module.exports = VTTRegion;
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(112)
+var __vue_script__ = __webpack_require__(113)
 /* template */
-var __vue_template__ = __webpack_require__(113)
+var __vue_template__ = __webpack_require__(114)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71054,7 +73047,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71083,7 +73076,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71127,15 +73120,15 @@ if (false) {
 }
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(115)
+var __vue_script__ = __webpack_require__(116)
 /* template */
-var __vue_template__ = __webpack_require__(116)
+var __vue_template__ = __webpack_require__(117)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71174,7 +73167,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71372,7 +73365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71664,15 +73657,15 @@ if (false) {
 }
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(118)
+var __vue_script__ = __webpack_require__(119)
 /* template */
-var __vue_template__ = __webpack_require__(119)
+var __vue_template__ = __webpack_require__(120)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71711,7 +73704,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71926,7 +73919,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72289,15 +74282,15 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(121)
+var __vue_script__ = __webpack_require__(122)
 /* template */
-var __vue_template__ = __webpack_require__(122)
+var __vue_template__ = __webpack_require__(123)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -72336,7 +74329,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72497,7 +74490,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72777,7 +74770,7 @@ if (false) {
 }
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

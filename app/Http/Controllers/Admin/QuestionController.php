@@ -60,7 +60,7 @@ class QuestionController extends Controller
             else{
                 $sub_question['correct_answer'] = '';
             }
-            $sub_question['answer'] = $item->answer;
+            $sub_question['_answer'] = $item->answer;
 
             array_push($new_question, $sub_question);
         }

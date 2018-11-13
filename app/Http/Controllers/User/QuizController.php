@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\PasswordController;
 use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Step;
@@ -23,42 +24,59 @@ class QuizController extends Controller
      */
     public function get_review_result(Request $request)
     {
-        $user_id = $request->get('data');
-        $user_quiz_data = Userhistory::where('user_id', $user_id)->get()->toArray();
-        $response = array(
-            'review_data' => $user_quiz_data[0]['step']
-        );
-        return response()->json($response);
+        // $user_id = $request->get('data');
+        $historyData = History::where('user_id', 1)->get()->toArray();
+        History::where('user_id', 1)->update(array('pass_status' => 1));
+        $all_question_answers = [];
+        foreach($historyData as $key => $historyItem)
+        {
+            $question_array = explode(',', $historyItem['question_ids']);
+            
+            foreach ($question_array as $item)
+            {
+                $result = Answer::select('*')->leftjoin("questions",function($join){
+                    $join->on("questions.id","=","answers.questionId");
+                })->where('answers.questionId', $item)->where('answers.correct_answer', '!=', '')->get()->toArray();
+                $result[0]['step'] = $key + 1;
+                array_push($all_question_answers, $result[0]);
+            }
+        }
+        return ['result' => $all_question_answers];
     }
-    public function get_quiz_info(Request $request)
+    public function show(Request $request)
     {
-
         $user_id = $request->get('data');
-        $is_history = History::where('user_id', $user_id)->get()->toArray();
-        $selectedSteps = Video::select('*')
-            ->join("steps",function ($join){
-                $join->on("steps.video_id", "=", "videos.id");
-            })->where('videos.select', 1)->get()->toArray();
-        print_r($selectedSteps);
-        exit();
-//        $historySteps = History::select('*')
-//                ->join("steps",function($join){
-//                    $join->on("steps.id","!=","histories.step_id")
-//                        ->on('steps.video_id',"=",'histories.video_id');
-//                })
-//                ->where('histories.user_id', $user_id)
-//                ->get()->toArray();
-//
+        $historySteps = History::where('user_id', $user_id)->get()->toArray();
+        $isPass = true;
+        if(empty($historySteps))
+        {
+            $isPass = false;
+            $selectedSteps = Video::select('*')
+                ->join("steps",function ($join){
+                    $join->on("steps.video_id", "=", "videos.id");
+                })->where('videos.select', 1)->get()->toArray();
+            foreach ($selectedSteps as $step){
+                $history = new History();
+                $history->user_id = $user_id;
+                $history->video_id = $step['video_id'];
+                $history->point = $step['point'];
+                $history->old_point = $step['old_point'];
+                $history->question_ids = $step['question_ids'];
+                $history->pass_status = 0;
+                $history->save();
+            }
+            $historySteps = History::where('user_id', $user_id)->get()->toArray();
+        }
         $response = array(
-            'historySteps' => $historySteps,
-            'is_history' => $is_history
+            'isPass' => $isPass,
+            'historyStep' => $historySteps
         );
         return response()->json($response);
     }
     public function get_videos()
     {
         $videos = Video::all();
-       return ['videos' => $videos];
+        return ['videos' => $videos];
     }
     public function create(Request $request)
     {
@@ -76,57 +94,35 @@ class QuizController extends Controller
     {
         $question_ids = $request->get('data');
         $question_array = explode(',', $question_ids);
-        $questionAnswers = Answer::select('*')->leftjoin("questions",function($join){
-            $join->on("questions.id","=","answers.questionId");
-        })->whereIn('questionId', $question_array)->get()->toArray();
-        return ['questionAnswers' => $questionAnswers];
+        $all_question_answers = [];
+        foreach ($question_array as $item)
+        {
+            $result = Answer::select('*')->leftjoin("questions",function($join){
+                $join->on("questions.id","=","answers.questionId");
+            })->where('answers.questionId', $item)->get()->toArray();
+            array_push($all_question_answers, $result);
+        }
+        return response()->json($all_question_answers);
     }
     public function accept(Request $request)
     {
         $response_data = (array)json_decode($request->get('data'));
-        $selected_ids = $response_data['selected_ids'];
-        $current_quiz = $response_data['current_quiz'];
-        $user_id = $response_data['user_id'];
-        $flag = false;
-        foreach ($current_quiz as $key => $item)
+        $correct = true;
+        foreach ($response_data as $item)
         {
-            $current_quiz[$key]->user_select= $selected_ids[$key];
-            unset($current_quiz[$key]->updated_at);
-            unset($current_quiz[$key]->created_at);
-            if($current_quiz[$key]->selected == $selected_ids[$key] + 1 )
-            {
-                $flag = true;
-            }
-            else{
-                $flag = false;
-            }
-        }
-        $check = Userhistory::where('user_id', $user_id)->get()->toArray();
-
-        if($flag == true)
-        {
+            $check = Answer::where('correct_answer', $item->answer)->where('questionId', $item->questionId)->get()->toArray();
             if(empty($check))
             {
-                $new = array();
-                $new[]= $current_quiz;
-                $userhistory = new Userhistory();
-                $userhistory->user_id = $user_id;
-                $userhistory->step = $new;
-                $userhistory->save();
-            }
-            else{
-                $new = array();
-                $new[]= $current_quiz;
-                Userhistory::where('user_id', $user_id)->push('step', $new);
+                $correct = false;
+                break;
             }
         }
-        return ['check'=>$flag];
+        return ['check' => $correct];
     }
     public function view()
     {
         $video_data = Video::where('select', 1)->get()->toArray();
         return view('user/user', ['vimeo_url' => $video_data[0]['vimeo_url']]);
     }
-
     
 }
