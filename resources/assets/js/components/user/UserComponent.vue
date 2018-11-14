@@ -44,20 +44,21 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                             <v-divider v-if="p_index == 0"></v-divider>
+                            <template v-if="step_review_data.question != null">
+                                <v-list-tile :key="p_index">
+                                    <v-list-tile-content >
+                                        <p>step {{step_review_data.step}}</p>
+                                    </v-list-tile-content>
+                                    <v-list-tile-content >
+                                        <p>{{step_review_data.question}}</p>
+                                    </v-list-tile-content>
 
-                            <v-list-tile :key="p_index">
-                                <v-list-tile-content >
-                                    <p>step {{step_review_data.step}}</p>
-                                </v-list-tile-content>
-                                <v-list-tile-content >
-                                    <p>{{step_review_data.question}}</p>
-                                </v-list-tile-content>
+                                    <v-list-tile-content >
+                                        <p>{{step_review_data.correct_answer}}</p>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </template>
 
-                                <v-list-tile-content >
-                                    <p>{{step_review_data.correct_answer}}</p>
-                                </v-list-tile-content>
-
-                            </v-list-tile>
                         </template>
                     </v-list>
                 </div>
@@ -172,7 +173,6 @@
         this.quiz = false;
       },
       next_video_step(){
-        this.passIndex = this.passIndex + 1;
         this.start_video_step();
         this.next_btn = false;
       },
@@ -196,7 +196,7 @@
             {
               this.quiz = false;
               this.accept_btn = false;
-              if(this.passIndex == this.step_count)
+              if(this.passIndex == this.step_count - 1)
               {
                 this.show_review_result();
               }
@@ -213,9 +213,10 @@
               this.quiz = false;
               this.showError("Your answer isn't correct")
             }
-          }.bind(this)).catch(function (error){
-            this.showError('Error')
           }.bind(this));
+        //   .catch(function (error){
+        //     this.showError('Error')
+        //   }.bind(this));
       },
       show_review_result () {
          axios.post('/api/user/user-quiz/get_review_result',
@@ -274,7 +275,7 @@
         {
           this.current_step = this.step_data[this.passIndex];
           this.questions = this.current_step.question_ids;
-
+            
           var start = this.current_step.old_point;
           var end = this.current_step.point;
           if ( start != '0' )

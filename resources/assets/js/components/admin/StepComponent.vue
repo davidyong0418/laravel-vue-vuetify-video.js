@@ -93,11 +93,8 @@
           {
             this.steps = response.data;
             this.steps.forEach(element => {
-              if(element.question_ids.length)
-              {
                 let str_questionsIds = element.question_ids.split(',');
                 element.questions = str_questionsIds.map(Number)
-              }
             });
           }
           else

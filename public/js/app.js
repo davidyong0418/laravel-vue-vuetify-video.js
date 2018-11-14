@@ -17378,6 +17378,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -17483,7 +17484,6 @@ var player;
       this.quiz = false;
     },
     next_video_step: function next_video_step() {
-      this.passIndex = this.passIndex + 1;
       this.start_video_step();
       this.next_btn = false;
     },
@@ -17506,7 +17506,7 @@ var player;
         if (response.data.check == true) {
           this.quiz = false;
           this.accept_btn = false;
-          if (this.passIndex == this.step_count) {
+          if (this.passIndex == this.step_count - 1) {
             this.show_review_result();
           } else {
             this.next_btn = true;
@@ -17520,9 +17520,10 @@ var player;
           this.quiz = false;
           this.showError("Your answer isn't correct");
         }
-      }.bind(this)).catch(function (error) {
-        this.showError('Error');
       }.bind(this));
+      //   .catch(function (error){
+      //     this.showError('Error')
+      //   }.bind(this));
     },
     show_review_result: function show_review_result() {
       axios.post('/api/user/user-quiz/get_review_result', {
@@ -19793,34 +19794,43 @@ var render = function() {
                               _vm._v(" "),
                               p_index == 0 ? _c("v-divider") : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "v-list-tile",
-                                { key: p_index },
-                                [
-                                  _c("v-list-tile-content", [
-                                    _c("p", [
-                                      _vm._v(
-                                        "step " + _vm._s(step_review_data.step)
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-tile-content", [
-                                    _c("p", [
-                                      _vm._v(_vm._s(step_review_data.question))
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-tile-content", [
-                                    _c("p", [
-                                      _vm._v(
-                                        _vm._s(step_review_data.correct_answer)
-                                      )
-                                    ])
-                                  ])
-                                ],
-                                1
-                              )
+                              step_review_data.question != null
+                                ? [
+                                    _c(
+                                      "v-list-tile",
+                                      { key: p_index },
+                                      [
+                                        _c("v-list-tile-content", [
+                                          _c("p", [
+                                            _vm._v(
+                                              "step " +
+                                                _vm._s(step_review_data.step)
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("v-list-tile-content", [
+                                          _c("p", [
+                                            _vm._v(
+                                              _vm._s(step_review_data.question)
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("v-list-tile-content", [
+                                          _c("p", [
+                                            _vm._v(
+                                              _vm._s(
+                                                step_review_data.correct_answer
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                : _vm._e()
                             ]
                           })
                         ],
@@ -74396,10 +74406,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         if (response.data.length) {
           this.steps = response.data;
           this.steps.forEach(function (element) {
-            if (element.question_ids.length) {
-              var str_questionsIds = element.question_ids.split(',');
-              element.questions = str_questionsIds.map(Number);
-            }
+            var str_questionsIds = element.question_ids.split(',');
+            element.questions = str_questionsIds.map(Number);
           });
         } else {
           this.initStep.video_id = id;

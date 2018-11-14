@@ -75,7 +75,7 @@ class QuestionController extends Controller
         $id = $request->get('deleteQuestion');
         Question::where('id', $id)->delete();
         Answer::where('questionId', $id)->delete();
-        Step::where('question_ids','like',"%{$id}%")->update(array('question_ids' => ''));
+        Step::where('question_ids','like',"%{$id}%")->update(array('question_ids' => null));
         History::where('question_ids','like',"%{$id}%")->delete();
         $questions = Question::all();
         return ['questions' => $questions];
