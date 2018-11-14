@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Step;
 use App\Model\Question;
-use App\Model\Userhistory;
 use App\Model\History;
 use App\Model\Answer;
 use JavaScript;
@@ -24,9 +23,12 @@ class QuizController extends Controller
      */
     public function get_review_result(Request $request)
     {
-        // $user_id = $request->get('data');
+        $request = $request->get('data');
+        $user_id = $request['user_id'];
+        $vimeo_id = $request['vimeo_id'];
+
         $historyData = History::where('user_id', 1)->get()->toArray();
-        History::where('user_id', 1)->update(array('pass_status' => 1));
+        History::where('user_id', $user_id)->update(array('pass_status' => 1));
         $all_question_answers = [];
         foreach($historyData as $key => $historyItem)
         {
@@ -35,7 +37,7 @@ class QuizController extends Controller
             foreach ($question_array as $item)
             {
                 $result = Answer::select('*')->leftjoin("questions",function($join){
-                    $join->on("questions.id","=","answers.questionId");
+                    $join->on("questions.id", "=", "answers.questionId");
                 })->where('answers.questionId', $item)->where('answers.correct_answer', '!=', '')->get()->toArray();
                 $result[0]['step'] = $key + 1;
                 array_push($all_question_answers, $result[0]);
@@ -45,12 +47,12 @@ class QuizController extends Controller
     }
     public function show(Request $request)
     {
-        $user_id = $request->get('data');
-        $historySteps = History::where('user_id', $user_id)->get()->toArray();
-        $isPass = true;
+        $user_id = $request->get('user_id');
+        $vimeoid = $request->get('vimeoid');
+        $historySteps = History::where('user_id', $user_id)->where('video_id', $vimeoid)->get()->toArray();
+        $passSteps = History::where('user_id', $user_id)->where('video_id', $vimeoid)->where('pass_status', 1)->get()->toArray();
         if(empty($historySteps))
         {
-            $isPass = false;
             $selectedSteps = Video::select('*')
                 ->join("steps",function ($join){
                     $join->on("steps.video_id", "=", "videos.id");
@@ -67,8 +69,9 @@ class QuizController extends Controller
             }
             $historySteps = History::where('user_id', $user_id)->get()->toArray();
         }
+
         $response = array(
-            'isPass' => $isPass,
+            'isPass' => empty($passSteps)?false:true,
             'historyStep' => $historySteps
         );
         return response()->json($response);

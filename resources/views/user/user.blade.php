@@ -5,7 +5,7 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title class="blue darken-3 white--text"><h2>User</h2></v-card-title>
-                    <user-course vimeourl="{{$vimeo_url}}" distinct="{{$distinct}}" ></user-course>
+                    <user-course vimeourl="{{$vimeo_url}}" distinct="{{$distinct}}" vimeoid="{{$vimeo_id}}"></user-course>
                 </v-card>
             </v-flex>
         </v-layout>

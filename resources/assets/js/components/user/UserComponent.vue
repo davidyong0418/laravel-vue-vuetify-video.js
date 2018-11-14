@@ -20,9 +20,7 @@
                     </template>
                 </v-list>
 
-
                 <v-card-actions>
-
                     <v-btn flat-right v-if="accept_btn == true" color="orange" @click="accept">OK</v-btn>
                     <v-btn flat-right v-if="start_btn == true" color="orange" @click="start_video_step">Start</v-btn>
                     <v-btn flat-right v-if="next_btn == true" color="orange" @click="next_video_step">Next</v-btn>
@@ -63,7 +61,6 @@
                         </template>
                     </v-list>
                 </div>
-                <div id="made-in-ny"></div>
             </v-card>
         </v-flex>
     </v-layout>
@@ -84,10 +81,13 @@
               type: String,
               default: null
             },
+            vimeoid: {
+              type: String,
+              default: null
+            },
         },
     data() {
       return {
- 
         video_url:'https://player.vimeo.com/video/' + this.get_videoId(this.vimeourl) +'?portrait=0&autoplay=0&background=1',
         step_data: {},
         start_offset: 0,
@@ -105,23 +105,13 @@
         start_btn:true,
         review_system:false,
         init_data: false,
-        playerOptions: {
-          // videojs options
-          sources: [{
-            type: "video/vimeo",
-            src: this.vimeourl,
-          }],
-          techOrder: ["vimeo"],
-        },
-          baseUrl:'https://player.vimeo.com/video/',
-          // baseUrlParam:'?portrait=0&autoplay=0&background=1',
-          baseUrlParam:'',
-          passIndex: 0,
+        baseUrl:'https://player.vimeo.com/video/',
+        baseUrlParam:'?portrait=0&autoplay=0&background=1',
+        passIndex: 0,
       }
     },
      mounted() {
         this.video_url = this.baseUrl +this.get_videoId(this.vimeourl) + this.baseUrlParam;
-        console.log(this.video_url);
   },
     computed: {
       player() {
@@ -134,7 +124,7 @@
     methods: {
         get_question_answer(){
             var vm =this;
-            axios.post('/api/user/user-quiz/get_questions_answers',{
+            axios.post('/api/user/user-quiz/get_questions_answers', {
                     data:this.current_step.question_ids
                 },
                 {
@@ -143,6 +133,13 @@
                     }
                 }).then((response) => {
                 this.current_step_quiz = response.data
+                if(this.current_step_quiz.length)
+                {
+                    this.init_data = false;
+                }
+                else{
+                    this.init_data = true;
+                }
             });
         },
       get_videoId(url){
@@ -152,20 +149,21 @@
       start_video_step(){
           player.play();
           var vm = this;
-          this.start_btn = false;
+          vm.start_btn = false;
           player.on('timeupdate', function(data){
-              console.log('datasecond', data);
-              console.log('this.endoffest', vm.end_offset)
               if(data.seconds > vm.end_offset && data.seconds < (vm.end_offset + 1))
               {
                   player.pause();
-                  vm.quiz = true;
-                  vm.accept_btn = true;
+                  if(vm.init_data == false)
+                  {
+                      vm.quiz = true;   
+                      vm.accept_btn = true;
+                  }               
+                  
               }
           });
       },
       replay(){
-          console.log(this.start_offset);
         player.setCurrentTime(this.start_offset).then(()=>{
             player.play();
         })
@@ -222,7 +220,10 @@
       show_review_result () {
          axios.post('/api/user/user-quiz/get_review_result',
         {
-          data: this.user_id,
+            data:{
+                user_id: this.user_id,
+                vimeo_id: this.vimeoid
+            }
         },
         {
             headers:{
@@ -232,6 +233,7 @@
             this.review_data = response.data.result;
             this.review_system = true;
             this.start_btn = false;
+            player.pause();
           }.bind(this)).catch(function (error){
             this.showError('Error')
           }.bind(this));
@@ -239,7 +241,7 @@
       init () {
         axios.get('/api/user/user-quiz/show',
         {
-          params:{data: this.user_id},
+          params:{user_id: this.user_id, vimeoid: this.vimeoid},
         }
         ).then(function(response){
             var iframe = document.querySelector('iframe');
@@ -253,7 +255,7 @@
                     this.show_review_result();
                 }
                 else{
-                    this.set_current_step('initStatus');
+                    this.set_current_step();
                 }
             }
             else{
@@ -283,17 +285,12 @@
               this.start_offset = 0;
           }
             this.end_offset = parseInt(parseInt(end.substring(0,2)) * 60) + parseInt(end.substring(2,4));
-            var vm = this;
-            if(initStatus != null)
-            {
-                player.setCurrentTime(this.start_offset);
-            }
             this.get_question_answer();
         }
         else{
           if(!this.is_history.length)
           {
-            this.show_review_result();
+            // this.show_review_result();
             return;
           }
         }

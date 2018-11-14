@@ -14981,21 +14981,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -17393,9 +17378,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -17411,11 +17393,14 @@ var player;
     distinct: {
       type: String,
       default: null
+    },
+    vimeoid: {
+      type: String,
+      default: null
     }
   },
   data: function data() {
     return {
-
       video_url: 'https://player.vimeo.com/video/' + this.get_videoId(this.vimeourl) + '?portrait=0&autoplay=0&background=1',
       step_data: {},
       start_offset: 0,
@@ -17433,23 +17418,13 @@ var player;
       start_btn: true,
       review_system: false,
       init_data: false,
-      playerOptions: {
-        // videojs options
-        sources: [{
-          type: "video/vimeo",
-          src: this.vimeourl
-        }],
-        techOrder: ["vimeo"]
-      },
       baseUrl: 'https://player.vimeo.com/video/',
-      // baseUrlParam:'?portrait=0&autoplay=0&background=1',
-      baseUrlParam: '',
+      baseUrlParam: '?portrait=0&autoplay=0&background=1',
       passIndex: 0
     };
   },
   mounted: function mounted() {
     this.video_url = this.baseUrl + this.get_videoId(this.vimeourl) + this.baseUrlParam;
-    console.log(this.video_url);
   },
 
   computed: {
@@ -17474,6 +17449,11 @@ var player;
         }
       }).then(function (response) {
         _this.current_step_quiz = response.data;
+        if (_this.current_step_quiz.length) {
+          _this.init_data = false;
+        } else {
+          _this.init_data = true;
+        }
       });
     },
     get_videoId: function get_videoId(url) {
@@ -17483,19 +17463,18 @@ var player;
     start_video_step: function start_video_step() {
       player.play();
       var vm = this;
-      this.start_btn = false;
+      vm.start_btn = false;
       player.on('timeupdate', function (data) {
-        console.log('datasecond', data);
-        console.log('this.endoffest', vm.end_offset);
         if (data.seconds > vm.end_offset && data.seconds < vm.end_offset + 1) {
           player.pause();
-          vm.quiz = true;
-          vm.accept_btn = true;
+          if (vm.init_data == false) {
+            vm.quiz = true;
+            vm.accept_btn = true;
+          }
         }
       });
     },
     replay: function replay() {
-      console.log(this.start_offset);
       player.setCurrentTime(this.start_offset).then(function () {
         player.play();
       });
@@ -17547,7 +17526,10 @@ var player;
     },
     show_review_result: function show_review_result() {
       axios.post('/api/user/user-quiz/get_review_result', {
-        data: this.user_id
+        data: {
+          user_id: this.user_id,
+          vimeo_id: this.vimeoid
+        }
       }, {
         headers: {
           'Content-Type': 'applicaton/json'
@@ -17556,13 +17538,14 @@ var player;
         this.review_data = response.data.result;
         this.review_system = true;
         this.start_btn = false;
+        player.pause();
       }.bind(this)).catch(function (error) {
         this.showError('Error');
       }.bind(this));
     },
     init: function init() {
       axios.get('/api/user/user-quiz/show', {
-        params: { data: this.user_id }
+        params: { user_id: this.user_id, vimeoid: this.vimeoid }
       }).then(function (response) {
         var iframe = document.querySelector('iframe');
         player = new __WEBPACK_IMPORTED_MODULE_2__vimeo_player__["a" /* default */](iframe);
@@ -17573,7 +17556,7 @@ var player;
           if (isPass == true) {
             this.show_review_result();
           } else {
-            this.set_current_step('initStatus');
+            this.set_current_step();
           }
         } else {
           this.init_data = true;
@@ -17600,14 +17583,10 @@ var player;
           this.start_offset = 0;
         }
         this.end_offset = parseInt(parseInt(end.substring(0, 2)) * 60) + parseInt(end.substring(2, 4));
-        var vm = this;
-        if (initStatus != null) {
-          player.setCurrentTime(this.start_offset);
-        }
         this.get_question_answer();
       } else {
         if (!this.is_history.length) {
-          this.show_review_result();
+          // this.show_review_result();
           return;
         }
       }
@@ -19850,9 +19829,7 @@ var render = function() {
                     : _vm._e()
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "made-in-ny" } })
+              )
             ],
             1
           )

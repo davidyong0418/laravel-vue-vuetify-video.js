@@ -48,7 +48,6 @@
                     </v-flex>
                     <v-flex xs12>
                         <h2>@{{  user.name }}</h2>
-                        <!-- <a href="https://en.gravatar.com/connect/">Change Avatar</a> -->
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -78,10 +77,6 @@
                     <v-icon right dark>save</v-icon>
                     Save
                 </v-btn>
-                <v-btn flat color="orange" @click="editUser()" v-else>
-                    <v-icon right dark>edit</v-icon>
-                    Edit
-                </v-btn>
                 <v-btn :loading="logoutLoading" @click="logout" flat color="orange">
                     <v-icon right dark>exit_to_app</v-icon>
                     Logout</v-btn>
@@ -89,12 +84,10 @@
             </v-card-actions>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <!-- <v-btn :loading="changingPassword" flat color="red" @click="changePassword">Change Password</v-btn> -->
                 <v-spacer></v-spacer>
             </v-card-actions>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <!-- <a href="https://en.gravatar.com/connect/">Change Avatar</a> -->
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
