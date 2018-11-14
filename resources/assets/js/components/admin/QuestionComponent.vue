@@ -51,8 +51,7 @@
     <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.question }}</td>
-        <td class="text-xs-center">2018.10.16</td>
-        <td class="text-xs-center">{{ props.item.count }}</td>
+        <td class="text-xs-center">{{ props.item.correct_answer }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
@@ -80,9 +79,7 @@
       valid: false,
       headers: [
         { text: 'Questions',align: 'center',sortable: false, value: 'question'},
-        { text: 'Correct', value: 'correct', align: 'center', },
-        { text: 'Answer Count', value: 'count',align: 'center'},
-        // { text: 'Create Date', value: 'created_at',align: 'center' },
+        { text: 'Correct Answer', value: 'correct', align: 'center', },
         { text: 'Actions', value: 'name', sortable: false, align: 'center' }
       ],
       desserts: [],
@@ -92,7 +89,6 @@
         'answer':'',
         'id':0
       },
-
     }),
     computed: {
       formTitle () {
@@ -187,7 +183,6 @@
               .catch((error) => {
                 console.log('error', error);
               });
-              
         this.dialog = true
       },
 

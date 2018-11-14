@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Step;
 use App\Model\Question;
+use App\Model\History;
 use App\Http\Controllers\Controller;
 class StepController extends Controller
 {
@@ -68,6 +69,7 @@ class StepController extends Controller
 
         }
         Step::where('video_id', $video_id)->delete();
+        History::where('video_id', $video_id)->delete();
         if (Step::insert($newSteps))
         {
             return 'success';

@@ -7,6 +7,10 @@ class Step extends Model
 {
     //
     protected $fillable = [
-        'video_id','end_times'
+        'video_id', 'point', 'old_point', 'question_ids'
+    ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
     ];
 }

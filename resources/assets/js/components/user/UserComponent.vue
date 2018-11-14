@@ -244,18 +244,17 @@
         ).then(function(response){
             var iframe = document.querySelector('iframe');
             player = new Vimeo(iframe);
-            for (var i=0;i<response.data.length;i++)
-            {
-                if(response.data[i].pass_status == 0)
-                {
-                    this.passIndex = i;
-                    break;
-                }
-            }
-            this.step_data = response.data;
+            this.step_data = response.data.historyStep;
+            let isPass = response.data.isPass;
             this.step_count = this.step_data.length;
             if(this.step_count){
-                this.set_current_step('initStatus');
+                if(isPass == true)
+                {
+                    this.show_review_result();
+                }
+                else{
+                    this.set_current_step('initStatus');
+                }
             }
             else{
                 this.init_data = true;

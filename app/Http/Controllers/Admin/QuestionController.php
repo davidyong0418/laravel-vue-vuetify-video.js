@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Model\Video;
 use App\Model\Question;
 use App\Model\Answer;
+use App\Model\History;
+use App\Model\Step;
 use DB;
 use App\Http\Controllers\Controller;
 class QuestionController extends Controller
@@ -39,7 +41,6 @@ class QuestionController extends Controller
         {
             $old_question = $new[0]->questionId;
             Answer::where('questionId', $old_question)->delete();
-            // Question::where('id', $old_question)->update(array('question' => $question));
             Question::where('id', $old_question)->update(array('question' => $question));
             $questionId = $old_question;
         }
@@ -47,7 +48,6 @@ class QuestionController extends Controller
             $createdQuestion = Question::insert(array('question' => $question));
             $questionId = DB::getPdo()->lastInsertId();
         }
-        
         foreach ($new as $item)
         {
             $sub_question = [];
@@ -60,7 +60,7 @@ class QuestionController extends Controller
             else{
                 $sub_question['correct_answer'] = '';
             }
-            $sub_question['_answer'] = $item->answer;
+            $sub_question['answer'] = $item->answer;
 
             array_push($new_question, $sub_question);
         }
@@ -75,6 +75,8 @@ class QuestionController extends Controller
         $id = $request->get('deleteQuestion');
         Question::where('id', $id)->delete();
         Answer::where('questionId', $id)->delete();
+        Step::where('question_ids','like',"%{$id}%")->update(array('question_ids' => ''));
+        History::where('question_ids','like',"%{$id}%")->delete();
         $questions = Question::all();
         return ['questions' => $questions];
     }

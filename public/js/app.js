@@ -17566,16 +17566,15 @@ var player;
       }).then(function (response) {
         var iframe = document.querySelector('iframe');
         player = new __WEBPACK_IMPORTED_MODULE_2__vimeo_player__["a" /* default */](iframe);
-        for (var i = 0; i < response.data.length; i++) {
-          if (response.data[i].pass_status == 0) {
-            this.passIndex = i;
-            break;
-          }
-        }
-        this.step_data = response.data;
+        this.step_data = response.data.historyStep;
+        var isPass = response.data.isPass;
         this.step_count = this.step_data.length;
         if (this.step_count) {
-          this.set_current_step('initStatus');
+          if (isPass == true) {
+            this.show_review_result();
+          } else {
+            this.set_current_step('initStatus');
+          }
         } else {
           this.init_data = true;
         }
@@ -73780,7 +73779,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73793,9 +73791,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       count: 1,
       loginLoading: false,
       valid: false,
-      headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct', value: 'correct', align: 'center' }, { text: 'Answer Count', value: 'count', align: 'center' },
-      // { text: 'Create Date', value: 'created_at',align: 'center' },
-      { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
+      headers: [{ text: 'Questions', align: 'center', sortable: false, value: 'question' }, { text: 'Correct Answer', value: 'correct', align: 'center' }, { text: 'Actions', value: 'name', sortable: false, align: 'center' }],
       desserts: [],
       editedIndex: -1,
       editedItem: [],
@@ -73803,7 +73799,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         'answer': '',
         'id': 0
       }
-
     };
   },
   computed: {
@@ -73896,7 +73891,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }).catch(function (error) {
         console.log('error', error);
       });
-
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
@@ -74222,11 +74216,7 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(props.item.question))]),
                 _vm._v(" "),
                 _c("td", { staticClass: "text-xs-center" }, [
-                  _vm._v("2018.10.16")
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-xs-center" }, [
-                  _vm._v(_vm._s(props.item.count))
+                  _vm._v(_vm._s(props.item.correct_answer))
                 ]),
                 _vm._v(" "),
                 _c(
@@ -74382,13 +74372,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -74444,6 +74427,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         } else {
           this.initStep.video_id = id;
           var clone = _extends({}, this.initStep);
+          this.steps = [];
           this.steps.push(clone);
         }
       }.bind(this)).catch(function (error) {
